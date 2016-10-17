@@ -1,5 +1,6 @@
 
-# Añadir en el fichero C:\xampp\apache\conf\extra\httpd-xampp.conf
+# AÃ±adir en el fichero C:\xampp\apache\conf\extra\httpd-xampp.conf
+```
 <VirtualHost *:80>
   ServerName titis.dev
   ServerAlias www.titis.dev
@@ -10,6 +11,8 @@
     Require all Granted
   </Directory>
 </VirtualHost>
-
-# Añadir en el fichero C:\Windows\System32\drivers\etc
+```
+# AÃ±adir en el fichero C:\Windows\System32\drivers\etc
+```
 127.0.0.1  titis.dev
+```
