@@ -15,7 +15,9 @@ class Inicio extends CI_Controller {
     }
 
     public function index() {
-        $this->cargar_inicio();
+        //$this->cargar_inicio();
+         $datos['titulo'] = "Inicio";
+        $this->plantilla->mostrar('admin', 'inicio', $datos);
     }
 
     private function cargar_inicio($datos = '') {
