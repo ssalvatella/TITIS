@@ -83,3 +83,18 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+
+/**
+ * Constantes añadidas
+ */
+define('NOMBRE_WEB', 'TITIS'); 
+define('AÑOS_COPYRIGHT', '2016 - 2017');
+
+define('USUARIO_ADMIN', 1);
+define('USUARIO_TECNICO_ADMIN', 2);
+define('USUARIO_TECNICO', 3);
+define('USUARIO_CLIENTE', 4);
+
+define('EMAIL_PAGINA', 'titiseupt@outlook.com');
+define('EMAIL_PAGINA_PASS', 'titis_eupt');
