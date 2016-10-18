@@ -6,12 +6,9 @@ class Usuario extends CI_Model {
         parent::__construct();
     }
 
-    public function login($datos) {
-        $this->db->where('usuario', $datos);
-        $this->db->limit(1);
-        $consulta = $this->db->get();
-
-        return $consulta->num_rows() == 1;
+    public function login($datos = array()) {
+        $consulta = $this->db->get_where('usuario', $datos, 1);
+        return $consulta->row_array();
     }
 
 }

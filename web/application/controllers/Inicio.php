@@ -145,7 +145,7 @@ class Inicio extends CI_Controller {
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
         //$this->email->from(EMAIL_PAGINA);
-         $this->email->from('noreply@titis.dev');
+        $this->email->from('noreply@titis.dev');
         $this->email->to($email);
         $this->email->subject($asunto);
 
@@ -178,6 +178,12 @@ class Inicio extends CI_Controller {
         $this->email->send();
 
         echo $this->email->print_debugger();
+    }
+
+    public function asd() {
+        $datos = array('nombre' => 'adfmin',
+            'contrasena' => 'admin');
+         print_r($this->usuario->login($datos));
     }
 
 }
