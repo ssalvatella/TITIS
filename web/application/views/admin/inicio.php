@@ -12,6 +12,7 @@
 
     <!-- Contenido -->
     <section class="content">
+        <!-- Cuadros resumen -->
         <div class="row">
             <!-- Cuadro de tickets -->
             <div class="col-lg-3 col-xs-6">
@@ -77,134 +78,133 @@
                 </div>
             </div>
         </div>
+            <div class="row">
+                <!-- TABLA DE TICKETS -->
+                <section class="col-lg-6 connectedSortable ui-sorteable">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Últimos tickets</h3>
 
-        <div class="row">
-
-            <!-- TABLA DE TICKETS -->
-            <div class="col-lg-6 col-xs-9">
-
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Últimos tickets</h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                    class="fa fa-minus"></i>
-                            </button>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-minus"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover no-margin">
-                                <thead>
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Título</th>
-                                    <th>Fecha</th>
-                                    <th>Estado</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">Pedro</a></td>
-                                    <td>Instalar impresoras</td>
-                                    <td>19/10/2016 14:20</td>
-                                    <td><span class="label label-warning">Pendiente</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">José</a></td>
-                                    <td>Arreglar servidores</td>
-                                    <td>17/10/2016 12:20</td>
-                                    <td><span class="label label-warning">Pendiente</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">Luisa</a></td>
-                                    <td>Formatear ordenadores</td>
-                                    <td>17/10/2016 10:44</td>
-                                    <td><span class="label label-info">En proceso</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">Javier</a></td>
-                                    <td>Revisar base de datos MySQL</td>
-                                    <td>16/10/2016 17:33</td>
-                                    <td><span class="label label-info">En proceso</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00c0ef" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">Marta</a></td>
-                                    <td>Presupuestar página web</td>
-                                    <td>15/10/2016 11:54</td>
-                                    <td><span class="label label-success">Completado</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">Fernando</a></td>
-                                    <td>Comprar dominio</td>
-                                    <td>14/10/2016 09:42</td>
-                                    <td><span class="label label-success">Completado</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="pages/examples/invoice.html">Isabel</a></td>
-                                    <td>Añadir servidor</td>
-                                    <td>13/10/2016 15:20</td>
-                                    <td><span class="label label-success">Completado</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover no-margin">
+                                    <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Título</th>
+                                        <th>Fecha</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><a href="pages/examples/invoice.html">Pedro</a></td>
+                                        <td>Instalar impresoras</td>
+                                        <td>19/10/2016 14:20</td>
+                                        <td><span class="label label-warning">Pendiente</span></td>
+                                        <td>
+                                            <div class="sparkbar" data-color="#00a65a" data-height="20">
+                                                <canvas width="34" height="20"
+                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="pages/examples/invoice.html">José</a></td>
+                                        <td>Arreglar servidores</td>
+                                        <td>17/10/2016 12:20</td>
+                                        <td><span class="label label-warning">Pendiente</span></td>
+                                        <td>
+                                            <div class="sparkbar" data-color="#f39c12" data-height="20">
+                                                <canvas width="34" height="20"
+                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="pages/examples/invoice.html">Luisa</a></td>
+                                        <td>Formatear ordenadores</td>
+                                        <td>17/10/2016 10:44</td>
+                                        <td><span class="label label-info">En proceso</span></td>
+                                        <td>
+                                            <div class="sparkbar" data-color="#f56954" data-height="20">
+                                                <canvas width="34" height="20"
+                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="pages/examples/invoice.html">Javier</a></td>
+                                        <td>Revisar base de datos MySQL</td>
+                                        <td>16/10/2016 17:33</td>
+                                        <td><span class="label label-info">En proceso</span></td>
+                                        <td>
+                                            <div class="sparkbar" data-color="#00c0ef" data-height="20">
+                                                <canvas width="34" height="20"
+                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="pages/examples/invoice.html">Marta</a></td>
+                                        <td>Presupuestar página web</td>
+                                        <td>15/10/2016 11:54</td>
+                                        <td><span class="label label-success">Completado</span></td>
+                                        <td>
+                                            <div class="sparkbar" data-color="#f39c12" data-height="20">
+                                                <canvas width="34" height="20"
+                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="pages/examples/invoice.html">Fernando</a></td>
+                                        <td>Comprar dominio</td>
+                                        <td>14/10/2016 09:42</td>
+                                        <td><span class="label label-success">Completado</span></td>
+                                        <td>
+                                            <div class="sparkbar" data-color="#f56954" data-height="20">
+                                                <canvas width="34" height="20"
+                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="pages/examples/invoice.html">Isabel</a></td>
+                                        <td>Añadir servidor</td>
+                                        <td>13/10/2016 15:20</td>
+                                        <td><span class="label label-success">Completado</span></td>
+                                        <td>
+                                            <div class="sparkbar" data-color="#00a65a" data-height="20">
+                                                <canvas width="34" height="20"
+                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
                         </div>
-                        <!-- /.table-responsive -->
+                        <!-- /.box-body -->
+                        <div class="box-footer clearfix">
+                            <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Ver todos</a>
+                        </div>
+                        <!-- /.box-footer -->
                     </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer clearfix">
-                        <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Ver todos</a>
-                    </div>
-                    <!-- /.box-footer -->
-                </div>
+                </section>
+
+                <!-- TABLA DE TÉCNICOS -->
+
             </div>
-        </div>
-
-
+        </section>
     </section>
     <!-- /.content -->
 </div>

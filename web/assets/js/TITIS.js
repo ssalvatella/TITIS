@@ -163,6 +163,17 @@
             window.alert('Por favor, use un navegador moderno para poder ver la página correctamente.');
         }
     }
+
+    // Esto activa la función de JQuery para poder tener elementos movibles
+    $(".connectedSortable").sortable({
+        placeholder: "sort-highlight",
+        connectWith: ".connectedSortable",
+        handle: ".box-header, .nav-tabs",
+        forcePlaceholderSize: true,
+        zIndex: 999999
+    });
+    $(".connectedSortable .box-header, .connectedSortable .nav-tabs-custom").css("cursor", "move");
+
 })(jQuery, $.AdminLTE);
 
 $(function () {
@@ -184,3 +195,4 @@ $(function () {
         }
     });
 });
+
