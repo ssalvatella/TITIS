@@ -85,7 +85,7 @@
 
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Últimos tickets recibidos</h3>
+                        <h3 class="box-title">Últimos tickets</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -102,13 +102,15 @@
                                     <th>Cliente</th>
                                     <th>Título</th>
                                     <th>Fecha</th>
+                                    <th>Estado</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td><a href="pages/examples/invoice.html">Pedro</a></td>
-                                    <td>Call of Duty IV</td>
-                                    <td><span class="label label-success">Shipped</span></td>
+                                    <td>Instalar impresoras</td>
+                                    <td>19/10/2016 14:20</td>
+                                    <td><span class="label label-warning">Pendiente</span></td>
                                     <td>
                                         <div class="sparkbar" data-color="#00a65a" data-height="20">
                                             <canvas width="34" height="20"
@@ -118,8 +120,9 @@
                                 </tr>
                                 <tr>
                                     <td><a href="pages/examples/invoice.html">José</a></td>
-                                    <td>Samsung Smart TV</td>
-                                    <td><span class="label label-warning">Pending</span></td>
+                                    <td>Arreglar servidores</td>
+                                    <td>17/10/2016 12:20</td>
+                                    <td><span class="label label-warning">Pendiente</span></td>
                                     <td>
                                         <div class="sparkbar" data-color="#f39c12" data-height="20">
                                             <canvas width="34" height="20"
@@ -129,8 +132,9 @@
                                 </tr>
                                 <tr>
                                     <td><a href="pages/examples/invoice.html">Luisa</a></td>
-                                    <td>iPhone 6 Plus</td>
-                                    <td><span class="label label-danger">Delivered</span></td>
+                                    <td>Formatear ordenadores</td>
+                                    <td>17/10/2016 10:44</td>
+                                    <td><span class="label label-info">En proceso</span></td>
                                     <td>
                                         <div class="sparkbar" data-color="#f56954" data-height="20">
                                             <canvas width="34" height="20"
@@ -140,8 +144,9 @@
                                 </tr>
                                 <tr>
                                     <td><a href="pages/examples/invoice.html">Javier</a></td>
-                                    <td>Samsung Smart TV</td>
-                                    <td><span class="label label-info">Processing</span></td>
+                                    <td>Revisar base de datos MySQL</td>
+                                    <td>16/10/2016 17:33</td>
+                                    <td><span class="label label-info">En proceso</span></td>
                                     <td>
                                         <div class="sparkbar" data-color="#00c0ef" data-height="20">
                                             <canvas width="34" height="20"
@@ -151,8 +156,9 @@
                                 </tr>
                                 <tr>
                                     <td><a href="pages/examples/invoice.html">Marta</a></td>
-                                    <td>Samsung Smart TV</td>
-                                    <td><span class="label label-warning">Pending</span></td>
+                                    <td>Presupuestar página web</td>
+                                    <td>15/10/2016 11:54</td>
+                                    <td><span class="label label-success">Completado</span></td>
                                     <td>
                                         <div class="sparkbar" data-color="#f39c12" data-height="20">
                                             <canvas width="34" height="20"
@@ -162,8 +168,9 @@
                                 </tr>
                                 <tr>
                                     <td><a href="pages/examples/invoice.html">Fernando</a></td>
-                                    <td>iPhone 6 Plus</td>
-                                    <td><span class="label label-danger">Delivered</span></td>
+                                    <td>Comprar dominio</td>
+                                    <td>14/10/2016 09:42</td>
+                                    <td><span class="label label-success">Completado</span></td>
                                     <td>
                                         <div class="sparkbar" data-color="#f56954" data-height="20">
                                             <canvas width="34" height="20"
@@ -173,8 +180,9 @@
                                 </tr>
                                 <tr>
                                     <td><a href="pages/examples/invoice.html">Isabel</a></td>
-                                    <td>Call of Duty IV</td>
-                                    <td><span class="label label-success">Shipped</span></td>
+                                    <td>Añadir servidor</td>
+                                    <td>13/10/2016 15:20</td>
+                                    <td><span class="label label-success">Completado</span></td>
                                     <td>
                                         <div class="sparkbar" data-color="#00a65a" data-height="20">
                                             <canvas width="34" height="20"
@@ -189,9 +197,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
-                        <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-                        <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All
-                            Orders</a>
+                        <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Ver todos</a>
                     </div>
                     <!-- /.box-footer -->
                 </div>
