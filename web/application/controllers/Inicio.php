@@ -10,14 +10,22 @@ class Inicio extends CI_Controller {
         $this->load->helper('security'); // form_validation -> xss_clean
         $this->load->library('form_validation');
         $this->load->library('session');
+        $this->load->library('encryption');
         $this->load->library('plantilla');
         $this->load->model('usuario');
+        $this->encryption->initialize(
+                array(
+                    'cipher' => 'aes-256',
+                    'mode' => 'ctr',
+                    'key' => config_item('encryption_key')
+                )
+        );
     }
 
     public function index() {
-        //$this->cargar_inicio();
-        $datos['titulo'] = "Inicio";
-        $this->plantilla->mostrar('admin', 'inicio', $datos);
+        $this->cargar_inicio();
+        //$datos['titulo'] = "Inicio";
+        //$this->plantilla->mostrar('admin', 'inicio', $datos);
     }
 
     private function cargar_inicio($datos = '') {
@@ -25,7 +33,6 @@ class Inicio extends CI_Controller {
             $datos['titulo'] = 'Inicio';
             switch ($this->session->userdata('tipo_usuario')) {
                 case USUARIO_ADMIN:
-                    $this->load->view('login');
                     $this->plantilla->mostrar('admin', 'inicio', $datos);
                     break;
                 case USUARIO_TECNICO_ADMIN:
@@ -46,11 +53,10 @@ class Inicio extends CI_Controller {
         }
     }
 
-    public function login() {
+    public function inicio_sesion() {
         if ($this->session->userdata('logged_in') == TRUE) {
             $this->cargar_inicio();
         } else {
-            //$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
             $this->form_validation->set_error_delimiters('<span class="help-block">', '</span>');
             $this->form_validation->set_rules('usuario', 'Usuario', 'trim|required|xss_clean');
             $this->form_validation->set_rules('contrasena', 'Contrasena', 'trim|required|xss_clean');
@@ -58,7 +64,7 @@ class Inicio extends CI_Controller {
                 $this->load->view('login');
             } else {
                 $usuario = $this->input->post('usuario');
-                $contrasena = md5($this->input->post('contrasena'));
+                $contrasena = $this->encryption->encrypt($this->input->post('contrasena'));
 
                 if ($this->usuario->login($usuario, $contrasena) == TRUE) {
                     $this->session->set_userdata('logged_in', TRUE);
@@ -109,7 +115,7 @@ class Inicio extends CI_Controller {
             );
             $this->enviar_email('plantilla_email_cambio_pass', $email, 'Contraseña cambiada', $datos_email);
 
-            $this->usuario->cambiar_pass($usuario, md5($nueva_pass));
+            $this->usuario->cambiar_pass($usuario, $this->encryption->encrypt($nueva_pass));
             $datos = array(
                 'mensaje' => 'La nueva contraseña se ha enviado a su email.',
             );
@@ -185,7 +191,7 @@ class Inicio extends CI_Controller {
     public function asd() {
         $datos = array('nombre' => 'adfmin',
             'contrasena' => 'admin');
-         print_r($this->usuario->login($datos));
+        print_r($this->usuario->login($datos));
     }
 
 }
