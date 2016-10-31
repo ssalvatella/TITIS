@@ -96,5 +96,6 @@ define('USUARIO_TECNICO_ADMIN', 2);
 define('USUARIO_TECNICO', 3);
 define('USUARIO_CLIENTE', 4);
 
-define('EMAIL_PAGINA', 'titiseupt@outlook.com');
-define('EMAIL_PAGINA_PASS', 'titis_eupt');
+//define('EMAIL_PAGINA', 'titiseupt@outlook.com');
+//define('EMAIL_PAGINA_PASS', 'titis_eupt');
+define('EMAIL_PAGINA', 'noreply@titis.dev');

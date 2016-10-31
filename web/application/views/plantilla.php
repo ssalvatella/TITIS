@@ -63,12 +63,13 @@
                             <!-- Menú cuenta usuario -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="<?= base_url() ?>assets/img/avatar/<?= $this->session->id_usuario ?>.jpg" class="user-image" alt="Imagen de Perfil">
+                                    <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="user-image" alt="Imagen de Perfil">
                                     <span class="hidden-xs"><?= $this->session->nombre_usuario ?></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="user-header">
-                                        <img src="<?= base_url() ?>assets/img/avatar/<?= $this->session->id_usuario ?>.jpg" class="img-circle" alt="Imagen de Perfil">
+                                        <!--img src="<?= base_url() ?>assets/img/avatar/<?= $this->session->id_usuario ?>.png" class="img-circle" alt="Imagen de Perfil"-->
+                                        <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="img-circle" alt="Imagen de Perfil">
                                         <p>
                                             <?= $this->session->nombre_usuario ?> - 
                                             <?php
@@ -96,7 +97,7 @@
                                             <a href="#" class="btn btn-default btn-flat">Perfil</a>
                                         </div>
                                         <div class="pull-right">
-                                            <a href="<?= site_url('inicio/cerrar_sesion') ?>" class="btn btn-default btn-flat">Cerrar Sesión</a>
+                                            <a href="<?= site_url('cerrar_sesion'); ?>" class="btn btn-default btn-flat">Cerrar Sesión</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -115,7 +116,7 @@
                     <!-- Panel de usuario sidebar -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="<?= base_url() ?>assets/img/avatar/<?= $this->session->id_usuario ?>.jpg" class="img-circle" alt="Imagen de Perfil">
+                            <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="img-circle" alt="Imagen de Perfil">
                         </div>
                         <div class="pull-left info">
                             <p><?= $this->session->nombre_usuario ?></p>                            

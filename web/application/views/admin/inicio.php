@@ -22,10 +22,10 @@
                         <p>Tickets Pendientes</p>
                     </div>
                     <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes') ?>"><i
+                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes'); ?>"><i
                                 class="fa fa-ticket"></i></a>
                     </div>
-                    <a href="<?= site_url('admin/clientes') ?>" class="small-box-footer">Acceder <i
+                    <a href="<?= site_url('admin/clientes'); ?>" class="small-box-footer">Acceder <i
                             class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                         <p>Clientes Nuevos</p>
                     </div>
                     <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes') ?>"><i
+                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes'); ?>"><i
                                 class="ion ion-person-add"></i></a>
                     </div>
                     <a href="<?= site_url('admin/clientes') ?>" class="small-box-footer">Acceder <i
@@ -55,7 +55,7 @@
                         <p>Facturas Pendientes</p>
                     </div>
                     <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes') ?>"><i
+                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes'); ?>"><i
                                 class="fa fa-money"></i></a>
                     </div>
                     <a href="#" class="small-box-footer">Acceder <i class="fa fa-arrow-circle-right"></i></a>
@@ -70,7 +70,7 @@
                         <p>Tareas Finalizadas</p>
                     </div>
                     <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes') ?>"><i
+                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes'); ?>"><i
                                 class="fa fa-tasks"></i></a>
                     </div>
                     <a href="#" class="small-box-footer">Acceder <i class="fa fa-arrow-circle-right"></i>
@@ -78,32 +78,32 @@
                 </div>
             </div>
         </div>
-            <div class="row">
-                <!-- TABLA DE TICKETS -->
-                <section class="col-lg-6 connectedSortable ui-sorteable">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Últimos tickets</h3>
+        <div class="row">
+            <!-- TABLA DE TICKETS -->
+            <section class="col-lg-6 connectedSortable ui-sorteable">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Últimos tickets</h3>
 
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                        class="fa fa-minus"></i>
-                                </button>
-                            </div>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover no-margin">
-                                    <thead>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover no-margin">
+                                <thead>
                                     <tr>
                                         <th>Cliente</th>
                                         <th>Título</th>
                                         <th>Fecha</th>
                                         <th>Estado</th>
                                     </tr>
-                                    </thead>
-                                    <tbody>
+                                </thead>
+                                <tbody>
                                     <tr>
                                         <td><a href="pages/examples/invoice.html">Pedro</a></td>
                                         <td>Instalar impresoras</td>
@@ -188,24 +188,24 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
+                                </tbody>
+                            </table>
                         </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer clearfix">
-                            <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Ver todos</a>
-                        </div>
-                        <!-- /.box-footer -->
+                        <!-- /.table-responsive -->
                     </div>
-                </section>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                        <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Ver todos</a>
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
+            </section>
 
-                <!-- TABLA DE TÉCNICOS -->
+            <!-- TABLA DE TÉCNICOS -->
 
-            </div>
-        </section>
+        </div>
     </section>
-    <!-- /.content -->
+</section>
+<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->

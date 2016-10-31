@@ -52,3 +52,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'inicio';
 $route['404_override'] = 'error_404';
 $route['translate_uri_dashes'] = FALSE;
+
+// RUTAS PERSONALIZADAS
+$route['login'] = 'inicio/inicio_sesion';
+$route['registro'] = 'inicio/registro';
+$route['contrasena_olvidada'] = 'inicio/contrasena_olvidada';
+$route['cerrar_sesion'] = 'inicio/cerrar_sesion';

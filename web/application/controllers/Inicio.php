@@ -9,7 +9,6 @@ class Inicio extends CI_Controller {
         $this->load->helper('form');
         $this->load->helper('security'); // form_validation -> xss_clean
         $this->load->library('form_validation');
-        $this->load->library('session');
         $this->load->library('encryption');
         $this->load->library('plantilla');
         $this->load->model('usuario');
@@ -24,8 +23,6 @@ class Inicio extends CI_Controller {
 
     public function index() {
         $this->cargar_inicio();
-        //$datos['titulo'] = "Inicio";
-        //$this->plantilla->mostrar('admin', 'inicio', $datos);
     }
 
     private function cargar_inicio($datos = '') {
@@ -33,7 +30,8 @@ class Inicio extends CI_Controller {
             $datos['titulo'] = 'Inicio';
             switch ($this->session->userdata('tipo_usuario')) {
                 case USUARIO_ADMIN:
-                    $this->plantilla->mostrar('admin', 'inicio', $datos);
+                   // $this->plantilla->mostrar('admin', 'inicio', $datos);
+                   redirect('admin');
                     break;
                 case USUARIO_TECNICO_ADMIN:
                     $this->plantilla->mostrar('tecnico_admin', 'inicio', $datos);
@@ -45,11 +43,13 @@ class Inicio extends CI_Controller {
                     $this->plantilla->mostrar('cliente', 'inicio', $datos);
                     break;
                 default:
-                    $this->load->view('login');
+                    redirect('login');
+                    // $this->load->view('login');
                     break;
             }
         } else {
-            $this->load->view('login');
+            redirect('login');
+            //$this->load->view('login');
         }
     }
 
@@ -61,30 +61,27 @@ class Inicio extends CI_Controller {
             $this->form_validation->set_rules('usuario', 'Usuario', 'trim|required|xss_clean');
             $this->form_validation->set_rules('contrasena', 'Contrasena', 'trim|required|xss_clean');
             if ($this->form_validation->run() == FALSE) {
-                $this->load->view('login');
+                $datos['mensaje'] = $this->session->flashdata('mensaje');
+                $this->load->view('login', $datos);
             } else {
                 $usuario = $this->input->post('usuario');
-                $contrasena = $this->encryption->encrypt($this->input->post('contrasena'));
+                $contrasena = $this->input->post('contrasena');
 
                 if ($this->usuario->login($usuario, $contrasena) == TRUE) {
                     $this->session->set_userdata('logged_in', TRUE);
                     $this->session->set_userdata('nombre_usuario', $usuario);
-                    $tipo_usuario = $this->usuario->obtener_tipo($usuario);
-                    $this->session->set_userdata('tipo_usuario', $tipo_usuario);
+                    $datos_usuario = $this->usuario->obtener_datos($usuario);
+                    $this->session->set_userdata('tipo_usuario', $datos_usuario['tipo']);
                     if ($this->input->post('recordarme')) {
                         $this->load->helper('cookie');
                         $cookie = $this->input->cookie('ci_session');
                         $this->input->set_cookie('ci_session', $cookie, '2592000'); // La cookie durará 30 días
                     }
-
-                    $resultado = $this->usuario->leer_informacion_usuario($usuario);
-                    if ($resultado != FALSE) {
-                        $this->session->set_userdata('id_usuario', $resultado[0]->id_usuario);
-                        $this->session->set_userdata('email_usuario', $resultado[0]->email);
-                        $this->cargar_inicio();
-                        if ($tipo_usuario == USUARIO_CLIENTE) {
-                            $this->session->set_userdata('id_cliente', $this->usuario->obtener_id_cliente($resultado[0]->id_usuario));
-                        }
+                    $this->session->set_userdata('id_usuario', $datos_usuario['id_usuario']);
+                    $this->session->set_userdata('email_usuario', $datos_usuario['email']);
+                    $this->cargar_inicio();
+                    if ($datos_usuario['tipo'] == USUARIO_CLIENTE) {
+                        $this->session->set_userdata('id_cliente', $this->usuario->obtener_id_cliente($datos_usuario['id_usuario']));
                     }
                 } else {
                     $datos = array(
@@ -98,8 +95,10 @@ class Inicio extends CI_Controller {
 
     public function cerrar_sesion() {
         session_destroy();
-        $datos['mensaje'] = 'Sesión cerrada correctamente.';
-        $this->load->view('login', $datos);
+        //$datos['mensaje'] = 'Sesión cerrada correctamente.';
+        // $this->load->view('login', $datos);
+        $this->session->set_flashdata('mensaje', 'Sesión cerrada correctamente.');
+        redirect('login');
     }
 
     public function cambiar_pass() {
@@ -152,18 +151,12 @@ class Inicio extends CI_Controller {
 
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
-        //$this->email->from(EMAIL_PAGINA);
-        $this->email->from('noreply@titis.dev');
+        $this->email->from(EMAIL_PAGINA);
         $this->email->to($email);
         $this->email->subject($asunto);
 
         $mensaje = $this->load->view($plantilla, $datos, TRUE);
         $this->email->message($mensaje);
-        /* if ($this->email->send()) {
-          echo 'Email enviado.';
-          } else {
-          show_error($this->email->print_debugger());
-          } */
         return $this->email->send();
     }
 
@@ -188,10 +181,8 @@ class Inicio extends CI_Controller {
         echo $this->email->print_debugger();
     }
 
-    public function asd() {
-        $datos = array('nombre' => 'adfmin',
-            'contrasena' => 'admin');
-        print_r($this->usuario->login($datos));
+    public function z() {
+        var_dump($this->usuario->obtener_datos('a'));
     }
 
 }

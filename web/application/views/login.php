@@ -47,16 +47,16 @@
                 </div>
 
 
-                <form action="<?= site_url('inicio/iniciar_sesion'); ?>" method="POST">
+                <form action="<?= site_url('login'); ?>" method="POST">
                     <div class="form-group has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?>">
-                        <input type="text" class="form-control" placeholder="Usuario">
+                        <input type="text" class="form-control" placeholder="Usuario" name="usuario">
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                        <?= form_error('usuario') ?>
+                        <?= form_error('usuario'); ?>
                     </div>
                     <div class="form-group has-feedback <?= form_error('contrasena') != '' ? 'has-error ' : '' ?>">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password" name="contrasena">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                        <?= form_error('contrasena') ?>
+                        <?= form_error('contrasena'); ?>
                     </div>
                     <div class="row">
                         <div class="col-xs-6 col-sm-7">
@@ -80,7 +80,7 @@
                 <div class="modal" id="modal_contrasena_olvidada">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form id="form_contrasena_olvidada" class="form-horizontal" action="<?= site_url('inicio/cambiar_contrasena') ?>" method="POST">
+                            <form id="form_contrasena_olvidada" class="form-horizontal" action="<?= site_url('contrasena_olvidada') ?>" method="POST">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span></button>
@@ -110,7 +110,7 @@
                 </div>
                 <!-- /.modal -->
                 <br>
-                <a href="<?= site_url('inicio/registrarse'); ?>" class="text-center">Registrar</a>
+                <a href="<?= site_url('registro'); ?>" class="text-center">Registrar</a>
 
             </div>
             <!-- /.login-box-body -->
