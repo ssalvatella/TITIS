@@ -47,14 +47,14 @@
                 </div>
 
 
-                <form action="<?= site_url('login'); ?>" method="POST">
+                <form action="<?= site_url('login'); ?>" method="POST" data-toggle="validator" role="form">
                     <div class="form-group has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?>">
-                        <input type="text" class="form-control" placeholder="Usuario" name="usuario">
+                        <input type="text" class="form-control" placeholder="Usuario" name="usuario" value="<?= set_value('usuario'); ?>" required>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         <?= form_error('usuario'); ?>
                     </div>
                     <div class="form-group has-feedback <?= form_error('contrasena') != '' ? 'has-error ' : '' ?>">
-                        <input type="password" class="form-control" placeholder="Password" name="contrasena">
+                        <input type="password" class="form-control" placeholder="Password" name="contrasena" required>
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         <?= form_error('contrasena'); ?>
                     </div>
@@ -62,7 +62,7 @@
                         <div class="col-xs-6 col-sm-7">
                             <div class="checkbox icheck">
                                 <label>
-                                    <input type="checkbox"> Recordarme
+                                    <input type="checkbox" name="recordarme"> Recordarme
                                 </label>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                 <div class="modal" id="modal_contrasena_olvidada">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form id="form_contrasena_olvidada" class="form-horizontal" action="<?= site_url('contrasena_olvidada') ?>" method="POST">
+                            <form id="form_contrasena_olvidada" class="form-horizontal" action="<?= site_url('contrasena_olvidada') ?>" method="POST" data-toggle="validator">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span></button>
@@ -90,13 +90,13 @@
                                     <div class="form-group col-md-12">
                                         <label for="input_usuario" class="col-sm-3 control-label">Usuario</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="usuario" id="input_usuario" placeholder="Usuario">
+                                            <input type="text" class="form-control" name="usuario" id="input_usuario" placeholder="Usuario" required>
                                         </div>                                
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="input_email" class="col-sm-3 control-label">E-mail</label>
                                         <div class="col-sm-8">
-                                            <input type="email" class="form-control" name="email" id="input_email" placeholder="E-mail">
+                                            <input type="email" class="form-control" name="email" id="input_email" placeholder="E-mail" required>
                                         </div>
                                     </div>
                                 </div>
@@ -120,6 +120,7 @@
         <script src="<?= site_url('assets/plugins/jQuery/jquery.min.js'); ?>"></script>
         <script src="<?= site_url('assets/js/bootstrap.min.js'); ?>"></script>
         <script src="<?= site_url('assets/plugins/iCheck/icheck.min.js'); ?>"></script>
+        <script src="<?= site_url('assets/plugins/bootstrap-validator/validator.min.js'); ?>"></script>
         <script>
             $(function () {
                 $('input').iCheck({

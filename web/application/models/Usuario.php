@@ -10,6 +10,14 @@ class Usuario extends CI_Model {
         $datos = array('nombre' => $usuario);
         $consulta = $this->db->get_where('Usuario', $datos, 1);
         if ($consulta->num_rows() == 1) {
+            $this->load->library('encryption');
+            $this->encryption->initialize(
+                    array(
+                        'cipher' => 'aes-256',
+                        'mode' => 'ctr',
+                        'key' => config_item('encryption_key')
+                    )
+            );
             return $this->encryption->decrypt($consulta->row_array()['contrasena']) == $contrasena;
         } else {
             return FALSE;
@@ -39,6 +47,51 @@ class Usuario extends CI_Model {
     public function modificar_datos($usuario, $datos) {
         $this->db->where('nombre', $usuario);
         return $this->db->update('Usuario', $datos);
+    }
+
+    public function registrar($datos) {
+        $this->db->select('*');
+        $this->db->from('Usuario');
+        $this->db->where('nombre', $datos['nombre']);
+        $this->db->limit(1);
+        $consulta = $this->db->get();
+        if ($consulta->num_rows() == 0) {
+            return $this->db->insert('Usuario', $datos);
+        } else {
+            // El usuario ya existe
+            return FALSE;
+        }
+    }
+
+    public function registrar_cliente($datos_usuario, $datos_cliente) {
+        $this->db->select('*');
+        $this->db->from('Usuario');
+        $this->db->where('nombre', $datos['nombre']);
+        $this->db->limit(1);
+        $consulta = $this->db->get();
+        if ($consulta->num_rows() == 0) {
+            $datos_usuario ['tipo'] = USUARIO_CLIENTE;
+            $this->db->insert('Usuario', $datos_usuario);
+            //  $datos_cliente['usuario'] = $this->db->select('*')->from('usuario')->where('nombre', $datos_usuario['nombre'])->limit(1)->get()->row()->id_usuario;
+            $datos_cliente ['usuario'] = $this->db->insert_id();
+            return $this->db->insert('Cliente', $datos_cliente);
+        } else {
+            // El usuario ya existe
+            return FALSE;
+        }
+    }
+
+    public function obtener_id_cliente($id_usuario) {
+        $this->db->select('id_cliente');
+        $this->db->from('cliente');
+        $this->db->join('usuario', 'usuario.id_usuario = cliente.usuario');
+        $this->db->where('usuario.id_usuario', $id_usuario)->limit(1);
+        $consulta = $this->db->get();
+        if ($consulta->num_rows() == 1) {
+            return $consulta->row()->id_cliente;
+        } else {
+            return FALSE;
+        }
     }
 
 }

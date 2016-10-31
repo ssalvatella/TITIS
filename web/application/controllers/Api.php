@@ -2,44 +2,57 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-// This can be removed if you use __autoload() in config.php OR use Modular Extensions
 require APPPATH . '/libraries/REST_Controller.php';
 
-/**
- * This is an example of a few basic user interaction methods you could use
- * all done with a hardcoded array
- *
- * @package         CodeIgniter
- * @subpackage      Rest Server
- * @category        Controller
- * @author          Phil Sturgeon, Chris Kacerguis
- * @license         MIT
- * @link            https://github.com/chriskacerguis/codeigniter-restserver
- */
 class Api extends REST_Controller {
 
-    function __construct() {
-        // Construct the parent class
+    public function __construct() {
         parent::__construct();
         $this->load->database();
         $this->load->model('usuario');
 
-        $this->methods['login_get']['limit'] = 5;
+        // $this->methods['login_get']['limit'] = 5;
     }
 
-    public function login_get() {
-        $nombre = $this->get('nombre');
-        $contrasena = $this->get('contrasena');
-        $contraseña = $this->get('contrasena');
-        $datos = array('nombre' => $nombre,
-            'contrasena' => $contraseña);
-        $login_correcto = $this->usuario->login($datos);
-        if ($login_correcto) {
-            $this->response('', REST_Controller::HTTP_OK);
+    public function login_post() {
+        $usuario = $this->post('usuario');
+        $contraseña = $this->post('contrasena');
+        if (!$usuario || !$contraseña) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo usuario y contrasena'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        if ($this->usuario->login($usuario, $contraseña)) {
+            $this->response([
+                'status' => TRUE
+                    ], REST_Controller::HTTP_OK);
         } else {
             $this->response([
                 'status' => FALSE,
-                'mensaje' => 'Login incorrecto'
+                'error' => 'Usuario/contraseña incorrecta'
+                    ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function datos_usuario_get() {
+        $usuario = $this->get('usuario');
+        if (!$usuario) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo usuario'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $datos_usuario = $this->usuario->obtener_datos($usuario);
+        if ($datos_usuario) {
+            $this->response([
+                'status' => TRUE,
+                'datos' => $datos_usuario
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'El usuario no existe'
                     ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
