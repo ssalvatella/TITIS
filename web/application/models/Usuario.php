@@ -36,4 +36,9 @@ class Usuario extends CI_Model {
         }
     }
 
+    public function modificar_datos($usuario, $datos) {
+        $this->db->where('nombre', $usuario);
+        return $this->db->update('Usuario', $datos);
+    }
+
 }

@@ -107,7 +107,7 @@
                     <table border="0" width="600" cellpadding="0" cellspacing="0" class="container" style="width:600px;max-width:600px">
                         <tr>
                             <td class="container-padding header" align="left">
-                                <a href="<?= site_url() ?>"><b>TITIS</b></a>
+                                <a href="<?= site_url(); ?>"><b>TITIS</b></a>
                             </td>
                         </tr>
                         <tr>
@@ -126,7 +126,7 @@
                         <tr>
                             <td class="container-padding footer-text" align="left">
                                 <br>
-                                <strong>Copyright &copy; <?= AÑOS_COPYRIGHT ?> <a href="<?= site_url() ?>"><?= NOMBRE_WEB ?></a>.</strong> Todos los derechos reservados.
+                                <strong>Copyright &copy; <?= AÑOS_COPYRIGHT ?> <a href="<?= site_url(); ?>"><?= NOMBRE_WEB ?></a>.</strong> Todos los derechos reservados.
                             </td>
                         </tr>
                     </table>

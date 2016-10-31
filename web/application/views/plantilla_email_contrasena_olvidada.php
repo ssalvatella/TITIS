@@ -107,7 +107,7 @@
                     <table border="0" width="600" cellpadding="0" cellspacing="0" class="container" style="width:600px;max-width:600px">
                         <tr>
                             <td class="container-padding header" align="left">
-                                <a href="<?= site_url() ?>"><b>TITIS</b></a>
+                                <a href="<?= site_url(); ?>"><b>TITIS</b></a>
                             </td>
                         </tr>
                         <tr>
@@ -116,7 +116,8 @@
                                 <div class="titulo">Contraseña cambiada</div>
                                 <br>
                                 <div class="body-text">
-                                    Su nueva contraseña es: <b><?= $nueva_pass ?></b>
+                                    Hola <i><?= $usuario ?></i>.<br/><br/>
+                                    Su nueva contraseña es: <b><?= $nueva_contrasena ?></b>
                                     <br><br>
                                 </div>
                             </td>
@@ -124,7 +125,7 @@
                         <tr>
                             <td class="container-padding footer-text" align="left">
                                 <br>
-                                <strong>Copyright &copy; <?= AÑOS_COPYRIGHT ?> <a href="<?= site_url() ?>"><?= NOMBRE_WEB ?></a>.</strong> Todos los derechos reservados.
+                                <strong>Copyright &copy; <?= AÑOS_COPYRIGHT ?> <a href="<?= site_url(); ?>"><?= NOMBRE_WEB ?></a>.</strong> Todos los derechos reservados.
                             </td>
                         </tr>
                     </table>

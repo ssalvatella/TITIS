@@ -27,20 +27,18 @@ class Inicio extends CI_Controller {
 
     private function cargar_inicio($datos = '') {
         if ($this->session->userdata('logged_in') == TRUE) {
-            $datos['titulo'] = 'Inicio';
             switch ($this->session->userdata('tipo_usuario')) {
                 case USUARIO_ADMIN:
-                   // $this->plantilla->mostrar('admin', 'inicio', $datos);
-                   redirect('admin');
+                    redirect('admin');
                     break;
                 case USUARIO_TECNICO_ADMIN:
-                    $this->plantilla->mostrar('tecnico_admin', 'inicio', $datos);
+                    redirect('tecnico_admin');
                     break;
                 case USUARIO_TECNICO:
-                    $this->plantilla->mostrar('tecnico', 'inicio', $datos);
+                    redirect('tecnico');
                     break;
                 case USUARIO_CLIENTE:
-                    $this->plantilla->mostrar('cliente', 'inicio', $datos);
+                    redirect('cliente');
                     break;
                 default:
                     redirect('login');
@@ -62,6 +60,7 @@ class Inicio extends CI_Controller {
             $this->form_validation->set_rules('contrasena', 'Contrasena', 'trim|required|xss_clean');
             if ($this->form_validation->run() == FALSE) {
                 $datos['mensaje'] = $this->session->flashdata('mensaje');
+                $datos['mensaje_error'] = $this->session->flashdata('mensaje_error');
                 $this->load->view('login', $datos);
             } else {
                 $usuario = $this->input->post('usuario');
@@ -95,35 +94,32 @@ class Inicio extends CI_Controller {
 
     public function cerrar_sesion() {
         session_destroy();
-        //$datos['mensaje'] = 'Sesión cerrada correctamente.';
-        // $this->load->view('login', $datos);
         $this->session->set_flashdata('mensaje', 'Sesión cerrada correctamente.');
         redirect('login');
     }
 
-    public function cambiar_pass() {
+    public function contrasena_olvidada() {
         $usuario = $this->input->post('usuario');
         $email = $this->input->post('email');
-        $datos_usuario = $this->usuario->leer_informacion_usuario($usuario);
+        $datos_usuario = $this->usuario->obtener_datos($usuario);
 
-        if ($datos_usuario != FALSE && $datos_usuario[0]->email == $email) {
+        if ($datos_usuario != FALSE && $datos_usuario['email'] == $email) {
             $this->load->helper('string');
-            $nueva_pass = random_string('alnum', 8);
-            $datos_email = array(
-                'nueva_pass' => $nueva_pass
-            );
-            $this->enviar_email('plantilla_email_cambio_pass', $email, 'Contraseña cambiada', $datos_email);
-
-            $this->usuario->cambiar_pass($usuario, $this->encryption->encrypt($nueva_pass));
-            $datos = array(
-                'mensaje' => 'La nueva contraseña se ha enviado a su email.',
-            );
+            $nueva_contrasena = random_string('alnum', 8);
+            $datos_email = [
+                'usuario' => $usuario,
+                'nueva_contrasena' => $nueva_contrasena
+            ];
+            $this->enviar_email('plantilla_email_contrasena_olvidada', $email, 'Contraseña cambiada', $datos_email);
+            $nuevos_datos = [
+                'contrasena' => $this->encryption->encrypt($nueva_contrasena)
+            ];
+            $this->usuario->modificar_datos($usuario, $nuevos_datos);
+            $this->session->set_flashdata('mensaje', 'La nueva contraseña se ha enviado a su email.');
         } else {
-            $datos = array(
-                'mensaje_error' => 'No se ha podido cambiar la contraseña debido a que no existe ningún usuario asociado a ese email.',
-            );
+            $this->session->set_flashdata('mensaje_error', 'No se ha podido cambiar la contraseña debido a que no existe ningún usuario asociado a ese email.');
         }
-        $this->load->view('login', $datos);
+        redirect('login');
     }
 
     private function enviar_email($plantilla, $email, $asunto, $datos = array()) {
@@ -158,31 +154,6 @@ class Inicio extends CI_Controller {
         $mensaje = $this->load->view($plantilla, $datos, TRUE);
         $this->email->message($mensaje);
         return $this->email->send();
-    }
-
-    public function prueba_email() {
-        $this->load->library('email');
-        $this->email->initialize(array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'smtp.mailtrap.io',
-            'smtp_user' => 'a811e75b96f6bd',
-            'smtp_pass' => 'f9408505200962',
-            'smtp_port' => 2525,
-            'crlf' => "\r\n",
-            'newline' => "\r\n"
-        ));
-
-        $this->email->from('noreply@titis.dev');
-        $this->email->to('titiseupt@outlook.com');
-        $this->email->subject('Email Test');
-        $this->email->message('Testing the email class.');
-        $this->email->send();
-
-        echo $this->email->print_debugger();
-    }
-
-    public function z() {
-        var_dump($this->usuario->obtener_datos('a'));
     }
 
 }
