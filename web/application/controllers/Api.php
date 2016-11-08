@@ -10,6 +10,7 @@ class Api extends REST_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model('usuario');
+        $this->load->model('cliente');
 
         // $this->methods['login_get']['limit'] = 5;
     }
@@ -55,6 +56,25 @@ class Api extends REST_Controller {
                 'error' => 'El usuario no existe'
                     ], REST_Controller::HTTP_NOT_FOUND);
         }
+    }
+
+    public function total_usuarios_get() {
+        $datos = array();
+        $datos['admin'] = $this->usuario->contar_usuarios(USUARIO_ADMIN);
+        $datos['tecnico_admin'] = $this->usuario->contar_usuarios(USUARIO_TECNICO_ADMIN);
+        $datos['tecnico'] = $this->usuario->contar_usuarios(USUARIO_TECNICO);
+        $datos['cliente'] = $this->usuario->contar_usuarios(USUARIO_CLIENTE);
+        $this->response([
+            'status' => TRUE,
+            'datos' => $datos
+                ], REST_Controller::HTTP_OK);
+    }
+
+    public function clientes_get() {
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->cliente->obtener_clientes()
+                ], REST_Controller::HTTP_OK);
     }
 
 }

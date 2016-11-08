@@ -39,14 +39,14 @@ class Admin extends My_Controller {
 
     public function registrar_empleado() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
-            $datos['titulo'] = 'Registrar Empleado';
+            $datos['titulo'] = 'Nuevo Empleado';
             $this->plantilla->mostrar('admin', 'nuevo_empleado', $datos);
         }
     }
 
     public function registrar_cliente() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
-            $datos['titulo'] = 'Registrar Cliente';
+            $datos['titulo'] = 'Nuevo Cliente';
             $this->plantilla->mostrar('admin', 'nuevo_cliente', $datos);
         }
     }
