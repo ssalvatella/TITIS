@@ -92,7 +92,54 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <canvas id="numero_clientes" style="height:250px"></canvas>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="numero_clientes" height="250"></canvas>
+                                    <!--canvas id="numero_clientes" style="height:250px"></canvas-->
+                                    <script>
+                                        var PieData = [
+                                            {
+                                                value: <?= $total_usuarios['admin'] ?>,
+                                                color: "#f56954",
+                                                highlight: "#f56954",
+                                                label: "Administradores"
+                                            },
+                                            {
+                                                value: <?= $total_usuarios['tecnico_admin'] ?>,
+                                                color: "#00a65a",
+                                                highlight: "#00a65a",
+                                                label: "Técnicos admin"
+                                            },
+                                            {
+                                                value: <?= $total_usuarios['tecnico'] ?>,
+                                                color: "#f39c12",
+                                                highlight: "#f39c12",
+                                                label: "Técnicos"
+                                            },
+                                            {
+                                                value: <?= $total_usuarios['cliente'] ?>,
+                                                color: "#3c8dbc",
+                                                highlight: "#3c8dbc",
+                                                label: "Clientes"
+                                            }
+                                        ];
+                                    </script>
+                                </div>
+                                <!-- ./chart-responsive -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-4">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle-o text-red"></i> Administradores</li>
+                                    <li><i class="fa fa-circle-o text-green"></i> Técnicos admin</li>
+                                    <li><i class="fa fa-circle-o text-yellow"></i> Técnicos</li>
+                                    <li><i class="fa fa-circle-o text-light-blue"></i> Clientes</li>
+                                </ul>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
                     </div>
                     <!-- /.box-body -->
                 </div>
