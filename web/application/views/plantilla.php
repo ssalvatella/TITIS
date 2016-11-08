@@ -357,11 +357,7 @@
         <!-- ./wrapper -->
 
         <!-- JAVASCRIPTS REQUERIDOS -->
-        <?= script_tag(base_url('assets/plugins/jQuery/jquery.min.js')) ?>
-        <?= script_tag(base_url('assets/plugins/jQueryUI/jquery-ui.min.js')) ?>
-
         <?= $js ?>
-
         <?= script_tag(base_url('assets/js/AdminLTE.min.js')) ?>
         <?= script_tag(base_url('assets/js/TITIS.js')) ?>
         <?php

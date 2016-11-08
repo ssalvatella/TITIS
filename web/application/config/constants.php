@@ -99,3 +99,10 @@ define('USUARIO_CLIENTE', 4);
 //define('EMAIL_PAGINA', 'titiseupt@outlook.com');
 //define('EMAIL_PAGINA_PASS', 'titis_eupt');
 define('EMAIL_PAGINA', 'noreply@titis.dev');
+
+define('TICKET_PENDIENTE', 1);
+define('TICKET_EN_PROCESO', 2);
+define('TICKET_FINALIZADO', 3);
+
+define('TAREA_EN_PROCESO', 1);
+define('TAREA_FINALIZADA', 2);

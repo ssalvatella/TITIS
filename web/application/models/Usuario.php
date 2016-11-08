@@ -44,7 +44,6 @@ class Usuario extends CI_Model {
         }
     }
 
-
     public function modificar_datos($usuario, $datos) {
         $this->db->where('nombre', $usuario);
         return $this->db->update('Usuario', $datos);
@@ -85,14 +84,20 @@ class Usuario extends CI_Model {
     public function obtener_id_cliente($id_usuario) {
         $this->db->select('id_cliente');
         $this->db->from('cliente');
-        $this->db->join('usuario', 'usuario.id_usuario = cliente.usuario');
-        $this->db->where('usuario.id_usuario', $id_usuario)->limit(1);
+        $this->db->join('Usuario', 'Usuario.id_usuario = Cliente.usuario');
+        $this->db->where('Usuario.id_usuario', $id_usuario)->limit(1);
         $consulta = $this->db->get();
         if ($consulta->num_rows() == 1) {
             return $consulta->row()->id_cliente;
         } else {
             return FALSE;
         }
+    }
+
+    public function contar_usuarios($tipo) {
+        $this->db->from('Usuario');
+        $this->db->where('tipo', $tipo);
+        return $this->db->get()->num_rows();
     }
 
 }
