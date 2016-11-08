@@ -39,7 +39,7 @@
 
                                 foreach ($clientes as $cliente) {
                                     echo '<tr style="cursor: pointer;">
-                                            <td><a  href="asdasdas.html"></a>'. $cliente['nombre'].'</td>
+                                            <td><a  href="'.site_url('admin/ver_cliente/'. $cliente['id_cliente']) .'"></a>'. $cliente['usuario'].'</td>
                                               <td>'. $cliente['email']. '</td>
                                               <td>'. $cliente['nombre'] .'</td>
                                               <td>'. $cliente['pais'] . '</td>
@@ -47,12 +47,11 @@
                                               <td>'. $cliente['telefono'] . '</td>
                                               <td align="center">';
                                         if ($cliente['activo'] == 1) {
-                                            echo '<a href ="'.site_url('admin/banear_cliente/'. $cliente['id_cliente']). '" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a></td>';
+                                            echo '<a data-toggle="tooltip" data-placement="top" title="Banear" href ="'.site_url('admin/banear_cliente/'. $cliente['id_cliente']). '" class="btn btn-xs btn-danger"><i class="fa fa-user-times"></i></a></td>';
                                         } else {
-                                            echo '<a href ="'.site_url('admin/activar_cliente/'. $cliente['id_cliente']). '"class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a></td>';
+                                            echo '<a data-toggle="tooltip" data-placement="top" title="Activar" href ="'.site_url('admin/activar_cliente/'. $cliente['id_cliente']). '"class="btn btn-xs btn-success"><i class="fa fa-user-plus"></i></a></td>';
                                         }
                                 }
-
                             ?>
 
                             </tbody>

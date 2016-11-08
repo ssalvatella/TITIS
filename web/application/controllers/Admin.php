@@ -51,4 +51,10 @@ class Admin extends My_Controller {
         }
     }
 
+    public function banear_cliente($id) {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+
+        }
+    }
+
 }

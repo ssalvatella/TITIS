@@ -5,21 +5,14 @@ $(function () {
         "searching": true,
         "ordering": true,
         "info": true,
-        "autoWidth": false,
-
-        columnDefs: [ {
-            orderable: false,
-            className: 'select-checkbox',
-            targets:   0
-        } ],
-        select: {
-            style:    'os',
-            selector: 'td:first-child'
-        },
-        order: [[ 1, 'asc' ]]
+        "autoWidth": false
     });
 });
 
 $('#clientes tr td:not(:last-child)').click(function () {
-    location.href = $(this).find('td a').attr('href');
+    window.location.href = $(this).parent().find('td:first-child a:first').attr('href');
 });
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
