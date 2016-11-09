@@ -37,9 +37,10 @@ class Api extends REST_Controller {
                 'error' => 'Se necesita el campo usuario y contrasena'
                     ], REST_Controller::HTTP_BAD_REQUEST);
         }
-        if ($this->usuario->login($usuario, $contrasena)) {
+        if (($datos_usuario = $this->usuario->login($usuario, $contrasena)) != FALSE) {
             $this->response([
-                'status' => TRUE
+                'status' => TRUE,
+                'datos' => $datos_usuario
                     ], REST_Controller::HTTP_OK);
         } else {
             $this->response([
@@ -76,7 +77,7 @@ class Api extends REST_Controller {
         if (!$id_usuario) {
             $this->response([
                 'status' => FALSE,
-                'error' => 'Se necesita el campo usuario'
+                'error' => 'Se necesita el campo id_usuario'
                     ], REST_Controller::HTTP_BAD_REQUEST);
         }
         $datos_cliente = $this->cliente->obtener_datos($id_usuario);

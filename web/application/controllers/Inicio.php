@@ -66,10 +66,14 @@ class Inicio extends CI_Controller {
                 $usuario = $this->input->post('usuario');
                 $contrasena = $this->input->post('contrasena');
 
-                if ($this->usuario->login($usuario, $contrasena) == TRUE) {
+                if (($datos_usuario = $this->usuario->login($usuario, $contrasena)) != FALSE) {
+                    if ($datos_usuario['activo'] == 0) {
+                        $this->session->set_flashdata('mensaje_error', 'La cuenta del usuario "' . $datos_usuario['usuario'] . '" no está activa.');
+                        redirect('login');
+                    }
                     $this->session->set_userdata('logged_in', TRUE);
                     $this->session->set_userdata('nombre_usuario', $usuario);
-                    $datos_usuario = $this->usuario->obtener_datos($usuario);
+                    //$datos_usuario = $this->usuario->obtener_datos($usuario);
                     $this->session->set_userdata('tipo_usuario', $datos_usuario['tipo']);
                     if ($this->input->post('recordarme')) {
                         $this->load->helper('cookie');

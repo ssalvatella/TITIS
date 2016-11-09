@@ -55,7 +55,7 @@ class Admin extends My_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['activo'] = '1';
             $this->usuario->modificar_datos($id, $datos);
-            redirect(site_url('admin/clientes'));
+            redirect('admin/clientes');
         }
     }
 
@@ -63,7 +63,7 @@ class Admin extends My_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['activo'] = '0';
             $this->usuario->modificar_datos($id, $datos);
-            redirect(site_url('admin/clientes'));
+            redirect('admin/clientes');
         }
     }
 

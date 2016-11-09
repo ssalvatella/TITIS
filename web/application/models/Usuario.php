@@ -18,10 +18,14 @@ class Usuario extends CI_Model {
                         'key' => config_item('encryption_key')
                     )
             );
-            return $this->encryption->decrypt($consulta->row_array()['contrasena']) == $contrasena;
-        } else {
-            return FALSE;
+            //return $this->encryption->decrypt($consulta->row_array()['contrasena']) == $contrasena;
+            $datos_usuario = $consulta->row_array();
+            if ($this->encryption->decrypt($datos_usuario['contrasena']) == $contrasena) {
+                unset($datos_usuario['contrasena']); // Se elimina la contraseña
+                return $datos_usuario;
+            }
         }
+        return FALSE;
     }
 
     public function obtener_id($usuario) {
@@ -35,8 +39,13 @@ class Usuario extends CI_Model {
     }
 
     public function obtener_datos($usuario) {
-        $datos = array('usuario' => $usuario);
-        $consulta = $this->db->get_where('Usuario', $datos, 1);
+        //$datos = array('usuario' => $usuario);
+        //$consulta = $this->db->get_where('Usuario', $datos, 1);
+        $this->db->select('id_usuario, tipo, usuario, email, activo'); // La contraseña no la devuelve
+        $this->db->from('Usuario');
+        $this->db->where('usuario', $usuario);
+        $consulta = $this->db->limit(1)->get();
+
         if ($consulta->num_rows() == 1) {
             return $consulta->row_array();
         } else {
