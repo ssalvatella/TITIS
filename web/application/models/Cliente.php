@@ -13,7 +13,17 @@ class Cliente extends CI_Model {
         return $this->db->get()->result_array();
     }
 
+    public function obtener_datos($id_usuario) {
+        $this->db->select('*');
+        $this->db->from('Cliente');
+        $this->db->where('usuario', $id_usuario);
+        // $this->db->join('Usuario', 'Usuario.id_usuario = Cliente.usuario');
+        $this->db->limit(1);
+        return $this->db->get()->row_array();
+    }
+
     public function registrar($datos_usuario, $datos_cliente) {
+        $datos_usuario['tipo'] = USUARIO_CLIENTE;
         $datos_usuario['activo'] = 1;
         $this->db->select('*');
         $this->db->from('Usuario');

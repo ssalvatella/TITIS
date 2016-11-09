@@ -20,7 +20,6 @@ class Pruebas extends My_Controller {
 
     public function index() {
         $datos_usuario = [
-            'tipo' => USUARIO_CLIENTE,
             'usuario' => 'cliente3',
             'contrasena' => $this->encryption->encrypt('cliente3'),
             'email' => 'cliente3@titis.dev'

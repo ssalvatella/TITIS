@@ -49,7 +49,7 @@ class Usuario extends CI_Model {
         return $this->db->update('Usuario', $datos);
     }
 
-    public function registrar($datos) {
+    public function registrar_empleado($datos) {
         $datos['activo'] = 1;
         $this->db->select('*');
         $this->db->from('Usuario');
