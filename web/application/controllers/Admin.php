@@ -31,8 +31,8 @@ class Admin extends My_Controller {
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
-            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-jasny/js/jasny-bootstrap.min.js'));
-            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-jasny/css/jasny-bootstrap.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.responsive.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/responsive.dataTables.min.css'));
             $this->plantilla->mostrar('admin', 'clientes', $datos);
         }
     }
@@ -51,9 +51,19 @@ class Admin extends My_Controller {
         }
     }
 
+    public function activar_cliente($id) {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['activo'] = '1';
+            $this->usuario->modificar_datos($id, $datos);
+            redirect(site_url('admin/clientes'));
+        }
+    }
+
     public function banear_cliente($id) {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
-
+            $datos['activo'] = '0';
+            $this->usuario->modificar_datos($id, $datos);
+            redirect(site_url('admin/clientes'));
         }
     }
 

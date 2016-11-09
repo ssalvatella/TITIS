@@ -21,7 +21,7 @@
                     <div class="box-body">
                         <a href = "<?= site_url('admin/registrar_cliente') ?>" class="btn btn-app"><i class="ion ion-person-add"></i>Añadir</a>
                         <a href = "javascript:history.go(0)" class="btn btn-app"><i class="fa fa-repeat"></i>Actualizar</a>
-                        <table data-link="" id="clientes" class="table table-bordered table-hover table-responsive" >
+                        <table data-link="" id="clientes" class="table table-bordered table-hover display nowrap"  >
                             <thead>
                                 <tr>
                                     <th><i class="fa fa-user" aria-hidden="true"></i> &nbsp; Usuario</th>
@@ -47,9 +47,9 @@
                                               <td>'. $cliente['telefono'] . '</td>
                                               <td align="center">';
                                         if ($cliente['activo'] == 1) {
-                                            echo '<a data-toggle="tooltip" data-placement="top" title="Banear" href ="'.site_url('admin/banear_cliente/'. $cliente['id_cliente']). '" class="btn btn-xs btn-danger"><i class="fa fa-user-times"></i></a></td>';
+                                            echo '<a data-toggle="tooltip" data-placement="top" title="Banear" href ="'.site_url('admin/banear_cliente/'. $cliente['usuario']). '" class="btn btn-xs btn-danger"><i class="fa fa-user-times"></i></a></td>';
                                         } else {
-                                            echo '<a data-toggle="tooltip" data-placement="top" title="Activar" href ="'.site_url('admin/activar_cliente/'. $cliente['id_cliente']). '"class="btn btn-xs btn-success"><i class="fa fa-user-plus"></i></a></td>';
+                                            echo '<a data-toggle="tooltip" data-placement="top" title="Activar" href ="'.site_url('admin/activar_cliente/'. $cliente['usuario']). '"class="btn btn-xs btn-success"><i class="fa fa-user-plus"></i></a></td>';
                                         }
                                 }
                             ?>
