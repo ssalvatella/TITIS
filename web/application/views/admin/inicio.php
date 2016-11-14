@@ -38,7 +38,7 @@
                         <p>Clientes Nuevos</p>
                     </div>
                     <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes'); ?>"><i
+                        <a data-toggle="tooltip" data-placement="top" title="Añadir cliente" style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/registrar_cliente'); ?>"><i
                                 class="ion ion-person-add"></i></a>
                     </div>
                     <a href="<?= site_url('admin/clientes') ?>" class="small-box-footer">Acceder <i

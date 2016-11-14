@@ -9,6 +9,7 @@ class Admin extends My_Controller {
         $this->load->library('plantilla');
         $this->load->model('usuario');
         $this->load->model('cliente');
+        $this->load->model('tecnico_admin');
     }
 
     public function index() {
@@ -66,5 +67,13 @@ class Admin extends My_Controller {
             redirect('admin/clientes');
         }
     }
+
+
+    public function obtener_tecnicos_admin() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            print_r($this->tecnico_admin->obtener_tecnicos_admin());
+        }
+    }
+
 
 }
