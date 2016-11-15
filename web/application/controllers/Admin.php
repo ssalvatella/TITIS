@@ -10,6 +10,7 @@ class Admin extends My_Controller {
         $this->load->model('usuario');
         $this->load->model('cliente');
         $this->load->model('tecnico_admin');
+        $this->load->model('ticket');
     }
 
     public function index() {
@@ -20,7 +21,6 @@ class Admin extends My_Controller {
             $datos['total_usuarios']['tecnico'] = $this->usuario->contar_usuarios(USUARIO_TECNICO);
             $datos['total_usuarios']['cliente'] = $this->usuario->contar_usuarios(USUARIO_CLIENTE);
             $this->plantilla->poner_js(site_url('assets/plugins/chartjs/Chart.min.js'));
-
             $this->plantilla->mostrar('admin', 'inicio', $datos);
         }
     }
@@ -68,6 +68,19 @@ class Admin extends My_Controller {
         }
     }
 
+    public function tickets() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['titulo'] = 'Tickets';
+            $datos['tickets'] = $this->ticket->obtener_tickets();
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.responsive.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/responsive.dataTables.min.css'));
+            $this->plantilla->mostrar('admin', 'tickets', $datos);
+
+        }
+    }
 
     public function obtener_tecnicos_admin() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {

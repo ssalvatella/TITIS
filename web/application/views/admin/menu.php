@@ -14,6 +14,7 @@
             <li id="menu_registro_cliente"><a href="<?= site_url('admin/registrar_cliente') ?>"><i class="fa fa-circle-o"></i> Cliente</a></li>
         </ul>
     </li>
+    <li id="menu_tickets"><a href="<?= site_url('admin/tickets') ?>"><i class="fa fa-ticket" aria-hidden="true"></i> <span>Tickets</span></a></li>
     <li id="menu_clientes"><a href="<?= site_url('admin/clientes') ?>"><i class="fa fa-address-book" aria-hidden="true"></i> <span>Clientes</span></a></li>
     <li class="header">AJUSTES</li>                        
     <li id="menu_perfil"><a href="<?= site_url('admin/perfil') ?>"><i class="fa fa-cog"></i> <span>Perfil</span></a></li>
