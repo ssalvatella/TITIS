@@ -10,7 +10,12 @@ class Cliente extends CI_Model {
         $this->db->select('*');
         $this->db->from('Cliente');
         $this->db->join('Usuario', 'Usuario.id_usuario = Cliente.usuario');
-        return $this->db->get()->result_array();
+        $datos = $this->db->get()->result_array();
+        foreach ($datos as $clave => $d) {
+            unset($d['contrasena']);
+            $datos[$clave] = $d;
+        }
+        return $datos;
     }
 
     public function obtener_datos($id_usuario) {
