@@ -11,14 +11,14 @@ class Ticket extends CI_Model {
         $this->db->select(' Ticket.*, cliente.nombre as nombre_cliente, usuarioTecnico.usuario as nombre_tecnico_admin');
         $this->db->from('Ticket');
         $this->db->join('Cliente as cliente', 'cliente.id_cliente = Ticket.cliente');
-        $this->db->join('Usuario as usuarioTecnico', 'usuarioTecnico.id_usuario = Ticket.tecnico_admin');
+        $this->db->join('Usuario as usuarioTecnico', 'usuarioTecnico.id_usuario = Ticket.tecnico_admin', 'left');
         $consulta = $this->db->get();
         $tickets = $consulta->result_array();
         $resultado = array();
         foreach($tickets as $ticket) {
             $totalTareas = $this->contar_tareas($ticket['id_ticket'], null);
             $tareasCompletadas = $this->contar_tareas($ticket['id_ticket'], TAREA_FINALIZADA);
-            if ($tareasCompletadas == 0) {
+            if ($totalTareas == 0) {
                 $ticket['progreso'] = 0;
             } else {
                 $ticket['progreso'] = ($tareasCompletadas/$totalTareas) * 100;

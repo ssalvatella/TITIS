@@ -41,8 +41,8 @@
                                             <td><a  href="'.site_url('admin/ver_ticket/'. $ticket['id_ticket']) .'"></a>'. $ticket['id_ticket'].'</td>
                                               <td><a href="'. site_url('admin/ver_cliente/'). $ticket['cliente']. '">'. $ticket['nombre_cliente']. '</a></td>
                                               <td>'. $ticket['titulo'] . '</td>
-                                              <td>'. $ticket['inicio'] . '</td>
-                                              <td>'. $ticket['nombre_tecnico_admin'] . '</td>
+                                              <td>'. date('d/m/Y H:i', strtotime($ticket['inicio'])) . '</td>
+                                              <td>'. $ticket['nombre_tecnico_admin']. '</td>
                                               <td>';
                                 switch($ticket['estado']) {
 
