@@ -20,12 +20,13 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <a href = "javascript:history.go(0)" class="btn btn-app"><i class="fa fa-repeat"></i>Actualizar</a>
-                        <table data-link="" id="clientes" class="table table-bordered table-hover display nowrap"  >
+                        <table data-link="" id="tickets" class="table table-bordered table-hover display nowrap"  >
                             <thead>
                             <tr>
                                 <th><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; Número</th>
                                 <th><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Cliente</th>
                                 <th><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Título</th>
+                                <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; Fecha </th>
                                 <th><i class="fa fa-wrench" aria-hidden="true"></i> &nbsp; Técnico Admin</th>
                                 <th><i class="glyphicon glyphicon-ok" aria-hidden="true"></i>&nbsp; Estado</th>
                                 <th><i class="glyphicon glyphicon-stats" aria-hidden="true"></i>&nbsp;  Progreso</th>
@@ -38,10 +39,25 @@
                             foreach ($tickets as $ticket) {
                                 echo '<tr style="cursor: pointer;">
                                             <td><a  href="'.site_url('admin/ver_ticket/'. $ticket['id_ticket']) .'"></a>'. $ticket['id_ticket'].'</td>
-                                              <td>'. $ticket['nombre_cliente']. '</td>
+                                              <td><a href="'. site_url('admin/ver_cliente/'). $ticket['cliente']. '">'. $ticket['nombre_cliente']. '</a></td>
                                               <td>'. $ticket['titulo'] . '</td>
+                                              <td>'. $ticket['inicio'] . '</td>
                                               <td>'. $ticket['nombre_tecnico_admin'] . '</td>
-                                              <td>'. $ticket['estado'] . '</td>
+                                              <td>';
+                                switch($ticket['estado']) {
+
+                                    case TICKET_PENDIENTE:
+                                        echo '<span class="label label-warning">Pendiente</span>';
+                                        break;
+                                    case TICKET_EN_PROCESO:
+                                        echo '<span class="label label-info">En proceso</span>';
+                                        break;
+                                    case TICKET_FINALIZADO:
+                                        echo '<span class="label label-success">Completado</span>';
+                                        break;
+                                }
+
+                                echo'</td>
                                               <td> <div class="progress progress-sm active "></div><div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="'. $ticket['progreso']. '" aria-valuemin="0" aria-valuemax="100" </div></td>';
 
                             }
@@ -52,6 +68,7 @@
                                 <th><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; Número</th>
                                 <th><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Cliente</th>
                                 <th><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Título</th>
+                                <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; Fecha </th>
                                 <th><i class="fa fa-wrench" aria-hidden="true"></i> &nbsp; Técnico Admin</th>
                                 <th><i class="glyphicon glyphicon-ok" aria-hidden="true"></i>&nbsp; Estado</th>
                                 <th><i class="glyphicon glyphicon-stats" aria-hidden="true"></i>&nbsp;  Progreso</th>
