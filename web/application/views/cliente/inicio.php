@@ -84,7 +84,7 @@
             <section class="col-lg-6 connectedSortable ui-sorteable">
                 <div class="box box-info ">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Line Chart</h3>
+                        <h3 class="box-title">Gráfico de Gastos</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -95,10 +95,27 @@
                     <div class="box-body">
                         <div class="chart">
                             <canvas id="lineChart" style="height: 123px; width: 389px;" height="123" width="389"></canvas>
+                            <script>
+                                var areaChartData = {
+                                    labels: ["January", "February", "March", "April", "May", "June", "July"],
+                                    datasets: [
+                                        {
+                                            label: "Factura",
+                                            fillColor: "rgba(210, 214, 222, 1)",
+                                            strokeColor: "rgba(210, 214, 222, 1)",
+                                            pointColor: "rgba(210, 214, 222, 1)",
+                                            pointStrokeColor: "#c1c7d1",
+                                            pointHighlightFill: "#fff",
+                                            pointHighlightStroke: "rgba(220,220,220,1)",
+                                            data: [65, 59, 80, 81, 56, 55, 40]
+                                        }
+                                    ]
+                                };
+                            </script>
                         </div>
                     </div>
                     <!-- /.box-body -->
-            </div>
+                </div>
             </section>
 
             <!-- TABLA DE TICKETS -->
@@ -116,7 +133,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <table class="table table-hover no-margin">
+                            <table id="tickets" class="table table-hover no-margin">
                                 <thead>
                                 <tr>
                                     <th>Título</th>
@@ -125,83 +142,30 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Instalar impresoras</td>
-                                    <td>19/10/2016 14:20</td>
-                                    <td><span class="label label-warning">Pendiente</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Arreglar servidores</td>
-                                    <td>17/10/2016 12:20</td>
-                                    <td><span class="label label-warning">Pendiente</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Formatear ordenadores</td>
-                                    <td>17/10/2016 10:44</td>
-                                    <td><span class="label label-info">En proceso</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Revisar base de datos MySQL</td>
-                                    <td>16/10/2016 17:33</td>
-                                    <td><span class="label label-info">En proceso</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00c0ef" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Presupuestar página web</td>
-                                    <td>15/10/2016 11:54</td>
-                                    <td><span class="label label-success">Completado</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Comprar dominio</td>
-                                    <td>14/10/2016 09:42</td>
-                                    <td><span class="label label-success">Completado</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Añadir servidor</td>
-                                    <td>13/10/2016 15:20</td>
-                                    <td><span class="label label-success">Completado</span></td>
-                                    <td>
-                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                            <canvas width="34" height="20"
-                                                    style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                        </div>
-                                    </td>
-                                </tr>
+
+                                <?php
+                                foreach ($tickets as $ticket) {
+                                    echo '<tr style="cursor: pointer;">
+                                              <td><a  href="'.site_url('cliente/ver_ticket/'. $ticket['id_ticket']) .'"></a>'. $ticket['titulo'] . '</td>
+                                              <td>'. date('d/m/Y H:i', strtotime($ticket['inicio'])) . '</td>
+                                              <td>';
+                                    switch($ticket['estado']) {
+
+                                        case TICKET_PENDIENTE:
+                                            echo '<span class="label label-warning">Pendiente</span>';
+                                            break;
+                                        case TICKET_EN_PROCESO:
+                                            echo '<span class="label label-info">En proceso</span>';
+                                            break;
+                                        case TICKET_FINALIZADO:
+                                            echo '<span class="label label-success">Completado</span>';
+                                            break;
+                                    }
+
+                                    echo'</td>';
+
+                                }
+                                ?>
                                 </tbody>
                             </table>
                         </div>

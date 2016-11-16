@@ -39,8 +39,6 @@ class Usuario extends CI_Model {
     }
 
     public function obtener_datos($usuario) {
-        //$datos = array('usuario' => $usuario);
-        //$consulta = $this->db->get_where('Usuario', $datos, 1);
         $this->db->select('id_usuario, tipo, usuario, email, activo'); // La contraseña no la devuelve
         $this->db->from('Usuario');
         $this->db->where('usuario', $usuario);
@@ -75,9 +73,8 @@ class Usuario extends CI_Model {
 
     public function obtener_id_cliente($id_usuario) {
         $this->db->select('id_cliente');
-        $this->db->from('cliente');
-        $this->db->join('Usuario', 'Usuario.id_usuario = Cliente.usuario');
-        $this->db->where('Usuario.id_usuario', $id_usuario)->limit(1);
+        $this->db->from('Cliente');
+        $this->db->where('usuario', $id_usuario) -> limit(1);
         $consulta = $this->db->get();
         if ($consulta->num_rows() == 1) {
             return $consulta->row()->id_cliente;

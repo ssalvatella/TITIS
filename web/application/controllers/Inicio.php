@@ -82,10 +82,11 @@ class Inicio extends CI_Controller {
                     }
                     $this->session->set_userdata('id_usuario', $datos_usuario['id_usuario']);
                     $this->session->set_userdata('email_usuario', $datos_usuario['email']);
-                    $this->cargar_inicio();
+                    $this->session->set_userdata('id_cliente', $datos_usuario['id_cliente']);
                     if ($datos_usuario['tipo'] == USUARIO_CLIENTE) {
                         $this->session->set_userdata('id_cliente', $this->usuario->obtener_id_cliente($datos_usuario['id_usuario']));
                     }
+                    $this->cargar_inicio();
                 } else {
                     $datos = array(
                         'mensaje_error' => 'Usuario y/o Contraseña incorrectos.',

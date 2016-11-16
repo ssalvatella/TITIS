@@ -8,7 +8,7 @@ class Admin extends MY_Controller {
         parent::__construct();
         $this->load->library('plantilla');
         $this->load->model('usuario');
-        $this->load->model('cliente');
+        $this->load->model('cliente_modelo');
         $this->load->model('tecnico_admin');
         $this->load->model('ticket');
     }
@@ -28,7 +28,7 @@ class Admin extends MY_Controller {
     public function clientes() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = 'Clientes';
-            $datos['clientes'] = $this->cliente->obtener_clientes();
+            $datos['clientes'] = $this->cliente_modelo->obtener_clientes();
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));

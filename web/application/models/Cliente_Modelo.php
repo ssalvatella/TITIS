@@ -1,6 +1,6 @@
 <?php
 
-class Cliente extends CI_Model {
+class Cliente_Modelo extends CI_Model {
 
     public function __construct() {
         parent::__construct();
@@ -24,7 +24,6 @@ class Cliente extends CI_Model {
         $this->db->where('Cliente.usuario', $id_usuario);
         $this->db->join('Usuario', 'Usuario.id_usuario = Cliente.usuario');
         $this->db->limit(1);
-        //return $this->db->get()->row_array();
         $datos = $this->db->get()->row_array();
         unset($datos['contrasena']); // Se elimina la contraseña
         return $datos;
@@ -53,6 +52,15 @@ class Cliente extends CI_Model {
     public function modificar_datos($cliente, $datos) {
         $this->db->where('id_cliente', $cliente);
         return $this->db->update('Cliente', $datos);
+    }
+
+    public function obtener_ultimos_tickets($id_cliente, $numero) {
+        $this->db->select('id_ticket, titulo, estado, inicio');
+        $this->db->from('Ticket');
+        $this->db->where('cliente', $id_cliente);
+        $this->db->order_by('inicio', 'DESC');
+        $this->db->limit($numero);
+        return $this->db->get()->result_array();
     }
 
 }
