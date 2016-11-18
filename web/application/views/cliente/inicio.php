@@ -82,7 +82,7 @@
 
             <!-- LINE CHART -->
             <section class="col-lg-6 connectedSortable ui-sorteable">
-                <div class="box box-info ">
+                <div class="box box-danger ">
                     <div class="box-header with-border">
                         <h3 class="box-title">Gráfico de Gastos</h3>
 

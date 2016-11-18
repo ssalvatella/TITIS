@@ -5,6 +5,7 @@ class Ticket extends CI_Model {
     public function __construct() {
         parent::__construct();
         $this->load->model('tarea');
+        $this->load->model('archivo');
     }
 
     public function obtener_tickets() {
@@ -32,6 +33,38 @@ class Ticket extends CI_Model {
         $this->db->where('id_ticket', $id_ticket);
         $consulta = $this->db->get();
         return $consulta->result_array();
+    }
+
+    public function registrar_ticket($datos) {
+
+        $id_cliente = $this->session->userdata('id_cliente');
+        $id_usuario_cliente = $this->session->userdata('id_usuario');
+
+        $ticket = array('titulo' => $datos['titulo'],
+            'cliente' => $id_cliente,
+            'inicio' => date("Y-m-d H:i:s"),
+            'estado' => TICKET_PENDIENTE
+        );
+
+        // INSERTAMOS EL TICKET ------------------
+        if($this->db->insert('Ticket', $ticket)) {
+
+            $id_ticket = $this->db->insert_id();
+
+            $mensaje = array('ticket' => $id_ticket,
+                'usuario' => $id_usuario_cliente,
+                'fecha' => date("Y-m-d H:i:s"),
+                'texto' => $datos['mensaje']
+            );
+
+            // INSERTAMOS EL MENSAJE --------------------
+            if ($this->db->insert('Mensaje', $mensaje)) {
+
+                $id_mensaje = $this->db->insert_id();
+                return true;
+            }
+        }
+
     }
 
 }

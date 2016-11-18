@@ -75,7 +75,7 @@
                 </form>                
 
                 <br>
-                <a href="#" data-toggle="modal" data-target="#modal_contrasena_olvidada">¿Contraseña olvidada?</a>
+                    <a href="#" data-toggle="modal" data-target="#modal_contrasena_olvidada">¿Contraseña olvidada?</a>
 
                 <div class="modal" id="modal_contrasena_olvidada">
                     <div class="modal-dialog">

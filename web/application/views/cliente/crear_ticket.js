@@ -1,0 +1,3 @@
+$(function () {
+    $("#mensaje").wysihtml5();
+});
