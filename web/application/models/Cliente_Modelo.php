@@ -40,7 +40,6 @@ class Cliente_Modelo extends CI_Model {
         if ($consulta->num_rows() == 0) {
             $datos_usuario ['tipo'] = USUARIO_CLIENTE;
             $this->db->insert('Usuario', $datos_usuario);
-            //  $datos_cliente['usuario'] = $this->db->select('*')->from('usuario')->where('nombre', $datos_usuario['nombre'])->limit(1)->get()->row()->id_usuario;
             $datos_cliente ['usuario'] = $this->db->insert_id();
             return $this->db->insert('Cliente', $datos_cliente);
         } else {

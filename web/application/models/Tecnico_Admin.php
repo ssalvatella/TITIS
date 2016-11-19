@@ -1,13 +1,10 @@
 <?php
 
-
-
 class Tecnico_Admin extends CI_Model {
 
     public function __construct() {
         parent::__construct();
     }
-
 
     public function obtener_tecnicos_admin() {
 
@@ -17,6 +14,5 @@ class Tecnico_Admin extends CI_Model {
         $resultado = $this->db->get()->result_array();
         return $resultado;
     }
-
 
 }

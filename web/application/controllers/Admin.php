@@ -78,7 +78,6 @@ class Admin extends MY_Controller {
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.responsive.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/responsive.dataTables.min.css'));
             $this->plantilla->mostrar('admin', 'tickets', $datos);
-
         }
     }
 
@@ -87,6 +86,5 @@ class Admin extends MY_Controller {
             print_r($this->tecnico_admin->obtener_tecnicos_admin());
         }
     }
-
 
 }

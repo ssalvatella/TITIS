@@ -8,11 +8,12 @@ class Ticket extends CI_Model {
         $this->load->model('archivo');
     }
 
-    public function obtener_tickets() {
+    public function obtener_tickets($inicio = 0, $cantidad = 9999) {
         $this->db->select('Ticket.*, cliente.nombre as nombre_cliente, usuarioTecnico.usuario as nombre_tecnico_admin');
         $this->db->from('Ticket');
         $this->db->join('Cliente as cliente', 'cliente.id_cliente = Ticket.cliente');
         $this->db->join('Usuario as usuarioTecnico', 'usuarioTecnico.id_usuario = Ticket.tecnico_admin', 'left');
+        $this->db->limit($cantidad, $inicio);
         $tickets = $this->db->get()->result_array();
         foreach ($tickets as $clave => $ticket) {
             $total_tareas = $this->tarea->contar_tareas($ticket['id_ticket']);
@@ -47,7 +48,7 @@ class Ticket extends CI_Model {
         );
 
         // INSERTAMOS EL TICKET ------------------
-        if($this->db->insert('Ticket', $ticket)) {
+        if ($this->db->insert('Ticket', $ticket)) {
 
             $id_ticket = $this->db->insert_id();
 
@@ -64,7 +65,6 @@ class Ticket extends CI_Model {
                 return true;
             }
         }
-
     }
 
 }

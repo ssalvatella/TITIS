@@ -7,11 +7,9 @@ class Cliente extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('plantilla');
-        $this->load->model('cliente_modelo');
-        $this->load->model('usuario');
-        $this->load->model('ticket');
+        $this->load->model(array('cliente_modelo', 'usuario', 'ticket'));
 
-        $config['max_size']     = '100';
+        $config['max_size'] = '100';
         $config['upload_path'] = './uploads/';
         $this->load->library('upload', $config);
     }
@@ -34,19 +32,18 @@ class Cliente extends MY_Controller {
             $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
             $this->plantilla->mostrar('cliente', 'crear_ticket', $datos);
         }
-   }
+    }
 
     public function enviar_ticket() {
         if ($this->usuario_permitido(USUARIO_CLIENTE)) {
 
-            $datos = array('titulo' =>  $this->input->post('titulo'),
-                'mensaje' =>  $this->input->post('mensaje'),
-                );
+            $datos = array('titulo' => $this->input->post('titulo'),
+                'mensaje' => $this->input->post('mensaje'),
+            );
 
             return $this->ticket->registrar_ticket($datos);
 
             // AQUÍ SE TENDRÁ QUE SUBIR EL ARCHIVO ----------------------
-
 //            if($this->upload->do_upload('fichero')) {
 //
 //                print_r('Subido');
@@ -65,12 +62,7 @@ class Cliente extends MY_Controller {
 //            }
         }
 
-            // ------------------------------------------------------------
-
+        // ------------------------------------------------------------
     }
-
-
-
-
 
 }

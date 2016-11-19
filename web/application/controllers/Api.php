@@ -13,6 +13,9 @@ class Api extends REST_Controller {
      * total_usuarios
      * clientes
      * cliente
+     * tickets
+     * ticket
+     * ultimos_tickets
      * 
      * --- POST ---
      * login
@@ -22,8 +25,7 @@ class Api extends REST_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->model('usuario');
-        $this->load->model('cliente');
+        $this->load->model(array('usuario', 'cliente_modelo', 'ticket'));
 
         // $this->methods['login_get']['limit'] = 5;
     }
@@ -80,7 +82,7 @@ class Api extends REST_Controller {
                 'error' => 'Se necesita el campo id_usuario'
                     ], REST_Controller::HTTP_BAD_REQUEST);
         }
-        $datos_cliente = $this->cliente->obtener_datos($id_usuario);
+        $datos_cliente = $this->cliente_modelo->obtener_datos($id_usuario);
         if ($datos_cliente) {
             $this->response([
                 'status' => TRUE,
@@ -109,7 +111,7 @@ class Api extends REST_Controller {
     public function clientes_get() {
         $this->response([
             'status' => TRUE,
-            'datos' => $this->cliente->obtener_clientes()
+            'datos' => $this->cliente_modelo->obtener_clientes()
                 ], REST_Controller::HTTP_OK);
     }
 
@@ -205,8 +207,67 @@ class Api extends REST_Controller {
 
         $this->response([
             'status' => TRUE,
-            'datos' => $this->cliente->registrar($datos_usuario, $datos_cliente)
+            'datos' => $this->cliente_modelo->registrar($datos_usuario, $datos_cliente)
                 ], REST_Controller::HTTP_OK);
+    }
+
+    public function tickets_get() {
+        $tickets = $this->ticket->obtener_tickets();
+        if ($tickets) {
+            $this->response([
+                'status' => TRUE,
+                'datos' => $tickets
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'No hay tickets'
+                    ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function ticket_get() {
+        $id_ticket = $this->get('id_ticket');
+        if (!$id_ticket) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_ticket'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $datos_ticket = $this->ticket->obtener_ticket($id_ticket);
+        if ($datos_ticket) {
+            $this->response([
+                'status' => TRUE,
+                'datos' => $datos_ticket
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'El ticket no existe'
+                    ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function ultimos_tickets_get() {
+        $id_cliente = $this->get('id_cliente');
+        if (!$id_cliente) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_cliente'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $ultimos_tickets = $this->cliente_modelo->obtener_ultimos_tickets($id_cliente, 7);
+        if ($ultimos_tickets) {
+            $this->response([
+                'status' => TRUE,
+                'datos' => $ultimos_tickets
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'El cliente no existe o no tiene tickets'
+                    ], REST_Controller::HTTP_NOT_FOUND);
+        }
     }
 
 }
