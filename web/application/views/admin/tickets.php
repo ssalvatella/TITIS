@@ -17,6 +17,10 @@
             <div class="col-xs-12">
                 <div class="box">
 
+                    <div id = "cargador" class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+
                     <!-- /.box-header -->
                     <div class="box-body">
                         <a href = "javascript:history.go(0)" class="btn btn-app"><i class="fa fa-repeat"></i>Actualizar</a>
@@ -58,7 +62,7 @@
                                 }
 
                                 echo'</td>
-                                              <td> <div class="progress progress-sm active "></div><div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="'. $ticket['progreso']. '" aria-valuemin="0" aria-valuemax="100" </div></td>';
+                                              <td> <div  data-toggle="tooltip" data-placement="top" title="'. $ticket['progreso']. ' % ' .'" class="progress progress-sm active "></div><div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="'. $ticket['progreso']. '" aria-valuemin="0" aria-valuemax="100" </div></td>';
 
                             }
                             ?>

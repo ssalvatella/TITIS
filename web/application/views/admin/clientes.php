@@ -17,6 +17,10 @@
             <div class="col-xs-12">
                 <div class="box">
 
+                    <div id = "cargador" class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+
                     <!-- /.box-header -->
                     <div class="box-body">
                         <a href = "<?= site_url('admin/registrar_cliente') ?>" class="btn btn-app"><i class="ion ion-person-add"></i>Añadir</a>

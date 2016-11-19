@@ -6,7 +6,10 @@ $(function () {
         "ordering": true,
         "info": true,
         "autoWidth": false,
-        "responsive": true
+        "responsive": true,
+        "fnInitComplete" : function() {
+            $("#cargador").hide();
+        }
     });
 });
 

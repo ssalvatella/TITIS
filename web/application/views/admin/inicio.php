@@ -18,11 +18,11 @@
             <div class="col-lg-3 col-xs-6">
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3>12</h3>
+                        <h3><?= $tickets_pendientes ?></h3>
                         <p>Tickets Pendientes</p>
                     </div>
                     <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes'); ?>"><i
+                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/tickets'); ?>"><i
                                 class="fa fa-ticket"></i></a>
                     </div>
                     <a href="<?= site_url('admin/clientes'); ?>" class="small-box-footer">Acceder <i
@@ -161,7 +161,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive">
-                            <table class="table table-hover no-margin">
+                            <table id="tickets" class="table table-hover no-margin">
                                 <thead>
                                     <tr>
                                         <th>Cliente</th>
@@ -171,90 +171,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">Pedro</a></td>
-                                        <td>Instalar impresoras</td>
-                                        <td>19/10/2016 14:20</td>
-                                        <td><span class="label label-warning">Pendiente</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                <canvas width="34" height="20"
-                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">José</a></td>
-                                        <td>Arreglar servidores</td>
-                                        <td>17/10/2016 12:20</td>
-                                        <td><span class="label label-warning">Pendiente</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                                <canvas width="34" height="20"
-                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">Luisa</a></td>
-                                        <td>Formatear ordenadores</td>
-                                        <td>17/10/2016 10:44</td>
-                                        <td><span class="label label-info">En proceso</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#f56954" data-height="20">
-                                                <canvas width="34" height="20"
-                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">Javier</a></td>
-                                        <td>Revisar base de datos MySQL</td>
-                                        <td>16/10/2016 17:33</td>
-                                        <td><span class="label label-info">En proceso</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#00c0ef" data-height="20">
-                                                <canvas width="34" height="20"
-                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">Marta</a></td>
-                                        <td>Presupuestar página web</td>
-                                        <td>15/10/2016 11:54</td>
-                                        <td><span class="label label-success">Completado</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                                <canvas width="34" height="20"
-                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">Fernando</a></td>
-                                        <td>Comprar dominio</td>
-                                        <td>14/10/2016 09:42</td>
-                                        <td><span class="label label-success">Completado</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#f56954" data-height="20">
-                                                <canvas width="34" height="20"
-                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">Isabel</a></td>
-                                        <td>Añadir servidor</td>
-                                        <td>13/10/2016 15:20</td>
-                                        <td><span class="label label-success">Completado</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                <canvas width="34" height="20"
-                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                    foreach ($tickets as $ticket) {
+                                        echo '<tr style="cursor: pointer;">
+                                                <td><a  href="'.site_url('admin/ver_ticket/'. $ticket['id_ticket']) .'"></a>  <a href="'. site_url('admin/ver_cliente/'). $ticket['cliente']. '">'. $ticket['nombre_cliente']. '</a>'.'</td>
+                                                <td> '. $ticket['titulo'] . '</td>
+                                                <td>'. date('d/m/Y H:i', strtotime($ticket['inicio'])) . '</td>
+                                                 <td> ';
+                                        switch($ticket['estado']) {
+
+                                            case TICKET_PENDIENTE:
+                                                echo '<span class="label label-warning">Pendiente</span>';
+                                                break;
+                                            case TICKET_EN_PROCESO:
+                                                echo '<span class="label label-info">En proceso</span>';
+                                                break;
+                                            case TICKET_FINALIZADO:
+                                                echo '<span class="label label-success">Completado</span>';
+                                                break;
+                                        }
+
+                                        echo'</td>';
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

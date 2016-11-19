@@ -14,7 +14,7 @@
     <!-- Contenido -->
     <section class="content">
 
-        <div class="box">
+        <div class="box box-solid">
 
         <form method="post" action="<?= site_url('cliente/enviar_ticket'); ?>">
 

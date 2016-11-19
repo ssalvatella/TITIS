@@ -20,6 +20,8 @@ class Admin extends MY_Controller {
             $datos['total_usuarios']['tecnico_admin'] = $this->usuario->contar_usuarios(USUARIO_TECNICO_ADMIN);
             $datos['total_usuarios']['tecnico'] = $this->usuario->contar_usuarios(USUARIO_TECNICO);
             $datos['total_usuarios']['cliente'] = $this->usuario->contar_usuarios(USUARIO_CLIENTE);
+            $datos['tickets'] = $this->ticket->obtener_ultimos_tickets(10);
+            $datos['tickets_pendientes'] = $this->ticket->contar_tickets_estado(TICKET_PENDIENTE);
             $this->plantilla->poner_js(site_url('assets/plugins/chartjs/Chart.min.js'));
             $this->plantilla->mostrar('admin', 'inicio', $datos);
         }
