@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title><?= NOMBRE_WEB ?> | Iniciar Sesión</title>
+        <title><?= NOMBRE_WEB ?> | <?= $this->lang->line('iniciar_sesion'); ?></title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <?= meta('description', 'TITIS - Gestión de incidencias y tickets') ?>
@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="<?= site_url('assets/css/bootstrap.min.css'); ?>">
         <link rel="stylesheet" href="<?= site_url('assets/css/font-awesome.min.css'); ?>">
         <link rel="stylesheet" href="<?= site_url('assets/css/ionicons.min.css'); ?>">
+        <link rel="stylesheet" href="<?= site_url('assets/plugins/flag-icon-css/css/flag-icon.min.css'); ?>">
         <link rel="stylesheet" href="<?= site_url('assets/css/AdminLTE.min.css'); ?>">
         <link rel="stylesheet" href="<?= site_url('assets/plugins/iCheck/square/blue.css'); ?>">
 
@@ -30,7 +31,7 @@
             </div>
             <!-- /.login-logo -->
             <div class="login-box-body">
-                <h3 class="login-box-msg">Iniciar Sesión</h3>
+                <h3 class="login-box-msg"><?= $this->lang->line('iniciar_sesion'); ?></h3>
                 <div>
                     <?php if (isset($mensaje)) { ?>
                         <div class="alert alert-success">
@@ -49,12 +50,12 @@
 
                 <form action="<?= site_url('login'); ?>" method="POST" data-toggle="validator" role="form">
                     <div class="form-group has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?>">
-                        <input type="text" class="form-control" placeholder="Usuario" name="usuario" value="<?= set_value('usuario'); ?>" required>
+                        <input type="text" class="form-control" placeholder="<?= $this->lang->line('usuario'); ?>" name="usuario" value="<?= set_value('usuario'); ?>" required>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         <?= form_error('usuario'); ?>
                     </div>
                     <div class="form-group has-feedback <?= form_error('contrasena') != '' ? 'has-error ' : '' ?>">
-                        <input type="password" class="form-control" placeholder="Password" name="contrasena" required>
+                        <input type="password" class="form-control" placeholder="<?= $this->lang->line('contrasena'); ?>" name="contrasena" required>
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         <?= form_error('contrasena'); ?>
                     </div>
@@ -62,21 +63,30 @@
                         <div class="col-xs-6 col-sm-7">
                             <div class="checkbox icheck">
                                 <label>
-                                    <input type="checkbox" name="recordarme"> Recordarme
+                                    <input type="checkbox" name="recordarme"> <?= $this->lang->line('recordarme'); ?>
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-xs-6 col-sm-5">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Iniciar Sesión</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-flat"><?= $this->lang->line('iniciar_sesion'); ?></button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>                
 
                 <br>
-                    <a href="#" data-toggle="modal" data-target="#modal_contrasena_olvidada">¿Contraseña olvidada?</a>
-
+                <div class="row">
+                    <div class="col-xs-6">
+                        <a href="#" data-toggle="modal" data-target="#modal_contrasena_olvidada"><?= $this->lang->line('contrasena_olvidada'); ?></a>
+                        <br>
+                        <a href="<?= site_url('registro'); ?>" class="text-center"><?= $this->lang->line('registrar'); ?></a>
+                    </div>
+                    <div class="col-xs-6 text-right" style="font-size: 200%;">
+                        <a href="<?= site_url('idioma_switcher/cambiar_idioma/spanish'); ?>" title="Español"><span class="flag-icon flag-icon-es"></span></a>
+                        <a href="<?= site_url('idioma_switcher/cambiar_idioma/english'); ?>" title="English"><span class="flag-icon flag-icon-gb"></span></a>
+                    </div>
+                </div>
                 <div class="modal" id="modal_contrasena_olvidada">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -84,33 +94,31 @@
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span></button>
-                                    <h3 class="modal-title">Contraseña Olvidada</h3>
+                                    <h3 class="modal-title"><?= $this->lang->line('contrasena_olvidada'); ?></h3>
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-group col-md-12">
-                                        <label for="input_usuario" class="col-sm-3 control-label">Usuario</label>
+                                        <label for="input_usuario" class="col-sm-3 control-label"><?= $this->lang->line('usuario'); ?></label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="usuario" id="input_usuario" placeholder="Usuario" required>
+                                            <input type="text" class="form-control" name="usuario" id="input_usuario" placeholder="<?= $this->lang->line('usuario'); ?>" required>
                                         </div>                                
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for="input_email" class="col-sm-3 control-label">E-mail</label>
+                                        <label for="input_email" class="col-sm-3 control-label"><?= $this->lang->line('email'); ?></label>
                                         <div class="col-sm-8">
-                                            <input type="email" class="form-control" name="email" id="input_email" placeholder="E-mail" required>
+                                            <input type="email" class="form-control" name="email" id="input_email" placeholder="<?= $this->lang->line('email'); ?>" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                                    <button id="boton_nuevo" type="submit" class="btn btn-primary">Cambiar</button>
+                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
+                                    <button id="boton_nuevo" type="submit" class="btn btn-primary"><?= $this->lang->line('cambiar'); ?></button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                <!-- /.modal -->
-                <br>
-                <a href="<?= site_url('registro'); ?>" class="text-center">Registrar</a>
+                <!-- /.modal -->                
 
             </div>
             <!-- /.login-box-body -->

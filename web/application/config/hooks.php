@@ -11,3 +11,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |	https://codeigniter.com/user_guide/general/hooks.html
 |
 */
+
+// --- CAMBIO DEL IDIOMA ---
+$hook['post_controller_constructor'] = array(
+    'class'    => 'Idioma_Loader',
+    'function' => 'inicializar',
+    'filename' => 'Idioma_Loader.php',
+    'filepath' => 'hooks'
+);
