@@ -12,6 +12,7 @@
 
         <!-- CSS REQUERIDOS -->
         <?= $css ?>
+        <?= link_tag(base_url('assets/plugins/flag-icon-css/css/flag-icon.min.css')); ?>
         <?= link_tag(base_url('assets/css/AdminLTE.min.css')); ?>
         <?= link_tag(base_url('assets/css/skins/_all-skins.min.css')); ?>
 
@@ -63,41 +64,53 @@
                             <!-- Menú cuenta usuario -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="user-image" alt="Imagen de Perfil">
+                                    <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="user-image" alt="<?= $this->lang->line('imagen_perfil'); ?>">
                                     <span class="hidden-xs"><?= $this->session->nombre_usuario ?></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="user-header">
                                         <!--img src="<?= base_url() ?>assets/img/avatar/<?= $this->session->id_usuario ?>.png" class="img-circle" alt="Imagen de Perfil"-->
-                                        <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="img-circle" alt="Imagen de Perfil">
+                                        <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="img-circle" alt="<?= $this->lang->line('imagen_perfil'); ?>">
                                         <p>
                                             <?= $this->session->nombre_usuario ?> - 
                                             <?php
                                             switch ($this->session->tipo_usuario) {
                                                 case USUARIO_ADMIN:
-                                                    echo 'Administrador';
+                                                    echo $this->lang->line('admin');
                                                     break;
                                                 case USUARIO_TECNICO_ADMIN:
-                                                    echo 'Técnico administrador';
+                                                    echo $this->lang->line('tecnico_admin');
                                                     break;
                                                 case USUARIO_TECNICO:
-                                                    echo 'Técnico';
+                                                    echo $this->lang->line('tecnico');
                                                     break;
                                                 case USUARIO_CLIENTE:
-                                                    echo 'Cliente';
+                                                    echo $this->lang->line('cliente');
                                                     break;
                                             }
                                             ?>
                                             <small><?= $this->session->email_usuario ?></small>
                                         </p>
-                                    </li>                                   
+                                    </li> 
+                                    <!-- Mení Body -->
+                                    <li class="user-body">
+                                        <div class="row" style="font-size: 200%;">
+                                            <div class="col-xs-6 text-center">
+                                                <a href="<?= site_url('idioma_switcher/cambiar_idioma/spanish'); ?>" title="Español"><span class="flag-icon flag-icon-es"></span></a>
+                                            </div>
+                                            <div class="col-xs-6 text-center">
+                                                <a href="<?= site_url('idioma_switcher/cambiar_idioma/english'); ?>" title="English"><span class="flag-icon flag-icon-gb"></span></a>
+                                            </div>
+                                        </div>
+                                        <!-- /.row -->
+                                    </li>
                                     <!-- Menú Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                                            <a href="#" class="btn btn-default btn-flat"><?= $this->lang->line('perfil'); ?></a>
                                         </div>
                                         <div class="pull-right">
-                                            <a href="<?= site_url('cerrar_sesion'); ?>" class="btn btn-default btn-flat">Cerrar Sesión</a>
+                                            <a href="<?= site_url('cerrar_sesion'); ?>" class="btn btn-default btn-flat"><?= $this->lang->line('cerrar_sesion'); ?></a>
                                         </div>
                                     </li>
                                 </ul>
@@ -116,7 +129,7 @@
                     <!-- Panel de usuario sidebar -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="img-circle" alt="Imagen de Perfil">
+                            <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="img-circle" alt="<?= $this->lang->line('imagen_perfil'); ?>">
                         </div>
                         <div class="pull-left info">
                             <p><?= $this->session->nombre_usuario ?></p>                            
@@ -136,7 +149,7 @@
 
             <!-- Pie de página principal -->
             <footer class="main-footer">
-                <strong>Copyright &copy; <?= AÑOS_COPYRIGHT ?> <a href="<?= site_url() ?>"><?= NOMBRE_WEB ?></a>.</strong> Todos los derechos reservados.
+                <strong>Copyright &copy; <?= AÑOS_COPYRIGHT ?> <a href="<?= site_url() ?>"><?= NOMBRE_WEB ?></a>.</strong> <?= $this->lang->line('derechos_reservados'); ?>.
             </footer>
 
             <!-- Barra lateral de control -->
