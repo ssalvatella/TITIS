@@ -21,7 +21,7 @@ $lang['cerrar_sesion'] = 'Sign out';
 $lang['derechos_reservados'] = 'All rights reserved';
 
 $lang['administradores'] = 'Administrators';
-$lang['tecnicos admin'] = 'Technicians Administrators';
+$lang['tecnicos_admin'] = 'Technicians Administrators';
 $lang['tecnicos'] = 'Technicians';
 $lang['clientes'] = 'Clients';
 
@@ -30,14 +30,14 @@ $lang['acceder'] = 'More info';
 // INICIO ADMIN -----------
 
 $lang['inicio'] = 'Home';
-$lang['panel de control'] = 'Control panel';
-$lang['tickets pendientes'] = 'Pending Tickets';
-$lang['clientes nuevos'] = 'New Customers';
-$lang['facturas pendientes'] = 'Pending Receipts';
-$lang['tareas finalizadas'] = 'Completed Tasks';
-$lang['numero de usuarios'] = 'Number of users';
-$lang['ultimos tickets'] = 'Last tickets';
-$lang['ver todos'] = 'See all';
+$lang['panel_de_control'] = 'Control panel';
+$lang['tickets_pendientes'] = 'Pending Tickets';
+$lang['clientes_nuevos'] = 'New Customers';
+$lang['facturas_pendientes'] = 'Pending Receipts';
+$lang['tareas_finalizadas'] = 'Completed Tasks';
+$lang['numero_de_usuarios'] = 'Number of users';
+$lang['ultimos_tickets'] = 'Last tickets';
+$lang['ver_todos'] = 'See all';
 
 // -----------------------
 
@@ -48,14 +48,14 @@ $lang['fecha'] = 'Date';
 $lang['estado'] = 'State';
 
 $lang['pendiente'] = 'Pending';
-$lang['en proceso'] = 'In process';
+$lang['en_proceso'] = 'In process';
 $lang['finalizado'] = 'Finalized';
 
 // -------------------------
 
 $lang['actualizar'] = 'Refresh';
 $lang['numero'] = 'Number';
-$lang['tecnico admin'] = 'Technician Admin';
+$lang['tecnico_admin'] = 'Technician Admin';
 $lang['progreso'] = 'Progress';
 
 $lang['añadir'] = 'Add';
@@ -73,48 +73,54 @@ $lang['registrar'] = 'Register';
 $lang['empleado'] = 'Employee';
 
 // CLIENTE INICIO ------------------------------
-$lang['tickets enviados'] = 'Sent Tickets';
-$lang['facturas recibidas'] = 'Receipts Received';
-$lang['tickets finalizadas'] = 'Finalized Tickets';
+$lang['tickets_enviados'] = 'Sent Tickets';
+$lang['facturas_recibidas'] = 'Receipts Received';
+$lang['tickets_finalizados'] = 'Finalized Tickets';
 
-$lang['grafico de gastos'] = 'Expense graph';
-$lang['crear ticket'] = 'Create Ticket';
-$lang['ct descripcion'] = 'Send a new ticket and our team will solve it as soon as possible';
-$lang['ver enviados'] = 'View Submitted';
+$lang['grafico_de_gastos'] = 'Expense graph';
+$lang['crear_ticket'] = 'Create Ticket';
+$lang['ct_descripcion'] = 'Send a new ticket and our team will solve it as soon as possible';
+$lang['ver_enviados'] = 'View Submitted';
 
 $lang['asunto'] = 'Subject';
-$lang['asunto descripcion'] = 'Enter a title for the ticket';
+$lang['asunto_descripcion'] = 'Enter a title for the ticket';
 
 $lang['mensaje'] = 'Message';
-$lang['mensaje descripcion'] = 'Describe with your words what the problem is ...';
+$lang['mensaje_descripcion'] = 'Describe with your words what the problem is ...';
 
-$lang['fichero adjunto'] = 'Attached file';
-$lang['aun no funcional'] = '(not yet functional)';
+$lang['fichero_adjunto'] = 'Attached file';
+$lang['aun_no_funcional'] = '(not yet functional)';
 
-$lang['enviar ticket'] = 'Send Ticket';
+$lang['enviar_ticket'] = 'Send Ticket';
+
+$lang['ticket_enviado'] = 'Ticket Submitted';
+$lang['ticket_enviado_mensaje'] = 'The ticket has been sent correctly. Our team will resolve the incident as soon as possible.';
+
+$lang['ticket_error'] = 'Error';
+$lang['ticket_error_mensaje'] = 'An unexpected error has occurred. We will try to resolve this issue as soon as possible.';
 // ---------------------------------------------
 
 // ------ BARRA LATERAL DERECHA ----
 
-$lang['opciones de diseño'] = 'Design options';
+$lang['opciones_de_diseño'] = 'Design options';
 
-$lang['diseño fijo'] = 'Fixed layout';
-$lang['d_fijo descripcion'] = 'Activates the fixed design. You can not use the fixed and boxed design at the same time';
+$lang['diseño_fijo'] = 'Fixed layout';
+$lang['d_fijo_descripcion'] = 'Activates the fixed design. You can not use the fixed and boxed design at the same time';
 
-$lang['diseño en caja'] = 'Box layout';
-$lang['d_caja descripcion'] = 'Activate boxed design';
+$lang['diseño_en_caja'] = 'Box layout';
+$lang['d_caja_descripcion'] = 'Activate boxed design';
 
-$lang['minimizar menu'] = 'Minimize menu';
-$lang['m_minimizar descripcion'] = 'Change left side menu (open or collapse)';
+$lang['minimizar_menu'] = 'Minimize menu';
+$lang['m_minimizar_descripcion'] = 'Change left side menu (open or collapse)';
 
-$lang['expandir menu'] = 'Expand hover menu';
-$lang['expandir_menu descripcion'] = 'Expand left side menu when hovering';
+$lang['expandir_menu'] = 'Expand hover menu';
+$lang['expandir_menu_descripcion'] = 'Expand left side menu when hovering';
 
-$lang['activa menu deslizante'] = 'Enable sliding right side menu';
-$lang['a_menu descripcion'] = 'Switch between sliding content and "pushed" content';
+$lang['activa_menu_deslizante'] = 'Enable sliding right side menu';
+$lang['a_menu_descripcion'] = 'Switch between sliding content and "pushed" content';
 
-$lang['activa skin'] = 'Activate the skin in the right content bar';
-$lang['a_skin descripcion'] = 'Activate between dark and clear skin for the right content bar';
+$lang['activa_skin'] = 'Activate the skin in the right content bar';
+$lang['a_skin_descripcion'] = 'Activate between dark and clear skin for the right content bar';
 
 $lang['azul'] = 'Blue';
 $lang['negro'] = 'Black';
@@ -122,12 +128,12 @@ $lang['morado'] = 'Purple';
 $lang['verde'] = 'Green';
 $lang['rojo'] = 'Red';
 $lang['amarillo'] = 'Yellow';
-$lang['azul claro'] = 'Light Blue';
-$lang['negro claro'] = 'Light Black';
-$lang['morado claro'] = 'Light Purple';
-$lang['verde claro'] = 'Light Green';
-$lang['rojo claro'] = 'Light Red';
-$lang['amarillo claro'] = 'Light Yellow';
+$lang['azul_claro'] = 'Light Blue';
+$lang['negro_claro'] = 'Light Black';
+$lang['morado_claro'] = 'Light Purple';
+$lang['verde_claro'] = 'Light Green';
+$lang['rojo_claro'] = 'Light Red';
+$lang['amarillo_claro'] = 'Light Yellow';
 
 // --------------------------------
 

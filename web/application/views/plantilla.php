@@ -163,42 +163,42 @@
                 <div class="tab-content">
                     <!-- Home tab content -->
                     <div class="tab-pane active" id="control-sidebar-layout-tab">
-                        <h4 class="control-sidebar-heading"><?= $this->lang->line('opciones de diseño'); ?></h4>
+                        <h4 class="control-sidebar-heading"><?= $this->lang->line('opciones_de_diseño'); ?></h4>
                         <div class="form-group">
                             <label class="control-sidebar-subheading">
-                                <input type="checkbox" data-layout="fixed" class="pull-right"><?= $this->lang->line('diseño fijo'); ?>
+                                <input type="checkbox" data-layout="fixed" class="pull-right"><?= $this->lang->line('diseño_fijo'); ?>
                             </label>
-                            <p><?= $this->lang->line('d_fijo descripcion'); ?></p>
+                            <p><?= $this->lang->line('d_fijo_descripcion'); ?></p>
                         </div>
                         <div class="form-group">
                             <label class="control-sidebar-subheading">
-                                <input type="checkbox" data-layout="layout-boxed" class="pull-right"><?= $this->lang->line('diseño en caja'); ?>
+                                <input type="checkbox" data-layout="layout-boxed" class="pull-right"><?= $this->lang->line('diseño_en_caja'); ?>
                             </label>
-                            <p><?= $this->lang->line('d_caja descripcion'); ?></p>
+                            <p><?= $this->lang->line('d_caja_descripcion'); ?></p>
                         </div>
                         <div class="form-group">
                             <label class="control-sidebar-subheading">
-                                <input type="checkbox" data-layout="sidebar-collapse" class="pull-right"><?= $this->lang->line('minimizar menu'); ?>
+                                <input type="checkbox" data-layout="sidebar-collapse" class="pull-right"><?= $this->lang->line('minimizar_menu'); ?>
                             </label>
-                            <p><?= $this->lang->line('m_minimizar descripcion'); ?></p>
+                            <p><?= $this->lang->line('m_minimizar_descripcion'); ?></p>
                         </div>
                         <div class="form-group">
                             <label class="control-sidebar-subheading">
-                                <input type="checkbox" data-enable="expandOnHover" class="pull-right"><?= $this->lang->line('expandir menu'); ?>
+                                <input type="checkbox" data-enable="expandOnHover" class="pull-right"><?= $this->lang->line('expandir_menu'); ?>
                             </label>
-                            <p><?= $this->lang->line('expandir_menu descripcion'); ?></p>
+                            <p><?= $this->lang->line('expandir_menu_descripcion'); ?></p>
                         </div>
                         <div class="form-group">
                             <label class="control-sidebar-subheading">
-                                <input type="checkbox" data-controlsidebar="control-sidebar-open" class="pull-right"><?= $this->lang->line('activa menu deslizante'); ?>
+                                <input type="checkbox" data-controlsidebar="control-sidebar-open" class="pull-right"><?= $this->lang->line('activa_menu_deslizante'); ?>
                             </label>
-                            <p><?= $this->lang->line('a_menu descripcion'); ?></p>
+                            <p><?= $this->lang->line('a_menu_descripcion'); ?></p>
                         </div>
                         <div class="form-group">
                             <label class="control-sidebar-subheading">
-                                <input type="checkbox" data-sidebarskin="toggle" class="pull-right"><?= $this->lang->line('activa skin'); ?>
+                                <input type="checkbox" data-sidebarskin="toggle" class="pull-right"><?= $this->lang->line('activa_skin'); ?>
                             </label>
-                            <p><?= $this->lang->line('a_skin descripcion'); ?></p>
+                            <p><?= $this->lang->line('a_skin_descripcion'); ?></p>
                         </div>                        
                     </div>
                     <!-- /.tab-pane -->
@@ -293,7 +293,7 @@
                                         <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
                                     </div>
                                 </a>
-                                <p class="text-center no-margin" style="font-size: 12px"><?= $this->lang->line('azul claro'); ?></p>
+                                <p class="text-center no-margin" style="font-size: 12px"><?= $this->lang->line('azul_claro'); ?></p>
                             </li>
                             <li style="float:left; width: 33.33333%; padding: 5px;">
                                 <a href="javascript:void(0);" data-skin="skin-black-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
@@ -306,7 +306,7 @@
                                         <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
                                     </div>
                                 </a>
-                                <p class="text-center no-margin" style="font-size: 12px"><?= $this->lang->line('negro claro'); ?></p>
+                                <p class="text-center no-margin" style="font-size: 12px"><?= $this->lang->line('negro_claro'); ?></p>
                             </li>
                             <li style="float:left; width: 33.33333%; padding: 5px;">
                                 <a href="javascript:void(0);" data-skin="skin-purple-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
@@ -319,7 +319,7 @@
                                         <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
                                     </div>
                                 </a>
-                                <p class="text-center no-margin" style="font-size: 12px"><?= $this->lang->line('morado claro'); ?></p>
+                                <p class="text-center no-margin" style="font-size: 12px"><?= $this->lang->line('morado_claro'); ?></p>
                             </li>
                             <li style="float:left; width: 33.33333%; padding: 5px;">
                                 <a href="javascript:void(0);" data-skin="skin-green-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover"><div>
@@ -331,7 +331,7 @@
                                         <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
                                     </div>
                                 </a>
-                                <p class="text-center no-margin" style="font-size: 12px"><?= $this->lang->line('verde claro'); ?></p>
+                                <p class="text-center no-margin" style="font-size: 12px"><?= $this->lang->line('verde_claro'); ?></p>
                             </li>
                             <li style="float:left; width: 33.33333%; padding: 5px;">
                                 <a href="javascript:void(0);" data-skin="skin-red-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
@@ -344,7 +344,7 @@
                                         <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
                                     </div>
                                 </a>
-                                <p class="text-center no-margin" style="font-size: 12px"><?= $this->lang->line('rojo claro'); ?></p>
+                                <p class="text-center no-margin" style="font-size: 12px"><?= $this->lang->line('rojo_claro'); ?></p>
                             </li>
                             <li style="float:left; width: 33.33333%; padding: 5px;">
                                 <a href="javascript:void(0);" data-skin="skin-yellow-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
@@ -357,7 +357,7 @@
                                         <span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;"></span>
                                     </div>
                                 </a>
-                                <p class="text-center no-margin" style="font-size: 12px;"><?= $this->lang->line('amarillo claro'); ?></p>
+                                <p class="text-center no-margin" style="font-size: 12px;"><?= $this->lang->line('amarillo_claro'); ?></p>
                             </li>
                         </ul>
                     </div>

@@ -11,8 +11,8 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li id="menu_crear_ticket"><a href="<?= site_url('cliente/crear_ticket') ?>"><i class="fa fa-circle-o"></i> <?= $this->lang->line('crear ticket'); ?></a></li>
-            <li id="menu_ver_tickets"><a href="<?= site_url('admin/ver_tickets') ?>"><i class="fa fa-circle-o"></i> <?= $this->lang->line('ver enviados'); ?></a></li>
+            <li id="menu_crear_ticket"><a href="<?= site_url('cliente/crear_ticket') ?>"><i class="fa fa-circle-o"></i> <?= $this->lang->line('crear_ticket'); ?></a></li>
+            <li id="menu_ver_tickets"><a href="<?= site_url('admin/ver_tickets') ?>"><i class="fa fa-circle-o"></i> <?= $this->lang->line('ver_enviados'); ?></a></li>
         </ul>
     </li>
     <li class="header"><?= $this->lang->line('ajustes'); ?></li>

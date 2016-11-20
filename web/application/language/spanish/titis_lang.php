@@ -21,33 +21,33 @@ $lang['cerrar_sesion'] = 'Cerrar Sesión';
 $lang['derechos_reservados'] = 'Todos los derechos reservados';
 
 $lang['administradores'] = 'Administradores';
-$lang['tecnicos admin'] = 'Técnicos admin';
+$lang['tecnicos_admin'] = 'Técnicos admin';
 $lang['tecnicos'] = 'Técnicos';
 $lang['clientes'] = 'Clientes';
 
 $lang['acceder'] = 'Acceder';
 
 $lang['inicio'] = 'Inicio';
-$lang['panel de control'] = 'Panel de control';
-$lang['tickets pendientes'] = 'Tickets Pendientes';
-$lang['clientes nuevos'] = 'Clientes Nuevos';
-$lang['facturas pendientes'] = 'Facturas Pendientes';
-$lang['tareas finalizadas'] = 'Tareas Finalizadas';
-$lang['numero de usuarios'] = 'Número de usuarios';
-$lang['ultimos tickets'] = 'Últimos tickets';
-$lang['ver todos'] = 'Ver todos';
+$lang['panel_de_control'] = 'Panel de control';
+$lang['tickets_pendientes'] = 'Tickets Pendientes';
+$lang['clientes_nuevos'] = 'Clientes Nuevos';
+$lang['facturas_pendientes'] = 'Facturas Pendientes';
+$lang['tareas_finalizadas'] = 'Tareas Finalizadas';
+$lang['numero_de_usuarios'] = 'Número de usuarios';
+$lang['ultimos_tickets'] = 'Últimos tickets';
+$lang['ver_todos'] = 'Ver todos';
 
 $lang['titulo'] = 'Título';
 $lang['fecha'] = 'Fecha';
 $lang['estado'] = 'Estado';
 
 $lang['pendiente'] = 'Pendiente';
-$lang['en proceso'] = 'En proceso';
+$lang['en_proceso'] = 'En proceso';
 $lang['finalizado'] = 'Finalizado';
 
 $lang['actualizar'] = 'Actualizar';
 $lang['numero'] = 'Número';
-$lang['tecnico admin'] = 'Técnico Admin';
+$lang['tecnico_admin'] = 'Técnico Admin';
 $lang['progreso'] = 'Progreso';
 
 $lang['añadir'] = 'Añadir';
@@ -65,49 +65,55 @@ $lang['registrar'] = 'Registrar';
 $lang['empleado'] = 'Empleado';
 
 // CLIENTE INICIO ------------------------------
-$lang['tickets enviados'] = 'Tickets Enviados';
-$lang['facturas recibidas'] = 'Facturas Recibidas';
-$lang['tickets finalizadas'] = 'Tickets Finalizados';
+$lang['tickets_enviados'] = 'Tickets Enviados';
+$lang['facturas_recibidas'] = 'Facturas Recibidas';
+$lang['tickets_finalizados'] = 'Tickets Finalizados';
 
-$lang['grafico de gastos'] = 'Gráfico de gastos';
+$lang['grafico_de_gastos'] = 'Gráfico de gastos';
 
-$lang['crear ticket'] = 'Crear Ticket';
-$lang['ct descripcion'] = 'Envía un nuevo ticket y nuestro equipo lo resolverá cuanto antes';
-$lang['ver enviados'] = 'Ver Enviados';
+$lang['crear_ticket'] = 'Crear Ticket';
+$lang['ct_descripcion'] = 'Envía un nuevo ticket y nuestro equipo lo resolverá cuanto antes';
+$lang['ver_enviados'] = 'Ver Enviados';
 
 $lang['asunto'] = 'Asunto';
-$lang['asunto descripcion'] = 'Introduce un título para el ticket';
+$lang['asunto_descripcion'] = 'Introduce un título para el ticket';
 
 $lang['mensaje'] = 'Mensaje';
-$lang['mensaje descripcion'] = 'Describe con tus palabras cual es el problema...';
+$lang['mensaje_descripcion'] = 'Describe con tus palabras cual es el problema...';
 
-$lang['fichero adjunto'] = 'Fichero adjunto ';
-$lang['aun no funcional'] = '(aún no funcional)';
+$lang['fichero_adjunto'] = 'Fichero adjunto ';
+$lang['aun_no_funcional'] = '(aún no funcional)';
 
-$lang['enviar ticket'] = 'Enviar Ticket';
+$lang['enviar_ticket'] = 'Enviar Ticket';
+
+$lang['ticket_enviado'] = 'Ticket enviado';
+$lang['ticket_enviado_mensaje'] = 'El ticket ha sido enviado correctamente. Nuestro equipo resolverá el incidente cuanto antes.';
+
+$lang['ticket_error'] = 'Error';
+$lang['ticket_error_mensaje'] = 'Ha ocurrido un error inesperado. Intentaremos resolver esta incidencia cuanto antes.';
 // ---------------------------------------------
 
 // ------ BARRA LATERA DERECHA ----
 
-$lang['opciones de diseño'] = 'Opciones de diseño';
+$lang['opciones_de_diseño'] = 'Opciones de diseño';
 
-$lang['diseño fijo'] = 'Diseño fijo';
-$lang['d_fijo descripcion'] = 'Activa el diseño fijo. No se puede usar el diseño fijo y en caja a la vez';
+$lang['diseño_fijo'] = 'Diseño fijo';
+$lang['d_fijo_descripcion'] = 'Activa el diseño fijo. No se puede usar el diseño fijo y en caja a la vez';
 
-$lang['diseño en caja'] = 'Diseño en caja';
-$lang['d_caja descripcion'] = 'Activa el diseño en caja';
+$lang['diseño_en_caja'] = 'Diseño en caja';
+$lang['d_caja_descripcion'] = 'Activa el diseño en caja';
 
-$lang['minimizar menu'] = 'Minimizar menú';
-$lang['m_minimizar descripcion'] = 'Cambia el menú lateral izquierdo (abre o colapsa)';
+$lang['minimizar_menu'] = 'Minimizar menú';
+$lang['m_minimizar_descripcion'] = 'Cambia el menú lateral izquierdo (abre o colapsa)';
 
-$lang['expandir menu'] = 'Expandir menú al hacer hover';
-$lang['expandir_menu descripcion'] = 'Expande el menú lateral izquierdo al hacer hover';
+$lang['expandir_menu'] = 'Expandir menú al hacer hover';
+$lang['expandir_menu_descripcion'] = 'Expande el menú lateral izquierdo al hacer hover';
 
-$lang['activa menu deslizante'] = 'Activa menú lateral derecho deslizante';
-$lang['a_menu descripcion'] = 'Cambia entre entre contenido deslizante y contenido "empujado"';
+$lang['activa_menu_deslizante'] = 'Activa menú lateral derecho deslizante';
+$lang['a_menu_descripcion'] = 'Cambia entre entre contenido deslizante y contenido "empujado"';
 
-$lang['activa skin'] = 'Activa el skin en la barra de contenido derecha';
-$lang['a_skin descripcion'] = 'Activa entre skin oscura y clara para la barra de contenido derecha';
+$lang['activa_skin'] = 'Activa el skin en la barra de contenido derecha';
+$lang['a_skin_descripcion'] = 'Activa entre skin oscura y clara para la barra de contenido derecha';
 
 $lang['azul'] = 'Azul';
 $lang['negro'] = 'Negro';
@@ -115,12 +121,12 @@ $lang['morado'] = 'Morado';
 $lang['verde'] = 'Verde';
 $lang['rojo'] = 'Rojo';
 $lang['amarillo'] = 'Amarillo';
-$lang['azul claro'] = 'Azul Claro';
-$lang['negro claro'] = 'Negro Claro';
-$lang['morado claro'] = 'Morado Claro';
-$lang['verde claro'] = 'Verde Claro';
-$lang['rojo claro'] = 'Rojo Claro';
-$lang['amarillo claro'] = 'Amarillo Claro';
+$lang['azul_claro'] = 'Azul Claro';
+$lang['negro_claro'] = 'Negro Claro';
+$lang['morado_claro'] = 'Morado Claro';
+$lang['verde_claro'] = 'Verde Claro';
+$lang['rojo_claro'] = 'Rojo Claro';
+$lang['amarillo_claro'] = 'Amarillo Claro';
 
 // --------------------------------
 

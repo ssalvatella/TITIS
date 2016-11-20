@@ -3,7 +3,7 @@
     <section class="content-header">
         <h1>
             <?= $this->lang->line('inicio'); ?>
-            <small><?= $this->lang->line('panel de control'); ?></small>
+            <small><?= $this->lang->line('panel_de_control'); ?></small>
         </h1>
         <ol class="breadcrumb">
             <li class="active"><i class="fa fa-home"></i> <?= $this->lang->line('inicio'); ?></li>
@@ -19,7 +19,7 @@
                 <div class="small-box bg-aqua">
                     <div class="inner">
                         <h3>12</h3>
-                        <p><?= $this->lang->line('tickets enviados'); ?></p>
+                        <p><?= $this->lang->line('tickets_enviados'); ?></p>
                     </div>
                     <div class="icon">
                         <a data-toggle="tooltip" data-placement="top" title="Crear Ticket" style="color: rgba(0,0,0,0.15);" href="<?= site_url('cliente/crear_ticket'); ?>"><i
@@ -35,7 +35,7 @@
                 <div class="small-box bg-yellow">
                     <div class="inner">
                         <h3>44</h3>
-                        <p><?= $this->lang->line('tareas finalizadas'); ?></p>
+                        <p><?= $this->lang->line('tareas_finalizadas'); ?></p>
                     </div>
                     <div class="icon">
                         <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/registrar_cliente'); ?>"><i
@@ -52,7 +52,7 @@
                 <div class="small-box bg-red">
                     <div class="inner">
                         <h3>65</h3>
-                        <p><?= $this->lang->line('facturas recibidas'); ?></p>
+                        <p><?= $this->lang->line('facturas_recibidas'); ?></p>
                     </div>
                     <div class="icon">
                         <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes'); ?>"><i
@@ -67,7 +67,7 @@
                 <div class="small-box bg-green">
                     <div class="inner">
                         <h3>53</h3>
-                        <p><?= $this->lang->line('tickets finalizadas'); ?></p>
+                        <p><?= $this->lang->line('tickets_finalizados'); ?></p>
                     </div>
                     <div class="icon">
                         <a style="color: rgba(0,0,0,0.15);"" href="<?= site_url('admin/clientes'); ?>"><i style="font-size: 80%" class="glyphicon glyphicon-ok"></i></a>
@@ -84,7 +84,7 @@
             <section class="col-lg-6 connectedSortable ui-sorteable">
                 <div class="box box-danger ">
                     <div class="box-header with-border">
-                        <h3 class="box-title"><?= $this->lang->line('grafico de gastos'); ?></h3>
+                        <h3 class="box-title"><?= $this->lang->line('grafico_de_gastos'); ?></h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -122,7 +122,7 @@
             <section class="col-lg-6 connectedSortable ui-sorteable">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title"><?= $this->lang->line('ultimos tickets'); ?></h3>
+                        <h3 class="box-title"><?= $this->lang->line('ultimos_tickets'); ?></h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i

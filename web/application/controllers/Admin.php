@@ -86,4 +86,12 @@ class Admin extends MY_Controller {
         }
     }
 
+    public function ver_ticket($id_ticket) {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['titulo'] = $this->lang->line('tickets');
+            $datos['ticket'] = $this->ticket->obtener_ticket($id_ticket)[0];
+            $this->plantilla->mostrar('admin', 'ticket', $datos);
+        }
+    }
+
 }

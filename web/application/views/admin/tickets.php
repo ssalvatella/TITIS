@@ -30,7 +30,7 @@
                                 <th><i class="fa fa-user" aria-hidden="true"></i>&nbsp; <?= $this->lang->line('cliente'); ?></th>
                                 <th><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('titulo'); ?></th>
                                 <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('fecha'); ?> </th>
-                                <th><i class="fa fa-wrench" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('tecnico admin'); ?></th>
+                                <th><i class="fa fa-wrench" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('tecnico_admin'); ?></th>
                                 <th><i class="glyphicon glyphicon-ok" aria-hidden="true"></i>&nbsp; <?= $this->lang->line('estado'); ?></th>
                                 <th><i class="glyphicon glyphicon-stats" aria-hidden="true"></i>&nbsp;  <?= $this->lang->line('progreso'); ?></th>
                             </tr>
@@ -50,13 +50,13 @@
                                 switch($ticket['estado']) {
 
                                     case TICKET_PENDIENTE:
-                                        echo '<span class="label label-warning">Pendiente</span>';
+                                        echo '<span class="label label-warning">'.  $this->lang->line('pendiente') .'</span>';
                                         break;
                                     case TICKET_EN_PROCESO:
-                                        echo '<span class="label label-info">En proceso</span>';
+                                        echo '<span class="label label-info">'.  $this->lang->line('en_proceso') .'</span>';
                                         break;
                                     case TICKET_FINALIZADO:
-                                        echo '<span class="label label-success">Completado</span>';
+                                        echo '<span class="label label-success">'.  $this->lang->line('finalizado') .'</span>';
                                         break;
                                 }
 
@@ -72,7 +72,7 @@
                                 <th><i class="fa fa-user" aria-hidden="true"></i>&nbsp; <?= $this->lang->line('cliente'); ?></th>
                                 <th><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('titulo'); ?></th>
                                 <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('fecha'); ?> </th>
-                                <th><i class="fa fa-wrench" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('tecnico admin'); ?></th>
+                                <th><i class="fa fa-wrench" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('tecnico_admin'); ?></th>
                                 <th><i class="glyphicon glyphicon-ok" aria-hidden="true"></i>&nbsp; <?= $this->lang->line('estado'); ?></th>
                                 <th><i class="glyphicon glyphicon-stats" aria-hidden="true"></i>&nbsp;  <?= $this->lang->line('progreso'); ?></th>
                             </tr>
