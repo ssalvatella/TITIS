@@ -51,6 +51,12 @@ $lang['pendiente'] = 'Pending';
 $lang['en_proceso'] = 'In process';
 $lang['finalizado'] = 'Finalized';
 
+$lang['ver_ticket'] = 'See Ticket';
+
+$lang['descripcion'] = 'Description';
+$lang['añadir_tarea'] = 'Add task';
+$lang['tareas'] = 'Tasks';
+
 // -------------------------
 
 $lang['actualizar'] = 'Refresh';
@@ -71,6 +77,8 @@ $lang['menu'] = 'MENU';
 $lang['ajustes'] = 'SETTINGS';
 $lang['registrar'] = 'Register';
 $lang['empleado'] = 'Employee';
+
+$lang['no_asignado'] = 'Not Assigned';
 
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Sent Tickets';

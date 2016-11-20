@@ -22,7 +22,7 @@
                         <p><?= $this->lang->line('tickets_enviados'); ?></p>
                     </div>
                     <div class="icon">
-                        <a data-toggle="tooltip" data-placement="top" title="Crear Ticket" style="color: rgba(0,0,0,0.15);" href="<?= site_url('cliente/crear_ticket'); ?>"><i
+                        <a data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('crear_ticket'); ?>" style="color: rgba(0,0,0,0.15);" href="<?= site_url('cliente/crear_ticket'); ?>"><i
                                 class="fa fa-plus"></i></a>
                     </div>
                     <a href="<?= site_url('cliente/tickets'); ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i

@@ -37,6 +37,8 @@ $lang['numero_de_usuarios'] = 'Número de usuarios';
 $lang['ultimos_tickets'] = 'Últimos tickets';
 $lang['ver_todos'] = 'Ver todos';
 
+$lang['ver_ticket'] = 'Ver Ticket';
+
 $lang['titulo'] = 'Título';
 $lang['fecha'] = 'Fecha';
 $lang['estado'] = 'Estado';
@@ -44,6 +46,10 @@ $lang['estado'] = 'Estado';
 $lang['pendiente'] = 'Pendiente';
 $lang['en_proceso'] = 'En proceso';
 $lang['finalizado'] = 'Finalizado';
+
+$lang['descripcion'] = 'Descripción';
+$lang['añadir_tarea'] = 'Añadir tarea';
+$lang['tareas'] = 'Tareas';
 
 $lang['actualizar'] = 'Actualizar';
 $lang['numero'] = 'Número';
@@ -63,6 +69,8 @@ $lang['menu'] = 'MENÚ';
 $lang['ajustes'] = 'AJUSTES';
 $lang['registrar'] = 'Registrar';
 $lang['empleado'] = 'Empleado';
+
+$lang['no_asignado'] = 'No Asignado';
 
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Tickets Enviados';

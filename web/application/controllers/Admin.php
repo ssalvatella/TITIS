@@ -7,7 +7,7 @@ class Admin extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('plantilla');
-        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket'));
+        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket', 'tarea', 'mensaje'));
     }
 
     public function index() {
@@ -90,6 +90,8 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('tickets');
             $datos['ticket'] = $this->ticket->obtener_ticket($id_ticket)[0];
+            $datos['tareas'] = $this->tarea->obtener_tareas($id_ticket);
+            $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
             $this->plantilla->mostrar('admin', 'ticket', $datos);
         }
     }
