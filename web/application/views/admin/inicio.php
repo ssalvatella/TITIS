@@ -2,11 +2,11 @@
     <!-- Cabecera -->
     <section class="content-header">
         <h1>
-            Inicio
-            <small>Panel de control</small>
+            <?= $this->lang->line('inicio'); ?>
+            <small><?= $this->lang->line('panel de control'); ?></small>
         </h1>
         <ol class="breadcrumb">
-            <li class="active"><i class="fa fa-home"></i> Inicio</li>
+            <li class="active"><i class="fa fa-home"></i>  <?= $this->lang->line('inicio'); ?></li>
         </ol>
     </section>
 
@@ -19,13 +19,13 @@
                 <div class="small-box bg-aqua">
                     <div class="inner">
                         <h3><?= $tickets_pendientes ?></h3>
-                        <p>Tickets Pendientes</p>
+                        <p><?= $this->lang->line('tickets pendientes'); ?></p>
                     </div>
                     <div class="icon">
                         <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/tickets'); ?>"><i
                                 class="fa fa-ticket"></i></a>
                     </div>
-                    <a href="<?= site_url('admin/clientes'); ?>" class="small-box-footer">Acceder <i
+                    <a href="<?= site_url('admin/clientes'); ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?> <i
                             class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -35,13 +35,13 @@
                 <div class="small-box bg-yellow">
                     <div class="inner">
                         <h3>44</h3>
-                        <p>Clientes Nuevos</p>
+                        <p><?= $this->lang->line('clientes nuevos'); ?></p>
                     </div>
                     <div class="icon">
-                        <a data-toggle="tooltip" data-placement="top" title="Añadir cliente" style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/registrar_cliente'); ?>"><i
+                        <a data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('añadir') . ' ' . $this->lang->line('cliente');?>" style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/registrar_cliente'); ?>"><i
                                 class="ion ion-person-add"></i></a>
                     </div>
-                    <a href="<?= site_url('admin/clientes') ?>" class="small-box-footer">Acceder <i
+                    <a href="<?= site_url('admin/clientes') ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i
                             class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -52,13 +52,13 @@
                 <div class="small-box bg-red">
                     <div class="inner">
                         <h3>65</h3>
-                        <p>Facturas Pendientes</p>
+                        <p><?= $this->lang->line('facturas pendientes'); ?></p>
                     </div>
                     <div class="icon">
                         <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes'); ?>"><i
                                 class="fa fa-money"></i></a>
                     </div>
-                    <a href="#" class="small-box-footer">Acceder <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="#" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- Cuadro de tareas -->
@@ -67,13 +67,13 @@
                 <div class="small-box bg-green">
                     <div class="inner">
                         <h3>53</h3>
-                        <p>Tareas Finalizadas</p>
+                        <p><?= $this->lang->line('tareas finalizadas'); ?></p>
                     </div>
                     <div class="icon">
                         <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes'); ?>"><i
                                 class="fa fa-tasks"></i></a>
                     </div>
-                    <a href="#" class="small-box-footer">Acceder <i class="fa fa-arrow-circle-right"></i>
+                    <a href="#" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
@@ -84,7 +84,7 @@
             <section class="col-lg-6 connectedSortable ui-sorteable">
                 <div class="box box-danger">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Número usuarios</h3>
+                        <h3 class="box-title"><?= $this->lang->line('numero de usuarios'); ?></h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -103,25 +103,25 @@
                                                 value: <?= $total_usuarios['admin'] ?>,
                                                 color: "#f56954",
                                                 highlight: "#f56954",
-                                                label: "Administradores"
+                                                label: "<?= $this->lang->line('administradores'); ?>"
                                             },
                                             {
                                                 value: <?= $total_usuarios['tecnico_admin'] ?>,
                                                 color: "#00a65a",
                                                 highlight: "#00a65a",
-                                                label: "Técnicos admin"
+                                                label: "<?= $this->lang->line('tecnicos admin'); ?>"
                                             },
                                             {
                                                 value: <?= $total_usuarios['tecnico'] ?>,
                                                 color: "#f39c12",
                                                 highlight: "#f39c12",
-                                                label: "Técnicos"
+                                                label: "<?= $this->lang->line('tecnicos'); ?>"
                                             },
                                             {
                                                 value: <?= $total_usuarios['cliente'] ?>,
                                                 color: "#3c8dbc",
                                                 highlight: "#3c8dbc",
-                                                label: "Clientes"
+                                                label: "<?= $this->lang->line('clientes'); ?>"
                                             }
                                         ];
                                     </script>
@@ -131,10 +131,10 @@
                             <!-- /.col -->
                             <div class="col-md-4">
                                 <ul class="chart-legend clearfix">
-                                    <li><i class="fa fa-circle-o text-red"></i> Administradores</li>
-                                    <li><i class="fa fa-circle-o text-green"></i> Técnicos admin</li>
-                                    <li><i class="fa fa-circle-o text-yellow"></i> Técnicos</li>
-                                    <li><i class="fa fa-circle-o text-light-blue"></i> Clientes</li>
+                                    <li><i class="fa fa-circle-o text-red"></i> <?= $this->lang->line('administradores'); ?></li>
+                                    <li><i class="fa fa-circle-o text-green"></i> <?= $this->lang->line('tecnicos admin'); ?></li>
+                                    <li><i class="fa fa-circle-o text-yellow"></i> <?= $this->lang->line('tecnicos'); ?></li>
+                                    <li><i class="fa fa-circle-o text-light-blue"></i> <?= $this->lang->line('clientes'); ?></li>
                                 </ul>
                             </div>
                             <!-- /.col -->
@@ -150,7 +150,7 @@
             <section class="col-lg-6 connectedSortable ui-sorteable">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Últimos tickets</h3>
+                        <h3 class="box-title"><?= $this->lang->line('ultimos tickets'); ?></h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -164,10 +164,10 @@
                             <table id="tickets" class="table table-hover no-margin">
                                 <thead>
                                     <tr>
-                                        <th>Cliente</th>
-                                        <th>Título</th>
-                                        <th>Fecha</th>
-                                        <th>Estado</th>
+                                        <th><?= $this->lang->line('cliente'); ?></th>
+                                        <th><?= $this->lang->line('titulo'); ?></th>
+                                        <th><?= $this->lang->line('fecha'); ?></th>
+                                        <th><?= $this->lang->line('estado'); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -181,13 +181,13 @@
                                         switch($ticket['estado']) {
 
                                             case TICKET_PENDIENTE:
-                                                echo '<span class="label label-warning">Pendiente</span>';
+                                                echo '<span class="label label-warning">'.  $this->lang->line('pendiente') .'</span>';
                                                 break;
                                             case TICKET_EN_PROCESO:
-                                                echo '<span class="label label-info">En proceso</span>';
+                                                echo '<span class="label label-info">'.  $this->lang->line('en proceso') .'</span>';
                                                 break;
                                             case TICKET_FINALIZADO:
-                                                echo '<span class="label label-success">Completado</span>';
+                                                echo '<span class="label label-success">'.  $this->lang->line('finalizado') .'</span>';
                                                 break;
                                         }
 
@@ -201,7 +201,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
-                        <a href="<?= site_url('admin/tickets') ?>" class="btn btn-sm btn-default btn-flat pull-right">Ver todos</a>
+                        <a href="<?= site_url('admin/tickets') ?>" class="btn btn-sm btn-default btn-flat pull-right"><?= $this->lang->line('ver todos'); ?></a>
                     </div>
                     <!-- /.box-footer -->
                 </div>

@@ -19,3 +19,84 @@ $lang['imagen_perfil'] = 'Imagen de Perfil';
 $lang['perfil'] = 'Perfil';
 $lang['cerrar_sesion'] = 'Cerrar Sesión';
 $lang['derechos_reservados'] = 'Todos los derechos reservados';
+
+$lang['administradores'] = 'Administradores';
+$lang['tecnicos admin'] = 'Técnicos admin';
+$lang['tecnicos'] = 'Técnicos';
+$lang['clientes'] = 'Clientes';
+
+$lang['acceder'] = 'Acceder';
+
+$lang['inicio'] = 'Inicio';
+$lang['panel de control'] = 'Panel de control';
+$lang['tickets pendientes'] = 'Tickets Pendientes';
+$lang['clientes nuevos'] = 'Clientes Nuevos';
+$lang['facturas pendientes'] = 'Facturas Pendientes';
+$lang['tareas finalizadas'] = 'Tareas Finalizadas';
+$lang['numero de usuarios'] = 'Número de usuarios';
+$lang['ultimos tickets'] = 'Últimos tickets';
+$lang['ver todos'] = 'Ver todos';
+
+$lang['titulo'] = 'Título';
+$lang['fecha'] = 'Fecha';
+$lang['estado'] = 'Estado';
+
+$lang['pendiente'] = 'Pendiente';
+$lang['en proceso'] = 'En proceso';
+$lang['finalizado'] = 'Finalizado';
+
+$lang['actualizar'] = 'Actualizar';
+$lang['numero'] = 'Número';
+$lang['tecnico admin'] = 'Técnico Admin';
+$lang['progreso'] = 'Progreso';
+
+$lang['añadir'] = 'Añadir';
+$lang['nombre'] = 'Nombre';
+$lang['pais'] = 'País';
+$lang['ciudad'] = 'Ciudad';
+$lang['telefono'] = 'Teléfono';
+
+$lang['banear'] = 'Banear';
+$lang['activar'] = 'Activar';
+
+$lang['menu'] = 'MENÚ';
+$lang['ajustes'] = 'AJUSTES';
+$lang['registrar'] = 'Registrar';
+$lang['empleado'] = 'Empleado';
+
+// ------ BARRA LATERA DERECHA ----
+
+$lang['opciones de diseño'] = 'Opciones de diseño';
+
+$lang['diseño fijo'] = 'Diseño fijo';
+$lang['d_fijo descripcion'] = 'Activa el diseño fijo. No se puede usar el diseño fijo y en caja a la vez';
+
+$lang['diseño en caja'] = 'Diseño en caja';
+$lang['d_caja descripcion'] = 'Activa el diseño en caja';
+
+$lang['minimizar menu'] = 'Minimizar menú';
+$lang['m_minimizar descripcion'] = 'Cambia el menú lateral izquierdo (abre o colapsa)';
+
+$lang['expandir menu'] = 'Expandir menú al hacer hover';
+$lang['expandir_menu descripcion'] = 'Expande el menú lateral izquierdo al hacer hover';
+
+$lang['activa menu deslizante'] = 'Activa menú lateral derecho deslizante';
+$lang['a_menu descripcion'] = 'Cambia entre entre contenido deslizante y contenido "empujado"';
+
+$lang['activa skin'] = 'Activa el skin en la barra de contenido derecha';
+$lang['a_skin descripcion'] = 'Activa entre skin oscura y clara para la barra de contenido derecha';
+
+$lang['azul'] = 'Azul';
+$lang['negro'] = 'Negro';
+$lang['morado'] = 'Morado';
+$lang['verde'] = 'Verde';
+$lang['rojo'] = 'Rojo';
+$lang['amarillo'] = 'Amarillo';
+$lang['azul claro'] = 'Azul Claro';
+$lang['negro claro'] = 'Negro Claro';
+$lang['morado claro'] = 'Morado Claro';
+$lang['verde claro'] = 'Verde Claro';
+$lang['rojo claro'] = 'Rojo Claro';
+$lang['amarillo claro'] = 'Amarillo Claro';
+
+// --------------------------------

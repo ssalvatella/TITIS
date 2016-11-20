@@ -3,10 +3,9 @@
     <section class="content-header">
         <h1>
             Tickets
-            <small>Panel de control</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="<?= site_url('admin'); ?>"><i class="fa fa-home"></i> Inicio</a></li>
+            <li><a href="<?= site_url('admin'); ?>"><i class="fa fa-home"></i><?= $this->lang->line('inicio'); ?></a></li>
             <li class="active"></i>Tickets</li>
         </ol>
     </section>
@@ -23,17 +22,17 @@
 
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <a href = "javascript:history.go(0)" class="btn btn-app"><i class="fa fa-repeat"></i>Actualizar</a>
+                        <a href = "javascript:history.go(0)" class="btn btn-app"><i class="fa fa-repeat"></i><?= $this->lang->line('actualizar'); ?></a>
                         <table data-link="" id="tickets" class="table table-bordered table-hover display nowrap"  >
                             <thead>
                             <tr>
-                                <th><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; Número</th>
-                                <th><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Cliente</th>
-                                <th><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Título</th>
-                                <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; Fecha </th>
-                                <th><i class="fa fa-wrench" aria-hidden="true"></i> &nbsp; Técnico Admin</th>
-                                <th><i class="glyphicon glyphicon-ok" aria-hidden="true"></i>&nbsp; Estado</th>
-                                <th><i class="glyphicon glyphicon-stats" aria-hidden="true"></i>&nbsp;  Progreso</th>
+                                <th><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('numero'); ?></th>
+                                <th><i class="fa fa-user" aria-hidden="true"></i>&nbsp; <?= $this->lang->line('cliente'); ?></th>
+                                <th><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('titulo'); ?></th>
+                                <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('fecha'); ?> </th>
+                                <th><i class="fa fa-wrench" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('tecnico admin'); ?></th>
+                                <th><i class="glyphicon glyphicon-ok" aria-hidden="true"></i>&nbsp; <?= $this->lang->line('estado'); ?></th>
+                                <th><i class="glyphicon glyphicon-stats" aria-hidden="true"></i>&nbsp;  <?= $this->lang->line('progreso'); ?></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -69,13 +68,13 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; Número</th>
-                                <th><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Cliente</th>
-                                <th><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Título</th>
-                                <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; Fecha </th>
-                                <th><i class="fa fa-wrench" aria-hidden="true"></i> &nbsp; Técnico Admin</th>
-                                <th><i class="glyphicon glyphicon-ok" aria-hidden="true"></i>&nbsp; Estado</th>
-                                <th><i class="glyphicon glyphicon-stats" aria-hidden="true"></i>&nbsp;  Progreso</th>
+                                <th><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('numero'); ?></th>
+                                <th><i class="fa fa-user" aria-hidden="true"></i>&nbsp; <?= $this->lang->line('cliente'); ?></th>
+                                <th><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('titulo'); ?></th>
+                                <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('fecha'); ?> </th>
+                                <th><i class="fa fa-wrench" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('tecnico admin'); ?></th>
+                                <th><i class="glyphicon glyphicon-ok" aria-hidden="true"></i>&nbsp; <?= $this->lang->line('estado'); ?></th>
+                                <th><i class="glyphicon glyphicon-stats" aria-hidden="true"></i>&nbsp;  <?= $this->lang->line('progreso'); ?></th>
                             </tr>
                             </tfoot>
                         </table>
