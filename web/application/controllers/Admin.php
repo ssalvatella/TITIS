@@ -7,20 +7,17 @@ class Admin extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('plantilla');
-        $this->load->model('usuario');
-        $this->load->model('Cliente_Modelo');
-        $this->load->model('tecnico_admin');
-        $this->load->model('ticket');
+        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket'));
     }
 
     public function index() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
-            $datos['titulo'] = 'Inicio';
+            $datos['titulo'] = $this->lang->line('inicio');
             $datos['total_usuarios']['admin'] = $this->usuario->contar_usuarios(USUARIO_ADMIN);
             $datos['total_usuarios']['tecnico_admin'] = $this->usuario->contar_usuarios(USUARIO_TECNICO_ADMIN);
             $datos['total_usuarios']['tecnico'] = $this->usuario->contar_usuarios(USUARIO_TECNICO);
             $datos['total_usuarios']['cliente'] = $this->usuario->contar_usuarios(USUARIO_CLIENTE);
-            $datos['tickets'] = $this->ticket->obtener_ultimos_tickets(10);
+            $datos['tickets'] = $this->ticket->obtener_ultimos_tickets();
             $datos['tickets_pendientes'] = $this->ticket->contar_tickets_estado(TICKET_PENDIENTE);
             $this->plantilla->poner_js(site_url('assets/plugins/chartjs/Chart.min.js'));
             $this->plantilla->mostrar('admin', 'inicio', $datos);
@@ -29,7 +26,7 @@ class Admin extends MY_Controller {
 
     public function clientes() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
-            $datos['titulo'] = 'Clientes';
+            $datos['titulo'] = $this->lang->line('clientes');
             $datos['clientes'] = $this->cliente_modelo->obtener_clientes();
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
@@ -42,14 +39,14 @@ class Admin extends MY_Controller {
 
     public function registrar_empleado() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
-            $datos['titulo'] = 'Nuevo Empleado';
+            $datos['titulo'] = $this->lang->line('nuevo_empleado');
             $this->plantilla->mostrar('admin', 'nuevo_empleado', $datos);
         }
     }
 
     public function registrar_cliente() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
-            $datos['titulo'] = 'Nuevo Cliente';
+            $datos['titulo'] = $this->lang->line('nuevo_cliente');
             $this->plantilla->mostrar('admin', 'nuevo_cliente', $datos);
         }
     }
@@ -72,7 +69,7 @@ class Admin extends MY_Controller {
 
     public function tickets() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
-            $datos['titulo'] = 'Tickets';
+            $datos['titulo'] = $this->lang->line('tickets');
             $datos['tickets'] = $this->ticket->obtener_tickets();
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));

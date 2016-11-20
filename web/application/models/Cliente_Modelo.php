@@ -53,7 +53,7 @@ class Cliente_Modelo extends CI_Model {
         return $this->db->update('Cliente', $datos);
     }
 
-    public function obtener_ultimos_tickets($id_cliente, $numero) {
+    public function obtener_ultimos_tickets($id_cliente, $numero = 7) {
         $this->db->select('id_ticket, titulo, estado, inicio');
         $this->db->from('Ticket');
         $this->db->where('cliente', $id_cliente);

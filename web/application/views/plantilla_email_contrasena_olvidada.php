@@ -113,11 +113,11 @@
                         <tr>
                             <td class="container-padding content" align="left">
                                 <br>
-                                <div class="titulo">Contraseña cambiada</div>
+                                <div class="titulo"><?= $this->lang->line('contrasena_cambiada'); ?></div>
                                 <br>
                                 <div class="body-text">
-                                    Hola <i><?= $usuario ?></i>.<br/><br/>
-                                    Su nueva contraseña es: <b><?= $nueva_contrasena ?></b>
+                                    <?= $this->lang->line('hola'); ?> <i><?= $usuario ?></i>.<br/><br/>
+                                    <?= $this->lang->line('nueva_contrasena'); ?>: <b><?= $nueva_contrasena ?></b>
                                     <br><br>
                                 </div>
                             </td>
@@ -125,7 +125,7 @@
                         <tr>
                             <td class="container-padding footer-text" align="left">
                                 <br>
-                                <strong>Copyright &copy; <?= AÑOS_COPYRIGHT ?> <a href="<?= site_url(); ?>"><?= NOMBRE_WEB ?></a>.</strong> Todos los derechos reservados.
+                                <strong>Copyright &copy; <?= AÑOS_COPYRIGHT ?> <a href="<?= site_url(); ?>"><?= NOMBRE_WEB ?></a>.</strong> <?= $this->lang->line('derechos_reservados'); ?>.
                             </td>
                         </tr>
                     </table>

@@ -12,7 +12,6 @@
         <!-- CSS REQUERIDOS -->
         <link rel="stylesheet" href="<?= site_url('assets/css/bootstrap.min.css'); ?>">
         <link rel="stylesheet" href="<?= site_url('assets/css/font-awesome.min.css'); ?>">
-        <link rel="stylesheet" href="<?= site_url('assets/css/ionicons.min.css'); ?>">
         <link rel="stylesheet" href="<?= site_url('assets/plugins/flag-icon-css/css/flag-icon.min.css'); ?>">
         <link rel="stylesheet" href="<?= site_url('assets/css/AdminLTE.min.css'); ?>">
         <link rel="stylesheet" href="<?= site_url('assets/plugins/iCheck/square/blue.css'); ?>">
@@ -36,13 +35,13 @@
                     <?php if (isset($mensaje)) { ?>
                         <div class="alert alert-success">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <?php echo $mensaje; ?>
+                            <?php echo $mensaje . '.'; ?>
                         </div>
                     <?php } ?>
                     <?php if (isset($mensaje_error)) { ?>
                         <div class="alert alert-danger">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <?php echo $mensaje_error; ?>
+                            <?php echo $mensaje_error . '.'; ?>
                         </div>
                     <?php } ?>
                 </div>
@@ -51,12 +50,12 @@
                 <form action="<?= site_url('login'); ?>" method="POST" data-toggle="validator" role="form">
                     <div class="form-group has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?>">
                         <input type="text" class="form-control" placeholder="<?= $this->lang->line('usuario'); ?>" name="usuario" value="<?= set_value('usuario'); ?>" required>
-                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        <span class="fa fa-user form-control-feedback" style="font-size: 130%;"></span>
                         <?= form_error('usuario'); ?>
                     </div>
                     <div class="form-group has-feedback <?= form_error('contrasena') != '' ? 'has-error ' : '' ?>">
                         <input type="password" class="form-control" placeholder="<?= $this->lang->line('contrasena'); ?>" name="contrasena" required>
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        <span class="fa fa-lock form-control-feedback" style="font-size: 130%;"></span>
                         <?= form_error('contrasena'); ?>
                     </div>
                     <div class="row">
@@ -79,8 +78,8 @@
                 <div class="row">
                     <div class="col-xs-6">
                         <a href="#" data-toggle="modal" data-target="#modal_contrasena_olvidada"><?= $this->lang->line('contrasena_olvidada'); ?></a>
-                        <br>
-                        <a href="<?= site_url('registro'); ?>" class="text-center"><?= $this->lang->line('registrar'); ?></a>
+                        <!--br>
+                        <a href="<?= site_url('registro'); ?>" class="text-center"><?= $this->lang->line('registrar'); ?></a-->
                     </div>
                     <div class="col-xs-6 text-right" style="font-size: 200%;">
                         <a href="<?= site_url('idioma_switcher/cambiar_idioma/spanish'); ?>" title="Español"><span class="flag-icon flag-icon-es"></span></a>

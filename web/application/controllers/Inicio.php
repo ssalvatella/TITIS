@@ -8,9 +8,7 @@ class Inicio extends CI_Controller {
         parent::__construct();
         $this->load->helper('form');
         $this->load->helper('security'); // form_validation -> xss_clean
-        $this->load->library('form_validation');
-        $this->load->library('encryption');
-        $this->load->library('plantilla');
+        $this->load->library(array('form_validation', 'encryption', 'plantilla'));
         $this->load->model('usuario');
         $this->encryption->initialize(
                 array(
@@ -68,7 +66,7 @@ class Inicio extends CI_Controller {
 
                 if (($datos_usuario = $this->usuario->login($usuario, $contrasena)) != FALSE) {
                     if ($datos_usuario['activo'] == 0) {
-                        $this->session->set_flashdata('mensaje_error', 'La cuenta del usuario "' . $datos_usuario['usuario'] . '" no está activa.');
+                        $this->session->set_flashdata('mensaje_error', sprintf($this->lang->line('usuario_inactivo'), $datos_usuario['usuario']));
                         redirect('login');
                     }
                     $this->session->set_userdata('logged_in', TRUE);
@@ -89,7 +87,7 @@ class Inicio extends CI_Controller {
                     $this->cargar_inicio();
                 } else {
                     $datos = array(
-                        'mensaje_error' => 'Usuario y/o Contraseña incorrectos.',
+                        'mensaje_error' => $this->lang->line('datos_login_incorrectos'),
                     );
                     $this->load->view('login', $datos);
                 }
@@ -98,8 +96,10 @@ class Inicio extends CI_Controller {
     }
 
     public function cerrar_sesion() {
+        $idioma = $this->session->userdata('idioma');
         session_destroy();
-        $this->session->set_flashdata('mensaje', 'Sesión cerrada correctamente.');
+        $this->session->set_userdata('idioma', $idioma); // No funciona (sigue poniendo la página en español al cerrar la sesión estando en inglés)
+        $this->session->set_flashdata('mensaje', $this->lang->line('sesion_cerrada'));
         redirect('login');
     }
 
@@ -115,14 +115,14 @@ class Inicio extends CI_Controller {
                 'usuario' => $usuario,
                 'nueva_contrasena' => $nueva_contrasena
             ];
-            $this->enviar_email('plantilla_email_contrasena_olvidada', $email, 'Contraseña cambiada', $datos_email);
+            $this->enviar_email('plantilla_email_contrasena_olvidada', $email, $this->lang->line('contrasena_cambiada'), $datos_email);
             $nuevos_datos = [
                 'contrasena' => $this->encryption->encrypt($nueva_contrasena)
             ];
             $this->usuario->modificar_datos($usuario, $nuevos_datos);
-            $this->session->set_flashdata('mensaje', 'La nueva contraseña se ha enviado a su email.');
+            $this->session->set_flashdata('mensaje', $this->lang->line('nueva_contrasena_enviada'));
         } else {
-            $this->session->set_flashdata('mensaje_error', 'No se ha podido cambiar la contraseña debido a que no existe ningún usuario asociado a ese email.');
+            $this->session->set_flashdata('mensaje_error', $this->lang->line('error_cambio_contrasena'));
         }
         redirect('login');
     }

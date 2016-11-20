@@ -123,3 +123,15 @@ $lang['rojo claro'] = 'Rojo Claro';
 $lang['amarillo claro'] = 'Amarillo Claro';
 
 // --------------------------------
+
+$lang['nuevo_cliente'] = 'Nuevo Cliente';
+$lang['nuevo_empleado'] = 'Nuevo Empleado';
+$lang['tickets'] = 'Tickets';
+$lang['usuario_inactivo'] = 'La cuenta del usuario "%s" no está activa';
+$lang['datos_login_incorrectos'] = 'Usuario y/o Contraseña incorrectos';
+$lang['sesion_cerrada'] = 'Sesión cerrada correctamente';
+$lang['contrasena_cambiada'] = 'Contraseña cambiada';
+$lang['nueva_contrasena_enviada'] = 'La nueva contraseña se ha enviado a su email';
+$lang['error_cambio_contrasena'] = 'No se ha podido cambiar la contraseña debido a que no existe ningún usuario asociado a ese email';
+$lang['hola'] = 'Hola';
+$lang['nueva_contrasena'] = 'Su nueva contraseña es';

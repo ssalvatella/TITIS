@@ -28,7 +28,7 @@ class Ticket extends CI_Model {
         return $tickets;
     }
 
-    public function obtener_ultimos_tickets($numero) {
+    public function obtener_ultimos_tickets($numero = 10) {
         $this->db->select('Ticket.*, cliente.nombre as nombre_cliente, usuarioTecnico.usuario as nombre_tecnico_admin');
         $this->db->from('Ticket');
         $this->db->join('Cliente as cliente', 'cliente.id_cliente = Ticket.cliente');

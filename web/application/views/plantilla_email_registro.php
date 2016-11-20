@@ -126,7 +126,7 @@
                         <tr>
                             <td class="container-padding footer-text" align="left">
                                 <br>
-                                <strong>Copyright &copy; <?= AÑOS_COPYRIGHT ?> <a href="<?= site_url(); ?>"><?= NOMBRE_WEB ?></a>.</strong> Todos los derechos reservados.
+                                <strong>Copyright &copy; <?= AÑOS_COPYRIGHT ?> <a href="<?= site_url(); ?>"><?= NOMBRE_WEB ?></a>.</strong> <?= $this->lang->line('derechos_reservados'); ?>.
                             </td>
                         </tr>
                     </table>

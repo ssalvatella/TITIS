@@ -9,6 +9,7 @@ class Idioma_Loader {
         if ($idioma) {
             $ci->lang->load('titis', $idioma);
         } else {
+            // Por defecto carga el idioma español
             $ci->lang->load('titis', 'spanish');
         }
     }

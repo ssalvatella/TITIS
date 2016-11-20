@@ -130,3 +130,15 @@ $lang['rojo claro'] = 'Light Red';
 $lang['amarillo claro'] = 'Light Yellow';
 
 // --------------------------------
+
+$lang['nuevo_cliente'] = 'New Client';
+$lang['nuevo_empleado'] = 'New Employee';
+$lang['tickets'] = 'Tickets';
+$lang['usuario_inactivo'] = 'User account "%s" is not active';
+$lang['datos_login_incorrectos'] = 'Incorrect Username or Password';
+$lang['sesion_cerrada'] = 'Session closed properly';
+$lang['contrasena_cambiada'] = 'Password changed';
+$lang['nueva_contrasena_enviada'] = 'The new password has been sent to your email';
+$lang['error_cambio_contrasena'] = 'Failed to change password because there is no user associated with that email';
+$lang['hola'] = 'Hello';
+$lang['nueva_contrasena'] = 'Your new password is';

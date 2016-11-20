@@ -16,6 +16,7 @@ class Api extends REST_Controller {
      * tickets
      * ticket
      * ultimos_tickets
+     * ultimos_tickets_cliente
      * 
      * --- POST ---
      * login
@@ -249,6 +250,21 @@ class Api extends REST_Controller {
     }
 
     public function ultimos_tickets_get() {
+        $ultimos_tickets = $this->ticket->obtener_ultimos_tickets();
+        if ($ultimos_tickets) {
+            $this->response([
+                'status' => TRUE,
+                'datos' => $ultimos_tickets
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'No hay tickets'
+                    ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function ultimos_tickets_cliente_get() {
         $id_cliente = $this->get('id_cliente');
         if (!$id_cliente) {
             $this->response([
@@ -256,7 +272,7 @@ class Api extends REST_Controller {
                 'error' => 'Se necesita el campo id_cliente'
                     ], REST_Controller::HTTP_BAD_REQUEST);
         }
-        $ultimos_tickets = $this->cliente_modelo->obtener_ultimos_tickets($id_cliente, 7);
+        $ultimos_tickets = $this->cliente_modelo->obtener_ultimos_tickets($id_cliente);
         if ($ultimos_tickets) {
             $this->response([
                 'status' => TRUE,
