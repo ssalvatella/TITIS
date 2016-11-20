@@ -12,8 +12,8 @@ $lang['registrar'] = 'Sign up';
 $lang['cambiar'] = 'Change';
 $lang['cancelar'] = 'Cancel';
 $lang['admin'] = 'Administrator';
-$lang['tecnico_admin'] = 'Technical administrator';
-$lang['tecnico'] = 'Technical';
+$lang['tecnico_admin'] = 'Technician administrator';
+$lang['tecnico'] = 'Technician';
 $lang['cliente'] = 'Client';
 $lang['imagen_perfil'] = 'Avatar';
 $lang['perfil'] = 'Profile';
@@ -27,6 +27,8 @@ $lang['clientes'] = 'Clients';
 
 $lang['acceder'] = 'More info';
 
+// INICIO ADMIN -----------
+
 $lang['inicio'] = 'Home';
 $lang['panel de control'] = 'Control panel';
 $lang['tickets pendientes'] = 'Pending Tickets';
@@ -37,6 +39,10 @@ $lang['numero de usuarios'] = 'Number of users';
 $lang['ultimos tickets'] = 'Last tickets';
 $lang['ver todos'] = 'See all';
 
+// -----------------------
+
+// TICKET -----------------
+
 $lang['titulo'] = 'Title';
 $lang['fecha'] = 'Date';
 $lang['estado'] = 'State';
@@ -44,6 +50,8 @@ $lang['estado'] = 'State';
 $lang['pendiente'] = 'Pending';
 $lang['en proceso'] = 'In process';
 $lang['finalizado'] = 'Finalized';
+
+// -------------------------
 
 $lang['actualizar'] = 'Refresh';
 $lang['numero'] = 'Number';
@@ -64,7 +72,29 @@ $lang['ajustes'] = 'SETTINGS';
 $lang['registrar'] = 'Register';
 $lang['empleado'] = 'Employee';
 
-// ------ BARRA LATERA DERECHA ----
+// CLIENTE INICIO ------------------------------
+$lang['tickets enviados'] = 'Sent Tickets';
+$lang['facturas recibidas'] = 'Receipts Received';
+$lang['tickets finalizadas'] = 'Finalized Tickets';
+
+$lang['grafico de gastos'] = 'Expense graph';
+$lang['crear ticket'] = 'Create Ticket';
+$lang['ct descripcion'] = 'Send a new ticket and our team will solve it as soon as possible';
+$lang['ver enviados'] = 'View Submitted';
+
+$lang['asunto'] = 'Subject';
+$lang['asunto descripcion'] = 'Enter a title for the ticket';
+
+$lang['mensaje'] = 'Message';
+$lang['mensaje descripcion'] = 'Describe with your words what the problem is ...';
+
+$lang['fichero adjunto'] = 'Attached file';
+$lang['aun no funcional'] = '(not yet functional)';
+
+$lang['enviar ticket'] = 'Send Ticket';
+// ---------------------------------------------
+
+// ------ BARRA LATERAL DERECHA ----
 
 $lang['opciones de diseño'] = 'Design options';
 
@@ -91,7 +121,7 @@ $lang['negro'] = 'Black';
 $lang['morado'] = 'Purple';
 $lang['verde'] = 'Green';
 $lang['rojo'] = 'Red';
-$lang['amarillo'] = 'Light Yellow';
+$lang['amarillo'] = 'Yellow';
 $lang['azul claro'] = 'Light Blue';
 $lang['negro claro'] = 'Light Black';
 $lang['morado claro'] = 'Light Purple';

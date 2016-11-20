@@ -8,7 +8,7 @@ class Admin extends MY_Controller {
         parent::__construct();
         $this->load->library('plantilla');
         $this->load->model('usuario');
-        $this->load->model('cliente_modelo');
+        $this->load->model('Cliente_Modelo');
         $this->load->model('tecnico_admin');
         $this->load->model('ticket');
     }

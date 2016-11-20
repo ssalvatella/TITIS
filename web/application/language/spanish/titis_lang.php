@@ -64,6 +64,29 @@ $lang['ajustes'] = 'AJUSTES';
 $lang['registrar'] = 'Registrar';
 $lang['empleado'] = 'Empleado';
 
+// CLIENTE INICIO ------------------------------
+$lang['tickets enviados'] = 'Tickets Enviados';
+$lang['facturas recibidas'] = 'Facturas Recibidas';
+$lang['tickets finalizadas'] = 'Tickets Finalizados';
+
+$lang['grafico de gastos'] = 'Gráfico de gastos';
+
+$lang['crear ticket'] = 'Crear Ticket';
+$lang['ct descripcion'] = 'Envía un nuevo ticket y nuestro equipo lo resolverá cuanto antes';
+$lang['ver enviados'] = 'Ver Enviados';
+
+$lang['asunto'] = 'Asunto';
+$lang['asunto descripcion'] = 'Introduce un título para el ticket';
+
+$lang['mensaje'] = 'Mensaje';
+$lang['mensaje descripcion'] = 'Describe con tus palabras cual es el problema...';
+
+$lang['fichero adjunto'] = 'Fichero adjunto ';
+$lang['aun no funcional'] = '(aún no funcional)';
+
+$lang['enviar ticket'] = 'Enviar Ticket';
+// ---------------------------------------------
+
 // ------ BARRA LATERA DERECHA ----
 
 $lang['opciones de diseño'] = 'Opciones de diseño';
