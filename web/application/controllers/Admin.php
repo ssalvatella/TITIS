@@ -7,7 +7,7 @@ class Admin extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('plantilla');
-        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket', 'tarea', 'mensaje'));
+        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket_modelo', 'tarea', 'mensaje'));
     }
 
     public function index() {
@@ -17,8 +17,8 @@ class Admin extends MY_Controller {
             $datos['total_usuarios']['tecnico_admin'] = $this->usuario->contar_usuarios(USUARIO_TECNICO_ADMIN);
             $datos['total_usuarios']['tecnico'] = $this->usuario->contar_usuarios(USUARIO_TECNICO);
             $datos['total_usuarios']['cliente'] = $this->usuario->contar_usuarios(USUARIO_CLIENTE);
-            $datos['tickets'] = $this->ticket->obtener_ultimos_tickets();
-            $datos['tickets_pendientes'] = $this->ticket->contar_tickets_estado(TICKET_PENDIENTE);
+            $datos['tickets'] = $this->ticket_modelo->obtener_ultimos_tickets();
+            $datos['tickets_pendientes'] = $this->ticket_modelo->contar_tickets_estado(TICKET_PENDIENTE);
             $this->plantilla->poner_js(site_url('assets/plugins/chartjs/Chart.min.js'));
             $this->plantilla->mostrar('admin', 'inicio', $datos);
         }
@@ -70,7 +70,7 @@ class Admin extends MY_Controller {
     public function tickets() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('tickets');
-            $datos['tickets'] = $this->ticket->obtener_tickets();
+            $datos['tickets'] = $this->ticket_modelo->obtener_tickets();
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
@@ -89,9 +89,12 @@ class Admin extends MY_Controller {
     public function ver_ticket($id_ticket) {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('tickets');
-            $datos['ticket'] = $this->ticket->obtener_ticket($id_ticket)[0];
+            $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket)[0];
             $datos['tareas'] = $this->tarea->obtener_tareas($id_ticket);
             $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
+            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
             $this->plantilla->mostrar('admin', 'ticket', $datos);
         }
     }

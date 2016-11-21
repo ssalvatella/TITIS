@@ -80,6 +80,10 @@ $lang['empleado'] = 'Employee';
 
 $lang['no_asignado'] = 'Not Assigned';
 
+$lang['ha_escrito_comentario'] = 'commented';
+$lang['enviar'] = 'Send';
+$lang['añadir_comentario'] = 'Write a comment...';
+
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Sent Tickets';
 $lang['facturas_recibidas'] = 'Receipts Received';

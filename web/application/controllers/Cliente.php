@@ -7,7 +7,7 @@ class Cliente extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('plantilla');
-        $this->load->model(array('cliente_modelo', 'usuario', 'ticket'));
+        $this->load->model(array('cliente_modelo', 'usuario', 'ticket_modelo'));
 
         $config['max_size'] = '100';
         $config['upload_path'] = './uploads/';

@@ -7,10 +7,16 @@ class Mensaje extends CI_Model {
     }
 
     public function obtener_mensajes($id_ticket) {
+        $this->db->select('Mensaje.*, usuario.usuario as nombre_usuario');
         $this->db->from('Mensaje');
         $this->db->where('ticket', $id_ticket);
+        $this->db->join('Usuario as usuario', 'Mensaje.usuario = usuario.id_usuario', 'left');
         $this->db->order_by('fecha', 'ASC');
         return $this->db->get()->result_array();
+    }
+
+    public function registrar_mensaje($datos) {
+        return $this->db->insert('Mensaje', $datos);
     }
 
 

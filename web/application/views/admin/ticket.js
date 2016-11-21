@@ -17,3 +17,7 @@ $(".todo-list").todolist({
         return ele;
     }
 });
+
+$(function () {
+    $("#mensaje").wysihtml5();
+});

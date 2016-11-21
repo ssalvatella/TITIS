@@ -72,6 +72,11 @@ $lang['empleado'] = 'Empleado';
 
 $lang['no_asignado'] = 'No Asignado';
 
+$lang['ha_escrito_comentario'] = 'ha escrito un comentario';
+$lang['enviar'] = 'Enviar';
+$lang['añadir_comentario'] = 'Escribir un comentario...';
+
+
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Tickets Enviados';
 $lang['facturas_recibidas'] = 'Facturas Recibidas';

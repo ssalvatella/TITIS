@@ -26,7 +26,7 @@ class Api extends REST_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->model(array('usuario', 'cliente_modelo', 'ticket'));
+        $this->load->model(array('usuario', 'cliente_modelo', 'ticket_modelo'));
 
         // $this->methods['login_get']['limit'] = 5;
     }
@@ -213,7 +213,7 @@ class Api extends REST_Controller {
     }
 
     public function tickets_get() {
-        $tickets = $this->ticket->obtener_tickets();
+        $tickets = $this->ticket_modelo->obtener_tickets();
         if ($tickets) {
             $this->response([
                 'status' => TRUE,
@@ -235,7 +235,7 @@ class Api extends REST_Controller {
                 'error' => 'Se necesita el campo id_ticket'
                     ], REST_Controller::HTTP_BAD_REQUEST);
         }
-        $datos_ticket = $this->ticket->obtener_ticket($id_ticket);
+        $datos_ticket = $this->ticket_modelo->obtener_ticket($id_ticket);
         if ($datos_ticket) {
             $this->response([
                 'status' => TRUE,
@@ -250,7 +250,7 @@ class Api extends REST_Controller {
     }
 
     public function ultimos_tickets_get() {
-        $ultimos_tickets = $this->ticket->obtener_ultimos_tickets();
+        $ultimos_tickets = $this->ticket_modelo->obtener_ultimos_tickets();
         if ($ultimos_tickets) {
             $this->response([
                 'status' => TRUE,

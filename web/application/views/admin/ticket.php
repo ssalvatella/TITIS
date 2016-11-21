@@ -13,16 +13,18 @@
     <section class="content">
 
         <div class="box  box-primary" style="width: 80%; margin:0 auto;">
+            <!-- CABECERA TÍTULO ---------------------------->
             <div class="box-header with-border">
                 <h3 class="box-title"><?= $ticket['titulo'] . ' <small>'. date('d/m/Y H:i', strtotime($ticket['inicio']))?> </small></h3>
                 <div class="box-tools pull-right">
 <!--                    <span class="label label-primary">Label</span>-->
                 </div><!-- /.box-tools -->
             </div><!-- /.box-header -->
+            <!-- ETIQUETAS CABECERA ------------------------->
             <div class="box-body">
 
                 <div class="row">
-                    <div class="col-lg-3 col-xs-6">
+                    <div class="col-lg-3 col-xs-6 col-md-6">
                         <div class="info-box bg-red">
                             <!-- Apply any bg-* class to to the icon to color it -->
                             <span class="info-box-icon"><i class="fa fa-user"></i></span>
@@ -32,7 +34,7 @@
                             </div><!-- /.info-box-content -->
                         </div><!-- /.info-box -->
                     </div>
-                    <div class="col-lg-3 col-xs-6">
+                    <div class="col-lg-3 col-xs-6 col-md-6">
                         <div class="info-box bg-green">
                             <!-- Apply any bg-* class to to the icon to color it -->
                             <span class="info-box-icon"><i class="fa fa-wrench"></i></span>
@@ -46,7 +48,7 @@
                             </div><!-- /.info-box-content -->
                         </div><!-- /.info-box -->
                     </div>
-                    <div class="col-lg-3 col-xs-6">
+                    <div class="col-lg-3 col-xs-6 col-md-6">
                         <div class="info-box bg-aqua">
                             <!-- Apply any bg-* class to to the icon to color it -->
                             <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
@@ -56,7 +58,7 @@
                             </div><!-- /.info-box-content -->
                         </div><!-- /.info-box -->
                     </div>
-                    <div class="col-lg-3 col-xs-6">
+                    <div class="col-lg-3 col-xs-6 col-md-6">
                         <div class="info-box <?php switch ($ticket['estado']){
 
                             case TICKET_PENDIENTE: echo 'bg-yellow'; break;
@@ -92,6 +94,7 @@
                 </div>
 
             </div><!-- /.box-body -->
+            <!-- DESCRIPCIÓN Y TAREAS ----------------------->
             <div class="box-group" id="accordion">
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
                 <div class="panel box box-primary">
@@ -123,12 +126,12 @@
                                 <?php
 
                                 foreach ($tareas as $tarea) {
-                                    echo '<li>
+                                    echo '<li '; if ($tarea['estado'] == TAREA_FINALIZADA) echo 'class="done"';echo '>
                                             <span class="handle">
                                                 <i class="fa fa-ellipsis-v"></i>
                                                 <i class="fa fa-ellipsis-v"></i>
                                             </span>
-                                            <input type="checkbox" value="">
+                                            <input type="checkbox" '; if ($tarea['estado'] == TAREA_FINALIZADA) echo 'checked="true"'; echo ' value="">
                                             <span class="text">'. $tarea['nombre'].'</span>
                                             <div class="tools">
                                                 <i class="fa fa-edit"></i>
@@ -136,91 +139,7 @@
                                             </div></li>';
 
                                 }
-
                                 ?>
-                                <li>
-                                    <!-- drag handle -->
-                                    <span class="handle">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                        <i class="fa fa-ellipsis-v"></i>
-                                    </span>
-                                    <!-- checkbox -->
-                                    <input type="checkbox" value="">
-                                    <!-- todo text -->
-                                    <span class="text">Design a nice theme</span>
-                                    <!-- Emphasis label -->
-                                    <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-                                    <!-- General tools such as edit or delete-->
-                                    <div class="tools">
-                                        <i class="fa fa-edit"></i>
-                                        <i class="fa fa-trash-o"></i>
-                                    </div>
-                                </li>
-                                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                                    <input type="checkbox" value="">
-                                    <span class="text">Make the theme responsive</span>
-                                    <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                                    <div class="tools">
-                                        <i class="fa fa-edit"></i>
-                                        <i class="fa fa-trash-o"></i>
-                                    </div>
-                                </li>
-                                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                                    <input type="checkbox" value="">
-                                    <span class="text">Let theme shine like a star</span>
-                                    <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
-                                    <div class="tools">
-                                        <i class="fa fa-edit"></i>
-                                        <i class="fa fa-trash-o"></i>
-                                    </div>
-                                </li>
-                                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                                    <input type="checkbox" value="">
-                                    <span class="text">Let theme shine like a star</span>
-                                    <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
-                                    <div class="tools">
-                                        <i class="fa fa-edit"></i>
-                                        <i class="fa fa-trash-o"></i>
-                                    </div>
-                                </li>
-                                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                                    <input type="checkbox" value="">
-                                    <span class="text">Check your messages and notifications</span>
-                                    <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-                                    <div class="tools">
-                                        <i class="fa fa-edit"></i>
-                                        <i class="fa fa-trash-o"></i>
-                                    </div>
-                                </li>
-                                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                                    <input type="checkbox" value="">
-                                    <span class="text">Let theme shine like a star</span>
-                                    <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-                                    <div class="tools">
-                                        <i class="fa fa-edit"></i>
-                                        <i class="fa fa-trash-o"></i>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                             <!-- /.box-header -->
@@ -233,10 +152,67 @@
                     </div>
                 </div>
             </div>
-            <div class="box-footer">
-                The footer of the box
-            </div><!-- box-footer -->
         </div>
+        <!-- COMENTARIOS -------------------------------->
+        <div class="" style="width: 80%; margin:0 auto; background-color: #ecf0f5; padding-top: 30px">
+            <ul class="timeline">
+
+                <?php
+
+                    for($i = 1; $i < count($mensajes); ++$i){
+
+                        $fecha_mensaje = date('d/m/Y H:i', strtotime($mensajes[$i]['fecha']));
+                        $fecha_mensaje_anterior = date('d/m/Y H:i', strtotime($mensajes[$i - 1]['fecha']));
+
+                        if (($fecha_mensaje - $fecha_mensaje_anterior) > 0) {
+                            echo '<li class="time-label">
+                                      <span class="bg-red">
+                                        ' . date('j M. Y', strtotime($mensajes[$i]['fecha'])) . '
+                                      </span>
+                                  </li>';
+                        }
+
+                        echo '<li>
+                                  <i class="fa fa-comments bg-yellow"></i>   
+                                <div class="timeline-item">
+                                    <span class="time"><i class="fa fa-clock-o"></i> &nbsp; ' . date('H:i', strtotime($mensajes[$i]['fecha'])) . '</span>
+            
+                                    <h3 class="timeline-header"><a href="#">' . $mensajes[$i]['nombre_usuario'] .'</a> ' . $this->lang->line('ha_escrito_comentario'). '</h3>
+            
+                                    <div class="timeline-body">
+                                        ' .$mensajes[$i]['texto']  . '
+                                    </div>
+                                </div>
+                              </li>';
+
+
+                    }
+
+                ?>
+
+                <li>
+                    <i class="fa fa-commenting bg-aqua"></i>
+                    <div class="timeline-item">
+                        <div class="timeline-body">
+                            <form method="post" action="<?= site_url('ticket/enviar_mensaje/') . $ticket['id_ticket']; ?>">
+                                <div class="form-group">
+                                    <textarea name= "mensaje" maxlength="500" class= "form-control" style = "width: 1200px" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
+                                    <input style="margin-top: 15px" name="submit" value="<?= $this->lang->line('enviar'); ?>" type="submit" id="boton" class="btn bg-purple btn-flat btn-md">
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="fa fa-repeat bg-gray" href="javascript:history.go(0)"></a>
+                </li>
+
+                <!-- END timeline item -->
+
+            </ul>
+        </div><!-- box-footer -->
 
     </section>
     <!-- /.content -->
