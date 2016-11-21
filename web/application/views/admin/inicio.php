@@ -132,7 +132,7 @@
                             <div class="col-md-4">
                                 <ul class="chart-legend clearfix">
                                     <li><i class="fa fa-circle-o text-red"></i> <?= $this->lang->line('administradores'); ?></li>
-                                    <li><i class="fa fa-circle-o text-green"></i> <?= $this->lang->line('tecnicos admin'); ?></li>
+                                    <li><i class="fa fa-circle-o text-green"></i> <?= $this->lang->line('tecnicos_admin'); ?></li>
                                     <li><i class="fa fa-circle-o text-yellow"></i> <?= $this->lang->line('tecnicos'); ?></li>
                                     <li><i class="fa fa-circle-o text-light-blue"></i> <?= $this->lang->line('clientes'); ?></li>
                                 </ul>

@@ -108,10 +108,21 @@ class Admin extends MY_Controller {
             $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket)[0];
             $datos['tareas'] = $this->tarea->obtener_tareas($id_ticket);
             $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
+            $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO_ADMIN);
             $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
+            $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
             $this->plantilla->mostrar('admin', 'ticket', $datos);
+        }
+    }
+
+    public function asignar_ticket() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $id_ticket = $this->input->post('id_ticket');
+            $id_tecnico_admin = $this->input->post('id_tecnico_admin');
+            $this -> ticket_modelo->asignar_ticket($id_ticket, $id_tecnico_admin);
         }
     }
 

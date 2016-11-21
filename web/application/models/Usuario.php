@@ -89,6 +89,12 @@ class Usuario extends CI_Model {
         return $this->db->get()->num_rows();
     }
 
+    public function obtener_usuarios_tipo($tipo) {
+        $this->db->from('Usuario');
+        $this->db->where('tipo', $tipo);
+        return $this->db->get()->result_array();
+    }
+
     public function obtener_usuarios() {
         $this->db->select('id_usuario, tipo, usuario, email, activo');
         $this->db->from('Usuario');

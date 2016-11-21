@@ -83,6 +83,8 @@ $lang['no_asignado'] = 'Not Assigned';
 $lang['ha_escrito_comentario'] = 'commented';
 $lang['enviar'] = 'Send';
 $lang['añadir_comentario'] = 'Write a comment...';
+$lang['asignar'] = 'Assign';
+$lang['cerrar'] = 'Close';
 
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Sent Tickets';

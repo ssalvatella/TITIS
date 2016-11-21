@@ -41,7 +41,7 @@ class Cliente extends MY_Controller {
                 'mensaje' => $this->input->post('mensaje'),
             );
 
-            if ($this->ticket->registrar_ticket($datosTicket)) {
+            if ($this->ticket_modelo->registrar_ticket($datosTicket)) {
                 $datos['enviado'] = 1;
             } else {
                 $datos['error'] = 1;

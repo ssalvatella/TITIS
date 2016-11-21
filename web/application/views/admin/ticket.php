@@ -12,6 +12,36 @@
     <!-- Contenido -->
     <section class="content">
 
+        <!-- Modal -->
+        <div class="modal fade" id="modal_asignar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('asignar') . ' ' . $this->lang->line('tecnico_admin'); ?></h4>
+                    </div>
+                    <form id = "asigna_tecnico_admin_form" method="post">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label><?= $this->lang->line('tecnico_admin'); ?></label>
+                                <select id = "seleccion_tecnicos_admins" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    <?php
+                                    foreach ($tecnicos_admins as $tecnico_admin) {
+                                        echo '<option value="' . $tecnico_admin['id_usuario'] . '"> ' . $tecnico_admin['usuario'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cerrar'); ?></button>
+                            <input  type="submit" id="asignar" value = "<?= $this->lang->line('asignar'); ?>" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="box  box-primary" style="width: 80%; margin:0 auto;">
             <!-- CABECERA TÍTULO ---------------------------->
             <div class="box-header with-border">
@@ -22,9 +52,8 @@
             </div><!-- /.box-header -->
             <!-- ETIQUETAS CABECERA ------------------------->
             <div class="box-body">
-
                 <div class="row">
-                    <div class="col-lg-3 col-xs-6 col-md-6">
+                    <div class="col-lg-3 col-xs-6 col-md-6 col-sm-6">
                         <div class="info-box bg-red">
                             <!-- Apply any bg-* class to to the icon to color it -->
                             <span class="info-box-icon"><i class="fa fa-user"></i></span>
@@ -34,7 +63,7 @@
                             </div><!-- /.info-box-content -->
                         </div><!-- /.info-box -->
                     </div>
-                    <div class="col-lg-3 col-xs-6 col-md-6">
+                    <div class="col-lg-3 col-xs-6 col-md-6 col-sm-6">
                         <div class="info-box bg-green">
                             <!-- Apply any bg-* class to to the icon to color it -->
                             <span class="info-box-icon"><i class="fa fa-wrench"></i></span>
@@ -45,10 +74,14 @@
                                     } else {
                                         echo $this->lang->line('no_asignado');
                                     }?></span>
+                                <?php
+                                    if (!isset($ticket['tecnico_admin']))
+                                        echo '<button data-toggle="modal" data-target="#modal_asignar" style="min-width: 100px" class="btn bg-orange btn-flat btn-sm"> <i class="ionicons ion-person-add"></i> &nbsp;'.$this->lang->line('asignar') . ' </button>';
+                                ?>
                             </div><!-- /.info-box-content -->
                         </div><!-- /.info-box -->
                     </div>
-                    <div class="col-lg-3 col-xs-6 col-md-6">
+                    <div class="col-lg-3 col-xs-6 col-md-6 col-sm-6">
                         <div class="info-box bg-aqua">
                             <!-- Apply any bg-* class to to the icon to color it -->
                             <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
@@ -58,7 +91,7 @@
                             </div><!-- /.info-box-content -->
                         </div><!-- /.info-box -->
                     </div>
-                    <div class="col-lg-3 col-xs-6 col-md-6">
+                    <div class="col-lg-3 col-xs-6 col-md-6 col-sm-6">
                         <div class="info-box <?php switch ($ticket['estado']){
 
                             case TICKET_PENDIENTE: echo 'bg-yellow'; break;
@@ -184,8 +217,6 @@
                                     </div>
                                 </div>
                               </li>';
-
-
                     }
 
                 ?>
@@ -196,7 +227,7 @@
                         <div class="timeline-body">
                             <form method="post" action="<?= site_url('ticket/enviar_mensaje/') . $ticket['id_ticket']; ?>">
                                 <div class="form-group">
-                                    <textarea name= "mensaje" maxlength="500" class= "form-control" style = "width: 1200px" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
+                                    <textarea name= "mensaje" maxlength="500" class= "form-control" style = "width: 100%" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
                                     <input style="margin-top: 15px" name="submit" value="<?= $this->lang->line('enviar'); ?>" type="submit" id="boton" class="btn bg-purple btn-flat btn-md">
                                 </div>
                             </form>

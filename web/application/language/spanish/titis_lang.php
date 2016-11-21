@@ -75,6 +75,9 @@ $lang['no_asignado'] = 'No Asignado';
 $lang['ha_escrito_comentario'] = 'ha escrito un comentario';
 $lang['enviar'] = 'Enviar';
 $lang['añadir_comentario'] = 'Escribir un comentario...';
+$lang['asignar'] = 'Asignar';
+
+$lang['cerrar'] = 'Cerrar';
 
 
 // CLIENTE INICIO ------------------------------
