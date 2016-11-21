@@ -39,5 +39,6 @@ $(function(){
             data: {id_ticket: id_ticket, id_tecnico_admin: id_tecnico_admin},
         });
         $('#modal_asignar').modal('hide');
+        window.location.reload();
     });
 });
