@@ -14,8 +14,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // --- CAMBIO DEL IDIOMA ---
 $hook['post_controller_constructor'] = array(
-    'class'    => 'Idioma_Loader',
+    'class'    => 'Idioma_loader',
     'function' => 'inicializar',
-    'filename' => 'Idioma_Loader.php',
+    'filename' => 'Idioma_loader.php',
     'filepath' => 'hooks'
 );
