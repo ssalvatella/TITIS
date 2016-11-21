@@ -160,3 +160,4 @@ $lang['nueva_contrasena_enviada'] = 'The new password has been sent to your emai
 $lang['error_cambio_contrasena'] = 'Failed to change password because there is no user associated with that email';
 $lang['hola'] = 'Hello';
 $lang['nueva_contrasena'] = 'Your new password is';
+$lang['registro_empleado'] = 'Registration of a new worker';

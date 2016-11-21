@@ -4,8 +4,7 @@ class Ticket_Modelo extends CI_Model {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('tarea');
-        $this->load->model('archivo');
+        $this->load->model(array('tarea', 'archivo'));
     }
 
     public function obtener_tickets($inicio = 0, $cantidad = 9999) {

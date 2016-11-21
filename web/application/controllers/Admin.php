@@ -40,7 +40,14 @@ class Admin extends MY_Controller {
     public function registrar_empleado() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('nuevo_empleado');
-            $this->plantilla->mostrar('admin', 'nuevo_empleado', $datos);
+            $this->plantilla->poner_css(site_url('assets/plugins/iCheck/all.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/iCheck/icheck.min.js'));
+            if ($this->input->server('REQUEST_METHOD') == 'GET') {
+                $this->plantilla->mostrar('admin', 'nuevo_empleado', $datos);
+            } else {
+                // Registro
+                $this->plantilla->mostrar('admin', 'nuevo_empleado', $datos);
+            }
         }
     }
 

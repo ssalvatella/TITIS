@@ -154,3 +154,4 @@ $lang['nueva_contrasena_enviada'] = 'La nueva contraseña se ha enviado a su ema
 $lang['error_cambio_contrasena'] = 'No se ha podido cambiar la contraseña debido a que no existe ningún usuario asociado a ese email';
 $lang['hola'] = 'Hola';
 $lang['nueva_contrasena'] = 'Su nueva contraseña es';
+$lang['registro_empleado'] = 'Registro de un nuevo trabajador';
