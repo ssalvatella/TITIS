@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Tecnico_Admin extends MY_Controller {
+class Tecnico_admin extends MY_Controller {
 
     public function __construct() {
         parent::__construct();

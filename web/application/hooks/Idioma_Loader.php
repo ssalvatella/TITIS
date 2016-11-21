@@ -1,6 +1,6 @@
 <?php
 
-class Idioma_Loader {
+class Idioma_loader {
 
     function inicializar() {
         $ci = & get_instance();
