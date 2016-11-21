@@ -1,6 +1,6 @@
 <?php
 
-class Tecnico_Admin extends CI_Model {
+class Tecnico_admin extends CI_Model {
 
     public function __construct() {
         parent::__construct();

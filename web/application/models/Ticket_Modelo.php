@@ -1,6 +1,6 @@
 <?php
 
-class Ticket_Modelo extends CI_Model {
+class Ticket_modelo extends CI_Model {
 
     public function __construct() {
         parent::__construct();

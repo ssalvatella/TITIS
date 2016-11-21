@@ -4,7 +4,7 @@
 import shutil
 from tempfile import mkstemp
 from shutil import move
-from os import remove, close
+import os
 import paramiko, base64
 
 def reemplazar(file_path, pattern, subst):
@@ -14,9 +14,9 @@ def reemplazar(file_path, pattern, subst):
         with open(file_path) as old_file:
             for line in old_file:
                 new_file.write(line.replace(pattern, subst))
-    close(fh)
+    os.close(fh)
     # Elimina el fichero original
-    remove(file_path)
+    os.remove(file_path)
     # Mueve el nuevo fichero
     move(abs_path, file_path)
 
@@ -27,7 +27,8 @@ def print_totals(transferred, toBeTransferred):
 print 'Copiando carpeta web'
 shutil.copytree('web', 'web_copia')
 
-shutil.rmtree('web_copia/nbproject')
+if os.path.exists('web_copia/nbproject'):
+    shutil.rmtree('web_copia/nbproject')
 
 print 'Modificando .htaccess'
 reemplazar('web_copia/.htaccess', '# RewriteBase /titis/', ' RewriteBase /titis/')
@@ -75,4 +76,4 @@ sftp.close()
 ssh.close()
 
 print 'Eliminando titis.zip'
-remove('titis.zip')
+os.remove('titis.zip')
