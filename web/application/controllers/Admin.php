@@ -6,8 +6,17 @@ class Admin extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->library('plantilla');
+        $this->load->helper('form');
+        $this->load->helper('security'); // form_validation -> xss_clean
+        $this->load->library(array('form_validation', 'encryption', 'plantilla'));
         $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket_modelo', 'tarea', 'mensaje'));
+        $this->encryption->initialize(
+                array(
+                    'cipher' => 'aes-256',
+                    'mode' => 'ctr',
+                    'key' => config_item('encryption_key')
+                )
+        );
     }
 
     public function index() {

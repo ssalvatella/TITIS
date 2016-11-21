@@ -30,6 +30,9 @@ shutil.copytree('web', 'web_copia')
 if os.path.exists('web_copia/nbproject'):
     shutil.rmtree('web_copia/nbproject')
 
+if os.path.exists('web_copia/.idea'):
+    shutil.rmtree('web_copia/.idea')
+
 print 'Modificando .htaccess'
 reemplazar('web_copia/.htaccess', '# RewriteBase /titis/', ' RewriteBase /titis/')
 
