@@ -8,6 +8,7 @@ class Admin extends MY_Controller {
         parent::__construct();
         $this->load->helper('form');
         $this->load->helper('security'); // form_validation -> xss_clean
+        $this->load->helper('string'); // Generar contraseña aleatoria
         $this->load->library(array('form_validation', 'encryption', 'plantilla'));
         $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket_modelo', 'tarea', 'mensaje'));
         $this->encryption->initialize(
@@ -49,14 +50,40 @@ class Admin extends MY_Controller {
     public function registrar_empleado() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('nuevo_empleado');
+            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-validator/validator.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/iCheck/all.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/iCheck/icheck.min.js'));
-            if ($this->input->server('REQUEST_METHOD') == 'GET') {
-                $this->plantilla->mostrar('admin', 'nuevo_empleado', $datos);
-            } else {
-                // Registro
-                $this->plantilla->mostrar('admin', 'nuevo_empleado', $datos);
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+                $this->form_validation->set_rules('usuario', $this->lang->line('usuario'), 'trim|required|xss_clean|is_unique[Usuario.usuario]');
+                $this->form_validation->set_rules('email', $this->lang->line('email'), 'trim|required|valid_email|xss_clean|is_unique[Usuario.email]');
+                $this->form_validation->set_rules('tipo_empleado', $this->lang->line('tipo_empleado'), 'required');
+                if ($this->form_validation->run() == TRUE) {
+                    $usuario = $this->input->post('usuario');
+                    $contrasena = random_string('alnum', 8);
+                    $email = $this->input->post('email');
+                    $tipo = $this->input->post('tipo_empleado');
+
+                    $datos_empleado = [
+                        'tipo' => $tipo,
+                        'usuario' => $usuario,
+                        'contrasena' => $this->encryption->encrypt($contrasena),
+                        'email' => $email
+                    ];
+                    $empleado_registrado = $this->usuario->registrar_empleado($datos_empleado);
+                    if ($empleado_registrado == TRUE) {
+                        $datos_email = array(
+                            'usuario' => $usuario,
+                            'contrasena' => $contrasena,
+                        );
+                        $this->enviar_email('plantilla_email_registro', $email, $this->lang->line('registro_completado'), $datos_email);
+                        $datos['mensaje'] = sprintf($this->lang->line('empleado_registrado'), '<b>' . $usuario . '</b>');
+                    } else {
+                        $datos['mensaje_error'] = $this->lang->line('registro_incorrecto');
+                    }
+                }
             }
+            $this->plantilla->mostrar('admin', 'nuevo_empleado', $datos);
         }
     }
 

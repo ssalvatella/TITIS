@@ -113,12 +113,12 @@
                         <tr>
                             <td class="container-padding content" align="left">
                                 <br>
-                                <div class="titulo">Registro completo</div>
+                                <div class="titulo"><?= $this->lang->line('registro_completado'); ?></div>
                                 <br>
                                 <div class="body-text">
-                                    Su usuario es: <b><?= $usuario ?></b>
+                                    <?= $this->lang->line('usuario_es'); ?>: <b><?= $usuario ?></b>
                                     <br><br>
-                                    Su contraseña es: <b><?= $pass ?></b>
+                                    <?= $this->lang->line('contrasena_es'); ?>: <b><?= $contrasena ?></b>
                                     <br><br>
                                 </div>
                             </td>

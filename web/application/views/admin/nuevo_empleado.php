@@ -22,23 +22,43 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
+                            <?php if (isset($mensaje_error)) { ?>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="alert alert-warning alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                            <i class="fa fa-exclamation-circle"></i> <?= $mensaje_error . '.' ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } else if (isset($mensaje)) { ?>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="alert alert-success alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                            <i class="fa fa-check-circle"></i> <?= $mensaje . '.' ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
                             <div class="form-group col-md-6 has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?>">
                                 <label for="input_usuario"><?= $this->lang->line('usuario'); ?></label>
-                                <input type="text" class="form-control" id="input_usuario" placeholder="<?= $this->lang->line('usuario'); ?>">
+                                <input type="text" class="form-control" id="input_usuario" placeholder="<?= $this->lang->line('usuario'); ?>" name="usuario" value="<?= set_value('usuario'); ?>" required>
                                 <?= form_error('usuario'); ?>
                             </div>
                             <div class="form-group col-md-6 has-feedback <?= form_error('email') != '' ? 'has-error ' : '' ?>">
                                 <label for="exampleInputEmail1"><?= $this->lang->line('email'); ?></label>
-                                <input type="email" class="form-control" id="input_email" placeholder="<?= $this->lang->line('email'); ?>">
+                                <input type="email" class="form-control" id="input_email" placeholder="<?= $this->lang->line('email'); ?>" name="email" value="<?= set_value('email'); ?>" required>
                                 <?= form_error('email'); ?>
                             </div>
-                            <div class="form-group col-md-6" id="radio_tipo">
-                                <label for="radio_tipo">Tipo empleado</label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('tipo_empleado') != '' ? 'has-error ' : '' ?>" id="radio_tipo">
+                                <label for="radio_tipo"><?= $this->lang->line('tipo_empleado'); ?></label>
                                 <div id="radio_tipo">
-                                    <text><input type="radio" name="tipo_empleado" class="flat"> <?= $this->lang->line('admin'); ?></text>&nbsp;&nbsp;
-                                    <text><input type="radio" name="tipo_empleado" class="flat"> <?= $this->lang->line('tecnico_admin'); ?></text>&nbsp;&nbsp;
-                                    <text><input type="radio" name="tipo_empleado" class="flat" checked> <?= $this->lang->line('tecnico'); ?></text>
+                                    <text><input type="radio" name="tipo_empleado" class="flat" value="<?= USUARIO_ADMIN; ?>" <?= set_value('tipo_empleado') == USUARIO_ADMIN ? 'checked' : ''; ?> required> <?= $this->lang->line('admin'); ?></text>&nbsp;&nbsp;
+                                    <text><input type="radio" name="tipo_empleado" class="flat" value="<?= USUARIO_TECNICO_ADMIN; ?>" <?= set_value('tipo_empleado') == USUARIO_TECNICO_ADMIN ? 'checked' : ''; ?> required> <?= $this->lang->line('tecnico_admin'); ?></text>&nbsp;&nbsp;
+                                    <text><input type="radio" name="tipo_empleado" class="flat" value="<?= USUARIO_TECNICO; ?>" <?= set_value('tipo_empleado') == USUARIO_TECNICO ? 'checked' : ''; ?> required> <?= $this->lang->line('tecnico'); ?></text>
                                 </div>
+                                <?= form_error('tipo_empleado'); ?>
                             </div>
                         </div>
                         <!-- /.box-body -->

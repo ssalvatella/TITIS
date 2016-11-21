@@ -31,6 +31,11 @@ class Api extends REST_Controller {
         // $this->methods['login_get']['limit'] = 5;
     }
 
+    public function a_get() {
+        // PRUEBA
+        $this->response(['asd' => 'qwerty'], REST_Controller::HTTP_OK);
+    }
+
     public function login_post() {
         $usuario = $this->post('usuario');
         $contrasena = $this->post('contrasena');
