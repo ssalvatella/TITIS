@@ -20,8 +20,8 @@ $lang['perfil'] = 'Profile';
 $lang['cerrar_sesion'] = 'Sign out';
 $lang['derechos_reservados'] = 'All rights reserved';
 
-$lang['administradores'] = 'Administrators';
-$lang['tecnicos_admin'] = 'Technicians Administrators';
+$lang['administradores'] = 'Admins';
+$lang['tecnicos_admin'] = 'Technicians Admins';
 $lang['tecnicos'] = 'Technicians';
 $lang['clientes'] = 'Clients';
 

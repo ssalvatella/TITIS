@@ -109,7 +109,7 @@
                                                 value: <?= $total_usuarios['tecnico_admin'] ?>,
                                                 color: "#00a65a",
                                                 highlight: "#00a65a",
-                                                label: "<?= $this->lang->line('tecnicos admin'); ?>"
+                                                label: "<?= $this->lang->line('tecnicos_admin'); ?>"
                                             },
                                             {
                                                 value: <?= $total_usuarios['tecnico'] ?>,

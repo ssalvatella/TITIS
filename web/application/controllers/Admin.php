@@ -54,7 +54,7 @@ class Admin extends MY_Controller {
             $this->plantilla->poner_css(site_url('assets/plugins/iCheck/all.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/iCheck/icheck.min.js'));
             if ($this->input->server('REQUEST_METHOD') == 'POST') {
-                $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+                $this->form_validation->set_error_delimiters('<div class="help-block">', '</div>');
                 $this->form_validation->set_rules('usuario', $this->lang->line('usuario'), 'trim|required|xss_clean|is_unique[Usuario.usuario]');
                 $this->form_validation->set_rules('email', $this->lang->line('email'), 'trim|required|valid_email|xss_clean|is_unique[Usuario.email]');
                 $this->form_validation->set_rules('tipo_empleado', $this->lang->line('tipo_empleado'), 'required');
@@ -137,6 +137,9 @@ class Admin extends MY_Controller {
             $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
             $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO_ADMIN);
             $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.es-ES.js'));
+            }
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
@@ -149,7 +152,7 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $id_ticket = $this->input->post('id_ticket');
             $id_tecnico_admin = $this->input->post('id_tecnico_admin');
-            $this -> ticket_modelo->asignar_ticket($id_ticket, $id_tecnico_admin);
+            $this->ticket_modelo->asignar_ticket($id_ticket, $id_tecnico_admin);
         }
     }
 
