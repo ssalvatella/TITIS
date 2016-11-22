@@ -97,9 +97,14 @@ class Ticket_modelo extends CI_Model {
     public function asignar_ticket($id_ticket, $id_tecnico_admin) {
 
         $datos = array('tecnico_admin' => $id_tecnico_admin);
-
         $this->db->where('id_ticket', $id_ticket);
         return $this->db->update('Ticket', $datos);
+    }
+
+    public function eliminar_ticket($id_ticket) {
+
+        $this->db->where('id_ticket', $id_ticket);
+        return $this->db->delete('Ticket');
     }
 
 }

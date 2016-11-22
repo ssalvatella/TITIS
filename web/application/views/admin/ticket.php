@@ -12,7 +12,7 @@
     <!-- Contenido -->
     <section class="content">
 
-        <!-- Modal -->
+        <!-- Modal ASIGNAR TÉCNICO ADMIN -->
         <div class="modal fade" id="modal_asignar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -41,13 +41,40 @@
                 </div>
             </div>
         </div>
+        <!-- END Modal ASIGNAR TÉCNICO ADMIN ----------->
+
+        <!-- Modal ELIMINAR TICKET -->
+        <div class="modal fade" id="modal_eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-danger" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('eliminar') . ' ticket ' ; ?></h4>
+                    </div>
+                    <form id = "asigna_tecnico_admin_form" method="post" action="<?= site_url('admin/eliminar_ticket/' . $ticket['id_ticket'])?>">
+                        <div class="modal-body">
+                            <p><?= $this->lang->line('mensaje_eliminar'); ?></p>
+                            <p><?= $this->lang->line('mensaje_eliminar2'); ?></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cerrar'); ?></button>
+                            <input  type="submit" id="eliminar" value = "<?= $this->lang->line('eliminar'); ?>" class="btn btn-danger">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Modal ELIMINAR TICKET ----------->
 
         <div class="box box-primary">
             <!-- CABECERA TÍTULO ---------------------------->
             <div class="box-header with-border">
                 <h3 class="box-title"><?= $ticket['titulo'] . ' <small>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) ?> </small></h3>
                 <div class="box-tools pull-right">
-                    <!--<span class="label label-primary">Label</span>-->
+                    <?php
+                        echo '<button data-toggle="modal" data-target="#modal_eliminar" class=" btn bg-red btn-flat btn-sm"> <i class="fa fa-trash"></i> &nbsp;' . $this->lang->line('eliminar') . ' </button>';
+                    ?>
+
                 </div><!-- /.box-tools -->
             </div><!-- /.box-header -->
             <!-- ETIQUETAS CABECERA ------------------------->
@@ -83,7 +110,7 @@
                         </div><!-- /.info-box -->
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="info-box bg-aqua">
+                        <div class="info-box bg-purple">
                             <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text"><?= $this->lang->line('fecha'); ?></span>
@@ -111,7 +138,7 @@
                                         echo 'fa fa-exclamation-triangle';
                                         break;
                                     case TICKET_EN_PROCESO:
-                                        echo 'fa fa-exclamation-exchange';
+                                        echo 'fa fa-exchange';
                                         break;
                                     case TICKET_FINALIZADO:
                                         echo 'glyphicon glyphicon-ok';

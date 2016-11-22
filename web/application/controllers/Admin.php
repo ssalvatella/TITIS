@@ -129,22 +129,27 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function ver_ticket($id_ticket) {
+    public function ver_ticket($id_ticket = null) {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
-            $datos['titulo'] = $this->lang->line('tickets');
-            $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket)[0];
-            $datos['tareas'] = $this->tarea->obtener_tareas($id_ticket);
-            $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
-            $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO_ADMIN);
-            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
-            if ($this->session->userdata('idioma') == 'spanish') {
-                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.es-ES.js'));
+
+            if ($id_ticket == null) {
+                redirect('admin');
             }
-            $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
-            $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
-            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
-            $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
-            $this->plantilla->mostrar('admin', 'ticket', $datos);
+                $datos['titulo'] = $this->lang->line('tickets');
+                $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket)[0];
+                $datos['tareas'] = $this->tarea->obtener_tareas($id_ticket);
+                $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
+                $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO_ADMIN);
+                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
+                if ($this->session->userdata('idioma') == 'spanish') {
+                    $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.es-ES.js'));
+                }
+                $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+                $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
+                $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
+                $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
+                $this->plantilla->mostrar('admin', 'ticket', $datos);
+
         }
     }
 
@@ -153,6 +158,14 @@ class Admin extends MY_Controller {
             $id_ticket = $this->input->post('id_ticket');
             $id_tecnico_admin = $this->input->post('id_tecnico_admin');
             $this->ticket_modelo->asignar_ticket($id_ticket, $id_tecnico_admin);
+        }
+    }
+
+    public function eliminar_ticket($id_ticket = -1) {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $this->ticket_modelo->eliminar_ticket($id_ticket);
+            $this->session->set_flashdata('mensaje', 'Ticket borrado correctamente.');
+            redirect('admin/tickets');
         }
     }
 

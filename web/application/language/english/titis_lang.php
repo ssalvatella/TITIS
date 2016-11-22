@@ -85,6 +85,9 @@ $lang['enviar'] = 'Send';
 $lang['añadir_comentario'] = 'Write a comment...';
 $lang['asignar'] = 'Assign';
 $lang['cerrar'] = 'Close';
+$lang['eliminar'] = 'Delete';
+$lang['mensaje_eliminar'] = 'Are you sure you want to delete the ticket?';
+$lang['mensaje_eliminar2'] = 'If you delete the ticket you will lose all the data related to it.';
 
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Sent Tickets';

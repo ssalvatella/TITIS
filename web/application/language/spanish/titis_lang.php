@@ -78,7 +78,9 @@ $lang['añadir_comentario'] = 'Escribir un comentario...';
 $lang['asignar'] = 'Asignar';
 
 $lang['cerrar'] = 'Cerrar';
-
+$lang['eliminar'] = 'Eliminar';
+$lang['mensaje_eliminar'] = '¿Está seguro de que desea eliminar el ticket?';
+$lang['mensaje_eliminar2'] = 'Si elimina el ticket se perderan todos los datos relacionados con este.';
 
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Tickets Enviados';

@@ -184,7 +184,7 @@
                                                 echo '<span class="label label-warning">'.  $this->lang->line('pendiente') .'</span>';
                                                 break;
                                             case TICKET_EN_PROCESO:
-                                                echo '<span class="label label-info">'.  $this->lang->line('en proceso') .'</span>';
+                                                echo '<span class="label label-info">'.  $this->lang->line('en_proceso') .'</span>';
                                                 break;
                                             case TICKET_FINALIZADO:
                                                 echo '<span class="label label-success">'.  $this->lang->line('finalizado') .'</span>';

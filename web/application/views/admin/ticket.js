@@ -49,4 +49,21 @@ $(function () {
         $('#modal_asignar').modal('hide');
         window.location.reload();
     });
+
+    // $('#eliminar').click($(function () {
+    //     var getUrl = window.location;
+    //     var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    //     var id_ticket = getUrl.pathname.split('/')[3];
+    //     $.ajax({
+    //         url: baseURL + '/eliminar_ticket',
+    //         type: 'POST',
+    //         data: {id_ticket: id_ticket},
+    //     });
+    //     $('modal_eliminar').modal('hide');
+    //
+    // }));
+
+
+
 });
+
