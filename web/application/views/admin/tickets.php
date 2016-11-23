@@ -22,6 +22,16 @@
 
                     <!-- /.box-header -->
                     <div class="box-body">
+                        <?php if (isset($mensaje)) { ?>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-success alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <i class="fa fa-check-circle"></i> <?= $mensaje . '.' ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
                         <a href = "javascript:history.go(0)" class="btn btn-app"><i class="fa fa-repeat"></i><?= $this->lang->line('actualizar'); ?></a>
                         <table data-link="" id="tickets" class="table table-bordered table-hover display nowrap"  >
                             <thead>
