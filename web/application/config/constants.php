@@ -106,3 +106,6 @@ define('TICKET_FINALIZADO', 3);
 
 define('TAREA_EN_PROCESO', 1);
 define('TAREA_FINALIZADA', 2);
+
+define('NOTIFICACION_NO_VISTA', 0);
+define('NOTIFICACION_VISTA', 1);

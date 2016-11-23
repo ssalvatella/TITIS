@@ -9,7 +9,6 @@
         <?= meta('description', 'TITIS - Gestión de incidencias y tickets') ?>
         <?php echo link_tag(base_url('favicon.ico'), 'shortcut icon', 'image/ico'); ?>
 
-
         <!-- CSS REQUERIDOS -->
         <?= $css ?>
         <?= link_tag(base_url('assets/plugins/flag-icon-css/css/flag-icon.min.css')); ?>
@@ -45,20 +44,24 @@
                             <li class="dropdown notifications-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-bell-o"></i>
-                                    <span class="label label-warning">10</span>
+                                    <?php if (count($notificaciones) >= 1) { ?>
+                                        <span class="label label-warning"><?= count($notificaciones); ?></span>
+                                    <?php } ?>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">Tiene 10 notificaciones</li>
+                                    <li class="header"><?= sprintf($this->lang->line('tiene_notificaciones'), count($notificaciones)); ?></li>
                                     <li>
                                         <ul class="menu">
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-users text-aqua"></i> Notificación ASD
-                                                </a>
-                                            </li>
+                                            <?php foreach ($notificaciones as $n) { ?>
+                                                <li>
+                                                    <a href="<?= $n['url']; ?>">
+                                                        <i class="fa fa-users text-aqua"></i> <?= sprintf($this->lang->line($n['texto']), '<b>' . $n['parametros'] . '</b>'); ?>
+                                                    </a>
+                                                </li>
+                                            <?php } ?>
                                         </ul>
                                     </li>
-                                    <li class="footer"><a href="#">Ver todas</a></li>
+                                    <li class="footer"><a href="#"><?= $this->lang->line('ver_todas'); ?></a></li>
                                 </ul>
                             </li>
                             <!-- Menú cuenta usuario -->

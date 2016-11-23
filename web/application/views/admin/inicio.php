@@ -25,7 +25,7 @@
                         <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/tickets'); ?>"><i
                                 class="fa fa-ticket"></i></a>
                     </div>
-                    <a href="<?= site_url('admin/clientes'); ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?> <i
+                    <a href="<?= site_url('admin/tickets'); ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?> <i
                             class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                         <p><?= $this->lang->line('clientes_nuevos'); ?></p>
                     </div>
                     <div class="icon">
-                        <a data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('añadir') . ' ' . $this->lang->line('cliente');?>" style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/registrar_cliente'); ?>"><i
+                        <a data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('añadir') . ' ' . $this->lang->line('cliente'); ?>" style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/registrar_cliente'); ?>"><i
                                 class="ion ion-person-add"></i></a>
                     </div>
                     <a href="<?= site_url('admin/clientes') ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i
@@ -55,10 +55,10 @@
                         <p><?= $this->lang->line('facturas_pendientes'); ?></p>
                     </div>
                     <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes'); ?>"><i
+                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/facturas'); ?>"><i
                                 class="fa fa-money"></i></a>
                     </div>
-                    <a href="#" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?= site_url('admin/facturas'); ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- Cuadro de tareas -->
@@ -66,14 +66,14 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3>53</h3>
+                        <h3><?= $tareas_finalizadas; ?></h3>
                         <p><?= $this->lang->line('tareas_finalizadas'); ?></p>
                     </div>
                     <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes'); ?>"><i
+                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/tickets'); ?>"><i
                                 class="fa fa-tasks"></i></a>
                     </div>
-                    <a href="#" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i class="fa fa-arrow-circle-right"></i>
+                    <a href="<?= site_url('admin/tickets'); ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
@@ -174,20 +174,20 @@
                                     <?php
                                     foreach ($tickets as $ticket) {
                                         echo '<tr style="cursor: pointer;">
-                                                <td><a  href="'.site_url('admin/ver_ticket/'. $ticket['id_ticket']) .'"></a>  <a href="'. site_url('admin/ver_cliente/'). $ticket['cliente']. '">'. $ticket['nombre_cliente']. '</a>'.'</td>
-                                                <td> '. $ticket['titulo'] . '</td>
-                                                <td>'. date('d/m/Y H:i', strtotime($ticket['inicio'])) . '</td>
+                                                <td><a  href="' . site_url('admin/ver_ticket/' . $ticket['id_ticket']) . '"></a>  <a href="' . site_url('admin/ver_cliente/') . $ticket['cliente'] . '">' . $ticket['nombre_cliente'] . '</a>' . '</td>
+                                                <td> ' . $ticket['titulo'] . '</td>
+                                                <td>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) . '</td>
                                                  <td> ';
-                                        switch($ticket['estado']) {
+                                        switch ($ticket['estado']) {
 
                                             case TICKET_PENDIENTE:
-                                                echo '<span class="label label-warning">'.  $this->lang->line('pendiente') .'</span>';
+                                                echo '<span class="label label-warning">' . $this->lang->line('pendiente') . '</span>';
                                                 break;
                                             case TICKET_EN_PROCESO:
-                                                echo '<span class="label label-info">'.  $this->lang->line('en proceso') .'</span>';
+                                                echo '<span class="label label-info">' . $this->lang->line('en proceso') . '</span>';
                                                 break;
                                             case TICKET_FINALIZADO:
-                                                echo '<span class="label label-success">'.  $this->lang->line('finalizado') .'</span>';
+                                                echo '<span class="label label-success">' . $this->lang->line('finalizado') . '</span>';
                                                 break;
                                         }
 
