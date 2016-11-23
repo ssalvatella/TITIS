@@ -19,14 +19,16 @@
                 <div class="small-box bg-aqua">
                     <div class="inner">
                         <h3><?= $tickets_pendientes ?></h3>
-                        <p><?= $this->lang->line('tickets_pendientes'); ?></p>
+                        <text style="font-size: 16px;"><?= $this->lang->line('tickets_pendientes'); ?></text>
                     </div>
                     <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/tickets'); ?>"><i
-                                class="fa fa-ticket"></i></a>
+                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/tickets'); ?>">
+                            <i class="fa fa-ticket"></i>
+                        </a>
                     </div>
-                    <a href="<?= site_url('admin/tickets'); ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?> <i
-                            class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?= site_url('admin/tickets'); ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </a>
                 </div>
             </div>
             <!-- Cuadro de clientes -->
@@ -35,14 +37,16 @@
                 <div class="small-box bg-yellow">
                     <div class="inner">
                         <h3>44</h3>
-                        <p><?= $this->lang->line('clientes_nuevos'); ?></p>
+                        <text style="font-size: 16px;" data-toggle="tooltip" data-placement="right" title="<?= sprintf($this->lang->line('ultimos_dias'), 7); ?>"><?= $this->lang->line('clientes_nuevos'); ?></text>
                     </div>
                     <div class="icon">
-                        <a data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('añadir') . ' ' . $this->lang->line('cliente'); ?>" style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/registrar_cliente'); ?>"><i
-                                class="ion ion-person-add"></i></a>
+                        <a data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('añadir') . ' ' . $this->lang->line('cliente'); ?>" style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/registrar_cliente'); ?>">
+                            <i class="ion ion-person-add"></i>
+                        </a>
                     </div>
-                    <a href="<?= site_url('admin/clientes') ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i
-                            class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?= site_url('admin/clientes') ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </a>
                 </div>
             </div>
 
@@ -52,11 +56,10 @@
                 <div class="small-box bg-red">
                     <div class="inner">
                         <h3>65</h3>
-                        <p><?= $this->lang->line('facturas_pendientes'); ?></p>
+                        <text style="font-size: 16px;"><?= $this->lang->line('facturas_pendientes'); ?></text>
                     </div>
                     <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/facturas'); ?>"><i
-                                class="fa fa-money"></i></a>
+                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/facturas'); ?>"><i class="fa fa-money"></i></a>
                     </div>
                     <a href="<?= site_url('admin/facturas'); ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
@@ -67,11 +70,10 @@
                 <div class="small-box bg-green">
                     <div class="inner">
                         <h3><?= $tareas_finalizadas; ?></h3>
-                        <p><?= $this->lang->line('tareas_finalizadas'); ?></p>
+                        <text style="font-size: 16px;" data-toggle="tooltip" data-placement="right" title="<?= sprintf($this->lang->line('ultimos_dias'), 7); ?>"><?= $this->lang->line('tareas_finalizadas'); ?></text>
                     </div>
                     <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/tickets'); ?>"><i
-                                class="fa fa-tasks"></i></a>
+                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/tickets'); ?>"><i class="fa fa-tasks"></i></a>
                     </div>
                     <a href="<?= site_url('admin/tickets'); ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i class="fa fa-arrow-circle-right"></i>
                     </a>
@@ -179,12 +181,11 @@
                                                 <td>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) . '</td>
                                                  <td> ';
                                         switch ($ticket['estado']) {
-
                                             case TICKET_PENDIENTE:
                                                 echo '<span class="label label-warning">' . $this->lang->line('pendiente') . '</span>';
                                                 break;
                                             case TICKET_EN_PROCESO:
-                                                echo '<span class="label label-info">' . $this->lang->line('en proceso') . '</span>';
+                                                echo '<span class="label label-info">' . $this->lang->line('en_proceso') . '</span>';
                                                 break;
                                             case TICKET_FINALIZADO:
                                                 echo '<span class="label label-success">' . $this->lang->line('finalizado') . '</span>';

@@ -175,3 +175,4 @@ $lang['contrasena_es'] = ' Your password is';
 $lang['tiene_notificaciones'] = 'You have %d notifications';
 $lang['ver_todas'] = 'See all';
 $lang['ticket_asignado'] = 'Admin %s has assigned you a ticket';
+$lang['ultimos_dias'] = 'Last %d days';

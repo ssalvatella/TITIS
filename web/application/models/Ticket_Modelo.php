@@ -64,7 +64,6 @@ class Ticket_modelo extends CI_Model {
     }
 
     public function registrar_ticket($datos) {
-
         $id_cliente = $this->session->userdata('id_cliente');
         $id_usuario_cliente = $this->session->userdata('id_usuario');
 
@@ -74,9 +73,8 @@ class Ticket_modelo extends CI_Model {
             'estado' => TICKET_PENDIENTE
         );
 
-        // INSERTAMOS EL TICKET ------------------
+        // Se inserta el ticket
         if ($this->db->insert('Ticket', $ticket)) {
-
             $id_ticket = $this->db->insert_id();
 
             $mensaje = array('ticket' => $id_ticket,
@@ -85,9 +83,8 @@ class Ticket_modelo extends CI_Model {
                 'texto' => $datos['mensaje']
             );
 
-            // INSERTAMOS EL MENSAJE --------------------
+            // Se inserta el mensaje
             if ($this->db->insert('Mensaje', $mensaje)) {
-
                 $id_mensaje = $this->db->insert_id();
                 return true;
             }
@@ -95,11 +92,14 @@ class Ticket_modelo extends CI_Model {
     }
 
     public function asignar_ticket($id_ticket, $id_tecnico_admin) {
-
         $datos = array('tecnico_admin' => $id_tecnico_admin);
-
         $this->db->where('id_ticket', $id_ticket);
         return $this->db->update('Ticket', $datos);
+    }
+
+    public function eliminar_ticket($id_ticket) {
+        $this->db->where('id_ticket', $id_ticket);
+        return $this->db->delete('Ticket');
     }
 
 }
