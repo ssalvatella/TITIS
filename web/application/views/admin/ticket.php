@@ -70,9 +70,12 @@
             <!-- CABECERA TÍTULO ---------------------------->
             <div class="box-header with-border">
                 <h3 class="box-title"><?= $ticket['titulo'] . ' <small>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) ?> </small></h3>
-                <div class="box-tools pull-right">
+                <div class="box-tools pull-right btn-group">
                     <?php
+                    if ($this->session->userdata('tipo_usuario') == USUARIO_ADMIN) {
+                        echo '<button style="margin-right: 20px" data-toggle="modal" data-target="#modal_asignar" class=" btn bg-yellow btn-flat btn-sm"> <i class="fa fa-wrench"></i> &nbsp;' . $this->lang->line('cambiar'). ' ' .$this->lang->line('tecnico_admin') . ' </button>';
                         echo '<button data-toggle="modal" data-target="#modal_eliminar" class=" btn bg-red btn-flat btn-sm"> <i class="fa fa-trash"></i> &nbsp;' . $this->lang->line('eliminar') . ' </button>';
+                    }
                     ?>
 
                 </div><!-- /.box-tools -->
