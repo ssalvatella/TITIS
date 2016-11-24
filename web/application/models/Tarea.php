@@ -35,4 +35,12 @@ class Tarea extends CI_Model {
         return $this->db->insert('Tarea', $datos);
     }
 
+    public function tareas_finalizadas($dias = 7) {
+                $this->db->from('Tarea');
+                $this->db->where('fin >= ', strtotime('-' . $dias . ' days'));
+                $this->db->where('estado', TAREA_FINALIZADA);
+
+                return $this->db->get()->num_rows();
+     }
+
 }
