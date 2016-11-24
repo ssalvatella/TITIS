@@ -140,16 +140,38 @@ class Admin extends MY_Controller {
                 $datos['tareas'] = $this->tarea->obtener_tareas($id_ticket);
                 $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
                 $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO_ADMIN);
+                $datos['tecnicos'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO);
+
                 $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
                 if ($this->session->userdata('idioma') == 'spanish') {
                     $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.es-ES.js'));
                 }
                 $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
                 $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
+
+                $this->plantilla->poner_js(site_url('assets/plugins/daterangepicker/moment.min.js'));
+
+                $this->plantilla->poner_js(site_url('assets/plugins/timepicker/bootstrap-timepicker.js'));
+                $this->plantilla->poner_css(site_url('assets/plugins/timepicker/bootstrap-timepicker.css'));
+
+                $this->plantilla->poner_css(site_url('assets/plugins/daterangepicker/daterangepicker.css'));
+                $this->plantilla->poner_js(site_url('assets/plugins/daterangepicker/daterangepicker.js'));
+
                 $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
                 $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
                 $this->plantilla->mostrar('admin', 'ticket', $datos);
+        }
+    }
 
+    public function crear_tarea() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $id_ticket = $this->input->post('id_ticket');
+            $id_tecnico = $this->input->post('id_tecnico');
+            $descripcion = $this->input->post('descripcion_tarea');
+            $inicio = $this->input->post('inicio');
+            $fin_previsto = $this->input->post('fin_previsto');
+            $datos = array('ticket' => $id_ticket, 'nombre' => $descripcion, 'tecnico' => $id_tecnico, 'estado' => TAREA_EN_PROCESO, 'inicio' => $inicio, 'fin_previsto' => $fin_previsto);
+            $this->tarea->crear_tarea($datos);
         }
     }
 

@@ -24,7 +24,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label><?= $this->lang->line('tecnico_admin'); ?></label>
-                                <select id = "seleccion_tecnicos_admins" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                <select required id = "seleccion_tecnicos_admins" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                     <?php
                                     foreach ($tecnicos_admins as $tecnico_admin) {
                                         echo '<option value="' . $tecnico_admin['id_usuario'] . '"> ' . $tecnico_admin['usuario'] . '</option>';
@@ -65,6 +65,50 @@
             </div>
         </div>
         <!-- Modal ELIMINAR TICKET ----------->
+
+        <!-- Modal AÑADIR TAREA -->
+        <div class="modal fade" id="modal_tarea" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('añadir_tarea'); ?></h4>
+                    </div>
+                    <form id = "crear_tarea_form" method="post">
+                        <div class="modal-body">
+                            <div class="form-group" >
+                                <label><?= $this->lang->line('descripcion_tarea'); ?></label>
+                                <input required id="descripcion_tarea" maxlength="200" name="descripcion_tarea" type="text" class="form-control" placeholder="<?= $this->lang->line('descripcion_tarea_place_holder'); ?>">
+                            </div>
+                            <div class="form-group">
+                                <label><?= $this->lang->line('tecnico'); ?></label>
+                                <select required id = "seleccion_tecnicos" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    <?php
+                                    foreach ($tecnicos as $tecnico) {
+                                        echo '<option value="' . $tecnico['id_usuario'] . '"> ' . $tecnico['usuario'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><?= $this->lang->line('tiempo_estimado'); ?></label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input required type="text" class="form-control pull-right" id="tiempo_tarea">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cerrar'); ?></button>
+                            <input  type="submit" id="añadir_tarea" value = "<?= $this->lang->line('añadir_tarea'); ?>" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END Modal AÑADIR TAREA ----------->
 
         <div class="box box-primary">
             <!-- CABECERA TÍTULO ---------------------------->
@@ -175,7 +219,7 @@
                 <div class="panel box box-primary">
                     <div class="box-header with-border">
                         <h4 class="box-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="collapsed">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="collapsed"><i class="fa fa-pencil"></i>&nbsp;
                                 <?= $this->lang->line('descripcion'); ?>
                             </a>
                         </h4>
@@ -190,7 +234,7 @@
                     <div class="box-header with-border">
                         <h4 class="box-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="" aria-expanded="false">
-                                <i class="ion ion-clipboard"></i>  <?= $this->lang->line('tareas'); ?>
+                                <i class="ion ion-clipboard"></i> &nbsp; <?= $this->lang->line('tareas'); ?>
                             </a>
                         </h4>
                     </div>
@@ -200,7 +244,7 @@
                             <ul class="todo-list">
                                 <?php
                                 foreach ($tareas as $tarea) {
-                                    echo '<li ';
+                                    echo '<li value="' . $tarea['id_tarea'] . '"';
                                     if ($tarea['estado'] == TAREA_FINALIZADA)
                                         echo 'class="done"';echo '>
                                             <span class="handle">
@@ -212,6 +256,7 @@
                                         echo 'checked="true"';
                                     echo ' value="">
                                             <span class="text">' . $tarea['nombre'] . '</span>
+                                            <span class="label label-primary"><i class="fa fa-wrench"></i> &nbsp;' . $tarea['nombre_tecnico'] . '</span>
                                             <div class="tools">
                                                 <i class="fa fa-edit"></i>
                                                 <i class="fa fa-trash-o"></i>
@@ -224,7 +269,7 @@
 
                         <!-- /.box-body -->
                         <div class="box-footer clearfix no-border">
-                            <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> <?= $this->lang->line('añadir_tarea'); ?></button>
+                            <button data-toggle="modal" data-target="#modal_tarea" type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> <?= $this->lang->line('añadir_tarea'); ?></button>
                         </div>
                         <!-- /.box -->
                     </div>

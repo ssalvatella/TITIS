@@ -24,9 +24,15 @@ class Tarea extends CI_Model {
     }
 
     public function obtener_tareas($id_ticket) {
+        $this->db->select('Tarea.*, usuario.usuario as nombre_tecnico');
         $this->db->from('Tarea');
         $this->db->where('ticket', $id_ticket);
+        $this->db->join('Usuario as usuario', 'usuario.id_usuario = Tarea.tecnico', 'left');
         return $this->db->get()->result_array();
+    }
+
+    public function crear_tarea($datos) {
+        return $this->db->insert('Tarea', $datos);
     }
 
 }

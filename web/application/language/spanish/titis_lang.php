@@ -82,6 +82,11 @@ $lang['eliminar'] = 'Eliminar';
 $lang['mensaje_eliminar'] = '¿Está seguro de que desea eliminar el ticket?';
 $lang['mensaje_eliminar2'] = 'Si elimina el ticket se perderan todos los datos relacionados con este.';
 
+$lang['descripcion_tarea'] = 'Descripción de la tarea';
+$lang['descripcion_tarea_place_holder'] = 'Escribe brevemente en qué consiste la tarea';
+
+$lang['tiempo_estimado'] = 'Tiempo estimado';
+
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Tickets Enviados';
 $lang['facturas_recibidas'] = 'Facturas Recibidas';

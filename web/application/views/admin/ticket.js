@@ -18,6 +18,22 @@ $(".todo-list").todolist({
     }
 });
 
+var fecha_inicio;
+var fecha_fin;
+
+$("#tiempo_tarea").daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A', autoUpdateInput: false},
+    function(start, end, label) {
+        fecha_inicio = start;
+        fecha_fin = end;
+    });
+$("#tiempo_tarea").on('apply.daterangepicker', function(ev, picker) {
+    $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+});
+
+$("#tiempo_tarea").on('cancel.daterangepicker', function(ev, picker) {
+    $(this).val('');
+});
+
 $(function () {
     $("#mensaje").wysihtml5({
         toolbar: {"size": "xs"},
@@ -50,20 +66,21 @@ $(function () {
         window.location.reload();
     });
 
-    // $('#eliminar').click($(function () {
-    //     var getUrl = window.location;
-    //     var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    //     var id_ticket = getUrl.pathname.split('/')[3];
-    //     $.ajax({
-    //         url: baseURL + '/eliminar_ticket',
-    //         type: 'POST',
-    //         data: {id_ticket: id_ticket},
-    //     });
-    //     $('modal_eliminar').modal('hide');
-    //
-    // }));
-
-
+    $('#crear_tarea_form').on('submit', function (e) {
+        e.preventDefault();
+        var getUrl = window.location;
+        var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+        var id_ticket = getUrl.pathname.split('/')[3];
+        var id_tecnico = $("#seleccion_tecnicos").val();
+        var descripcion_tarea = $('#descripcion_tarea').val();
+        $.ajax({
+            url: baseURL + '/crear_tarea',
+            type: 'POST',
+            data: {id_ticket: id_ticket, id_tecnico: id_tecnico, descripcion_tarea: descripcion_tarea, inicio: fecha_inicio.format('DD/MM/YYYY HH:MM'), fin_previsto: fecha_fin.format('DD/MM/YYYY HH:MM')},
+        });
+        $('#modal_tarea').modal('hide');
+        window.location.reload();
+    });
 
 });
 
