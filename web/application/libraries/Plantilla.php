@@ -38,6 +38,7 @@ class Plantilla {
             if (file_exists('application/views/' . $carpeta . '/' . $pagina . '.js')) {
                 $this->datos['js_pagina'] = read_file('application/views/' . $carpeta . '/' . $pagina . '.js');
             }
+            $this->datos['notificaciones'] = $this->CI->notificacion->obtener_notificaciones($this->CI->session->userdata('id_usuario'));
             $this->CI->load->view('plantilla.php', $this->datos);
         }
     }
