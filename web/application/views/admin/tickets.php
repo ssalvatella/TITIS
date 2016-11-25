@@ -71,10 +71,16 @@
                                 }
 
                                 echo'</td>
-                                              <td> <div  data-toggle="tooltip" data-placement="top" title="'. $ticket['progreso']. ' % ' .'" class="progress progress-sm active "></div><div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="'. $ticket['progreso']. '" aria-valuemin="0" aria-valuemax="100" </div></td>';
+                                              <td> 
+                                                  <div class="progress progress-xs" data-html="true" data-toggle="tooltip" data-placement="top" title="'. sprintf("%.1f %%",  $ticket['progreso']) .'<br />'. $this->lang->line('tareas'). ' ' .$ticket['tareas_completadas'] .'/'.$ticket['total_tareas'] .'">
+                                                    <div class="progress-bar progress-bar-green" style="width: '.$ticket['progreso'].'%" role="progressbar" aria-valuenow="'. $ticket['progreso'].'" aria-valuemin="0" aria-valuemax="100">
+                                                    </div>
+                                                  </div>
+                                              </td>';
 
                             }
                             ?>
+
                             </tbody>
                             <tfoot>
                             <tr>
@@ -88,6 +94,7 @@
                             </tr>
                             </tfoot>
                         </table>
+
                     </div>
                     <!-- /.box-body -->
                 </div>

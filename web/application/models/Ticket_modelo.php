@@ -22,6 +22,8 @@ class Ticket_modelo extends CI_Model {
             } else {
                 $ticket['progreso'] = ($tareas_completadas / $total_tareas) * 100;
             }
+            $ticket['total_tareas'] = $total_tareas;
+            $ticket['tareas_completadas'] = $tareas_completadas;
             $tickets[$clave] = $ticket;
         }
         return $tickets;
