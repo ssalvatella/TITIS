@@ -77,21 +77,31 @@ $(function () {
             url: baseURL + '/crear_tarea',
             type: 'POST',
             data: {id_ticket: id_ticket, id_tecnico: id_tecnico, descripcion_tarea: descripcion_tarea, inicio: fecha_inicio.format('DD/MM/YYYY HH:MM'), fin_previsto: fecha_fin.format('DD/MM/YYYY HH:MM')},
+            success: function(data){
+                setTimeout(function(){ window.location.reload(true); }, 1500);
+                noty({text: '¡Tarea creada con éxito!', type: 'success', layout: 'topRight', timeout: 1000});
+            }
         });
         $('#modal_tarea').modal('hide');
-        window.location.reload();
+
+
     });
 
     $("#borrar_tarea").on("click", function(){
         var id_tarea= $(this).closest("li")[0].value;
         var getUrl = window.location;
         var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+        var li = $(this).closest('li')
+        li.fadeOut('slow', function() { li.remove(); });
         $.ajax({
             url: baseURL + '/borrar_tarea',
             type: 'POST',
             data: {id_tarea: id_tarea},
+            success: function(data){
+                setTimeout(function(){ window.location.reload(true); }, 1500);
+                noty({text: '¡Tarea borrada con éxito!', type: 'success', layout: 'topRight', timeout: 1000});
+            }
         });
-        window.location.reload();
     });
 
 });
