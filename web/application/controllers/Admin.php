@@ -192,4 +192,12 @@ class Admin extends MY_Controller {
         }
     }
 
+    public function borrar_tarea() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $id_tarea = $this->input->post('id_tarea');
+            $this->tarea->borrar_tarea($id_tarea);
+        }
+    }
+
+
 }

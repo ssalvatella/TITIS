@@ -82,5 +82,17 @@ $(function () {
         window.location.reload();
     });
 
+    $("#borrar_tarea").on("click", function(){
+        var id_tarea= $(this).closest("li")[0].value;
+        var getUrl = window.location;
+        var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+        $.ajax({
+            url: baseURL + '/borrar_tarea',
+            type: 'POST',
+            data: {id_tarea: id_tarea},
+        });
+        window.location.reload();
+    });
+
 });
 

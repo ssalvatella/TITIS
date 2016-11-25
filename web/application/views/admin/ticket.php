@@ -259,7 +259,7 @@
                                             <span class="label label-primary"><i class="fa fa-wrench"></i> &nbsp;' . $tarea['nombre_tecnico'] . '</span>
                                             <div class="tools">
                                                 <i class="fa fa-edit"></i>
-                                                <i class="fa fa-trash-o"></i>
+                                                <i data-html="true" data-toggle="tooltip" data-placement="top" title="'. $this->lang->line('eliminar').'" id = "borrar_tarea" class="fa fa-trash-o"></i>
                                             </div></li>';
                                 }
                                 ?>

@@ -35,6 +35,11 @@ class Tarea extends CI_Model {
         return $this->db->insert('Tarea', $datos);
     }
 
+    public function borrar_tarea($id_tarea) {
+        $this->db->where('id_tarea', $id_tarea);
+        return $this->db->delete('Tarea');
+    }
+
     public function tareas_finalizadas($dias = 7) {
                 $this->db->from('Tarea');
                 $this->db->where('fin >= ', strtotime('-' . $dias . ' days'));
