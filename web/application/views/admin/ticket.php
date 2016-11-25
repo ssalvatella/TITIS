@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cerrar'); ?></button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
                             <input  type="submit" id="asignar" value = "<?= $this->lang->line('asignar'); ?>" class="btn btn-primary">
                         </div>
                     </form>
@@ -49,15 +49,15 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('eliminar') . ' ticket ' ; ?></h4>
+                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('eliminar') . ' ticket '; ?></h4>
                     </div>
-                    <form id = "asigna_tecnico_admin_form" method="post" action="<?= site_url('admin/eliminar_ticket/' . $ticket['id_ticket'])?>">
+                    <form id = "asigna_tecnico_admin_form" method="post" action="<?= site_url('admin/eliminar_ticket/' . $ticket['id_ticket']) ?>">
                         <div class="modal-body">
                             <p><?= $this->lang->line('mensaje_eliminar'); ?></p>
                             <p><?= $this->lang->line('mensaje_eliminar2'); ?></p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cerrar'); ?></button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
                             <input  type="submit" id="eliminar" value = "<?= $this->lang->line('eliminar'); ?>" class="btn btn-danger">
                         </div>
                     </form>
@@ -113,16 +113,21 @@
         <div class="box box-primary">
             <!-- CABECERA TÍTULO ---------------------------->
             <div class="box-header with-border">
-                <h3 class="box-title"><?= $ticket['titulo'] . ' <small>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) ?> </small></h3>
-                <div class="box-tools pull-right btn-group">
-                    <?php
-                    if ($this->session->userdata('tipo_usuario') == USUARIO_ADMIN) {
-                        echo '<button style="margin-right: 20px" data-toggle="modal" data-target="#modal_asignar" class=" btn bg-yellow btn-flat btn-sm"> <i class="fa fa-wrench"></i> &nbsp;' . $this->lang->line('cambiar'). ' ' .$this->lang->line('tecnico_admin') . ' </button>';
-                        echo '<button data-toggle="modal" data-target="#modal_eliminar" class=" btn bg-red btn-flat btn-sm"> <i class="fa fa-trash"></i> &nbsp;' . $this->lang->line('eliminar') . ' </button>';
-                    }
-                    ?>
-
-                </div><!-- /.box-tools -->
+                <div class="col-md-6">
+                    <h3 class="box-title"><?= $ticket['titulo'] . ' <small>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) ?> </small></h3>
+                </div>
+                <div class="col-md-6">
+                    <div class="box-tools pull-right">
+                        <?php
+                        if ($this->session->userdata('tipo_usuario') == USUARIO_ADMIN) {
+                            echo '<button style="margin-right: 20px" data-toggle="modal" data-target="#modal_asignar" class=" btn bg-yellow btn-flat btn-sm"> <i class="fa fa-wrench"></i> &nbsp;' . $this->lang->line('cambiar') . ' ' . $this->lang->line('tecnico_admin') . ' </button>';
+                            echo '<button data-toggle="modal" data-target="#modal_eliminar" class=" btn bg-red btn-flat btn-sm"> <i class="fa fa-trash"></i> &nbsp;' . $this->lang->line('eliminar') . ' </button>';
+                            //echo'<button type="button" data-toggle="modal" data-target="#modal_asignar" class="btn btn-box-tool" data-toggle="tooltip" title="' . $this->lang->line('cambiar') . ' ' . $this->lang->line('tecnico_admin') . '"><i class="fa fa-wrench"></i></button>';
+                            //echo'<button type="button" data-toggle="modal" data-target="#modal_eliminar" class="btn btn-box-tool" data-toggle="tooltip" title="' . $this->lang->line('eliminar') . '"><i class="fa fa-trash"></i></button>';
+                        }
+                        ?>
+                    </div><!-- /.box-tools -->
+                </div>
             </div><!-- /.box-header -->
             <!-- ETIQUETAS CABECERA ------------------------->
             <div class="box-body">
@@ -259,7 +264,7 @@
                                             <span class="label label-primary"><i class="fa fa-wrench"></i> &nbsp;' . $tarea['nombre_tecnico'] . '</span>
                                             <div class="tools">
                                                 <i class="fa fa-edit"></i>
-                                                <i data-html="true" data-toggle="tooltip" data-placement="top" title="'. $this->lang->line('eliminar').'" id = "borrar_tarea" class="fa fa-trash-o"></i>
+                                                <i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('eliminar') . '" id = "borrar_tarea" class="fa fa-trash-o"></i>
                                             </div></li>';
                                 }
                                 ?>

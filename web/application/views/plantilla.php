@@ -14,6 +14,7 @@
         <?= link_tag(base_url('assets/plugins/flag-icon-css/css/flag-icon.min.css')); ?>
         <?= link_tag(base_url('assets/css/AdminLTE.min.css')); ?>
         <?= link_tag(base_url('assets/css/skins/_all-skins.min.css')); ?>
+        <?= link_tag(base_url('assets/css/TITIS.css')); ?>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

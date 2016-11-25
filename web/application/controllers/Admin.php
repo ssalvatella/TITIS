@@ -10,7 +10,7 @@ class Admin extends MY_Controller {
         $this->load->helper('security'); // form_validation -> xss_clean
         $this->load->helper('string'); // Generar contraseña aleatoria
         $this->load->library(array('form_validation', 'encryption', 'plantilla'));
-        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket_modelo', 'tarea', 'mensaje','notificacion'));
+        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion'));
         $this->encryption->initialize(
                 array(
                     'cipher' => 'aes-256',
@@ -42,8 +42,8 @@ class Admin extends MY_Controller {
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
-            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.responsive.min.js'));
-            $this->plantilla->poner_css(site_url('assets/plugins/datatables/responsive.dataTables.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css'));
             $this->plantilla->mostrar('admin', 'clientes', $datos);
         }
     }
@@ -118,8 +118,10 @@ class Admin extends MY_Controller {
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
-            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.responsive.min.js'));
-            $this->plantilla->poner_css(site_url('assets/plugins/datatables/responsive.dataTables.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css'));
+            $this->plantilla->poner_css(site_url('assets/plugins/pace/pace.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/pace/pace.min.js'));
             $this->plantilla->mostrar('admin', 'tickets', $datos);
         }
     }
@@ -136,33 +138,33 @@ class Admin extends MY_Controller {
             if ($id_ticket == null) {
                 redirect('admin');
             }
-                $datos['titulo'] = $this->lang->line('tickets');
-                $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket)[0];
-                $datos['tareas'] = $this->tarea->obtener_tareas($id_ticket);
-                $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
-                $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO_ADMIN);
-                $datos['tecnicos'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO);
+            $datos['titulo'] = $this->lang->line('tickets');
+            $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket)[0];
+            $datos['tareas'] = $this->tarea->obtener_tareas($id_ticket);
+            $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
+            $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO_ADMIN);
+            $datos['tecnicos'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO);
 
-                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
-                if ($this->session->userdata('idioma') == 'spanish') {
-                    $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.es-ES.js'));
-                }
-                $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
-                $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.es-ES.js'));
+            }
+            $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
 
-                $this->plantilla->poner_js(site_url('assets/plugins/daterangepicker/moment.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/daterangepicker/moment.min.js'));
 
-                $this->plantilla->poner_js(site_url('assets/plugins/timepicker/bootstrap-timepicker.js'));
-                $this->plantilla->poner_css(site_url('assets/plugins/timepicker/bootstrap-timepicker.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/timepicker/bootstrap-timepicker.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/timepicker/bootstrap-timepicker.css'));
 
-                $this->plantilla->poner_css(site_url('assets/plugins/daterangepicker/daterangepicker.css'));
-                $this->plantilla->poner_js(site_url('assets/plugins/daterangepicker/daterangepicker.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/daterangepicker/daterangepicker.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/daterangepicker/daterangepicker.js'));
 
-                $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
-                $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
+            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
+            $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
 
-                $this->plantilla->poner_js('assets/plugins/noty/jquery.noty.packaged.min.js');
-                $this->plantilla->mostrar('admin', 'ticket', $datos);
+            $this->plantilla->poner_js('assets/plugins/noty/jquery.noty.packaged.min.js');
+            $this->plantilla->mostrar('admin', 'ticket', $datos);
         }
     }
 
@@ -200,6 +202,5 @@ class Admin extends MY_Controller {
             $this->tarea->borrar_tarea($id_tarea);
         }
     }
-
 
 }

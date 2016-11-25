@@ -21,16 +21,46 @@ $(".todo-list").todolist({
 var fecha_inicio;
 var fecha_fin;
 
-$("#tiempo_tarea").daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A', autoUpdateInput: false},
-    function(start, end, label) {
-        fecha_inicio = start;
-        fecha_fin = end;
-    });
-$("#tiempo_tarea").on('apply.daterangepicker', function(ev, picker) {
+$("#tiempo_tarea").daterangepicker({
+    timePicker: true,
+    timePickerIncrement: 30,
+    format: 'MM/DD/YYYY h:mm A',
+    autoUpdateInput: false,
+    locale: {
+        "format": "MM/DD/YYYY h:mm A",
+        "separator": " - ",
+        "applyLabel": "Aplicar",
+        "cancelLabel": "Cancelar",
+        "fromLabel": "Desde",
+        "toLabel": "Hasta",
+        "customRangeLabel": "Custom",
+        "daysOfWeek": ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+        "monthNames": [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Augosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+        ],
+        "firstDay": 1
+    }},
+        function (start, end, label) {
+            fecha_inicio = start;
+            fecha_fin = end;
+        }
+);
+$("#tiempo_tarea").on('apply.daterangepicker', function (ev, picker) {
     $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
 });
 
-$("#tiempo_tarea").on('cancel.daterangepicker', function(ev, picker) {
+$("#tiempo_tarea").on('cancel.daterangepicker', function (ev, picker) {
     $(this).val('');
 });
 
@@ -38,15 +68,15 @@ $(function () {
     $("#mensaje").wysihtml5({
         toolbar: {"size": "xs"},
         locale: "es-ES"
-        /*showToolbarAfterInit: false,
-        "events": {
-            "focus": function () {
-                this.toolbar.show();
-            },
-            "blur": function () {
-                this.toolbar.hide();
-            }
-        }*/
+                /*showToolbarAfterInit: false,
+                 "events": {
+                 "focus": function () {
+                 this.toolbar.show();
+                 },
+                 "blur": function () {
+                 this.toolbar.hide();
+                 }
+                 }*/
     });
 
     $(".select2").select2();
@@ -77,8 +107,10 @@ $(function () {
             url: baseURL + '/crear_tarea',
             type: 'POST',
             data: {id_ticket: id_ticket, id_tecnico: id_tecnico, descripcion_tarea: descripcion_tarea, inicio: fecha_inicio.format('DD/MM/YYYY HH:MM'), fin_previsto: fecha_fin.format('DD/MM/YYYY HH:MM')},
-            success: function(data){
-                setTimeout(function(){ window.location.reload(true); }, 1500);
+            success: function (data) {
+                setTimeout(function () {
+                    window.location.reload(true);
+                }, 1500);
                 noty({text: '¡Tarea creada con éxito!', type: 'success', layout: 'topRight', timeout: 1000});
             }
         });
@@ -87,18 +119,22 @@ $(function () {
 
     });
 
-    $("#borrar_tarea").on("click", function(){
-        var id_tarea= $(this).closest("li")[0].value;
+    $("#borrar_tarea").on("click", function () {
+        var id_tarea = $(this).closest("li")[0].value;
         var getUrl = window.location;
         var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
         var li = $(this).closest('li')
-        li.fadeOut('slow', function() { li.remove(); });
+        li.fadeOut('slow', function () {
+            li.remove();
+        });
         $.ajax({
             url: baseURL + '/borrar_tarea',
             type: 'POST',
             data: {id_tarea: id_tarea},
-            success: function(data){
-                setTimeout(function(){ window.location.reload(true); }, 1500);
+            success: function (data) {
+                setTimeout(function () {
+                    window.location.reload(true);
+                }, 1500);
                 noty({text: '¡Tarea borrada con éxito!', type: 'success', layout: 'topRight', timeout: 1000});
             }
         });
