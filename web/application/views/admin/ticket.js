@@ -9,11 +9,39 @@ $(".todo-list").sortable({
 /* The todo list plugin */
 $(".todo-list").todolist({
     onCheck: function (ele) {
-        window.console.log("The element has been checked");
+        var id_tarea = $(this).closest("li")[0].value;
+        var getUrl = window.location;
+        var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+        $.ajax({
+            url: baseURL + '/completar_tarea',
+            type: 'POST',
+            data: {id_tarea: id_tarea},
+            success: function (data) {
+                setTimeout(function () {
+                    window.location.reload(true);
+                }, 1500);
+                noty({text: '¡Tarea marcada como realizada!', type: 'success', layout: 'topRight', timeout: 1000});
+            }
+        });
         return ele;
     },
     onUncheck: function (ele) {
-        window.console.log("The element has been unchecked");
+        var id_tarea = $(this).closest("li")[0].value;
+        var getUrl = window.location;
+        var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+        var li = $(this).closest('li').find('.fecha_fin');
+        li.remove();
+        $.ajax({
+            url: baseURL + '/descompletar_tarea',
+            type: 'POST',
+            data: {id_tarea: id_tarea},
+            success: function (data) {
+                setTimeout(function () {
+                    window.location.reload(true);
+                }, 1500);
+                noty({text: '¡Tarea marcada como en proceso!', type: 'success', layout: 'topRight', timeout: 1000});
+            }
+        });
         return ele;
     }
 });
@@ -119,7 +147,7 @@ $(function () {
 
     });
 
-    $("#borrar_tarea").on("click", function () {
+    $(".boton_borrar").on("click", function () {
         var id_tarea = $(this).closest("li")[0].value;
         var getUrl = window.location;
         var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
@@ -141,4 +169,5 @@ $(function () {
     });
 
 });
+
 

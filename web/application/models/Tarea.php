@@ -40,6 +40,19 @@ class Tarea extends CI_Model {
         return $this->db->delete('Tarea');
     }
 
+    public function completar_tarea($id_tarea) {
+        $datos = array('estado' => TAREA_FINALIZADA);
+        $this->db->where('id_tarea', $id_tarea);
+        return $this->db->update('Tarea', $datos);
+    }
+
+    public function descompletar_tarea($id_tarea) {
+        $datos = array('estado' => TAREA_EN_PROCESO);
+        $this->db->where('id_tarea', $id_tarea);
+        return $this->db->update('Tarea', $datos);
+    }
+
+
     public function tareas_finalizadas($dias = 7) {
                 $this->db->from('Tarea');
                 $this->db->where('fin >= ', strtotime('-' . $dias . ' days'));

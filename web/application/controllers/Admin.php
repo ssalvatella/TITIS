@@ -203,4 +203,18 @@ class Admin extends MY_Controller {
         }
     }
 
+    public function completar_tarea() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $id_tarea = $this->input->post('id_tarea');
+            $this->tarea->completar_tarea($id_tarea);
+        }
+    }
+
+    public function descompletar_tarea() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $id_tarea = $this->input->post('id_tarea');
+            $this->tarea->descompletar_tarea($id_tarea);
+        }
+    }
+
 }

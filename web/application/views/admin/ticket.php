@@ -137,7 +137,7 @@
                             <span class="info-box-icon"><i class="fa fa-user"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text"><?= $this->lang->line('cliente'); ?></span>
-                                <span class="info-box-number" style="font-size:17px;"><?= $ticket['nombre_cliente'] ?></span>
+                               <span class="info-box-number" style="font-size:17px;"> <a style="color: inherit;" href="<?=site_url('admin/ver_cliente/') . $ticket['id_cliente'] ?>"><?= $ticket['nombre_cliente'] ?></a></span>
                             </div><!-- /.info-box-content -->
                         </div><!-- /.info-box -->
                     </div>
@@ -261,10 +261,14 @@
                                         echo 'checked="true"';
                                     echo ' value="">
                                             <span class="text">' . $tarea['nombre'] . '</span>
-                                            <span class="label label-primary"><i class="fa fa-wrench"></i> &nbsp;' . $tarea['nombre_tecnico'] . '</span>
-                                            <div class="tools">
-                                                <i class="fa fa-edit"></i>
-                                                <i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('eliminar') . '" id = "borrar_tarea" class="fa fa-trash-o"></i>
+                                            <span class="label label-primary"><i class="fa fa-wrench"></i> &nbsp;' . $tarea['nombre_tecnico'] . '</span>';
+                                    echo '
+                                            <div class="tools">';
+                                    if ($tarea['estado'] == TAREA_FINALIZADA) {
+                                        echo '<i style="margin-right: 10px" class="label label-info fecha_fin"><i class="fa fa-calendar"></i> &nbsp;' . $tarea['fin'] . '</i>';
+                                    }
+                                               echo' <i class="fa fa-edit"></i>
+                                                <i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('eliminar') . '" id = "borrar_tarea" class="fa fa-trash-o boton_borrar"></i>
                                             </div></li>';
                                 }
                                 ?>
