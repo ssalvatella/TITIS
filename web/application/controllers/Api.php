@@ -17,6 +17,7 @@ class Api extends REST_Controller {
      * ticket
      * ultimos_tickets
      * ultimos_tickets_cliente
+     * tareas
      * 
      * --- POST ---
      * login
@@ -287,6 +288,28 @@ class Api extends REST_Controller {
             $this->response([
                 'status' => FALSE,
                 'error' => 'El cliente no existe o no tiene tickets'
+                    ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+    
+    public function tareas_get() {
+        $id_ticket = $this->get('id_ticket');
+        if (!$id_ticket) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_ticket'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $datos_ticket = $this->tarea->obtener_tareas($id_ticket);
+        if ($datos_ticket) {
+            $this->response([
+                'status' => TRUE,
+                'datos' => $datos_ticket
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'El ticket no existe o no tiene tareas'
                     ], REST_Controller::HTTP_NOT_FOUND);
         }
     }

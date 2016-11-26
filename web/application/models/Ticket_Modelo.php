@@ -50,7 +50,7 @@ class Ticket_modelo extends CI_Model {
     }
 
     public function obtener_ticket($id_ticket) {
-        $this->db->select('Ticket.*, cliente.nombre as nombre_cliente, usuarioTecnico.usuario as nombre_tecnico_admin');
+        $this->db->select('Ticket.*, cliente.*,cliente.nombre as nombre_cliente, usuarioTecnico.usuario as nombre_tecnico_admin');
         $this->db->from('Ticket');
         $this->db->where('id_ticket', $id_ticket);
         $this->db->join('Cliente as cliente', 'cliente.id_cliente = Ticket.cliente');
