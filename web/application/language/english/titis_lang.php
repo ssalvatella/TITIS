@@ -94,6 +94,9 @@ $lang['descripcion_tarea_place_holder'] = 'Write briefly what the task is';
 
 $lang['tiempo_estimado'] = 'Estimated time';
 
+$lang['editar'] = 'Edit';
+$lang['editar_tarea'] = 'Edit task';
+
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Sent Tickets';
 $lang['facturas_recibidas'] = 'Receipts Received';

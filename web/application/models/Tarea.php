@@ -36,6 +36,11 @@ class Tarea extends CI_Model {
         return $this->db->insert('Tarea', $datos);
     }
 
+    public function editar_tarea($id_tarea, $datos) {
+        $this->db->where('id_tarea', $id_tarea);
+        return $this->db->update('Tarea', $datos);
+    }
+
     public function borrar_tarea($id_tarea) {
         $this->db->where('id_tarea', $id_tarea);
         return $this->db->delete('Tarea');

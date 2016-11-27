@@ -96,7 +96,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>
                                     </div>
-                                    <input required type="text" class="form-control pull-right" id="tiempo_tarea">
+                                    <input required type="text" class="form-control pull-right tiempo_tarea" id="tiempo_tarea">
                                 </div>
                             </div>
                         </div>
@@ -109,6 +109,50 @@
             </div>
         </div>
         <!-- END Modal AÑADIR TAREA ----------->
+
+        <!-- Modal EDITAR TAREA -->
+        <div class="modal fade" id="modal_editar_tarea" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('editar_tarea'); ?></h4>
+                    </div>
+                    <form id = "editar_tarea_form" method="post">
+                        <div class="modal-body">
+                            <div class="form-group" >
+                                <label><?= $this->lang->line('descripcion_tarea'); ?></label>
+                                <input required id="descripcion_tarea_editar" maxlength="200" name="descripcion_tarea" type="text" class="form-control" placeholder="<?= $this->lang->line('descripcion_tarea_place_holder'); ?>">
+                            </div>
+                            <div class="form-group">
+                                <label><?= $this->lang->line('tecnico'); ?></label>
+                                <select required id = "seleccion_tecnicos_editar" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    <?php
+                                    foreach ($tecnicos as $tecnico) {
+                                        echo '<option value="' . $tecnico['id_usuario'] . '"> ' . $tecnico['usuario'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><?= $this->lang->line('tiempo_estimado'); ?></label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input required type="text" class="form-control pull-right tiempo_tarea" id="tiempo_tarea">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cerrar'); ?></button>
+                            <input  type="submit" id="editar_tarea" value = "<?= $this->lang->line('editar_tarea'); ?>" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END Modal EDITAR TAREA ----------->
 
         <div class="box box-primary">
             <!-- CABECERA TÍTULO ---------------------------->
@@ -267,7 +311,7 @@
                                     if ($tarea['estado'] == TAREA_FINALIZADA) {
                                         echo '<i style="margin-right: 10px" class="label label-info fecha_fin"><i class="fa fa-calendar"></i> &nbsp;' . $tarea['fin'] . '</i>';
                                     }
-                                               echo' <i class="fa fa-edit"></i>
+                                               echo '<span style="cursor:pointer" data-toggle="modal"  data-target="#modal_editar_tarea"><i  data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('editar') . '"  class="fa fa-edit boton_editar"></i></span>
                                                 <i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('eliminar') . '" id = "borrar_tarea" class="fa fa-trash-o boton_borrar"></i>
                                             </div></li>';
                                 }

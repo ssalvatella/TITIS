@@ -87,6 +87,9 @@ $lang['descripcion_tarea_place_holder'] = 'Escribe brevemente en qué consiste l
 
 $lang['tiempo_estimado'] = 'Tiempo estimado';
 
+$lang['editar'] = 'Editar';
+$lang['editar_tarea'] = 'Editar tarea';
+
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Tickets Enviados';
 $lang['facturas_recibidas'] = 'Facturas Recibidas';

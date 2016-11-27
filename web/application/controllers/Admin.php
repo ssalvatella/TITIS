@@ -180,6 +180,18 @@ class Admin extends MY_Controller {
         }
     }
 
+    public function editar_tarea() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $id_tarea = $this->input->post('id_tarea');
+            $id_tecnico = $this->input->post('id_tecnico');
+            $descripcion = $this->input->post('descripcion_tarea');
+            $inicio = $this->input->post('inicio');
+            $fin_previsto = $this->input->post('fin_previsto');
+            $datos = array('nombre' => $descripcion, 'tecnico' => $id_tecnico, 'estado' => TAREA_EN_PROCESO, 'inicio' => $inicio, 'fin_previsto' => $fin_previsto);
+            $this->tarea->editar_tarea($id_tarea, $datos);
+        }
+    }
+
     public function asignar_ticket() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $id_ticket = $this->input->post('id_ticket');

@@ -50,8 +50,9 @@ $(".todo-list").todolist({
 
 var fecha_inicio;
 var fecha_fin;
+var tarea_editar;
 
-$("#tiempo_tarea").daterangepicker({
+$(".tiempo_tarea").daterangepicker({
     timePicker: true,
     timePickerIncrement: 30,
     format: 'MM/DD/YYYY h:mm A',
@@ -86,11 +87,11 @@ $("#tiempo_tarea").daterangepicker({
             fecha_fin = end;
         }
 );
-$("#tiempo_tarea").on('apply.daterangepicker', function (ev, picker) {
+$(".tiempo_tarea").on('apply.daterangepicker', function (ev, picker) {
     $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
 });
 
-$("#tiempo_tarea").on('cancel.daterangepicker', function (ev, picker) {
+$(".tiempo_tarea").on('cancel.daterangepicker', function (ev, picker) {
     $(this).val('');
 });
 
@@ -145,7 +146,35 @@ $(function () {
             }
         });
         $('#modal_tarea').modal('hide');
+    });
 
+    $('#editar_tarea_form').on('submit', function (e) {
+        e.preventDefault();
+        var getUrl = window.location;
+        var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+        var id_tecnico = $("#seleccion_tecnicos").val();
+        var descripcion_tarea = $('#descripcion_tarea_editar').val();
+        $.ajax({
+            url: baseURL + '/editar_tarea',
+            type: 'POST',
+            data: {id_tarea: tarea_editar, id_tecnico: id_tecnico, descripcion_tarea: descripcion_tarea, inicio: fecha_inicio.format('DD/MM/YYYY HH:MM'), fin_previsto: fecha_fin.format('DD/MM/YYYY HH:MM')},
+            success: function (data) {
+                setTimeout(function () {
+                    window.location.reload(true);
+                }, 1500);
+                noty({text: '¡Tarea editada!', type: 'success', layout: 'topRight', timeout: 1000});
+            }
+        });
+        $('#modal_editar_tarea').modal('hide');
+    });
+
+    $(".boton_editar").on("click", function () {
+        var li = $(this).closest('li');
+        var id_tarea = li[0].value;
+        var descripcion_tarea =  li.find('.text')[0].textContent;
+        var tecnico =  li.find('.label label-primary');
+        $('#descripcion_tarea_editar').val(descripcion_tarea);
+        tarea_editar = id_tarea;
 
     });
 
