@@ -25,6 +25,8 @@ class Plantilla {
         $this->poner_js(base_url('assets/js/bootstrap.min.js'));
         //$this->poner_js(base_url('assets/js/AdminLTE.min.js'));
         //$this->poner_js(base_url('assets/js/TITIS.js'));
+        $this->poner_css(site_url('assets/plugins/pace/pace.css'));
+        $this->poner_js(site_url('assets/plugins/pace/pace.min.js'));
     }
 
     public function mostrar($carpeta, $pagina, $datos = array()) {

@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                         <?php } ?>
-                        <a class="btn btn-app ajax-recargar-pagina"><i class="fa fa-spin fa-refresh"></i><?= $this->lang->line('actualizar'); ?></a>
+                        <a href = "javascript:history.go(0)" class="btn btn-app"><i class="fa fa-spin fa-refresh"></i><?= $this->lang->line('actualizar'); ?></a>
                         <table data-link="" id="tickets" class="table table-bordered table-hover display nowrap">
                             <thead>
                                 <tr>

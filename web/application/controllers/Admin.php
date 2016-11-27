@@ -51,7 +51,7 @@ class Admin extends MY_Controller {
     public function registrar_empleado() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('nuevo_empleado');
-            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-validator/validator.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/iCheck/all.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/iCheck/icheck.min.js'));
             if ($this->input->server('REQUEST_METHOD') == 'POST') {
@@ -120,8 +120,6 @@ class Admin extends MY_Controller {
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css'));
-            $this->plantilla->poner_css(site_url('assets/plugins/pace/pace.css'));
-            $this->plantilla->poner_js(site_url('assets/plugins/pace/pace.min.js'));
             $this->plantilla->mostrar('admin', 'tickets', $datos);
         }
     }

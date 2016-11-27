@@ -15,7 +15,7 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                <form action="<?= site_url('admin/registrar_empleado'); ?>" method="POST" data-toggle="validator" role="form">
+                <form id="form-registro-empleado" action="<?= site_url('admin/registrar_empleado'); ?>" method="POST" role="form" data-parsley-errors-messages-disabled="true">
                     <div class="box">
                         <div class="box-header with-border">
                             <h3 class="box-title"><?= $this->lang->line('registrar'); ?></h3>
