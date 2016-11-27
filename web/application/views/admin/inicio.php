@@ -95,7 +95,7 @@
                     </div>
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-lg-8 col-md-6 col-sm-8 col-xs-8">
                                 <div class="chart-responsive">
                                     <canvas id="numero_clientes" height="250"></canvas>
                                     <!--canvas id="numero_clientes" style="height:250px"></canvas-->
@@ -131,7 +131,7 @@
                                 <!-- ./chart-responsive -->
                             </div>
                             <!-- /.col -->
-                            <div class="col-md-4">
+                            <div class="col-lg-4 col-md-6 col-sm-4 col-xs-4">
                                 <ul class="chart-legend clearfix">
                                     <li><i class="fa fa-circle-o text-red"></i> <?= $this->lang->line('administradores'); ?></li>
                                     <li><i class="fa fa-circle-o text-green"></i> <?= $this->lang->line('tecnicos_admin'); ?></li>
