@@ -206,15 +206,18 @@ class Admin extends MY_Controller {
     public function completar_tarea() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $id_tarea = $this->input->post('id_tarea');
+            $id_ticket = $this->input->post('id_ticket');
             $this->tarea->completar_tarea($id_tarea);
+            $this->ticket_modelo->comprobar_estado($id_ticket);
         }
     }
 
     public function descompletar_tarea() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $id_tarea = $this->input->post('id_tarea');
+            $id_ticket = $this->input->post('id_ticket');
             $this->tarea->descompletar_tarea($id_tarea);
+            $this->ticket_modelo->comprobar_estado($id_ticket);
         }
     }
-
 }

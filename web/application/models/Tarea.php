@@ -4,6 +4,7 @@ class Tarea extends CI_Model {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model(array('ticket_modelo'));
     }
 
     /**
@@ -43,13 +44,13 @@ class Tarea extends CI_Model {
     public function completar_tarea($id_tarea) {
         $datos = array('estado' => TAREA_FINALIZADA);
         $this->db->where('id_tarea', $id_tarea);
-        return $this->db->update('Tarea', $datos);
+        $this->db->update('Tarea', $datos);
     }
 
     public function descompletar_tarea($id_tarea) {
         $datos = array('estado' => TAREA_EN_PROCESO);
         $this->db->where('id_tarea', $id_tarea);
-        return $this->db->update('Tarea', $datos);
+        $this->db->update('Tarea', $datos);
     }
 
 

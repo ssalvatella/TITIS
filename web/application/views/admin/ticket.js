@@ -12,10 +12,11 @@ $(".todo-list").todolist({
         var id_tarea = $(this).closest("li")[0].value;
         var getUrl = window.location;
         var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+        var id_ticket = getUrl.pathname.split('/')[3];
         $.ajax({
             url: baseURL + '/completar_tarea',
             type: 'POST',
-            data: {id_tarea: id_tarea},
+            data: {id_tarea: id_tarea, id_ticket: id_ticket},
             success: function (data) {
                 setTimeout(function () {
                     window.location.reload(true);
@@ -29,12 +30,13 @@ $(".todo-list").todolist({
         var id_tarea = $(this).closest("li")[0].value;
         var getUrl = window.location;
         var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+        var id_ticket = getUrl.pathname.split('/')[3];
         var li = $(this).closest('li').find('.fecha_fin');
         li.remove();
         $.ajax({
             url: baseURL + '/descompletar_tarea',
             type: 'POST',
-            data: {id_tarea: id_tarea},
+            data: {id_tarea: id_tarea, id_ticket: id_ticket},
             success: function (data) {
                 setTimeout(function () {
                     window.location.reload(true);

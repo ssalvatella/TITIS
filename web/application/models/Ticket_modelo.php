@@ -104,4 +104,24 @@ class Ticket_modelo extends CI_Model {
         return $this->db->delete('Ticket');
     }
 
+    public function comprobar_estado($id_ticket) {
+        $this->db->select('*');
+        $this->db->from('Ticket');
+        $this->db->where('id_ticket', $id_ticket);
+        $ticket = $this->db->limit(1)->get()->result_array()[0];
+        $total_tareas = $this->tarea->contar_tareas($id_ticket);
+        $tareas_completadas = $this->tarea->contar_tareas($id_ticket, TAREA_FINALIZADA);
+        $datos['estado'] = $ticket['estado'];
+        if ($tareas_completadas == $total_tareas) {
+            $datos['estado'] = TICKET_FINALIZADO;
+            $datos['fin'] = date('Y-m-d H:i:s');
+        } else if(isset($ticket['tecnico_admin'] )) {
+            $datos['estado'] = TICKET_EN_PROCESO;
+        } else {
+            $datos['estado'] = TICKET_PENDIENTE;
+        }
+        $this->db->where('id_ticket', $id_ticket);
+        return $this->db->update('Ticket', $datos);
+    }
+
 }
