@@ -48,6 +48,15 @@ class Admin extends MY_Controller {
         }
     }
 
+    public function ver_cliente($id_cliente) {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['titulo'] = $this->lang->line('cliente');
+            $datos['cliente'] = $this->cliente_modelo->obtener_cliente($id_cliente);
+            $datos['numero_tickets'] = $this->ticket_modelo->contar_tickets_cliente($id_cliente);
+            $this->plantilla->mostrar('admin', 'cliente', $datos);
+        }
+    }
+
     public function registrar_empleado() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('nuevo_empleado');
