@@ -21,7 +21,13 @@ $(".todo-list").todolist({
                 setTimeout(function () {
                     window.location.reload(true);
                 }, 1500);
-                noty({text: '¡Tarea marcada como realizada!', type: 'success', layout: 'topRight', timeout: 1000});
+                $.notify({
+                    icon: 'glyphicon glyphicon-ok',
+                    title: '<strong>Tarea completada!</strong>',
+                    message: 'La tarea ha sido marcada como completada.',
+                },{
+                    type: 'success',delay: 100
+                });
             }
         });
         return ele;
@@ -41,7 +47,13 @@ $(".todo-list").todolist({
                 setTimeout(function () {
                     window.location.reload(true);
                 }, 1500);
-                noty({text: '¡Tarea marcada como en proceso!', type: 'success', layout: 'topRight', timeout: 1000});
+                $.notify({
+                    icon: 'glyphicon glyphicon-ok',
+                    title: '<strong>Tarea pendiente!</strong>',
+                    message: 'La tarea ha sido marcada como pendiente.',
+                },{
+                    type: 'success',delay: 100
+                });
             }
         });
         return ele;
@@ -142,7 +154,13 @@ $(function () {
                 setTimeout(function () {
                     window.location.reload(true);
                 }, 1500);
-                noty({text: '¡Tarea creada con éxito!', type: 'success', layout: 'topRight', timeout: 1000});
+                $.notify({
+                    icon: 'glyphicon glyphicon-ok',
+                    title: '<strong>Tarea creada!</strong>',
+                    message: 'La tarea ha sido creada con éxito.',
+                },{
+                    type: 'success',delay: 100
+                });
             }
         });
         $('#modal_tarea').modal('hide');
@@ -162,7 +180,13 @@ $(function () {
                 setTimeout(function () {
                     window.location.reload(true);
                 }, 1500);
-                noty({text: '¡Tarea editada!', type: 'success', layout: 'topRight', timeout: 1000});
+                $.notify({
+                    icon: 'glyphicon glyphicon-ok',
+                    title: '<strong>Tarea editada!</strong>',
+                    message: 'La tarea ha sido editada con éxito.',
+                },{
+                    type: 'success',delay: 100
+                });
             }
         });
         $('#modal_editar_tarea').modal('hide');
@@ -194,7 +218,13 @@ $(function () {
                 setTimeout(function () {
                     window.location.reload(true);
                 }, 1500);
-                noty({text: '¡Tarea borrada con éxito!', type: 'success', layout: 'topRight', timeout: 1000});
+                $.notify({
+                    icon: 'glyphicon glyphicon-ok',
+                    title: '<strong>Tarea borrada!</strong>',
+                    message: 'La tarea ha sido borrada con éxito.',
+                },{
+                    type: 'success',delay: 100
+                });
             }
         });
     });

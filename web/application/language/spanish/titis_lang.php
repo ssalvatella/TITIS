@@ -96,8 +96,10 @@ $lang['datos_personales'] = 'Datos personales';
 $lang['observaciones'] = 'Observaciones';
 $lang['direccion'] = 'Dirección';
 $lang['numero_telefono'] = 'Número de teléfono';
+$lang['localidad'] = 'Localidad';
+$lang['provincia'] = 'Provincia';
 
-
+$lang['cliente_envio_ticket'] = 'envió el ticket ';
 
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Tickets Enviados';

@@ -157,21 +157,18 @@
         <div class="box box-primary">
             <!-- CABECERA TÍTULO ---------------------------->
             <div class="box-header with-border">
-                <div class="col-md-6">
                     <h3 class="box-title"><?= $ticket['titulo'] . ' <small>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) ?> </small></h3>
-                </div>
-                <div class="col-md-6">
+
                     <div class="box-tools pull-right">
                         <?php
                         if ($this->session->userdata('tipo_usuario') == USUARIO_ADMIN) {
-                            echo '<button style="margin-right: 20px" data-toggle="modal" data-target="#modal_asignar" class=" btn bg-yellow btn-flat btn-sm"> <i class="fa fa-wrench"></i> &nbsp;' . $this->lang->line('cambiar') . ' ' . $this->lang->line('tecnico_admin') . ' </button>';
-                            echo '<button data-toggle="modal" data-target="#modal_eliminar" class=" btn bg-red btn-flat btn-sm"> <i class="fa fa-trash"></i> &nbsp;' . $this->lang->line('eliminar') . ' </button>';
-                            //echo'<button type="button" data-toggle="modal" data-target="#modal_asignar" class="btn btn-box-tool" data-toggle="tooltip" title="' . $this->lang->line('cambiar') . ' ' . $this->lang->line('tecnico_admin') . '"><i class="fa fa-wrench"></i></button>';
-                            //echo'<button type="button" data-toggle="modal" data-target="#modal_eliminar" class="btn btn-box-tool" data-toggle="tooltip" title="' . $this->lang->line('eliminar') . '"><i class="fa fa-trash"></i></button>';
+//                            echo '<button style="margin-right: 20px" data-toggle="modal" data-target="#modal_asignar" class=" btn bg-yellow btn-flat btn-sm"> <i class="fa fa-wrench"></i> &nbsp;' . $this->lang->line('cambiar') . ' ' . $this->lang->line('tecnico_admin') . ' </button>';
+//                            echo '<button data-toggle="modal" data-target="#modal_eliminar" class=" btn bg-red btn-flat btn-sm"> <i class="fa fa-trash"></i> &nbsp;' . $this->lang->line('eliminar') . ' </button>';
+                            echo'<button type="button" data-toggle="modal" data-target="#modal_asignar" class="btn btn-box-tool" data-toggle="tooltip" title="' . $this->lang->line('cambiar') . ' ' . $this->lang->line('tecnico_admin') . '"><i class="fa fa-wrench"></i></button>';
+                            echo'<button type="button" data-toggle="modal" data-target="#modal_eliminar" class="btn btn-box-tool" data-toggle="tooltip" title="' . $this->lang->line('eliminar') . '"><i class="fa fa-trash"></i></button>';
                         }
                         ?>
                     </div><!-- /.box-tools -->
-                </div>
             </div><!-- /.box-header -->
             <!-- ETIQUETAS CABECERA ------------------------->
             <div class="box-body">
@@ -353,7 +350,9 @@
                                     <span class="time"><i class="fa fa-clock-o"></i> &nbsp; ' . date('H:i', strtotime($mensajes[$i]['fecha'])) . '</span>
                                     <h3 class="timeline-header"><a href="#">' . $mensajes[$i]['nombre_usuario'] . '</a> ' . $this->lang->line('ha_escrito_comentario') . '</h3>
                                     <div class="timeline-body">
+                                        <div class="mensaje">
                                         ' . $mensajes[$i]['texto'] . '
+                                        </div>
                                     </div>
                                 </div>
                               </li>';

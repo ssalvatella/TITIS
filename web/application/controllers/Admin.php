@@ -172,7 +172,7 @@ class Admin extends MY_Controller {
             $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
             $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
 
-            $this->plantilla->poner_js('assets/plugins/noty/jquery.noty.packaged.min.js');
+            $this->plantilla->poner_js('assets/plugins/bootstrap-notify/bootstrap-notify.min.js');
             $this->plantilla->mostrar('admin', 'ticket', $datos);
         }
     }

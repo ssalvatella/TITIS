@@ -42,3 +42,8 @@ input.parsley-error, textarea.parsley-error, select.parsley-error {
 .btn-group .parsley-errors-list {
     display: none;
 }
+
+.mensaje img {
+    max-height:100%;
+    max-width:100%;
+}

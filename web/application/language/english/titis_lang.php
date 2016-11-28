@@ -102,7 +102,10 @@ $lang['datos_personales'] = 'Personal information';
 $lang['observaciones'] = 'Observations';
 $lang['direccion'] = 'Address';
 $lang['numero_telefono'] = 'Telephone number';
+$lang['localidad'] = 'Location';
+$lang['provincia'] = 'Province';
 
+$lang['cliente_envio_ticket'] = 'sent the ticket ';
 
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Sent Tickets';
