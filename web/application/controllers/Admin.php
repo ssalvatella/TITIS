@@ -230,6 +230,12 @@ class Admin extends MY_Controller {
             $id_ticket = $this->input->post('id_ticket');
             $this->tarea->completar_tarea($id_tarea);
             $this->ticket_modelo->comprobar_estado($id_ticket);
+            $notificacion = [
+                'url' => 'admin/ver_ticket/' . $id_ticket,
+                'texto' => 'tarea_completada',
+                'parametros' => $this->session->userdata('nombre_usuario')
+            ];
+            $this->notificacion->obtener_notificaciones($this->session->userdata('id_usuario'), $notificacion);
         }
     }
 

@@ -189,6 +189,11 @@ $lang['usuario_es'] = 'Your username is';
 $lang['contrasena_es'] = ' Your password is';
 $lang['tiene_notificaciones'] = 'You have %d notifications';
 $lang['ver_todas'] = 'See all';
-$lang['ticket_asignado'] = 'Admin %s has assigned you a ticket';
 $lang['ultimos_dias'] = 'Last %d days';
 $lang['notificaciones'] = 'Notifications';
+
+// Notificaciones
+$lang['ticket_asignado'] = 'Admin %s has assigned you a ticket';
+$lang['ticket_eliminado'] = 'Admin %s has deleted you from a ticket';
+$lang['tarea_activada'] = 'Admin %s has activated a task';
+$lang['tarea_completada'] = 'Admin %s marked as complete a task';

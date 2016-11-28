@@ -18,6 +18,19 @@ class Cliente_modelo extends CI_Model {
         return $datos;
     }
 
+    public function obtener_cliente($id_cliente) {
+        $this->db->select('*');
+        $this->db->from('Cliente');
+        $this->db->where('Cliente.id_cliente', $id_cliente);
+        $this->db->join('Usuario', 'Usuario.id_usuario = Cliente.usuario');
+        $datos = $this->db->get()->result_array();
+        foreach ($datos as $clave => $d) {
+            unset($d['contrasena']);
+            $datos[$clave] = $d;
+        }
+        return $datos[0];
+    }
+
     public function obtener_datos($id_usuario) {
         $this->db->select('*');
         $this->db->from('Cliente');

@@ -23,4 +23,16 @@ class Notificacion extends CI_Model {
         return $this->db->update('Usuario', array('vista' => NOTIFICACION_VISTA));
     }
 
+    public function insertar_notificacion_admins($id_usuario, $datos) {
+        $datos['vista'] = 0;
+        $datos['fecha'] = date("Y-m-d H:i:s");
+        $admins = $this->db->from('Usuario')->where('tipo', USUARIO_ADMIN)->where('id_usuario !=', $id_usuario)->get()->result_array();
+        foreach ($admins as $a) {
+            //if ($a['id_usuario'] != $id_usuario) {
+            $datos['usuario'] = $a['id_usuario'];
+            $this->db->insert('Notificacion', $datos);
+            // }
+        }
+    }
+
 }

@@ -178,13 +178,18 @@ $lang['hola'] = 'Hola';
 $lang['nueva_contrasena'] = 'Su nueva contraseña es';
 $lang['registro_empleado'] = 'Registro de un nuevo trabajador';
 $lang['tipo_empleado'] = 'Tipo empleado';
-$lang['registro_completo'] = 'Registro completado';
+$lang['registro_completado'] = 'Registro completado';
 $lang['empleado_registrado'] = 'Empleado %s registrado correctamente';
 $lang['registro_incorrecto'] = '¡Registro incorrecto! Ya existe un usuario con ese nombre';
 $lang['usuario_es'] = 'Su usuario es';
 $lang['contrasena_es'] = 'Su contraseña es';
 $lang['tiene_notificaciones'] = 'Tiene %d notificaciones';
 $lang['ver_todas'] = 'Ver todas';
-$lang['ticket_asignado'] = 'El admin %s le ha asignado un ticket';
 $lang['ultimos_dias'] = 'Últimos %d días';
 $lang['notificaciones'] = 'Notificaciones';
+
+// Notificaciones
+$lang['ticket_asignado'] = 'El admin %s le ha asignado un ticket';
+$lang['ticket_eliminado'] = 'El admin %s le ha eliminado de un ticket';
+$lang['tarea_activada'] = 'El admin %s ha activado una tarea';
+$lang['tarea_completada'] = 'El admin %s ha marcado como completada una tarea';
