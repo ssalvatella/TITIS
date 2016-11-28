@@ -90,6 +90,15 @@ $lang['tiempo_estimado'] = 'Tiempo estimado';
 $lang['editar'] = 'Editar';
 $lang['editar_tarea'] = 'Editar tarea';
 
+$lang['comentarios'] = 'Comentarios';
+$lang['datos_personales'] = 'Datos personales';
+
+$lang['observaciones'] = 'Observaciones';
+$lang['direccion'] = 'Dirección';
+$lang['numero_telefono'] = 'Número de teléfono';
+
+
+
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Tickets Enviados';
 $lang['facturas_recibidas'] = 'Facturas Recibidas';

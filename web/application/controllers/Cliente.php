@@ -18,7 +18,7 @@ class Cliente extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_CLIENTE)) {
             $id_cliente = $this->session->userdata('id_cliente');
             $datos['titulo'] = 'Inicio';
-            $datos['tickets'] = $this->cliente_modelo->obtener_ultimos_tickets($id_cliente, 7);
+            $datos['tickets'] = $this->cliente_modelo->obtener_tickets($id_cliente, 7);
             $this->plantilla->poner_js(site_url('assets/plugins/chartjs/Chart.min.js'));
             $this->plantilla->mostrar('cliente', 'inicio', $datos);
         }

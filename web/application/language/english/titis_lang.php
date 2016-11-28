@@ -97,6 +97,13 @@ $lang['tiempo_estimado'] = 'Estimated time';
 $lang['editar'] = 'Edit';
 $lang['editar_tarea'] = 'Edit task';
 
+$lang['comentarios'] = 'Comments';
+$lang['datos_personales'] = 'Personal information';
+$lang['observaciones'] = 'Observations';
+$lang['direccion'] = 'Address';
+$lang['numero_telefono'] = 'Telephone number';
+
+
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Sent Tickets';
 $lang['facturas_recibidas'] = 'Receipts Received';

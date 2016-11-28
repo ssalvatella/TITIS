@@ -53,6 +53,8 @@ class Admin extends MY_Controller {
             $datos['titulo'] = $this->lang->line('cliente');
             $datos['cliente'] = $this->cliente_modelo->obtener_cliente($id_cliente);
             $datos['numero_tickets'] = $this->ticket_modelo->contar_tickets_cliente($id_cliente);
+            $datos['tickets'] = $this->cliente_modelo->obtener_tickets($id_cliente);
+            $datos['numero_mensajes'] = $this->mensaje->contar_mensajes_usuario($datos['cliente']['id_usuario']);
             $this->plantilla->mostrar('admin', 'cliente', $datos);
         }
     }

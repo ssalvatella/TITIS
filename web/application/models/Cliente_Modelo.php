@@ -18,6 +18,19 @@ class Cliente_modelo extends CI_Model {
         return $datos;
     }
 
+    public function obtener_cliente($id_cliente) {
+        $this->db->select('*');
+        $this->db->from('Cliente');
+        $this->db->where('Cliente.id_cliente', $id_cliente);
+        $this->db->join('Usuario', 'Usuario.id_usuario = Cliente.usuario');
+        $datos = $this->db->get()->result_array();
+        foreach ($datos as $clave => $d) {
+            unset($d['contrasena']);
+            $datos[$clave] = $d;
+        }
+        return $datos[0];
+    }
+
     public function obtener_datos($id_usuario) {
         $this->db->select('*');
         $this->db->from('Cliente');
@@ -53,13 +66,28 @@ class Cliente_modelo extends CI_Model {
         return $this->db->update('Cliente', $datos);
     }
 
-    public function obtener_ultimos_tickets($id_cliente, $numero = 7) {
+    public function obtener_tickets($id_cliente, $numero=null) {
         $this->db->select('id_ticket, titulo, estado, inicio');
         $this->db->from('Ticket');
         $this->db->where('cliente', $id_cliente);
         $this->db->order_by('inicio', 'DESC');
-        $this->db->limit($numero);
-        return $this->db->get()->result_array();
+        if (isset($numero)) {
+            $this->db->limit($numero);
+        }
+        $tickets = $this->db->get()->result_array();
+        foreach ($tickets as $clave => $ticket) {
+            $total_tareas = $this->tarea->contar_tareas($ticket['id_ticket']);
+            $tareas_completadas = $this->tarea->contar_tareas($ticket['id_ticket'], TAREA_FINALIZADA);
+            if ($total_tareas == 0) {
+                $ticket['progreso'] = 0;
+            } else {
+                $ticket['progreso'] = ($tareas_completadas / $total_tareas) * 100;
+            }
+            $ticket['total_tareas'] = $total_tareas;
+            $ticket['tareas_completadas'] = $tareas_completadas;
+            $tickets[$clave] = $ticket;
+        }
+        return $tickets;
     }
 
 }
