@@ -181,7 +181,7 @@
                             <span class="info-box-icon"><i class="fa fa-user"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text"><?= $this->lang->line('cliente'); ?></span>
-                               <span class="info-box-number" style="font-size:17px;"> <a style="color: inherit;" href="<?=site_url('admin/ver_cliente/') . $ticket['id_cliente'] ?>"><?= $ticket['nombre_cliente'] ?></a></span>
+                                <span class="info-box-number" style="font-size:17px;"> <a style="color: inherit;" href="<?= site_url('admin/ver_cliente/') . $ticket['id_cliente'] ?>"><?= $ticket['nombre_cliente'] ?></a></span>
                             </div><!-- /.info-box-content -->
                         </div><!-- /.info-box -->
                     </div>
@@ -311,7 +311,7 @@
                                     if ($tarea['estado'] == TAREA_FINALIZADA) {
                                         echo '<i style="margin-right: 10px" class="label label-info fecha_fin"><i class="fa fa-calendar"></i> &nbsp;' . $tarea['fin'] . '</i>';
                                     }
-                                               echo '<span style="cursor:pointer" data-toggle="modal"  data-target="#modal_editar_tarea"><i  data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('editar') . '"  class="fa fa-edit boton_editar"></i></span>
+                                    echo '<span style="cursor:pointer" data-toggle="modal"  data-target="#modal_editar_tarea"><i  data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('editar') . '"  class="fa fa-edit boton_editar"></i></span>
                                                 <i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('eliminar') . '" id = "borrar_tarea" class="fa fa-trash-o boton_borrar"></i>
                                             </div></li>';
                                 }
@@ -376,7 +376,7 @@
                 </li>
 
                 <li>
-                    <a class="fa fa-repeat bg-gray" title="<?= $this->lang->line('actualizar'); ?>" href="javascript:history.go(0)"></a>
+                    <a class="fa fa-repeat bg-gray"  data-toggle="tooltip" data-placement="right" title="<?= $this->lang->line('actualizar'); ?>" href="javascript:history.go(0)"></a>
                 </li>
 
                 <!-- END timeline item -->

@@ -65,12 +65,6 @@ class Ticket_modelo extends CI_Model {
         return $this->db->get()->num_rows();
     }
 
-    public function contar_tickets_cliente($id_cliente) {
-        $this->db->from('Ticket');
-        $this->db->where('cliente', $id_cliente);
-        return $this->db->get()->num_rows();
-    }
-
     public function registrar_ticket($datos) {
         $id_cliente = $this->session->userdata('id_cliente');
         $id_usuario_cliente = $this->session->userdata('id_usuario');

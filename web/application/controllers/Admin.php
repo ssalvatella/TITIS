@@ -239,4 +239,14 @@ class Admin extends MY_Controller {
             $this->ticket_modelo->comprobar_estado($id_ticket);
         }
     }
+
+    public function notificaciones() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['titulo'] = $this->lang->line('notificaciones');
+            $datos['notificaciones'] = $this->notificacion->obtener_notificaciones($this->session->userdata('id_usuario'));
+
+            $this->plantilla->mostrar('admin', 'notificaciones', $datos);
+        }
+    }
+
 }

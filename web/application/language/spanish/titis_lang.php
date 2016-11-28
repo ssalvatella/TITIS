@@ -178,3 +178,4 @@ $lang['tiene_notificaciones'] = 'Tiene %d notificaciones';
 $lang['ver_todas'] = 'Ver todas';
 $lang['ticket_asignado'] = 'El admin %s le ha asignado un ticket';
 $lang['ultimos_dias'] = 'Últimos %d días';
+$lang['notificaciones'] = 'Notificaciones';

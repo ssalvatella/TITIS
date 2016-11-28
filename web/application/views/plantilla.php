@@ -62,7 +62,22 @@
                                             <?php } ?>
                                         </ul>
                                     </li>
-                                    <li class="footer"><a href="#"><?= $this->lang->line('ver_todas'); ?></a></li>
+                                    <li class="footer"><a href="<?php
+                                        switch ($this->session->tipo_usuario) {
+                                            case USUARIO_ADMIN:
+                                                echo site_url('admin/notificaciones');
+                                                break;
+                                            case USUARIO_TECNICO_ADMIN:
+                                                echo site_url('tecnico_admin/notificaciones');
+                                                break;
+                                            case USUARIO_TECNICO:
+                                                echo site_url('tecnico/notificaciones');
+                                                break;
+                                            case USUARIO_CLIENTE:
+                                                echo site_url('cliente/notificaciones');
+                                                break;
+                                        };
+                                        ?>"><?= $this->lang->line('ver_todas'); ?></a></li>
                                 </ul>
                             </li>
                             <!-- Menú cuenta usuario -->
