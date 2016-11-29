@@ -101,7 +101,7 @@ $lang['provincia'] = 'Provincia';
 
 $lang['cliente_envio_ticket'] = 'envió el ticket ';
 $lang['cliente_se_registro'] = ' se registro en TITIS';
-
+$lang['registrado'] = 'Registrado';
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Tickets Enviados';
 $lang['facturas_recibidas'] = 'Facturas Recibidas';
@@ -123,6 +123,10 @@ $lang['fichero_adjunto'] = 'Fichero adjunto ';
 $lang['aun_no_funcional'] = '(aún no funcional)';
 
 $lang['enviar_ticket'] = 'Enviar Ticket';
+$lang['enviar_mensaje'] = 'Enviar mensaje';
+$lang['enviar_mensaje_a'] = 'Enviar mensaje a ';
+$lang['escribir_mensaje'] = 'Escribe aqui tu mensaje...';
+
 
 $lang['ticket_enviado'] = 'Ticket enviado';
 $lang['ticket_enviado_mensaje'] = 'El ticket ha sido enviado correctamente. Nuestro equipo resolverá el incidente cuanto antes.';

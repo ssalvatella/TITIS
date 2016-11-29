@@ -19,9 +19,10 @@ class Mensaje extends CI_Model {
         return $this->db->insert('Mensaje', $datos);
     }
 
-    public function contar_mensajes_usuario($id_usuario) {
+    public function contar_comentarios_usuario($id_usuario) {
         $this->db->from('Mensaje');
         $this->db->where('usuario', $id_usuario);
+        $this->db->where('ticket', 'NULL');
         return $this->db->get()->num_rows();
     }
 

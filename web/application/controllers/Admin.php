@@ -54,7 +54,13 @@ class Admin extends MY_Controller {
             $datos['cliente'] = $this->cliente_modelo->obtener_cliente($id_cliente);
             $datos['numero_tickets'] = $this->ticket_modelo->contar_tickets_cliente($id_cliente);
             $datos['tickets'] = $this->cliente_modelo->obtener_tickets($id_cliente);
-            $datos['numero_mensajes'] = $this->mensaje->contar_mensajes_usuario($datos['cliente']['id_usuario']);
+            $datos['numero_mensajes'] = $this->mensaje->contar_comentarios_usuario($datos['cliente']['id_usuario']);
+            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.es-ES.js'));
+            }
+            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
+            $this->plantilla->poner_js('assets/plugins/bootstrap-notify/bootstrap-notify.min.js');
             $this->plantilla->mostrar('admin', 'cliente', $datos);
         }
     }
@@ -251,6 +257,16 @@ class Admin extends MY_Controller {
                 'parametros' => $this->session->userdata('nombre_usuario')
             ];
             $this->notificacion->insertar_notificacion_admins($this->session->userdata('id_usuario'), $notificacion);
+        }
+    }
+
+    public function enviar_mensaje() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $id_receptor = $this->input->post('id_receptor');
+            $id_emisor = $this->session->userdata('id_usuario');
+            $mensaje =  $this->input->post('mensaje');
+            $datos = array('usuario' => $id_emisor, 'destinatario' => $id_emisor, 'texto'=>$mensaje);
+            $this->mensaje->registrar_mensaje($datos);
         }
     }
 

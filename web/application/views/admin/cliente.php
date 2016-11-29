@@ -7,9 +7,35 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?= site_url('admin'); ?>"><i class="fa fa-home"></i><?= $this->lang->line('inicio'); ?></a></li>
-            <li class="active"></i><?= $this->lang->line('cliente'); ?></li>
+            <li><a href="<?= site_url('admin/clientes'); ?>"><?= $this->lang->line('clientes'); ?></a></li>
+            <li class="active"></i><?= $cliente['nombre'] ?></li>
         </ol>
     </section>
+
+    <!-- Modal ENVIAR MENSAJE -->
+    <div class="modal fade" id="modal_mensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('enviar_mensaje_a') . $cliente['nombre'] ?></h4>
+                </div>
+                <form id = "enviar_mensaje_form" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label><?= $this->lang->line('mensaje'); ?></label>
+                            <textarea name= "mensaje" maxlength="500" class= "form-control" style = "width: 100%" id="mensaje" placeholder="<?= $this->lang->line('escribir_mensaje'); ?>" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
+                        <input  type="submit" id="asignar" value = "<?= $this->lang->line('enviar'); ?>" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END Modal ENVIAR MENSAJE ----------->
 
     <section class="content">
 
@@ -34,9 +60,12 @@
                             <li class="list-group-item">
                                 <b><?= $this->lang->line('comentarios'); ?></b> <a class="pull-right"><?= $numero_mensajes - $numero_tickets; ?></a>
                             </li>
+                            <li class="list-group-item">
+                                <b><?= $this->lang->line('registrado'); ?></b> <a class="pull-right"><?=  date('d/m/Y H:i', strtotime($cliente['fecha_registro'])); ?></a>
+                            </li>
                         </ul>
 
-                        <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_mensaje"><b><?= $this->lang->line('enviar_mensaje'); ?></b></a>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -88,7 +117,7 @@
             <div class="col-md-9">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#activity" data-toggle="tab"><?= $this->lang->line('tickets'); ?></a></li>
+                        <li class="active"><a href="#activity" data-toggle="tab"><?= $this->lang->line('tickets_enviados'); ?></a></li>
                         <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
                         <li><a href="#settings" data-toggle="tab"><?= $this->lang->line('editar'); ?></a></li>
                     </ul>
@@ -165,16 +194,24 @@
                               </li>';
                             }
 
-                        $fecha_ultimo_ticket = date('d/m/Y H:i', strtotime($tickets[count($tickets) - 1]['inicio']));
-                        $fecha_registro =  date('d/m/Y H:i', strtotime($cliente['fecha_registro']));
-
-                        if (($fecha_ultimo_ticket - $fecha_registro) > 0) {
+                        if (count($tickets) >0) {
+                            $fecha_ultimo_ticket = date('d/m/Y H:i', strtotime($tickets[count($tickets) - 1]['inicio']));
+                            $fecha_registro =  date('d/m/Y H:i', strtotime($cliente['fecha_registro']));
+                            if (($fecha_ultimo_ticket - $fecha_registro) > 0) {
+                                echo '<li class="time-label">
+                                    <span class="bg-red">
+                                        ' . date('j M. Y', strtotime($cliente['fecha_registro'])) . '
+                                    </span>
+                                  </li>';
+                            }
+                        } else {
                             echo '<li class="time-label">
                                     <span class="bg-red">
                                         ' . date('j M. Y', strtotime($cliente['fecha_registro'])) . '
                                     </span>
                                   </li>';
                         }
+
                         ?>
 
                                 <li style="margin-right: 0px;">
@@ -183,6 +220,10 @@
                                         <span class="time"><i class="fa fa-clock-o"></i> <?= date('H:i', strtotime($cliente['fecha_registro'])); ?> </span>
                                         <h3 class="timeline-header"><a href="#"><?=   $cliente['nombre'] . '</a> ' . $this->lang->line('cliente_se_registro') ?> </h3>
                                     </div>
+                                </li>
+
+                                <li>
+                                    <a class="fa fa-repeat bg-gray"  data-toggle="tooltip" data-placement="right" title="<?= $this->lang->line('actualizar'); ?>" href="javascript:history.go(0)"></a>
                                 </li>
 
                             </ul>

@@ -128,12 +128,16 @@ $lang['fichero_adjunto'] = 'Attached file';
 $lang['aun_no_funcional'] = '(not yet functional)';
 
 $lang['enviar_ticket'] = 'Send Ticket';
+$lang['enviar_mensaje'] = 'Send message';
+$lang['enviar_mensaje_a'] = 'Send message to ';
+$lang['escribir_mensaje'] = 'Write your message here...';
 
 $lang['ticket_enviado'] = 'Ticket Submitted';
 $lang['ticket_enviado_mensaje'] = 'The ticket has been sent correctly. Our team will resolve the incident as soon as possible.';
 
 $lang['ticket_error'] = 'Error';
 $lang['ticket_error_mensaje'] = 'An unexpected error has occurred. We will try to resolve this issue as soon as possible.';
+$lang['registrado'] = 'Registered';
 // ---------------------------------------------
 
 // ------ BARRA LATERAL DERECHA ----
