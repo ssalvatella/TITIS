@@ -23,6 +23,7 @@ class Api extends REST_Controller {
      * login
      * registrar_empleado
      * registrar_cliente
+     * crear_tarea
      */
     public function __construct() {
         parent::__construct();
@@ -141,7 +142,7 @@ class Api extends REST_Controller {
                 'error' => 'Se necesitan los campos tipo, usuario, contrasena y email'
                     ], REST_Controller::HTTP_BAD_REQUEST);
         }
-        if ($tipo != USUARIO_ADMIN || $tipo != USUARIO_TECNICO_ADMIN || $tipo != USUARIO_TECNICO) {
+        if ($tipo != USUARIO_ADMIN && $tipo != USUARIO_TECNICO_ADMIN && $tipo != USUARIO_TECNICO) {
             $this->response([
                 'status' => FALSE,
                 'error' => 'Tipo incorrecto. Valores posibles: Admin=' . USUARIO_ADMIN . ', Técnico admin=' . USUARIO_TECNICO_ADMIN . ', Técnico=' . USUARIO_TECNICO
@@ -291,7 +292,7 @@ class Api extends REST_Controller {
                     ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
-    
+
     public function tareas_get() {
         $id_ticket = $this->get('id_ticket');
         if (!$id_ticket) {
@@ -311,6 +312,43 @@ class Api extends REST_Controller {
                 'status' => FALSE,
                 'error' => 'El ticket no existe o no tiene tareas'
                     ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function crear_tarea_post() {
+        $id_ticket = $this->input->post('id_ticket');
+        $id_tecnico = $this->input->post('id_tecnico');
+        $descripcion = $this->input->post('descripcion_tarea');
+        $inicio = $this->input->post('inicio');
+        $fin_previsto = $this->input->post('fin_previsto');
+
+        if (!$id_ticket || !$id_tecnico || !$descripcion || !$inicio || !$fin_previsto) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesitan los campos id_ticket, id_tecnico, descripcion, inicio y fin_previsto'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        $datos_tarea = [
+            'ticket' => $id_ticket,
+            'nombre' => $descripcion,
+            'tecnico' => $id_tecnico,
+            'estado' => TAREA_EN_PROCESO,
+            'inicio' => $inicio,
+            'fin_previsto' => $fin_previsto
+        ];
+        $tarea_creada = $this->tarea->crear_tarea($datos_tarea);
+
+        if ($tarea_creada) {
+            $this->response([
+                'status' => TRUE,
+                'mensaje' => 'Tarea creada correctamente'
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => TRUE,
+                'mensaje' => 'No se ha podido crear la tarea'
+                    ], REST_Controller::HTTP_CONFLICT);
         }
     }
 
