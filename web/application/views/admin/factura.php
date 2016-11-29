@@ -12,7 +12,7 @@
     <!-- Contenido --> 
     <section class="content">
         
-        <div class="box box-primary" style="width: 80%; margin: 0 auto;">
+        <div class="box box-primary">
             <!-- CABECERA TITULO -->
             <div class="box-header with-border">
                 <h3 class="box-title"><?= $factura['descripcion'] . ' <small>'. $this->ticket_modelo->obtener_nombreticket_factura($factura['id_factura'])?></small></h3>

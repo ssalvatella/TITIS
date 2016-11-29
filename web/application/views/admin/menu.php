@@ -16,6 +16,7 @@
     </li>
     <li id="menu_tickets"><a href="<?= site_url('admin/tickets') ?>"><i class="fa fa-ticket" aria-hidden="true"></i> <span>Tickets</span></a></li>
     <li id="menu_clientes"><a href="<?= site_url('admin/clientes') ?>"><i class="fa fa-address-book" aria-hidden="true"></i> <span><?= $this->lang->line('clientes'); ?></span></a></li>
+    <li id="menu_facturas"><a href="<?= site_url('admin/facturas') ?>"><i class="fa fa-money" aria-hidden="true"></i> <span><?= $this->lang->line('facturas'); ?></span></a></li>
     <li class="header"><?= $this->lang->line('ajustes'); ?></li>
     <li id="menu_perfil"><a href="<?= site_url('admin/perfil') ?>"><i class="fa fa-cog"></i> <span><?= $this->lang->line('perfil'); ?></span></a></li>
 </ul>

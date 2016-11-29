@@ -4,7 +4,7 @@ class Ticket_modelo extends CI_Model {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('tarea', 'archivo'));
+        $this->load->model(array('tarea', 'archivo', 'factura_modelo'));
     }
 
     public function obtener_tickets($inicio = 0, $cantidad = 9999) {
@@ -130,4 +130,19 @@ class Ticket_modelo extends CI_Model {
         return $this->db->update('Ticket', $datos);
     }
 
+    //Obtener el numero de ticket de una factura
+    public function obtener_ticket_factura($id_factura) {
+        $this->db->select('id_ticket');
+        $this->db->from('Ticket');
+        $this->db->where('factura', $id_factura) -> limit(1);
+        return $this->db->get()->row()->id_ticket;
+    }
+    
+    //Obtenemos el nombre del ticket a partir de su factura
+    public function obtener_nombreticket_factura($id_factura) {
+        $this->db->select('titulo');
+        $this->db->from('Ticket');
+        $this->db->where('factura', $id_factura) -> limit(1);
+        return $this->db->get()->row()->titulo;
+    }
 }
