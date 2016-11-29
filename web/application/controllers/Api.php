@@ -30,7 +30,14 @@ class Api extends REST_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model(array('usuario', 'cliente_modelo', 'ticket_modelo'));
-
+        $this->load->library('encryption');
+        $this->encryption->initialize(
+                array(
+                    'cipher' => 'aes-256',
+                    'mode' => 'ctr',
+                    'key' => config_item('encryption_key')
+                )
+        );
         // $this->methods['login_get']['limit'] = 5;
     }
 
@@ -360,19 +367,10 @@ class Api extends REST_Controller {
             'inicio' => $inicio,
             'fin_previsto' => $fin_previsto
         ];
-        $tarea_creada = $this->tarea->crear_tarea($datos_tarea);
-
-        if ($tarea_creada) {
-            $this->response([
-                'status' => TRUE,
-                'mensaje' => 'Tarea creada correctamente'
-                    ], REST_Controller::HTTP_OK);
-        } else {
-            $this->response([
-                'status' => TRUE,
-                'mensaje' => 'No se ha podido crear la tarea'
-                    ], REST_Controller::HTTP_CONFLICT);
-        }
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->tarea->crear_tarea($datos_tarea)
+                ], REST_Controller::HTTP_OK);
     }
 
     public function editar_tarea_post() {
@@ -412,18 +410,10 @@ class Api extends REST_Controller {
             $datos_tarea['fin_previsto'] = $fin_previsto;
         }
 
-        $tarea_editada = $this->tarea->editar_tarea($id_tarea, $datos_tarea);
-        if ($tarea_editada) {
-            $this->response([
-                'status' => TRUE,
-                'mensaje' => 'Tarea editada correctamente'
-                    ], REST_Controller::HTTP_OK);
-        } else {
-            $this->response([
-                'status' => TRUE,
-                'mensaje' => 'No se ha podido editar la tarea'
-                    ], REST_Controller::HTTP_CONFLICT);
-        }
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->tarea->editar_tarea($id_tarea, $datos_tarea)
+                ], REST_Controller::HTTP_OK);
     }
 
 }
