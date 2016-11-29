@@ -201,3 +201,10 @@ $lang['ticket_eliminado'] = 'El admin %s le ha eliminado de un ticket';
 //$lang['tarea_activada'] = 'El admin %s ha activado una tarea';
 $lang['tarea_completada'] = 'El admin %s ha marcado como completada una tarea';
 $lang['tarea_descompletada'] = 'El admin %s ha marcado como no completada una tarea';
+
+//Facturas
+$lang['ver_factura'] = 'Ver Factura';
+$lang['facturas'] = 'Facturas';
+$lang['ticket'] = 'Ticket';
+$lang['concepto'] = 'Concepto';
+$lang['iva'] = 'IVA';

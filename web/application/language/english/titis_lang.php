@@ -206,3 +206,10 @@ $lang['ticket_eliminado'] = 'Admin %s has deleted you from a ticket';
 //$lang['tarea_activada'] = 'Admin %s has activated a task';
 $lang['tarea_completada'] = 'Admin %s marked as complete a task';
 $lang['tarea_descompletada'] = 'Admin %s marked as not complete a task';
+
+//Facturas
+$lang['ver_factura'] = 'View Receipt';
+$lang['facturas'] = 'Receipts';
+$lang['ticket'] = 'Ticket';
+$lang['concepto'] = 'Price';
+$lang['iva'] = 'VAT';

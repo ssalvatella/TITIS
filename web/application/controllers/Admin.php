@@ -10,7 +10,7 @@ class Admin extends MY_Controller {
         $this->load->helper('security'); // form_validation -> xss_clean
         $this->load->helper('string'); // Generar contraseña aleatoria
         $this->load->library(array('form_validation', 'encryption', 'plantilla'));
-        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion'));
+        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'factura_modelo'));
         $this->encryption->initialize(
                 array(
                     'cipher' => 'aes-256',
@@ -279,4 +279,28 @@ class Admin extends MY_Controller {
         }
     }
 
+    public function facturas() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['titulo'] = $this->lang->line('facturas');
+            $datos['facturas'] = $this->factura_modelo->obtener_facturas();
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.responsive.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugin/datatables/responsive.dataTables.min.css'));
+            $this->plantilla->mostrar('admin', 'facturas', $datos);
+        }
+    }
+    
+    public function ver_factura($id_factura) {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['titulo'] = $this->lang->line('facturas');
+            $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura)[0];
+            $datos['ticket'] = $this->ticket_modelo->obtener_ticket_factura($id_factura)[0];
+            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
+            $this->plantilla->mostrar('admin', 'factura', $datos);
+        }
+    }
 }
