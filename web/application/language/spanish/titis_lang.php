@@ -193,5 +193,6 @@ $lang['notificaciones'] = 'Notificaciones';
 // Notificaciones
 $lang['ticket_asignado'] = 'El admin %s le ha asignado un ticket';
 $lang['ticket_eliminado'] = 'El admin %s le ha eliminado de un ticket';
-$lang['tarea_activada'] = 'El admin %s ha activado una tarea';
+//$lang['tarea_activada'] = 'El admin %s ha activado una tarea';
 $lang['tarea_completada'] = 'El admin %s ha marcado como completada una tarea';
+$lang['tarea_descompletada'] = 'El admin %s ha marcado como no completada una tarea';

@@ -12,8 +12,10 @@ class Idioma_loader {
             if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
                 // Si el idioma del navegador es español carga el idioma español
                 if (substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) == 'es') {
+                    $ci->session->set_userdata('idioma', 'spanish');
                     $ci->lang->load('titis', 'spanish');
                 } else {
+                    $ci->session->set_userdata('idioma', 'english');
                     $ci->lang->load('titis', 'english');
                 }
             } else {
