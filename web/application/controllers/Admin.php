@@ -340,7 +340,7 @@ class Admin extends MY_Controller {
             $id_receptor = $this->input->post('id_receptor');
             $id_emisor = $this->session->userdata('id_usuario');
             $mensaje = $this->input->post('mensaje');
-            $datos = array('usuario' => $id_emisor, 'destinatario' => $id_emisor, 'texto' => $mensaje);
+            $datos = array('usuario' => $id_emisor, 'destinatario' => $id_receptor, 'texto' => $mensaje);
             $this->mensaje->registrar_mensaje($datos);
         }
     }

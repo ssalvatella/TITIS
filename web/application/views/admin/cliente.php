@@ -13,7 +13,7 @@
     </section>
 
     <!-- Modal ENVIAR MENSAJE -->
-    <div class="modal fade" id="modal_mensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" value="<?= $cliente['id_usuario'] ?>" id="modal_mensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

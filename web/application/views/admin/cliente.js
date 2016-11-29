@@ -18,7 +18,7 @@ $(function () {
         e.preventDefault();
         var getUrl = window.location;
         var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-        var id_cliente = getUrl.pathname.split('/')[3];
+        var id_cliente =  $('#modal_mensaje').attr("value");
         var mensaje = $('#mensaje').val();
         $.ajax({
             url: baseURL + '/enviar_mensaje',
@@ -27,10 +27,11 @@ $(function () {
             success: function (data) {
                 $.notify({
                     icon: 'glyphicon glyphicon-ok',
-                    title: '<strong>Mensaje enviado!</strong>'
+                    title: '<strong>Mensaje enviado!</strong>', message: ''
                 },{
                     type: 'success',delay: 100
                 });
+                $('#mensaje').value = "";
             }
         });
         $('#modal_mensaje').modal('hide');
