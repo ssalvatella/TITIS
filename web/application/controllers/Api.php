@@ -200,7 +200,7 @@ class Api extends REST_Controller {
         $cp = $this->post('cp');
         $direccion = $this->post('direccion');
         $pais = $this->post('pais');
-        $ciudad = $this->post('ciudad');
+        $provincia = $this->post('provincia');
         $localidad = $this->post('localidad');
         $nif = $this->post('nif');
         $telefono = $this->post('telefono');
@@ -209,10 +209,10 @@ class Api extends REST_Controller {
         $email_opcional = $this->post('email_opcional');
         $observacion = $this->post('observacion');
 
-        if (!$usuario || !$contrasena || !$email || !$nombre || !$cp || !$direccion || !$pais || !$ciudad || !$localidad || !$nif || !$telefono || !$numero_cuenta) {
+        if (!$usuario || !$contrasena || !$email || !$nombre || !$cp || !$direccion || !$pais || !$provincia || !$localidad || !$nif || !$telefono || !$numero_cuenta) {
             $this->response([
                 'status' => FALSE,
-                'error' => 'Se necesitan los campos tipo, usuario, contrasena, email, nombre, cp, direccion, pais, ciudad, localidad, nif, telefono, numero_cuenta. Campos opcionales: contacto, email_opcional y observacion'
+                'error' => 'Se necesitan los campos tipo, usuario, contrasena, email, nombre, cp, direccion, pais, provincia, localidad, nif, telefono, numero_cuenta. Campos opcionales: contacto, email_opcional y observacion'
                     ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
@@ -222,11 +222,11 @@ class Api extends REST_Controller {
             'email' => $email
         ];
         $datos_cliente = [
-            'nombre' => 'Cliente3',
+            'nombre' => $nombre,
             'cp' => $cp,
             'direccion' => $direccion,
             'pais' => $pais,
-            'ciudad' => $ciudad,
+            'provincia' => $provincia,
             'localidad' => $localidad,
             'nif' => $nif,
             'telefono' => $telefono,

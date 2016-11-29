@@ -14,7 +14,7 @@
     <!-- Contenido -->
     <section class="content">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-lg-offset-1 col-lg-10">
                 <form id="form-registro-empleado" action="<?= site_url('admin/registrar_empleado'); ?>" method="POST" role="form" data-parsley-errors-messages-disabled="true">
                     <div class="box">
                         <div class="box-header with-border">
@@ -47,7 +47,7 @@
                                 <?= form_error('usuario'); ?>
                             </div>
                             <div class="form-group col-md-6 has-feedback <?= form_error('email') != '' ? 'has-error ' : '' ?>">
-                                <label for="exampleInputEmail1"><?= $this->lang->line('email'); ?></label>
+                                <label for="input_email"><?= $this->lang->line('email'); ?></label>
                                 <input type="email" class="form-control" id="input_email" placeholder="<?= $this->lang->line('email'); ?>" name="email" value="<?= set_value('email'); ?>" required>
                                 <?= form_error('email'); ?>
                             </div>

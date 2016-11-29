@@ -75,7 +75,7 @@ class Admin extends MY_Controller {
                 $this->form_validation->set_error_delimiters('<div class="help-block">', '</div>');
                 $this->form_validation->set_rules('usuario', $this->lang->line('usuario'), 'trim|required|xss_clean|is_unique[Usuario.usuario]');
                 $this->form_validation->set_rules('email', $this->lang->line('email'), 'trim|required|valid_email|xss_clean|is_unique[Usuario.email]');
-                $this->form_validation->set_rules('tipo_empleado', $this->lang->line('tipo_empleado'), 'required');
+                $this->form_validation->set_rules('tipo_empleado', $this->lang->line('tipo_empleado'), 'trim|required|xss_clean');
                 if ($this->form_validation->run() == TRUE) {
                     $usuario = $this->input->post('usuario');
                     $contrasena = random_string('alnum', 8);
@@ -108,6 +108,81 @@ class Admin extends MY_Controller {
     public function registrar_cliente() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('nuevo_cliente');
+            $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/BootstrapFormHelpers/css/bootstrap-formhelpers.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/BootstrapFormHelpers/js/bootstrap-formhelpers.min.js'));
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $this->form_validation->set_error_delimiters('<div class="help-block">', '</div>');
+                $this->form_validation->set_rules('usuario', $this->lang->line('usuario'), 'trim|required|xss_clean|is_unique[Usuario.usuario]');
+                $this->form_validation->set_rules('email', $this->lang->line('email'), 'trim|required|valid_email|xss_clean|is_unique[Usuario.email]');
+                $this->form_validation->set_rules('cp', $this->lang->line('cp'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('direccion', $this->lang->line('direccion'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('pais', $this->lang->line('pais'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('provincia', $this->lang->line('provincia'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('localidad', $this->lang->line('localidad'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('nif', $this->lang->line('nif'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('telefono', $this->lang->line('telefono'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('numero_cuenta', $this->lang->line('numero_cuenta'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('contacto', $this->lang->line('contacto'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('email_opcional', $this->lang->line('email_opcional'), 'trim|required|valid_email|xss_clean|is_unique[Cliente.email_opcional]');
+                $this->form_validation->set_rules('observacion', $this->lang->line('observaciones'), 'trim|required|xss_clean');
+
+                if ($this->form_validation->run() == TRUE) {
+                    $usuario = $this->input->post('usuario');
+                    $contrasena = random_string('alnum', 8);
+                    $nombre = $this->input->post('nombre');
+                    $email = $this->input->post('email');
+                    $cp = $this->input->post('cp');
+                    $direccion = $this->input->post('direccion');
+                    $pais = $this->input->post('pais');
+                    $provincia = $this->input->post('provincia');
+                    $localidad = $this->input->post('localidad');
+                    $nif = $this->input->post('nif');
+                    $telefono = $this->input->post('telefono');
+                    $numero_cuenta = $this->input->post('numero_cuenta');
+                    $contacto = $this->input->post('contacto');
+                    $email_opcional = $this->input->post('email_opcional');
+                    $observacion = $this->input->post('observacion');
+
+                    $datos_usuario = [
+                        'usuario' => $usuario,
+                        'contrasena' => $this->encryption->encrypt($contrasena),
+                        'email' => $email
+                    ];
+
+                    $datos_cliente = [
+                        'nombre' => $nombre,
+                        'cp' => $cp,
+                        'direccion' => $direccion,
+                        'pais' => $pais,
+                        'provincia' => $provincia,
+                        'localidad' => $localidad,
+                        'nif' => $nif,
+                        'telefono' => $telefono,
+                        'numero_cuenta' => $numero_cuenta
+                    ];
+                    if ($contacto != NULL) {
+                        $datos_cliente['contacto'] = $contacto;
+                    }
+                    if ($email_opcional != NULL) {
+                        $datos_cliente['email_opcional'] = $email_opcional;
+                    }
+                    if ($observacion != NULL) {
+                        $datos_cliente['observacion'] = $observacion;
+                    }
+                    $cliente_registrado = $this->cliente_modelo->registrar($datos_usuario, $datos_cliente);
+                    if ($cliente_registrado == TRUE) {
+                        $datos_email = array(
+                            'usuario' => $usuario,
+                            'contrasena' => $contrasena,
+                        );
+                        $this->enviar_email('plantilla_email_registro', $email, $this->lang->line('registro_completado'), $datos_email);
+                        $datos['mensaje'] = sprintf($this->lang->line('cliente_registrado'), '<b>' . $usuario . '</b>');
+                    } else {
+                        $datos['mensaje_error'] = $this->lang->line('registro_incorrecto');
+                    }
+                }
+            }
             $this->plantilla->mostrar('admin', 'nuevo_cliente', $datos);
         }
     }
@@ -264,8 +339,8 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $id_receptor = $this->input->post('id_receptor');
             $id_emisor = $this->session->userdata('id_usuario');
-            $mensaje =  $this->input->post('mensaje');
-            $datos = array('usuario' => $id_emisor, 'destinatario' => $id_emisor, 'texto'=>$mensaje);
+            $mensaje = $this->input->post('mensaje');
+            $datos = array('usuario' => $id_emisor, 'destinatario' => $id_emisor, 'texto' => $mensaje);
             $this->mensaje->registrar_mensaje($datos);
         }
     }
