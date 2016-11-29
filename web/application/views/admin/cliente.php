@@ -55,7 +55,7 @@
 
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
-                                <b>Tickets</b> <a class="pull-right"><?= $numero_tickets; ?></a>
+                                <b><?= $this->lang->line('tickets'); ?></b> <a class="pull-right"><?= $numero_tickets; ?></a>
                             </li>
                             <li class="list-group-item">
                                 <b><?= $this->lang->line('comentarios'); ?></b> <a class="pull-right"><?= $numero_mensajes - $numero_tickets; ?></a>
@@ -126,35 +126,39 @@
                             <div class="row">
 
                                 <?php
-
                                 foreach ($tickets as $ticket) {
 
-                                    echo '<div class="col-md-3 col-sm-6 col-xs-12">';
+                                    echo '<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">';
                                     echo '<div class="info-box bg-';
                                     switch ($ticket['estado']) {
-                                        case TICKET_FINALIZADO: echo'green'; break;
-                                        case TICKET_EN_PROCESO: echo'aqua'; break;
-                                        case TICKET_PENDIENTE: echo'yellow'; break;
+                                        case TICKET_FINALIZADO: echo'green';
+                                            break;
+                                        case TICKET_EN_PROCESO: echo'aqua';
+                                            break;
+                                        case TICKET_PENDIENTE: echo'yellow';
+                                            break;
                                     } echo '">';
                                     echo ' <span class="info-box-icon"><i class="';
                                     switch ($ticket['estado']) {
-                                        case TICKET_FINALIZADO: echo'glyphicon glyphicon-ok" data-html="true" data-toggle="tooltip" data-placement="top" title="'.  $this->lang->line('finalizado'). '<br  />' .intval($ticket['progreso']) . ' %"'; break;
-                                        case TICKET_EN_PROCESO: echo'fa fa-exchange" data-html="true" data-toggle="tooltip" data-placement="top" title="'.  $this->lang->line('en_proceso'). '<br  />' .intval($ticket['progreso']) . ' %"';break;
-                                        case TICKET_PENDIENTE: echo'fa fa-exclamation-triangle" data-html="true" data-toggle="tooltip" data-placement="top" title="'.  $this->lang->line('pendiente'). '<br  />' .intval($ticket['progreso']) . ' %"';break;
+                                        case TICKET_FINALIZADO: echo'glyphicon glyphicon-ok" data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('finalizado') . '<br  />' . intval($ticket['progreso']) . ' %"';
+                                            break;
+                                        case TICKET_EN_PROCESO: echo'fa fa-exchange" data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('en_proceso') . '<br  />' . intval($ticket['progreso']) . ' %"';
+                                            break;
+                                        case TICKET_PENDIENTE: echo'fa fa-exclamation-triangle" data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('pendiente') . '<br  />' . intval($ticket['progreso']) . ' %"';
+                                            break;
                                     } echo '></i></span>';
 
                                     echo '<div class="info-box-content">';
-                                    echo '<span class="info-box-text">'. $ticket['titulo'] .'</span>';
-                                    echo ' <span class="info-box-number">'. $ticket['tareas_completadas']. '/' . $ticket['total_tareas'].' ' . strtolower($this->lang->line('tareas')) .'</span>';
+                                    echo '<span class="info-box-text">' . $ticket['titulo'] . '</span>';
+                                    echo ' <span class="info-box-number">' . $ticket['tareas_completadas'] . '/' . $ticket['total_tareas'] . ' ' . strtolower($this->lang->line('tareas')) . '</span>';
                                     echo ' <div class="progress">';
-                                    echo '<div class="progress-bar" style="width: '.$ticket['progreso'].'%"></div>';
+                                    echo '<div class="progress-bar" style="width: ' . $ticket['progreso'] . '%"></div>';
                                     echo '</div>';
-                                    echo'<span class="progress-description">'. $this->lang->line('fecha').': ' .date('d/m/Y H:i', strtotime($ticket['inicio'])) .'</span>';
-                                    echo '</div>';echo '</div>';
+                                    echo'<span class="progress-description">' . date('d/m/Y H:i', strtotime($ticket['inicio'])) . '</span>';
                                     echo '</div>';
-
+                                    echo '</div>';
+                                    echo '</div>';
                                 }
-
                                 ?>
                             </div>
                         </div>
@@ -164,35 +168,35 @@
                             <ul class="timeline timeline-inverse">
 
 
-                        <?php
-                            for ($i = 0; $i < count($tickets); ++$i) {
+                                <?php
+                                for ($i = 0; $i < count($tickets); ++$i) {
 
-                                $fecha_ticket = date('d/m/Y H:i', strtotime($tickets[$i]['inicio']));
-                                if ($i == 0) {
-                                    echo '<li class="time-label">
-                                    <span class="bg-red">
-                                        ' . date('j M. Y', strtotime($tickets[$i]['inicio'])) . '
-                                    </span>
-                                  </li>';
-                                } else {
-                                    $fecha_ticket_anterior = date('d/m/Y H:i', strtotime($tickets[$i - 1]['inicio']));
-                                    if (($fecha_ticket - $fecha_ticket_anterior) < 0) {
+                                    $fecha_ticket = date('d/m/Y H:i', strtotime($tickets[$i]['inicio']));
+                                    if ($i == 0) {
                                         echo '<li class="time-label">
                                     <span class="bg-red">
                                         ' . date('j M. Y', strtotime($tickets[$i]['inicio'])) . '
                                     </span>
                                   </li>';
+                                    } else {
+                                        $fecha_ticket_anterior = date('d/m/Y H:i', strtotime($tickets[$i - 1]['inicio']));
+                                        if (($fecha_ticket - $fecha_ticket_anterior) < 0) {
+                                            echo '<li class="time-label">
+                                    <span class="bg-red">
+                                        ' . date('j M. Y', strtotime($tickets[$i]['inicio'])) . '
+                                    </span>
+                                  </li>';
+                                        }
                                     }
-                                }
 
-                                echo '<li style="margin-right: 0px;">
+                                    echo '<li style="margin-right: 0px;">
                                 <i class="fa fa-ticket bg-blue"></i>   
                                 <div class="timeline-item">
                                     <span class="time"><i class="fa fa-clock-o"></i> &nbsp; ' . date('H:i', strtotime($tickets[$i]['inicio'])) . '</span>
-                                    <h3 class="timeline-header"><a href="#">' .  $cliente['nombre'] . '</a> ' . $this->lang->line('cliente_envio_ticket') . '#'. $tickets[$i]['id_ticket'] .' - ' .$tickets[$i]['titulo'] .'</h3>
+                                    <h3 class="timeline-header"><a href="#">' . $cliente['nombre'] . '</a> ' . $this->lang->line('cliente_envio_ticket') . '#' . $tickets[$i]['id_ticket'] . ' - ' . $tickets[$i]['titulo'] . '</h3>
                                 </div>
                               </li>';
-                            }
+                                }
 
                         if (count($tickets) >0) {
                             $fecha_ultimo_ticket = date('d/m/Y H:i', strtotime($tickets[count($tickets) - 1]['inicio']));
@@ -206,6 +210,11 @@
                             }
                         } else {
                             echo '<li class="time-label">
+                                $fecha_ultimo_ticket = date('d/m/Y H:i', strtotime($tickets[count($tickets) - 1]['inicio']));
+                                $fecha_registro = date('d/m/Y H:i', strtotime($cliente['fecha_registro']));
+
+                                if (($fecha_ultimo_ticket - $fecha_registro) > 0) {
+                                    echo '<li class="time-label">
                                     <span class="bg-red">
                                         ' . date('j M. Y', strtotime($cliente['fecha_registro'])) . '
                                     </span>
@@ -213,12 +222,14 @@
                         }
 
                         ?>
+                                }
+                                ?>
 
                                 <li style="margin-right: 0px;">
                                     <i class="fa fa-address-card bg-green"></i>
                                     <div class="timeline-item">
                                         <span class="time"><i class="fa fa-clock-o"></i> <?= date('H:i', strtotime($cliente['fecha_registro'])); ?> </span>
-                                        <h3 class="timeline-header"><a href="#"><?=   $cliente['nombre'] . '</a> ' . $this->lang->line('cliente_se_registro') ?> </h3>
+                                        <h3 class="timeline-header"><a href="#"><?= $cliente['nombre'] . '</a> ' . $this->lang->line('cliente_se_registro') ?> </h3>
                                     </div>
                                 </li>
 

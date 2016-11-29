@@ -24,6 +24,7 @@ class Api extends REST_Controller {
      * registrar_empleado
      * registrar_cliente
      * crear_tarea
+     * editar_tarea
      */
     public function __construct() {
         parent::__construct();
@@ -33,9 +34,31 @@ class Api extends REST_Controller {
         // $this->methods['login_get']['limit'] = 5;
     }
 
-    public function a_get() {
-        // PRUEBA
-        $this->response(['asd' => 'qwerty'], REST_Controller::HTTP_OK);
+    public function index_get() {
+        $this->response([
+            'info' => 'TITIS - API Restful',
+            'metodos_GET' => [
+                'usuario' => [
+                    'info' => 'Obtiene los datos de un usuario',
+                    'param_obligatorios' => [
+                        'usuario' => 'Nombre del usuario'
+                    ],
+                    'param_opcionales' => [
+                    ]
+                ]
+            ],
+            'metodos_POST' => [
+                'login' => [
+                    'info' => 'Inicia sesión',
+                    'param_obligatorios' => [
+                        'usuario' => 'Nombre del usuario',
+                        'contrasena' => 'Constraseña del usuario',
+                    ],
+                    'param_opcionales' => [
+                    ]
+                ]
+            ]
+                ], REST_Controller::HTTP_OK);
     }
 
     public function login_post() {
@@ -348,6 +371,57 @@ class Api extends REST_Controller {
             $this->response([
                 'status' => TRUE,
                 'mensaje' => 'No se ha podido crear la tarea'
+                    ], REST_Controller::HTTP_CONFLICT);
+        }
+    }
+
+    public function editar_tarea_post() {
+        $id_tarea = $this->input->post('id_tarea');
+        $id_tecnico = $this->input->post('id_tecnico');
+        $descripcion = $this->input->post('descripcion_tarea');
+        $inicio = $this->input->post('inicio');
+        $fin_previsto = $this->input->post('fin_previsto');
+
+        if (!$id_tarea) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_tarea'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        if (!$id_tecnico && !$descripcion && !$inicio && !$fin_previsto) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesitan al menos alguno de los siguientes campos: id_tecnico, descripcion, inicio o fin_previsto'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        $datos_tarea = [
+            'estado' => TAREA_EN_PROCESO
+        ];
+        if ($id_tecnico != NULL) {
+            $datos_tarea['tecnico'] = $id_tecnico;
+        }
+        if ($descripcion != NULL) {
+            $datos_tarea['nombre'] = $descripcion;
+        }
+        if ($inicio != NULL) {
+            $datos_tarea['inicio'] = $inicio;
+        }
+        if ($fin_previsto != NULL) {
+            $datos_tarea['fin_previsto'] = $fin_previsto;
+        }
+
+        $tarea_editada = $this->tarea->editar_tarea($id_tarea, $datos_tarea);
+        if ($tarea_editada) {
+            $this->response([
+                'status' => TRUE,
+                'mensaje' => 'Tarea editada correctamente'
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => TRUE,
+                'mensaje' => 'No se ha podido editar la tarea'
                     ], REST_Controller::HTTP_CONFLICT);
         }
     }
