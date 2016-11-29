@@ -51,7 +51,7 @@
 
                         <h3 class="profile-username text-center"><?= $cliente['nombre']; ?></h3>
 
-                        <p class="text-muted text-center"><?= $cliente['ciudad']; ?></p>
+                        <p class="text-muted text-center"><?= $cliente['provincia']; ?></p>
 
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
@@ -214,7 +214,6 @@
                                         ' . date('j M. Y', strtotime($cliente['fecha_registro'])) . '
                                     </span>
                                   </li>';
-                                    
                                 }
 
                                 ?>
@@ -269,7 +268,7 @@
                                     <label for="inputProvincia" class="col-sm-2 control-label"><?= $this->lang->line('provincia'); ?></label>
 
                                     <div class="col-sm-10">
-                                        <input value="<?= $cliente['ciudad'] ?>" type="text" class="form-control" id="inputProvincia" placeholder="<?= $this->lang->line('provincia'); ?>">
+                                        <input value="<?= $cliente['provincia'] ?>" type="text" class="form-control" id="inputProvincia" placeholder="<?= $this->lang->line('provincia'); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">

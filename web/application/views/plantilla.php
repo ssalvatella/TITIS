@@ -41,6 +41,59 @@
                     <!-- Menú Navbar Derecho -->
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
+
+                            <!-- Messages: style can be found in dropdown.less-->
+                            <li class="dropdown messages-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="label label-success"><?= count($mensajes_privados) ?></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <?php
+                                    echo '<li class="header">';
+                                        if (count($mensajes_privados) == 0) {
+                                            echo $this->lang->line('no_hay_mensajes');
+                                        } else if (count($mensajes_privados) == 1) {
+                                            echo $this->lang->line('tiene_1_mensaje');
+                                        } else {
+                                            echo $this->lang->line('tiene') . count($mensajes_privados) . $this->lang->line('mensajes') ;
+                                        }
+                                        echo '</li>';
+                                    ?>
+                                    <li>
+                                        <ul class="menu">
+
+                                        <?php
+
+                                            foreach ($mensajes_privados as $mensaje_privado) {
+                                                $fecha_mensaje = new DateTime($mensaje_privado['fecha']);
+                                                $fecha_actual = new DateTime("now");
+                                                $intervaloTiempo = date_diff($fecha_mensaje, $fecha_actual);
+                                                if ($intervaloTiempo->d > 0) {
+                                                    $diferencia = $intervaloTiempo->format('%a ' . $this->lang->line('dias'));
+                                                } else if($intervaloTiempo->h > 0) {
+                                                    $diferencia = $intervaloTiempo->format('%h h %i min');
+                                                } else  {
+                                                    $diferencia = $intervaloTiempo->format('%i min');
+                                                }
+
+                                                echo '    <li>'; // empieza el mensaje
+                                                echo '        <a href="#">';
+                                                echo '            <div class="pull-left">';
+                                                echo '                  <img src="' . site_url('assets/img/avatar/1.png').'" class="img-circle" alt="User Image">';
+                                                echo '            </div>';
+                                                echo '            <h4>  '. $mensaje_privado['usuario'] . ' <small><i class="fa fa-clock-o"></i> '.$diferencia.'</small> </h4>';
+                                                echo '            <p>'. $mensaje_privado['texto'] . '</p>';
+                                                echo '        </a>';
+                                                echo '    </li>';
+                                            }
+                                        ?>
+                                        </ul>
+                                    </li>
+                                    <li class="footer"><a href="#"><?= $this->lang->line('ver_todos_los_mensajes') ?></a></li>
+                                </ul>
+                            </li>
+
                             <!-- Menú de notificaciones -->
                             <li class="dropdown notifications-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">

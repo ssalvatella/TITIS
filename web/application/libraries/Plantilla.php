@@ -41,6 +41,7 @@ class Plantilla {
                 $this->datos['js_pagina'] = read_file('application/views/' . $carpeta . '/' . $pagina . '.js');
             }
             $this->datos['notificaciones'] = $this->CI->notificacion->obtener_notificaciones($this->CI->session->userdata('id_usuario'));
+            $this->datos['mensajes_privados'] = $this->CI->mensaje->ver_mensajes_privados($this->CI->session->userdata('id_usuario'), 'No vistos');
             $this->CI->load->view('plantilla.php', $this->datos);
         }
     }

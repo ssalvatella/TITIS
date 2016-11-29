@@ -45,7 +45,7 @@
                                               <td>' . $cliente['email'] . '</td>
                                               <td>' . $cliente['nombre'] . '</td>
                                               <td>' . $cliente['pais'] . '</td>
-                                              <td>' . $cliente['ciudad'] . '</td>
+                                              <td>' . $cliente['localidad'] . '</td>
                                               <td>' . $cliente['telefono'] . '</td>
                                               <td align="center">';
                                     if ($cliente['activo'] == 1) {

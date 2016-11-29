@@ -146,6 +146,14 @@ $lang['ticket_enviado_mensaje'] = 'The ticket has been sent correctly. Our team 
 $lang['ticket_error'] = 'Error';
 $lang['ticket_error_mensaje'] = 'An unexpected error has occurred. We will try to resolve this issue as soon as possible.';
 $lang['registrado'] = 'Registered';
+
+$lang['dias'] = ' days';
+$lang['tiene_1_mensaje'] = 'You have a message';
+$lang['no_hay_mensajes'] = 'No messages';
+$lang['tiene'] = 'You have ';
+$lang['mensajes'] = ' messages';
+$lang['ver_todos_los_mensajes'] = 'See All Messages';
+
 // ---------------------------------------------
 
 // ------ BARRA LATERAL DERECHA ----

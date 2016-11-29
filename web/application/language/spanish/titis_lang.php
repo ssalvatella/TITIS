@@ -144,6 +144,12 @@ $lang['ticket_error_mensaje'] = 'Ha ocurrido un error inesperado. Intentaremos r
 // ---------------------------------------------
 
 // ------ BARRA LATERA DERECHA ----
+$lang['dias'] = ' dias';
+$lang['tiene_1_mensaje'] = 'Tiene un mensaje';
+$lang['no_hay_mensajes'] = 'No tiene mensajes';
+$lang['tiene'] = 'Tiene ';
+$lang['mensajes'] = ' mensajes';
+$lang['ver_todos_los_mensajes'] = 'Ver Todos';
 
 $lang['opciones_de_diseño'] = 'Opciones de diseño';
 
