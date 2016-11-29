@@ -106,6 +106,7 @@ $lang['localidad'] = 'Location';
 $lang['provincia'] = 'Province';
 
 $lang['cliente_envio_ticket'] = 'sent the ticket ';
+$lang['cliente_se_registro'] = ' registered in TITIS';
 
 // CLIENTE INICIO ------------------------------
 $lang['tickets_enviados'] = 'Sent Tickets';

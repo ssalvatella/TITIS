@@ -164,7 +164,27 @@
                                 </div>
                               </li>';
                             }
+
+                        $fecha_ultimo_ticket = date('d/m/Y H:i', strtotime($tickets[count($tickets) - 1]['inicio']));
+                        $fecha_registro =  date('d/m/Y H:i', strtotime($cliente['fecha_registro']));
+
+                        if (($fecha_ultimo_ticket - $fecha_registro) > 0) {
+                            echo '<li class="time-label">
+                                    <span class="bg-red">
+                                        ' . date('j M. Y', strtotime($cliente['fecha_registro'])) . '
+                                    </span>
+                                  </li>';
+                        }
                         ?>
+
+                                <li style="margin-right: 0px;">
+                                    <i class="fa fa-address-card bg-green"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fa fa-clock-o"></i> <?= date('H:i', strtotime($cliente['fecha_registro'])); ?> </span>
+                                        <h3 class="timeline-header"><a href="#"><?=   $cliente['nombre'] . '</a> ' . $this->lang->line('cliente_se_registro') ?> </h3>
+                                    </div>
+                                </li>
+
                             </ul>
                         </div>
                         <!-- /.tab-pane -->
