@@ -193,7 +193,7 @@
                                 <i class="fa fa-ticket bg-blue"></i>   
                                 <div class="timeline-item">
                                     <span class="time"><i class="fa fa-clock-o"></i> &nbsp; ' . date('H:i', strtotime($tickets[$i]['inicio'])) . '</span>
-                                    <h3 class="timeline-header"><a href="#">' . $cliente['nombre'] . '</a> ' . $this->lang->line('cliente_envio_ticket') . '#' . $tickets[$i]['id_ticket'] . ' - ' . $tickets[$i]['titulo'] . '</h3>
+                                    <h3 class="timeline-header"><a href="">' . $cliente['nombre'] . '</a> ' . $this->lang->line('cliente_envio_ticket') . '<a href="'. site_url('admin/ver_ticket/' . $tickets[$i]['id_ticket']) .'">' . $tickets[$i]['titulo'] .'</a></h3>
                                 </div>
                               </li>';
                                 }
@@ -209,20 +209,14 @@
                                   </li>';
                             }
                         } else {
-                            echo '<li class="time-label">
-                                $fecha_ultimo_ticket = date('d/m/Y H:i', strtotime($tickets[count($tickets) - 1]['inicio']));
-                                $fecha_registro = date('d/m/Y H:i', strtotime($cliente['fecha_registro']));
-
-                                if (($fecha_ultimo_ticket - $fecha_registro) > 0) {
                                     echo '<li class="time-label">
                                     <span class="bg-red">
                                         ' . date('j M. Y', strtotime($cliente['fecha_registro'])) . '
                                     </span>
                                   </li>';
-                        }
-
-                        ?>
+                                    
                                 }
+
                                 ?>
 
                                 <li style="margin-right: 0px;">

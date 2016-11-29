@@ -22,7 +22,7 @@ class Mensaje extends CI_Model {
     public function contar_comentarios_usuario($id_usuario) {
         $this->db->from('Mensaje');
         $this->db->where('usuario', $id_usuario);
-        $this->db->where('ticket', 'NULL');
+        $this->db->where('ticket !=', 'NULL');
         return $this->db->get()->num_rows();
     }
 
