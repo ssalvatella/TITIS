@@ -149,10 +149,12 @@ $lang['registrado'] = 'Registered';
 
 $lang['dias'] = ' days';
 $lang['tiene_1_mensaje'] = 'You have a message';
+$lang['tiene_1_notificacion'] = 'You have a notification';
 $lang['no_hay_mensajes'] = 'No messages';
+$lang['no_hay_notificaciones'] = 'No notifications';
 $lang['tiene'] = 'You have ';
 $lang['mensajes'] = ' messages';
-$lang['ver_todos_los_mensajes'] = 'See All Messages';
+//$lang['ver_todos_los_mensajes'] = 'See All Messages';
 
 // ---------------------------------------------
 

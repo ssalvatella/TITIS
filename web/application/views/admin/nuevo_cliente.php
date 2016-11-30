@@ -56,14 +56,14 @@
                                 <input type="email" class="form-control" id="input_email" placeholder="<?= $this->lang->line('email'); ?>" name="email" value="<?= set_value('email'); ?>" required>
                                 <?= form_error('email'); ?>
                             </div>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('nombre') != '' ? 'has-error ' : '' ?>">
-                                <label for="input_nombre"><?= $this->lang->line('nombre'); ?></label>
-                                <input type="text" class="form-control" id="input_nombre" placeholder="<?= $this->lang->line('nombre'); ?>" name="usuario" value="<?= set_value('nombre'); ?>" required>
-                                <?= form_error('nombre'); ?>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('email_opcional') != '' ? 'has-error ' : '' ?>">
+                                <label for="input_email_opcional"><?= $this->lang->line('email_opcional'); ?></label>
+                                <input type="email" class="form-control" id="input_email_opcional" placeholder="<?= $this->lang->line('email_opcional'); ?>" name="email_opcional" value="<?= set_value('email_opcional'); ?>">
+                                <?= form_error('email_opcional'); ?>
                             </div>
                             <div class="form-group col-md-6 has-feedback <?= form_error('pais') != '' ? 'has-error ' : '' ?>">
                                 <label for="div_pais"><?= $this->lang->line('pais'); ?></label>
-                                <div id="div_pais" class="bfh-selectbox bfh-countries" data-country="<?= set_value('pais'); ?>" data-flags="true" name="pais">
+                                <div id="div_pais" class="bfh-selectbox bfh-countries" data-country="<?= set_value('pais'); ?>" data-flags="true" name="pais" required>
                                     <input type="hidden" value="">
                                     <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
                                         <span class="bfh-selectbox-option input-medium" data-option=""></span>

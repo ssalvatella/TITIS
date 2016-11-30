@@ -9,20 +9,20 @@
             <li class="active"></i><?= $this->lang->line('facturas'); ?></li>
         </ol>
     </section>
-    
+
     <!-- Contenido -->
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                    
-                   <!-- <div id = "cargador" class="overlay">
-                        <i class="fa fa-refresh fa-spin"></i>
-                    </div> -->
-                    
+
+                    <!-- <div id = "cargador" class="overlay">
+                         <i class="fa fa-refresh fa-spin"></i>
+                     </div> -->
+
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <a href="javascript:history.go(0)" class="btn btn-app"><i class="fa fa-repeat"></i><?= $this->lang->line('actualizar'); ?></a>
+                        <a href="javascript:history.go(0)" class="btn btn-app"><i class="fa fa-spin fa-refresh"></i><?= $this->lang->line('actualizar'); ?></a>
                         <table data-link="" id="facturas" class="table table-bordered table-hover display nowrap">
                             <thead>
                                 <tr>
@@ -34,22 +34,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
-                                <?php 
-                                
+                                <?php
                                 foreach ($facturas as $factura) {
-                                    echo '<tr style="cursor: pointer;">
-                                                <td><a href="'.site_url('admin/ver_factura/'. $factura['id_factura']) .'"></a>'. $factura['id_factura'].'</td>
-                                                <td><a href="'.site_url('admin/ver_cliente/'. $factura['cliente']) . '">'. $factura['nombre_cliente']. '</a></td>
-                                                <td><a href="'.site_url('admin/ver_ticket/'. $factura['ticket']) . '">'. $factura['ticket']. '</a></td>
-                                                <td>'. $factura['precio'] . '</td>
-                                                <td>'. $factura['iva'] . '</td>';
+                                  echo '<tr style="cursor: pointer;">
+                                            <td><a href="' . site_url('admin/ver_factura/' . $factura['id_factura']) . '"></a>' . $factura['id_factura'] . '</td>
+                                            <td><a href="' . site_url('admin/ver_cliente/' . $factura['cliente']) . '">' . $factura['nombre_cliente'] . '</a></td>
+                                            <td><a href="' . site_url('admin/ver_ticket/' . $factura['ticket']) . '">' . $factura['ticket'] . '</a></td>
+                                            <td>' . $factura['precio'] . '</td>
+                                            <td>' . $factura['iva'] . '</td>
+                                        </tr>
+                                         ';
                                 }
-                                
-                                
                                 ?>
                             </tbody>
-                            
+
                             <tfoot>
                                 <tr>
                                     <th><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('numero'); ?></th>

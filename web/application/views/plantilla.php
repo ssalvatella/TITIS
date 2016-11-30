@@ -46,51 +46,65 @@
                             <li class="dropdown messages-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-envelope-o"></i>
-                                    <span class="label label-success"><?= count($mensajes_privados) ?></span>
+                                    <?php if (count($mensajes_privados) >= 1) { ?>
+                                        <span class="label label-success"><?= count($mensajes_privados) ?></span>
+                                    <?php } ?>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <?php
-                                    echo '<li class="header">';
+                                    <li class="header">
+                                        <?php
                                         if (count($mensajes_privados) == 0) {
                                             echo $this->lang->line('no_hay_mensajes');
                                         } else if (count($mensajes_privados) == 1) {
                                             echo $this->lang->line('tiene_1_mensaje');
                                         } else {
-                                            echo $this->lang->line('tiene') . count($mensajes_privados) . $this->lang->line('mensajes') ;
+                                            echo $this->lang->line('tiene') . count($mensajes_privados) . $this->lang->line('mensajes');
                                         }
-                                        echo '</li>';
-                                    ?>
+                                        ?>
+                                    </li>
                                     <li>
                                         <ul class="menu">
-
-                                        <?php
-
+                                            <?php
                                             foreach ($mensajes_privados as $mensaje_privado) {
                                                 $fecha_mensaje = new DateTime($mensaje_privado['fecha']);
                                                 $fecha_actual = new DateTime("now");
-                                                $intervaloTiempo = date_diff($fecha_mensaje, $fecha_actual);
-                                                if ($intervaloTiempo->d > 0) {
-                                                    $diferencia = $intervaloTiempo->format('%a ' . $this->lang->line('dias'));
-                                                } else if($intervaloTiempo->h > 0) {
-                                                    $diferencia = $intervaloTiempo->format('%h h %i min');
-                                                } else  {
-                                                    $diferencia = $intervaloTiempo->format('%i min');
+                                                $intervalo_tiempo = date_diff($fecha_mensaje, $fecha_actual);
+                                                if ($intervalo_tiempo->d > 0) {
+                                                    $diferencia = $intervalo_tiempo->format('%a ' . $this->lang->line('dias'));
+                                                } else if ($intervalo_tiempo->h > 0) {
+                                                    $diferencia = $intervalo_tiempo->format('%h h %i min');
+                                                } else {
+                                                    $diferencia = $intervalo_tiempo->format('%i min');
                                                 }
-
-                                                echo '    <li>'; // empieza el mensaje
-                                                echo '        <a href="#">';
-                                                echo '            <div class="pull-left">';
-                                                echo '                  <img src="' . site_url('assets/img/avatar/1.png').'" class="img-circle" alt="User Image">';
-                                                echo '            </div>';
-                                                echo '            <h4>  '. $mensaje_privado['usuario'] . ' <small><i class="fa fa-clock-o"></i> '.$diferencia.'</small> </h4>';
-                                                echo '            <p>'. $mensaje_privado['texto'] . '</p>';
-                                                echo '        </a>';
-                                                echo '    </li>';
-                                            }
-                                        ?>
+                                                ?>
+                                                <li>
+                                                    <a href="#">';
+                                                        <div class="pull-left">';
+                                                            <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="img-circle" alt="<?= $this->lang->line('imagen_perfil'); ?>">
+                                                        </div>
+                                                        <h4><?= $mensaje_privado['usuario']; ?><small><i class="fa fa-clock-o"></i><?= $diferencia; ?></small></h4>
+                                                        <p><?= $mensaje_privado['texto']; ?></p>
+                                                    </a>
+                                                </li>
+                                            <?php } ?>
                                         </ul>
                                     </li>
-                                    <li class="footer"><a href="#"><?= $this->lang->line('ver_todos_los_mensajes') ?></a></li>
+                                    <li class="footer"><a href="<?php
+                                        switch ($this->session->tipo_usuario) {
+                                            case USUARIO_ADMIN:
+                                                echo site_url('admin/mensajes');
+                                                break;
+                                            case USUARIO_TECNICO_ADMIN:
+                                                echo site_url('tecnico_admin/mensajes');
+                                                break;
+                                            case USUARIO_TECNICO:
+                                                echo site_url('tecnico/mensajes');
+                                                break;
+                                            case USUARIO_CLIENTE:
+                                                echo site_url('cliente/mensajes');
+                                                break;
+                                        };
+                                        ?>"><?= $this->lang->line('ver_todos') ?></a></li>
                                 </ul>
                             </li>
 
@@ -103,7 +117,17 @@
                                     <?php } ?>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header"><?= sprintf($this->lang->line('tiene_notificaciones'), count($notificaciones)); ?></li>
+                                    <li class="header">
+                                        <?php
+                                        if (count($notificaciones) == 0) {
+                                            echo $this->lang->line('no_hay_notificaciones');
+                                        } else if (count($notificaciones) == 1) {
+                                            echo $this->lang->line('tiene_1_notificacion');
+                                        } else {
+                                            echo sprintf($this->lang->line('tiene_notificaciones'), count($notificaciones));
+                                        }
+                                        ?>
+                                    </li>
                                     <li>
                                         <ul class="menu">
                                             <?php foreach ($notificaciones as $n) { ?>
