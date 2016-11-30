@@ -43,12 +43,22 @@
                             <?php } ?>
                             <div class="form-group col-md-6 has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?>">
                                 <label for="input_usuario"><?= $this->lang->line('usuario'); ?></label>
-                                <input type="text" class="form-control" id="input_usuario" placeholder="<?= $this->lang->line('usuario'); ?>" name="usuario" value="<?= set_value('usuario'); ?>" required>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="input_usuario" placeholder="<?= $this->lang->line('usuario'); ?>" name="usuario" value="<?= set_value('usuario'); ?>" required>
+                                </div>    
                                 <?= form_error('usuario'); ?>
                             </div>
                             <div class="form-group col-md-6 has-feedback <?= form_error('email') != '' ? 'has-error ' : '' ?>">
                                 <label for="input_email"><?= $this->lang->line('email'); ?></label>
-                                <input type="email" class="form-control" id="input_email" placeholder="<?= $this->lang->line('email'); ?>" name="email" value="<?= set_value('email'); ?>" required>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="ion ion-android-mail"></i>
+                                    </div>
+                                    <input type="email" class="form-control" id="input_email" placeholder="<?= $this->lang->line('email'); ?>" name="email" value="<?= set_value('email'); ?>" required>
+                                </div>   
                                 <?= form_error('email'); ?>
                             </div>
                             <div class="form-group col-md-6 has-feedback <?= form_error('tipo_empleado') != '' ? 'has-error ' : '' ?>" id="radio_tipo">

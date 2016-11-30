@@ -109,12 +109,20 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('nuevo_cliente');
             $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
-            $this->plantilla->poner_css(site_url('assets/plugins/BootstrapFormHelpers/css/bootstrap-formhelpers.min.css'));
-            $this->plantilla->poner_js(site_url('assets/plugins/BootstrapFormHelpers/js/bootstrap-formhelpers.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/flagstrap/css/flags.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/flagstrap/js/jquery.flagstrap.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.es-ES.js'));
+            }
+            $this->plantilla->poner_js(site_url('assets/plugins/input-mask/jquery.inputmask.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/input-mask/jquery.inputmask.extensions.js'));
             if ($this->input->server('REQUEST_METHOD') == 'POST') {
                 $this->form_validation->set_error_delimiters('<div class="help-block">', '</div>');
                 $this->form_validation->set_rules('usuario', $this->lang->line('usuario'), 'trim|required|xss_clean|is_unique[Usuario.usuario]');
                 $this->form_validation->set_rules('email', $this->lang->line('email'), 'trim|required|valid_email|xss_clean|is_unique[Usuario.email]');
+                $this->form_validation->set_rules('nombre', $this->lang->line('nombre'), 'trim|required|xss_clean');
                 $this->form_validation->set_rules('cp', $this->lang->line('cp'), 'trim|required|xss_clean');
                 $this->form_validation->set_rules('direccion', $this->lang->line('direccion'), 'trim|required|xss_clean');
                 $this->form_validation->set_rules('pais', $this->lang->line('pais'), 'trim|required|xss_clean');
@@ -125,7 +133,7 @@ class Admin extends MY_Controller {
                 $this->form_validation->set_rules('numero_cuenta', $this->lang->line('numero_cuenta'), 'trim|required|xss_clean');
                 $this->form_validation->set_rules('contacto', $this->lang->line('contacto'), 'trim|required|xss_clean');
                 $this->form_validation->set_rules('email_opcional', $this->lang->line('email_opcional'), 'trim|required|valid_email|xss_clean|is_unique[Cliente.email_opcional]');
-                $this->form_validation->set_rules('observacion', $this->lang->line('observaciones'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('observaciones', $this->lang->line('observaciones'), 'trim|required|xss_clean');
 
                 if ($this->form_validation->run() == TRUE) {
                     $usuario = $this->input->post('usuario');
@@ -142,7 +150,7 @@ class Admin extends MY_Controller {
                     $numero_cuenta = $this->input->post('numero_cuenta');
                     $contacto = $this->input->post('contacto');
                     $email_opcional = $this->input->post('email_opcional');
-                    $observacion = $this->input->post('observacion');
+                    $observacion = $this->input->post('observaciones');
 
                     $datos_usuario = [
                         'usuario' => $usuario,
@@ -170,6 +178,7 @@ class Admin extends MY_Controller {
                     if ($observacion != NULL) {
                         $datos_cliente['observacion'] = $observacion;
                     }
+
                     $cliente_registrado = $this->cliente_modelo->registrar($datos_usuario, $datos_cliente);
                     if ($cliente_registrado == TRUE) {
                         $datos_email = array(
@@ -234,12 +243,14 @@ class Admin extends MY_Controller {
             $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
             $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO_ADMIN);
             $datos['tecnicos'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO);
-
+            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
             if ($this->session->userdata('idioma') == 'spanish') {
                 $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.es-ES.js'));
             }
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+
+            $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
 
             $this->plantilla->poner_js(site_url('assets/plugins/daterangepicker/moment.min.js'));
@@ -249,9 +260,6 @@ class Admin extends MY_Controller {
 
             $this->plantilla->poner_css(site_url('assets/plugins/daterangepicker/daterangepicker.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/daterangepicker/daterangepicker.js'));
-
-            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
-            $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
 
             $this->plantilla->poner_js('assets/plugins/bootstrap-notify/bootstrap-notify.min.js');
             $this->plantilla->mostrar('admin', 'ticket', $datos);
@@ -313,7 +321,7 @@ class Admin extends MY_Controller {
             $this->ticket_modelo->comprobar_estado($id_ticket);
             $notificacion = [
                 'url' => 'admin/ver_ticket/' . $id_ticket,
-                'texto' => 'tarea_completada',
+                'texto' => 'notif_tarea_completada',
                 'parametros' => $this->session->userdata('nombre_usuario')
             ];
             $this->notificacion->insertar_notificacion_admins($this->session->userdata('id_usuario'), $notificacion);
@@ -328,7 +336,7 @@ class Admin extends MY_Controller {
             $this->ticket_modelo->comprobar_estado($id_ticket);
             $notificacion = [
                 'url' => 'admin/ver_ticket/' . $id_ticket,
-                'texto' => 'tarea_descompletada',
+                'texto' => 'notif_tarea_descompletada',
                 'parametros' => $this->session->userdata('nombre_usuario')
             ];
             $this->notificacion->insertar_notificacion_admins($this->session->userdata('id_usuario'), $notificacion);
@@ -387,16 +395,17 @@ class Admin extends MY_Controller {
             $this->plantilla->mostrar('admin', 'facturas', $datos);
         }
     }
-    
+
     public function ver_factura($id_factura) {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('facturas');
-            $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura)[0];
-            $datos['ticket'] = $this->ticket_modelo->obtener_ticket_factura($id_factura)[0];
+            $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura);
+            $datos['concepto'] = $this->concepto->obtener_concepto($id_factura);
             $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
             $this->plantilla->mostrar('admin', 'factura', $datos);
         }
     }
+
 }

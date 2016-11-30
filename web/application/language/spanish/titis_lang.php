@@ -115,6 +115,9 @@ $lang['tickets_enviados'] = 'Tickets Enviados';
 $lang['facturas_recibidas'] = 'Facturas Recibidas';
 $lang['tickets_finalizados'] = 'Tickets Finalizados';
 
+$lang['fecha'] = 'Fecha';
+$lang['fichero_adjunto'] = 'Fichero adjunto ';
+$lang['finalizado'] = 'Finalizado';
 $lang['grafico_de_gastos'] = 'Gráfico de gastos';
 
 $lang['crear_ticket'] = 'Crear Ticket';
@@ -124,6 +127,14 @@ $lang['ver_enviados'] = 'Ver Enviados';
 $lang['asunto'] = 'Asunto';
 $lang['asunto_descripcion'] = 'Introduce un título para el ticket';
 
+$lang['ha_escrito_comentario'] = 'ha escrito un comentario';
+$lang['hola'] = 'Hola';
+$lang['imagen_perfil'] = 'Imagen de Perfil';
+$lang['iniciar_sesion'] = 'Iniciar Sesión';
+$lang['inicio'] = 'Inicio';
+$lang['iva'] = 'IVA';
+$lang['localidad'] = 'Localidad';
+$lang['m_minimizar_descripcion'] = 'Cambia el menú lateral izquierdo (abre o colapsa)';
 $lang['mensaje'] = 'Mensaje';
 $lang['mensaje_descripcion'] = 'Describe con tus palabras cual es el problema...';
 
@@ -160,6 +171,10 @@ $lang['d_fijo_descripcion'] = 'Activa el diseño fijo. No se puede usar el dise�
 $lang['diseño_en_caja'] = 'Diseño en caja';
 $lang['d_caja_descripcion'] = 'Activa el diseño en caja';
 
+$lang['mensaje_eliminar'] = '¿Está seguro de que desea eliminar el ticket?';
+$lang['mensaje_eliminar2'] = 'Si elimina el ticket se perderan todos los datos relacionados con este.';
+$lang['mensajes'] = ' mensajes';
+$lang['menu'] = 'Menú';
 $lang['minimizar_menu'] = 'Minimizar menú';
 $lang['m_minimizar_descripcion'] = 'Cambia el menú lateral izquierdo (abre o colapsa)';
 
@@ -187,6 +202,20 @@ $lang['amarillo_claro'] = 'Amarillo Claro';
 
 // --------------------------------
 
+$lang['negro'] = 'Negro';
+$lang['negro_claro'] = 'Negro Claro';
+$lang['nif'] = 'NIF';
+$lang['no_asignado'] = 'No Asignado';
+$lang['no_hay_mensajes'] = 'No tiene mensajes';
+$lang['no_hay_notificaciones'] = 'No tiene notificaciones';
+$lang['nombre'] = 'Nombre';
+$lang['notif_tarea_completada'] = 'El admin %s ha marcado como completada una tarea';
+$lang['notif_tarea_descompletada'] = 'El admin %s ha marcado como no completada una tarea';
+$lang['notif_ticket_asignado'] = 'El admin %s le ha asignado un ticket';
+$lang['notif_ticket_eliminado'] = 'El admin %s le ha eliminado de un ticket';
+$lang['notificaciones'] = 'Notificaciones';
+$lang['nueva_contrasena'] = 'Su nueva contraseña es';
+$lang['nueva_contrasena_enviada'] = 'La nueva contraseña se ha enviado a su email';
 $lang['nuevo_cliente'] = 'Nuevo Cliente';
 $lang['nuevo_empleado'] = 'Nuevo Empleado';
 $lang['tickets'] = 'Tickets';
@@ -199,29 +228,80 @@ $lang['error_cambio_contrasena'] = 'No se ha podido cambiar la contraseña debid
 $lang['hola'] = 'Hola';
 $lang['nueva_contrasena'] = 'Su nueva contraseña es';
 $lang['registro_empleado'] = 'Registro de un nuevo trabajador';
+$lang['numero'] = 'Número';
+$lang['numero_cuenta'] = 'Nº de cuenta';
+$lang['numero_de_usuarios'] = 'Número de usuarios';
+$lang['numero_telefono'] = 'Número de teléfono';
+$lang['observaciones'] = 'Observaciones';
+$lang['opciones_de_diseño'] = 'Opciones de diseño';
+$lang['pagina_no_encontrada'] = 'Página No Encontrada';
+$lang['pais'] = 'País';
+$lang['panel_de_control'] = 'Panel de control';
+$lang['pendiente'] = 'Pendiente';
+$lang['perfil'] = 'Perfil';
+$lang['progreso'] = 'Progreso';
+$lang['provincia'] = 'Provincia';
+$lang['recordarme'] = 'Recordarme';
+$lang['registrado'] = 'Registrado';
+$lang['registrar'] = 'Registrar';
 $lang['registro_cliente'] = 'Registro de un nuevo cliente';
 $lang['tipo_empleado'] = 'Tipo empleado';
 $lang['registro_completado'] = 'Registro completado';
 $lang['empleado_registrado'] = 'Empleado %s registrado correctamente';
 $lang['cliente_registrado'] = 'Cliente %s registrado correctamente';
+$lang['registro_empleado'] = 'Registro de un nuevo trabajador';
 $lang['registro_incorrecto'] = '¡Registro incorrecto! Ya existe un usuario con ese nombre';
 $lang['usuario_es'] = 'Su usuario es';
 $lang['contrasena_es'] = 'Su contraseña es';
+$lang['rojo'] = 'Rojo';
+$lang['rojo_claro'] = 'Rojo Claro';
+$lang['sesion_cerrada'] = 'Sesión cerrada correctamente';
+$lang['tareas'] = 'Tareas';
+$lang['tareas_finalizadas'] = 'Tareas Finalizadas';
+$lang['tecnico'] = 'Técnico';
+$lang['tecnico_admin'] = 'Técnico Admin';
+$lang['tecnico_admin'] = 'Técnico administrador';
+$lang['tecnicos'] = 'Técnicos';
+$lang['tecnicos_admin'] = 'Técnicos admin';
+$lang['telefono'] = 'Teléfono';
+$lang['ticket'] = 'Ticket';
+$lang['ticket_enviado'] = 'Ticket enviado';
+$lang['ticket_enviado_mensaje'] = 'El ticket ha sido enviado correctamente. Nuestro equipo resolverá el incidente cuanto antes.';
+$lang['ticket_error'] = 'Error';
+$lang['ticket_error_mensaje'] = 'Ha ocurrido un error inesperado. Intentaremos resolver esta incidencia cuanto antes.';
+$lang['tickets'] = 'Tickets';
+$lang['tickets_enviados'] = 'Tickets Enviados';
+$lang['tickets_finalizados'] = 'Tickets Finalizados';
+$lang['tickets_pendientes'] = 'Tickets Pendientes';
+$lang['tiempo_estimado'] = 'Tiempo estimado';
+$lang['tiene'] = 'Tiene ';
+$lang['tiene_1_mensaje'] = 'Tiene un mensaje';
+$lang['tiene_1_notificacion'] = 'Tiene una notificación';
 $lang['tiene_notificaciones'] = 'Tiene %d notificaciones';
 $lang['ver_todas'] = 'Ver todas';
+$lang['tipo_empleado'] = 'Tipo empleado';
+$lang['titulo'] = 'Título';
 $lang['ultimos_dias'] = 'Últimos %d días';
 $lang['notificaciones'] = 'Notificaciones';
 
 // Notificaciones
 $lang['ticket_asignado'] = 'El admin %s le ha asignado un ticket';
-$lang['ticket_eliminado'] = 'El admin %s le ha eliminado de un ticket';
 //$lang['tarea_activada'] = 'El admin %s ha activado una tarea';
 $lang['tarea_completada'] = 'El admin %s ha marcado como completada una tarea';
 $lang['tarea_descompletada'] = 'El admin %s ha marcado como no completada una tarea';
 
 //Facturas
+$lang['ultimos_tickets'] = 'Últimos tickets';
+$lang['usuario'] = 'Usuario';
+$lang['usuario_es'] = 'Su usuario es';
+$lang['usuario_inactivo'] = 'La cuenta del usuario "%s" no está activa';
+$lang['ver_enviados'] = 'Ver Enviados';
 $lang['ver_factura'] = 'Ver Factura';
 $lang['facturas'] = 'Facturas';
 $lang['ticket'] = 'Ticket';
 $lang['concepto'] = 'Concepto';
-$lang['iva'] = 'IVA';
+$lang['iva'] = 'IVA';$lang['ver_ticket'] = 'Ver Ticket';
+$lang['ver_todas'] = 'Ver todas';
+$lang['ver_todos'] = 'Ver todos';
+$lang['verde'] = 'Verde';
+$lang['verde_claro'] = 'Verde Claro';

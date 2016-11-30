@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title><?= NOMBRE_WEB ?> | 404 Página no encontrada</title>
+        <title><?= NOMBRE_WEB ?> | 404 <?= $this->lang->line('pagina_no_encontrada'); ?></title>
 
         <link href="<?= site_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
@@ -104,14 +104,14 @@
                     <div class="col-md-12">
                         <h2 class="center capital">Error</h2>
                         <h1 id="error" class="center">0</h1>
-                        <h3 class="center capital">¡Página no encontrada!</h3>
+                        <h3 class="center capital">¡<?= $this->lang->line('pagina_no_encontrada'); ?>!</h3>
                     </div>
                 </div>               
 
                 <div class="row">
                     <div class="col-md-12">     
                         <div class="col-md-6 col-md-offset-3 form">
-                            <a href="<?= site_url('/') ?>" class="btn btn-default col-md-offset-2 col-md-8 col-xs-12" role="button">Inicio</a>
+                            <a href="<?= site_url('/') ?>" class="btn btn-default col-md-offset-2 col-md-8 col-xs-12" role="button"><?= $this->lang->line('inicio'); ?></a>
                         </div>
                     </div>
                 </div>               

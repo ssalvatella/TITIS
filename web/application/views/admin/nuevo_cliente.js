@@ -16,4 +16,16 @@ $(function () {
         $('.bs-callout-info').toggleClass('hidden', !ok);
         $('.bs-callout-warning').toggleClass('hidden', ok);
     });
+
+    $("textarea").wysihtml5({
+        toolbar: {"size": "xs"},
+        locale: "es-ES"
+    });
+
+    $("[data-mask]").inputmask();
+
+    $('#pais').flagStrap({
+        placeholder: false
+    });
 });
+

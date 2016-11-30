@@ -37,21 +37,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <?php
                                 foreach ($clientes as $cliente) {
                                     echo '<tr style="cursor: pointer;">
                                             <td><a  href="' . site_url('admin/ver_cliente/' . $cliente['id_cliente']) . '"></a>' . $cliente['usuario'] . '</td>
-                                              <td>' . $cliente['email'] . '</td>
-                                              <td>' . $cliente['nombre'] . '</td>
-                                              <td>' . $cliente['pais'] . '</td>
-                                              <td>' . $cliente['localidad'] . '</td>
-                                              <td>' . $cliente['telefono'] . '</td>
-                                              <td align="center">';
+                                            <td>' . $cliente['email'] . '</td>
+                                            <td>' . $cliente['nombre'] . '</td>
+                                            <td>' . $cliente['pais'] . '</td>
+                                            <td>' . $cliente['localidad'] . '</td>
+                                            <td>' . $cliente['telefono'] . '</td>
+                                            <td align="center">';
                                     if ($cliente['activo'] == 1) {
-                                        echo '<a data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('banear') . '" href ="' . site_url('admin/banear_cliente/' . $cliente['usuario']) . '" class="btn btn-xs btn-danger"><i class="fa fa-user-times"></i></a></td>';
+                                        echo '<a data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('banear') . '" href ="' . site_url('admin/banear_cliente/' . $cliente['usuario']) . '" class="btn btn-xs btn-danger"><i class="fa fa-user-times"></i></a></td></tr>';
                                     } else {
-                                        echo '<a data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('activar') . '" href ="' . site_url('admin/activar_cliente/' . $cliente['usuario']) . '"class="btn btn-xs btn-success"><i class="fa fa-user-plus"></i></a></td>';
+                                        echo '<a data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('activar') . '" href ="' . site_url('admin/activar_cliente/' . $cliente['usuario']) . '"class="btn btn-xs btn-success"><i class="fa fa-user-plus"></i></a></td></tr>';
                                     }
                                 }
                                 ?>

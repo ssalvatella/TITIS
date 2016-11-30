@@ -51,13 +51,12 @@
                                 foreach ($tickets as $ticket) {
                                     echo '<tr style="cursor: pointer;">
                                             <td><a  href="' . site_url('admin/ver_ticket/' . $ticket['id_ticket']) . '"></a>' . $ticket['id_ticket'] . '</td>
-                                              <td><a href="' . site_url('admin/ver_cliente/') . $ticket['cliente'] . '">' . $ticket['nombre_cliente'] . '</a></td>
-                                              <td>' . $ticket['titulo'] . '</td>
-                                              <td>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) . '</td>
-                                              <td>' . $ticket['nombre_tecnico_admin'] . '</td>
-                                              <td>';
+                                            <td><a href="' . site_url('admin/ver_cliente/') . $ticket['cliente'] . '">' . $ticket['nombre_cliente'] . '</a></td>
+                                            <td>' . $ticket['titulo'] . '</td>
+                                            <td>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) . '</td>
+                                            <td>' . $ticket['nombre_tecnico_admin'] . '</td>
+                                            <td>';
                                     switch ($ticket['estado']) {
-
                                         case TICKET_PENDIENTE:
                                             echo '<span class="label label-warning">' . $this->lang->line('pendiente') . '</span>';
                                             break;
@@ -70,12 +69,13 @@
                                     }
 
                                     echo'</td>
-                                              <td> 
-                                                  <div class="progress progress-xs" data-html="true" data-toggle="tooltip" data-placement="top" title="' . intval($ticket['progreso']) . ' %<br />' . $this->lang->line('tareas') . ' ' . $ticket['tareas_completadas'] . '/' . $ticket['total_tareas'] . '">
-                                                    <div class="progress-bar progress-bar-green" style="width: ' . $ticket['progreso'] . '%" role="progressbar" aria-valuenow="' . $ticket['progreso'] . '" aria-valuemin="0" aria-valuemax="100">
-                                                    </div>
-                                                  </div>
-                                              </td>';
+                                        <td> 
+                                            <div class="progress progress-xs" data-html="true" data-toggle="tooltip" data-placement="top" title="' . intval($ticket['progreso']) . ' %<br />' . $this->lang->line('tareas') . ' ' . $ticket['tareas_completadas'] . '/' . $ticket['total_tareas'] . '">
+                                              <div class="progress-bar progress-bar-green" style="width: ' . $ticket['progreso'] . '%" role="progressbar" aria-valuenow="' . $ticket['progreso'] . '" aria-valuemin="0" aria-valuemax="100">
+                                              </div>
+                                            </div>
+                                        </td>
+                                      </tr>';
                                 }
                                 ?>
 
