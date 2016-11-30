@@ -90,7 +90,7 @@
                                         ?>
                                         </ul>
                                     </li>
-                                    <li class="footer"><a href="#"><?= $this->lang->line('ver_todos_los_mensajes') ?></a></li>
+                                    <li class="footer"><a href="<?= site_url('admin/mensajes') ?>"><?= $this->lang->line('ver_todos_los_mensajes') ?></a></li>
                                 </ul>
                             </li>
 

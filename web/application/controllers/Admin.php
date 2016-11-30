@@ -345,6 +345,27 @@ class Admin extends MY_Controller {
         }
     }
 
+    public function mensajes() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['titulo'] = $this->lang->line('mensajes_titulo');
+            $datos['mensajes'] =$this->mensaje->ver_mensajes_privados($this->session->userdata('id_usuario'));
+            $datos['numero_mensajes_no_vistos'] = 0;
+            foreach ($datos['mensajes'] as $mensaje) {
+                if ($mensaje['visto'] == 0) {
+                    $datos['numero_mensajes_no_vistos']++;
+                }
+            }
+            $this->plantilla->poner_js(site_url('assets/plugins/iCheck/iCheck.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/iCheck/flat/blue.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css'));
+            $this->plantilla->mostrar('admin', 'mensajes', $datos);
+        }
+    }
+
     public function notificaciones() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('notificaciones');

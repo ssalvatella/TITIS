@@ -148,10 +148,11 @@ $lang['ticket_error_mensaje'] = 'An unexpected error has occurred. We will try t
 $lang['registrado'] = 'Registered';
 
 $lang['dias'] = ' days';
-$lang['tiene_1_mensaje'] = 'You have a message';
-$lang['no_hay_mensajes'] = 'No messages';
+$lang['tiene_1_mensaje'] = 'You have a new message';
+$lang['no_hay_mensajes'] = 'No new messages';
 $lang['tiene'] = 'You have ';
-$lang['mensajes'] = ' messages';
+$lang['mensajes'] = ' new messages';
+$lang['mensajes_titulo'] = 'Messages';
 $lang['ver_todos_los_mensajes'] = 'See All Messages';
 
 // ---------------------------------------------
