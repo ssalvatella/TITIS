@@ -321,7 +321,7 @@ class Admin extends MY_Controller {
             $this->ticket_modelo->comprobar_estado($id_ticket);
             $notificacion = [
                 'url' => 'admin/ver_ticket/' . $id_ticket,
-                'texto' => 'tarea_completada',
+                'texto' => 'notif_tarea_completada',
                 'parametros' => $this->session->userdata('nombre_usuario')
             ];
             $this->notificacion->insertar_notificacion_admins($this->session->userdata('id_usuario'), $notificacion);
@@ -336,7 +336,7 @@ class Admin extends MY_Controller {
             $this->ticket_modelo->comprobar_estado($id_ticket);
             $notificacion = [
                 'url' => 'admin/ver_ticket/' . $id_ticket,
-                'texto' => 'tarea_descompletada',
+                'texto' => 'notif_tarea_descompletada',
                 'parametros' => $this->session->userdata('nombre_usuario')
             ];
             $this->notificacion->insertar_notificacion_admins($this->session->userdata('id_usuario'), $notificacion);
