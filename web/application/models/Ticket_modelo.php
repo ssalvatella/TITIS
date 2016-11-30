@@ -121,7 +121,7 @@ class Ticket_modelo extends CI_Model {
         if ($tareas_completadas == $total_tareas) {
             $datos['estado'] = TICKET_FINALIZADO;
             $datos['fin'] = date('Y-m-d H:i:s');
-        } else if(isset($ticket['tecnico_admin'] )) {
+        } else if (isset($ticket['tecnico_admin'])) {
             $datos['estado'] = TICKET_EN_PROCESO;
         } else {
             $datos['estado'] = TICKET_PENDIENTE;
@@ -130,19 +130,4 @@ class Ticket_modelo extends CI_Model {
         return $this->db->update('Ticket', $datos);
     }
 
-    //Obtener el numero de ticket de una factura
-    public function obtener_ticket_factura($id_factura) {
-        $this->db->select('id_ticket');
-        $this->db->from('Ticket');
-        $this->db->where('factura', $id_factura) -> limit(1);
-        return $this->db->get()->row()->id_ticket;
-    }
-    
-    //Obtenemos el nombre del ticket a partir de su factura
-    public function obtener_nombreticket_factura($id_factura) {
-        $this->db->select('titulo');
-        $this->db->from('Ticket');
-        $this->db->where('factura', $id_factura) -> limit(1);
-        return $this->db->get()->row()->titulo;
-    }
 }

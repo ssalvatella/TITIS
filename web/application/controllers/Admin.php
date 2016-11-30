@@ -378,8 +378,8 @@ class Admin extends MY_Controller {
     public function ver_factura($id_factura) {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('facturas');
-            $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura)[0];
-            $datos['ticket'] = $this->ticket_modelo->obtener_ticket_factura($id_factura)[0];
+            $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura);
+            $datos['concepto'] = $this->concepto->obtener_concepto($id_factura);
             $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
