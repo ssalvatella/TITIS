@@ -233,3 +233,5 @@ $lang['facturas'] = 'Receipts';
 $lang['ticket'] = 'Ticket';
 $lang['concepto'] = 'Price';
 $lang['iva'] = 'VAT';
+
+$lang['pagina_no_encontrada'] = 'Page Not Found';
