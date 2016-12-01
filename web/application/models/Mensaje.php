@@ -27,6 +27,7 @@ class Mensaje extends CI_Model {
     }
 
     public function ver_mensajes_privados($id_usuario, $no_vistos = null) {
+        $this->db->select('Mensaje.*, emisor.usuario as nombre_emisor');
         $this->db->from('Mensaje');
         $this->db->where('destinatario', $id_usuario);
 

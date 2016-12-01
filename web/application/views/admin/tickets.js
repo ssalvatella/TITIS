@@ -7,6 +7,7 @@ $(function () {
         "info": true,
         "autoWidth": false,
         "responsive": true,
+        "stateSave": true,
         "columnDefs": [{
                 "targets": [0, 3, 4, 5],
                 "class": "not-mobile",
