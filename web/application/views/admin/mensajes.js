@@ -58,4 +58,54 @@ $(function () {
             $("#cargador").hide();
         }
     });
+
+
+
 });
+
+$('#mensajes tr td').click(function () {
+    window.location.href = $(this).parent().find('td:first-child a:first').attr('href');
+});
+
+$("#mensaje").wysihtml5({
+    toolbar: {"size": "xs"},
+    locale: "es-ES"
+    /*showToolbarAfterInit: false,
+     "events": {
+     "focus": function () {
+     this.toolbar.show();
+     },
+     "blur": function () {
+     this.toolbar.hide();
+     }
+     }*/
+});
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+
+$('#enviar_mensaje_form').on('submit', function (e) {
+    e.preventDefault();
+    var getUrl = window.location;
+    var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    var id_receptor = $("#seleccion_usuarios").val() ;
+    var mensaje = $('#mensaje').val();
+    $.ajax({
+        url: baseURL + '/enviar_mensaje',
+        type: 'POST',
+        data: {id_receptor: id_receptor, mensaje: mensaje},
+        success: function (data) {
+            $.notify({
+                icon: 'glyphicon glyphicon-ok',
+                title: '<strong>Mensaje enviado!</strong>', message: ''
+            },{
+                type: 'success',delay: 100
+            });
+            $('#mensaje').value = "";
+        }
+    });
+    $('#modal_mensaje').modal('hide');
+});
+
+$.fn.modal.Constructor.prototype.enforceFocus = function() {};

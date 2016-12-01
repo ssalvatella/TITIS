@@ -118,6 +118,14 @@ $lang['mensajes'] = ' mensajes nuevos';
 $lang['mensajes_titulo'] = 'Mensajes';
 $lang['ver_todos_los_mensajes'] = 'Ver Todos';
 
+$lang['recibidos'] = 'Recibidos';
+$lang['enviados'] = 'Enviados';
+$lang['seleccionar_todos'] = 'Marcar todos';
+$lang['eliminar_marcados'] = 'Eliminar';
+$lang['carpetas'] = 'Carpetas';
+$lang['no_visto'] = 'No visto';
+$lang['visto'] = 'Visto';
+
 $lang['opciones_de_diseño'] = 'Opciones de diseño';
 
 $lang['diseño_fijo'] = 'Diseño fijo';

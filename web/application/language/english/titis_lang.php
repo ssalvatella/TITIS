@@ -114,8 +114,11 @@ $lang['no_hay_mensajes'] = 'No new messages';
 $lang['tiene'] = 'You have ';
 $lang['mensajes'] = ' new messages';
 $lang['mensajes_titulo'] = 'Messages';
+$lang['eliminar_marcados'] = 'Remove';
 $lang['ver_todos_los_mensajes'] = 'See All Messages';
-
+$lang['carpetas'] = 'Folders';
+$lang['no_visto'] = 'Not seen';
+$lang['visto'] = 'Viewed';
 // ---------------------------------------------
 
 // ------ BARRA LATERAL DERECHA ----
@@ -133,6 +136,9 @@ $lang['mensaje_eliminar'] = 'Are you sure you want to delete the ticket?';
 $lang['mensaje_eliminar2'] = 'If you delete the ticket you will lose all the data related to it.';
 $lang['mensajes'] = ' messages';
 $lang['menu'] = 'Menu';
+$lang['recibidos'] = 'Received';
+$lang['enviados'] = 'Sent';
+$lang['seleccionar_todos'] = 'Select All';
 
 $lang['minimizar_menu'] = 'Minimize menu';
 $lang['morado'] = 'Purple';

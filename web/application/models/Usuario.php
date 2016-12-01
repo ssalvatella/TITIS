@@ -98,7 +98,6 @@ class Usuario extends CI_Model {
     public function obtener_usuarios() {
         $this->db->select('id_usuario, tipo, usuario, email, activo');
         $this->db->from('Usuario');
-        //$this->db->join('Usuario', 'Usuario.id_usuario = Cliente.usuario');
         return $this->db->get()->result_array();
     }
 

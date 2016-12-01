@@ -21,17 +21,53 @@
         </ol>
     </section>
 
+    <!-- Modal ENVIAR -->
+    <div class="modal fade" id="modal_enviar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('enviar_mensaje'); ?></h4>
+                </div>
+                <form id = "enviar_mensaje_form" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label><?= $this->lang->line('usuario'); ?></label>
+                            <select required id = "seleccion_usuarios" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                <?php
+                                foreach ($usuarios as $usuario) {
+                                    if ($usuario['id_usuario'] != $this->session->userdata('id_usuario'))
+                                        echo '<option value="' . $usuario['id_usuario'] . '"> ' . $usuario['usuario'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><?= $this->lang->line('mensaje'); ?></label>
+                            <textarea name= "mensaje" maxlength="500" class= "form-control" style = "width: 100%" id="mensaje" placeholder="<?= $this->lang->line('escribir_mensaje'); ?>" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
+                        <input  type="submit" id="enviar" value = "<?= $this->lang->line('enviar'); ?>" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END Modal ENVIAR ----------->
+
     <section class="content">
 
         <div class="row">
 
             <div class="col-md-3">
 
-                <a href="#" class="btn btn-primary btn-block margin-bottom"><?= $this->lang->line('enviar_mensaje'); ?></a>
+                <a href="#" data-toggle="modal" data-target="#modal_enviar" class="btn btn-primary btn-block margin-bottom"><?= $this->lang->line('enviar_mensaje'); ?></a>
 
                 <div class="box box-solid">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Folders</h3>
+                        <h3 class="box-title"><?= $this->lang->line('carpetas'); ?></h3>
 
                         <div class="box-tools">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -40,13 +76,9 @@
                     </div>
                     <div class="box-body no-padding">
                         <ul class="nav nav-pills nav-stacked">
-                            <li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox
+                            <li class="active"><a href="#"><i class="fa fa-inbox"></i> <?= $this->lang->line('recibidos'); ?>
                                     <span class="label label-primary pull-right"><?php if ($numero_mensajes_no_vistos > 0) echo $numero_mensajes_no_vistos;?></span></a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
-                            <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-                            <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+                            <li><a href="#"><i class="fa fa-envelope-o"></i> <?= $this->lang->line('enviados'); ?></a></li>
                         </ul>
                     </div>
 
@@ -56,12 +88,22 @@
             <div class="col-md-9">
                 <div class="box box-primary" style="padding-bottom: 20px" >
                     <div class="box-header ">
-                        <h3 class="box-title">Inbox</h3>
+                        <h3 class="box-title"><?= $this->lang->line('recibidos'); ?></h3>
                         <!-- /.box-tools -->
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body no-padding " >
-
+                        <div class="mailbox-controls">
+                            <!-- Check all button -->
+                            <button data-html="true" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('seleccionar_todos'); ?>" type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                            </button>
+                            <div class="btn-group">
+                                <button data-html="true" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('eliminar_marcados'); ?>" type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                            </div>
+                            <!-- /.btn-group -->
+                            <a href = "javascript:history.go(0)" type="button" class="btn btn-default btn-sm" data-html="true" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('actualizar'); ?>"><i class="fa fa-refresh"></i></a>
+                            <!-- /.pull-right -->
+                        </div>
                         <div class="table-responsive mailbox-messages" >
                             <table id= "mensajes" class="table table-hover table-striped" >
                                 <tbody>
@@ -83,10 +125,14 @@
                                             $diferencia = $intervalo_tiempo->format('%i min');
                                         }
 
-
-                                        echo '<tr>';
-                                        echo '<td><input type="checkbox"></td>';
-                                        echo '<td class="mailbox-name"><a href="'.'">'. $mensaje['nombre_emisor'] .'</a></td>';
+                                        echo '<tr style="cursor: pointer;"> ';
+                                        echo '<td> <a  href="' . site_url('admin/ver_mensaje/' . $mensaje['id_mensaje']) . '"></a><input type="checkbox"></td>';
+                                        if ($mensaje['visto'] == 0) {
+                                            echo '<td><i data-html="true" data-toggle="tooltip" data-placement="top" title="'. $this->lang->line('no_visto') .'" class="fa fa-eye-slash"></i></td>';
+                                        } else {
+                                            echo '<td><i data-html="true" data-toggle="tooltip" data-placement="top" title="'. $this->lang->line('visto').'" class="fa fa-eye"></i></td>';
+                                        }
+                                        echo '<td class="mailbox-name"> <a href="'. site_url('admin/ver_usuario/' . $mensaje['id_usuario']) . '">'. $mensaje['nombre_emisor'] .'</a></td>';
                                         echo '<td class="mailbox-subject">'. strip_tags(substr($mensaje['texto'],0,20)) .'...</td>';
                                         if (isset($mensaje['archivo'])) {
                                             echo '<td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>';
