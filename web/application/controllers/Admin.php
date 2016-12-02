@@ -384,7 +384,7 @@ class Admin extends MY_Controller {
     public function ver_mensaje($id_mensaje) {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('mensajes_titulo');
-            $datos['mensaje'] =$this->mensaje->obtener_mensaje($id_mensaje);
+            $datos['mensaje'] =$this->mensaje->obtener_mensaje($id_mensaje)[0];
             $datos['numero_mensajes_no_vistos'] =$this->mensaje->contar_mensajes_no_vistos($this->session->userdata('id_usuario'));;
             $datos['usuarios'] = $this->usuario->obtener_usuarios();
 
