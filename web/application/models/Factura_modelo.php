@@ -27,4 +27,11 @@ class Factura_modelo extends CI_Model {
         return $consulta->row_array();
     }
 
+    public function facturas_pendientes() {
+        $this->db->from('Ticket');
+        $this->db->where('factura', NULL);
+        $this->db->where('estado', TICKET_FINALIZADO);
+        return $this->db->get()->num_rows();
+    }
+
 }

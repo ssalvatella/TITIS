@@ -9,13 +9,13 @@ class Ticket extends MY_Controller {
     }
 
     public function enviar_mensaje($id_ticket) {
-        $datosMensaje = array('ticket' => $id_ticket,
+        $datos_mensaje = array('ticket' => $id_ticket,
             'texto' => $this->input->post('mensaje'),
             'usuario' => $this->session->userdata('id_usuario'),
             'fecha' => date("Y-m-d H:i:s")
         );
 
-        if ($this->mensaje->registrar_mensaje($datosMensaje)) {
+        if ($this->mensaje->registrar_mensaje($datos_mensaje)) {
             $datos['enviado'] = 1;
         } else {
             $datos['error'] = 1;

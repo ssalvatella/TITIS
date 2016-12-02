@@ -29,6 +29,8 @@ class Admin extends MY_Controller {
             $datos['total_usuarios']['cliente'] = $this->usuario->contar_usuarios(USUARIO_CLIENTE);
             $datos['tickets'] = $this->ticket_modelo->obtener_ultimos_tickets();
             $datos['tickets_pendientes'] = $this->ticket_modelo->contar_tickets_estado(TICKET_PENDIENTE);
+            $datos['clientes_registrados'] = $this->cliente_modelo->clientes_registrados();
+            $datos['facturas_pendientes'] = $this->factura_modelo->facturas_pendientes();
             $datos['tareas_finalizadas'] = $this->tarea->tareas_finalizadas();
             $this->plantilla->poner_js(site_url('assets/plugins/chartjs/Chart.min.js'));
             $this->plantilla->mostrar('admin', 'inicio', $datos);
@@ -356,8 +358,9 @@ class Admin extends MY_Controller {
     public function mensajes() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('mensajes_titulo');
-            $datos['mensajes'] =$this->mensaje->ver_mensajes_privados($this->session->userdata('id_usuario'));
-            $datos['numero_mensajes_no_vistos'] =$this->mensaje->contar_mensajes_no_vistos($this->session->userdata('id_usuario'));;
+            $datos['mensajes'] = $this->mensaje->ver_mensajes_privados($this->session->userdata('id_usuario'));
+            $datos['numero_mensajes_no_vistos'] = $this->mensaje->contar_mensajes_no_vistos($this->session->userdata('id_usuario'));
+            ;
             $datos['usuarios'] = $this->usuario->obtener_usuarios();
 
             $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
@@ -384,8 +387,9 @@ class Admin extends MY_Controller {
     public function ver_mensaje($id_mensaje) {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('mensajes_titulo');
-            $datos['mensaje'] =$this->mensaje->obtener_mensaje($id_mensaje);
-            $datos['numero_mensajes_no_vistos'] =$this->mensaje->contar_mensajes_no_vistos($this->session->userdata('id_usuario'));;
+            $datos['mensaje'] = $this->mensaje->obtener_mensaje($id_mensaje);
+            $datos['numero_mensajes_no_vistos'] = $this->mensaje->contar_mensajes_no_vistos($this->session->userdata('id_usuario'));
+            ;
             $datos['usuarios'] = $this->usuario->obtener_usuarios();
 
             $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
