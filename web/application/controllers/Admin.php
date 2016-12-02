@@ -350,7 +350,11 @@ class Admin extends MY_Controller {
             $id_receptor = $this->input->post('id_receptor');
             $id_emisor = $this->session->userdata('id_usuario');
             $mensaje = $this->input->post('mensaje');
-            $datos = array('usuario' => $id_emisor, 'destinatario' => $id_receptor, 'texto' => $mensaje);
+            $datos = [
+                'usuario' => $id_emisor,
+                'destinatario' => $id_receptor,
+                'texto' => $mensaje
+            ];
             $this->mensaje->registrar_mensaje($datos);
         }
     }
@@ -409,7 +413,6 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('notificaciones');
             $datos['notificaciones'] = $this->notificacion->obtener_notificaciones($this->session->userdata('id_usuario'));
-
             $this->plantilla->mostrar('admin', 'notificaciones', $datos);
         }
     }

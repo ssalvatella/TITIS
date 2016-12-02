@@ -18,18 +18,21 @@ class Api extends REST_Controller {
      * ultimos_tickets
      * ultimos_tickets_cliente
      * tareas
+     * notificaciones
+     * mensajes
      * 
      * --- POST ---
      * login
      * registrar_empleado
      * registrar_cliente
+     * modificar_cliente
      * crear_tarea
-     * editar_tarea
+     * modificar_tarea
      */
     public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->model(array('usuario', 'cliente_modelo', 'ticket_modelo'));
+        $this->load->model(array('usuario', 'cliente_modelo', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion'));
         $this->load->library('encryption');
         $this->encryption->initialize(
                 array(
@@ -212,7 +215,7 @@ class Api extends REST_Controller {
         if (!$usuario || !$contrasena || !$email || !$nombre || !$cp || !$direccion || !$pais || !$provincia || !$localidad || !$nif || !$telefono || !$numero_cuenta) {
             $this->response([
                 'status' => FALSE,
-                'error' => 'Se necesitan los campos tipo, usuario, contrasena, email, nombre, cp, direccion, pais, provincia, localidad, nif, telefono, numero_cuenta. Campos opcionales: contacto, email_opcional y observacion'
+                'error' => 'Se necesitan los campos usuario, contrasena, email, nombre, cp, direccion, pais, provincia, localidad, nif, telefono, numero_cuenta. Campos opcionales: contacto, email_opcional y observacion'
                     ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
@@ -373,7 +376,7 @@ class Api extends REST_Controller {
                 ], REST_Controller::HTTP_OK);
     }
 
-    public function editar_tarea_post() {
+    public function modificar_tarea_post() {
         $id_tarea = $this->input->post('id_tarea');
         $id_tecnico = $this->input->post('id_tecnico');
         $descripcion = $this->input->post('descripcion_tarea');
@@ -413,6 +416,108 @@ class Api extends REST_Controller {
         $this->response([
             'status' => TRUE,
             'datos' => $this->tarea->editar_tarea($id_tarea, $datos_tarea)
+                ], REST_Controller::HTTP_OK);
+    }
+
+    public function modificar_cliente_post() {
+        $id_cliente = $this->post('id_cliente');
+        $nombre = $this->post('nombre');
+        $cp = $this->post('cp');
+        $direccion = $this->post('direccion');
+        $pais = $this->post('pais');
+        $provincia = $this->post('provincia');
+        $localidad = $this->post('localidad');
+        $nif = $this->post('nif');
+        $telefono = $this->post('telefono');
+        $numero_cuenta = $this->post('numero_cuenta');
+        $contacto = $this->post('contacto');
+        $email_opcional = $this->post('email_opcional');
+        $observacion = $this->post('observacion');
+
+        if (!$id_cliente) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_cliente'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        if (!$nombre && !$cp && !$direccion && !$pais && !$provincia && !$localidad && !$nif && !$telefono && !$numero_cuenta) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesitan al menos alguno de los siguientes campos: usuario, contrasena, email, nombre, cp, direccion, pais, provincia, localidad, nif, telefono, numero_cuenta, contacto, email_opcional u observacion'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        $datos_cliente = [];
+
+        if ($nombre != NULL) {
+            $datos_cliente['nombre'] = $nombre;
+        }
+        if ($cp != NULL) {
+            $datos_cliente['cp'] = $cp;
+        }
+        if ($direccion != NULL) {
+            $datos_cliente['direccion'] = $direccion;
+        }
+        if ($pais != NULL) {
+            $datos_cliente['pais'] = $pais;
+        }
+        if ($provincia != NULL) {
+            $datos_cliente['provincia'] = $provincia;
+        }
+        if ($localidad != NULL) {
+            $datos_cliente['localidad'] = $localidad;
+        }
+        if ($nif != NULL) {
+            $datos_cliente['nif'] = $nif;
+        }
+        if ($telefono != NULL) {
+            $datos_cliente['telefono'] = $telefono;
+        }
+        if ($numero_cuenta != NULL) {
+            $datos_cliente['numero_cuenta'] = $numero_cuenta;
+        }
+        if ($contacto != NULL) {
+            $datos_cliente['contacto'] = $contacto;
+        }
+        if ($email_opcional != NULL) {
+            $datos_cliente['email_opcional'] = $email_opcional;
+        }
+        if ($observacion != NULL) {
+            $datos_cliente['observacion'] = $observacion;
+        }
+
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->cliente_modelo->modificar_datos($id_cliente, $datos_cliente)
+                ], REST_Controller::HTTP_OK);
+    }
+
+    public function notificaciones_get() {
+        $id_usuario = $this->get('id_usuario');
+        if (!$id_usuario) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_usuario'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->notificacion->obtener_notificaciones($id_usuario)
+                ], REST_Controller::HTTP_OK);
+    }
+
+    public function mensajes_get() {
+        $id_ticket = $this->get('id_ticket');
+        if (!$id_ticket) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_ticket'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->mensaje->obtener_mensajes($id_ticket)
                 ], REST_Controller::HTTP_OK);
     }
 
