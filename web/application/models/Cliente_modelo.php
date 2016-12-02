@@ -66,7 +66,7 @@ class Cliente_modelo extends CI_Model {
         return $this->db->update('Cliente', $datos);
     }
 
-    public function obtener_tickets($id_cliente, $numero=null) {
+    public function obtener_tickets($id_cliente, $numero = null) {
         $this->db->select('id_ticket, titulo, estado, inicio');
         $this->db->from('Ticket');
         $this->db->where('cliente', $id_cliente);
@@ -88,6 +88,13 @@ class Cliente_modelo extends CI_Model {
             $tickets[$clave] = $ticket;
         }
         return $tickets;
+    }
+
+    public function clientes_registrados($dias = 7) {
+        $this->db->from('Usuario');
+        $this->db->where('fecha_Registro >= ', strtotime('-' . $dias . ' days'));
+        $this->db->where('tipo', USUARIO_CLIENTE);
+        return $this->db->get()->num_rows();
     }
 
 }

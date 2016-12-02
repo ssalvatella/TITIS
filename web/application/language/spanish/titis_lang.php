@@ -26,6 +26,7 @@ $lang['añadir_tarea'] = 'Añadir tarea';
 $lang['banear'] = 'Banear';
 $lang['cambiar'] = 'Cambiar';
 $lang['cancelar'] = 'Cancelar';
+$lang['carpetas'] = 'Carpetas';
 $lang['cerrar'] = 'Cerrar';
 $lang['cerrar_sesion'] = 'Cerrar Sesión';
 $lang['ciudad'] = 'Ciudad';
@@ -60,11 +61,13 @@ $lang['diseño_fijo'] = 'Diseño fijo';
 $lang['editar'] = 'Editar';
 $lang['editar_tarea'] = 'Editar tarea';
 $lang['eliminar'] = 'Eliminar';
+$lang['eliminar_marcados'] = 'Eliminar';
 $lang['email'] = 'E-mail';
 $lang['email_opcional'] = 'E-mail Opcional';
 $lang['empleado'] = 'Empleado';
 $lang['empleado_registrado'] = 'Empleado %s registrado correctamente';
 $lang['en_proceso'] = 'En proceso';
+$lang['enviados'] = 'Enviados';
 $lang['enviar'] = 'Enviar';
 $lang['enviar_mensaje'] = 'Enviar mensaje';
 $lang['enviar_mensaje_a'] = 'Enviar mensaje a ';
@@ -91,55 +94,12 @@ $lang['localidad'] = 'Localidad';
 $lang['m_minimizar_descripcion'] = 'Cambia el menú lateral izquierdo (abre o colapsa)';
 $lang['mensaje'] = 'Mensaje';
 $lang['mensaje_descripcion'] = 'Describe con tus palabras cual es el problema...';
-
-
-$lang['fichero_adjunto'] = 'Fichero adjunto ';
-$lang['aun_no_funcional'] = '(aún no funcional)';
-
-$lang['enviar_ticket'] = 'Enviar Ticket';
-$lang['enviar_mensaje'] = 'Enviar mensaje';
-$lang['enviar_mensaje_a'] = 'Enviar mensaje a ';
-$lang['escribir_mensaje'] = 'Escribe aqui tu mensaje...';
-
-
-$lang['ticket_enviado'] = 'Ticket enviado';
-$lang['ticket_enviado_mensaje'] = 'El ticket ha sido enviado correctamente. Nuestro equipo resolverá el incidente cuanto antes.';
-
-$lang['ticket_error'] = 'Error';
-$lang['ticket_error_mensaje'] = 'Ha ocurrido un error inesperado. Intentaremos resolver esta incidencia cuanto antes.';
-// ---------------------------------------------
-
-// ------ BARRA LATERA DERECHA ----
-$lang['dias'] = ' dias';
-$lang['tiene_1_mensaje'] = 'Tiene un mensaje nuevos';
-$lang['no_hay_mensajes'] = 'No tiene mensajes nuevos';
-$lang['tiene'] = 'Tiene ';
-$lang['mensajes'] = ' mensajes nuevos';
-$lang['mensajes_titulo'] = 'Mensajes';
-$lang['ver_todos_los_mensajes'] = 'Ver Todos';
-
-$lang['recibidos'] = 'Recibidos';
-$lang['enviados'] = 'Enviados';
-$lang['seleccionar_todos'] = 'Marcar todos';
-$lang['eliminar_marcados'] = 'Eliminar';
-$lang['carpetas'] = 'Carpetas';
-$lang['no_visto'] = 'No visto';
-$lang['visto'] = 'Visto';
-
-$lang['opciones_de_diseño'] = 'Opciones de diseño';
-
-$lang['diseño_fijo'] = 'Diseño fijo';
-$lang['d_fijo_descripcion'] = 'Activa el diseño fijo. No se puede usar el diseño fijo y en caja a la vez';
-
-$lang['diseño_en_caja'] = 'Diseño en caja';
-$lang['d_caja_descripcion'] = 'Activa el diseño en caja';
-
-
 $lang['mensaje_eliminar'] = '¿Está seguro de que desea eliminar el ticket?';
 $lang['mensaje_eliminar2'] = 'Si elimina el ticket se perderan todos los datos relacionados con este.';
+$lang['mensajes'] = ' mensajes nuevos';
 $lang['mensajes'] = ' mensajes';
+$lang['mensajes_titulo'] = 'Mensajes';
 $lang['menu'] = 'Menú';
-
 $lang['minimizar_menu'] = 'Minimizar menú';
 $lang['morado'] = 'Morado';
 $lang['morado_claro'] = 'Morado Claro';
@@ -147,8 +107,10 @@ $lang['negro'] = 'Negro';
 $lang['negro_claro'] = 'Negro Claro';
 $lang['nif'] = 'NIF';
 $lang['no_asignado'] = 'No Asignado';
+$lang['no_hay_mensajes'] = 'No tiene mensajes nuevos';
 $lang['no_hay_mensajes'] = 'No tiene mensajes';
 $lang['no_hay_notificaciones'] = 'No tiene notificaciones';
+$lang['no_visto'] = 'No visto';
 $lang['nombre'] = 'Nombre';
 $lang['notif_tarea_completada'] = 'El admin %s ha marcado como completada una tarea';
 $lang['notif_tarea_descompletada'] = 'El admin %s ha marcado como no completada una tarea';
@@ -172,6 +134,7 @@ $lang['pendiente'] = 'Pendiente';
 $lang['perfil'] = 'Perfil';
 $lang['progreso'] = 'Progreso';
 $lang['provincia'] = 'Provincia';
+$lang['recibidos'] = 'Recibidos';
 $lang['recordarme'] = 'Recordarme';
 $lang['registrado'] = 'Registrado';
 $lang['registrar'] = 'Registrar';
@@ -181,6 +144,7 @@ $lang['registro_empleado'] = 'Registro de un nuevo trabajador';
 $lang['registro_incorrecto'] = '¡Registro incorrecto! Ya existe un usuario con ese nombre';
 $lang['rojo'] = 'Rojo';
 $lang['rojo_claro'] = 'Rojo Claro';
+$lang['seleccionar_todos'] = 'Marcar todos';
 $lang['sesion_cerrada'] = 'Sesión cerrada correctamente';
 $lang['tareas'] = 'Tareas';
 $lang['tareas_finalizadas'] = 'Tareas Finalizadas';
@@ -201,6 +165,7 @@ $lang['tickets_finalizados'] = 'Tickets Finalizados';
 $lang['tickets_pendientes'] = 'Tickets Pendientes';
 $lang['tiempo_estimado'] = 'Tiempo estimado';
 $lang['tiene'] = 'Tiene ';
+$lang['tiene_1_mensaje'] = 'Tiene un mensaje nuevos';
 $lang['tiene_1_mensaje'] = 'Tiene un mensaje';
 $lang['tiene_1_notificacion'] = 'Tiene una notificación';
 $lang['tiene_notificaciones'] = 'Tiene %d notificaciones';
@@ -216,5 +181,8 @@ $lang['ver_factura'] = 'Ver Factura';
 $lang['ver_ticket'] = 'Ver Ticket';
 $lang['ver_todas'] = 'Ver todas';
 $lang['ver_todos'] = 'Ver todos';
+$lang['ver_todos_los_mensajes'] = 'Ver Todos';
 $lang['verde'] = 'Verde';
 $lang['verde_claro'] = 'Verde Claro';
+$lang['visto'] = 'Visto';
+

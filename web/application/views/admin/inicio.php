@@ -36,7 +36,7 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3><?= $clientes_registrados; ?></h3>
                         <text style="font-size: 16px;" data-toggle="tooltip" data-placement="right" title="<?= sprintf($this->lang->line('ultimos_dias'), 7); ?>"><?= $this->lang->line('clientes_nuevos'); ?></text>
                     </div>
                     <div class="icon">
@@ -55,7 +55,7 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>65</h3>
+                        <h3><?= $facturas_pendientes; ?></h3>
                         <text style="font-size: 16px;"><?= $this->lang->line('facturas_pendientes'); ?></text>
                     </div>
                     <div class="icon">

@@ -26,6 +26,7 @@ $lang['añadir_tarea'] = 'Add task';
 $lang['banear'] = 'Ban';
 $lang['cambiar'] = 'Change';
 $lang['cancelar'] = 'Cancel';
+$lang['carpetas'] = 'Folders';
 $lang['cerrar'] = 'Close';
 $lang['cerrar_sesion'] = 'Sign out';
 $lang['ciudad'] = 'City';
@@ -60,11 +61,13 @@ $lang['diseño_fijo'] = 'Fixed layout';
 $lang['editar'] = 'Edit';
 $lang['editar_tarea'] = 'Edit task';
 $lang['eliminar'] = 'Delete';
+$lang['eliminar_marcados'] = 'Remove';
 $lang['email'] = 'E-mail';
 $lang['email_opcional'] = 'Optional E-mail';
 $lang['empleado'] = 'Employee';
 $lang['empleado_registrado'] = 'Employee %s successfully registered';
 $lang['en_proceso'] = 'In process';
+$lang['enviados'] = 'Sent';
 $lang['enviar'] = 'Send';
 $lang['enviar_mensaje'] = 'Send message';
 $lang['enviar_mensaje_a'] = 'Send message to ';
@@ -91,55 +94,12 @@ $lang['localidad'] = 'Location';
 $lang['m_minimizar_descripcion'] = 'Change left side menu (open or collapse)';
 $lang['mensaje'] = 'Message';
 $lang['mensaje_descripcion'] = 'Describe with your words what the problem is ...';
-
-
-$lang['fichero_adjunto'] = 'Attached file';
-$lang['aun_no_funcional'] = '(not yet functional)';
-
-$lang['enviar_ticket'] = 'Send Ticket';
-$lang['enviar_mensaje'] = 'Send message';
-$lang['enviar_mensaje_a'] = 'Send message to ';
-$lang['escribir_mensaje'] = 'Write your message here...';
-
-$lang['ticket_enviado'] = 'Ticket Submitted';
-$lang['ticket_enviado_mensaje'] = 'The ticket has been sent correctly. Our team will resolve the incident as soon as possible.';
-
-$lang['ticket_error'] = 'Error';
-$lang['ticket_error_mensaje'] = 'An unexpected error has occurred. We will try to resolve this issue as soon as possible.';
-$lang['registrado'] = 'Registered';
-
-$lang['dias'] = ' days';
-$lang['tiene_1_mensaje'] = 'You have a new message';
-$lang['no_hay_mensajes'] = 'No new messages';
-$lang['tiene'] = 'You have ';
-$lang['mensajes'] = ' new messages';
-$lang['mensajes_titulo'] = 'Messages';
-$lang['eliminar_marcados'] = 'Remove';
-$lang['ver_todos_los_mensajes'] = 'See All Messages';
-$lang['carpetas'] = 'Folders';
-$lang['no_visto'] = 'Not seen';
-$lang['visto'] = 'Viewed';
-// ---------------------------------------------
-
-// ------ BARRA LATERAL DERECHA ----
-
-$lang['opciones_de_diseño'] = 'Design options';
-
-$lang['diseño_fijo'] = 'Fixed layout';
-$lang['d_fijo_descripcion'] = 'Activates the fixed design. You can not use the fixed and boxed design at the same time';
-
-$lang['diseño_en_caja'] = 'Box layout';
-$lang['d_caja_descripcion'] = 'Activate boxed design';
-
-
 $lang['mensaje_eliminar'] = 'Are you sure you want to delete the ticket?';
 $lang['mensaje_eliminar2'] = 'If you delete the ticket you will lose all the data related to it.';
 $lang['mensajes'] = ' messages';
+$lang['mensajes'] = ' new messages';
+$lang['mensajes_titulo'] = 'Messages';
 $lang['menu'] = 'Menu';
-$lang['recibidos'] = 'Received';
-$lang['enviados'] = 'Sent';
-$lang['seleccionar_todos'] = 'Select All';
-
 $lang['minimizar_menu'] = 'Minimize menu';
 $lang['morado'] = 'Purple';
 $lang['morado_claro'] = 'Light Purple';
@@ -148,7 +108,9 @@ $lang['negro_claro'] = 'Light Black';
 $lang['nif'] = 'NIF';
 $lang['no_asignado'] = 'Not Assigned';
 $lang['no_hay_mensajes'] = 'No messages';
+$lang['no_hay_mensajes'] = 'No new messages';
 $lang['no_hay_notificaciones'] = 'No notifications';
+$lang['no_visto'] = 'Not seen';
 $lang['nombre'] = 'Name';
 $lang['notif_tarea_completada'] = 'Admin %s marked as complete a task';
 $lang['notif_tarea_descompletada'] = 'Admin %s marked as not complete a task';
@@ -172,6 +134,7 @@ $lang['pendiente'] = 'Pending';
 $lang['perfil'] = 'Profile';
 $lang['progreso'] = 'Progress';
 $lang['provincia'] = 'Province';
+$lang['recibidos'] = 'Received';
 $lang['recordarme'] = 'Remember me';
 $lang['registrado'] = 'Registered';
 $lang['registrar'] = 'Sign up';
@@ -181,6 +144,7 @@ $lang['registro_empleado'] = 'Registration of a new worker';
 $lang['registro_incorrecto'] = 'Wrong registration! A user with that name already exists';
 $lang['rojo'] = 'Red';
 $lang['rojo_claro'] = 'Light Red';
+$lang['seleccionar_todos'] = 'Select All';
 $lang['sesion_cerrada'] = 'Session closed properly';
 $lang['tareas'] = 'Tasks';
 $lang['tareas_finalizadas'] = 'Completed Tasks';
@@ -202,6 +166,7 @@ $lang['tickets_pendientes'] = 'Pending Tickets';
 $lang['tiempo_estimado'] = 'Estimated time';
 $lang['tiene'] = 'You have ';
 $lang['tiene_1_mensaje'] = 'You have a message';
+$lang['tiene_1_mensaje'] = 'You have a new message';
 $lang['tiene_1_notificacion'] = 'You have a notification';
 $lang['tiene_notificaciones'] = 'You have %d notifications';
 $lang['tipo_empleado'] = 'Employee type';
@@ -216,5 +181,8 @@ $lang['ver_factura'] = 'View Receipt';
 $lang['ver_ticket'] = 'See Ticket';
 $lang['ver_todas'] = 'See all';
 $lang['ver_todos'] = 'See all';
+$lang['ver_todos_los_mensajes'] = 'See All Messages';
 $lang['verde'] = 'Green';
 $lang['verde_claro'] = 'Light Green';
+$lang['visto'] = 'Viewed';
+

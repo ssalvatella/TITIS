@@ -192,10 +192,10 @@
                                     <li class="user-body">
                                         <div class="row" style="font-size: 200%;">
                                             <div class="col-xs-6 text-center">
-                                                <a href="<?= site_url('idioma_switcher/cambiar_idioma/spanish'); ?>" title="Español"><span class="flag-icon flag-icon-es"></span></a>
+                                                <a href="<?= site_url('idioma_switcher/cambiar_idioma/spanish'); ?>" data-toggle="tooltip" data-placement="top" title="Español"><span class="flag-icon flag-icon-es"></span></a>
                                             </div>
                                             <div class="col-xs-6 text-center">
-                                                <a href="<?= site_url('idioma_switcher/cambiar_idioma/english'); ?>" title="English"><span class="flag-icon flag-icon-gb"></span></a>
+                                                <a href="<?= site_url('idioma_switcher/cambiar_idioma/english'); ?>" data-toggle="tooltip" data-placement="top" title="English"><span class="flag-icon flag-icon-gb"></span></a>
                                             </div>
                                         </div>
                                         <!-- /.row -->
