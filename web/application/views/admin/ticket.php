@@ -12,7 +12,29 @@
     <!-- Contenido -->
     <section class="content">
 
-        <!-- Modal ASIGNAR TÉCNICO ADMIN -->
+        <!-- INICIO Modal EDITAR DESCRIPCION -->
+        <div class="modal fade" id="modal_editar_descripcion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('editar_descripcion'); ?></h4>
+                    </div>
+                    <form id="editar_descripcion_form" method="POST">
+                        <div class="modal-body">
+                            <textarea id="textarea_descripcion" name="descripcion" maxlength="500" class="form-control" style="width: 100%;"  required></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
+                            <button type="submit" id="id_descripcion" name="id_descripcion" value="<?= $mensajes[0]['id_mensaje']; ?>" class="btn btn-primary"><?= $this->lang->line('editar'); ?></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- FIN Modal EDITAR DESCRIPCION -->
+
+        <!-- INICIO Modal ASIGNAR TÉCNICO ADMIN -->
         <div class="modal fade" id="modal_asignar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -20,7 +42,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('asignar') . ' ' . $this->lang->line('tecnico_admin'); ?></h4>
                     </div>
-                    <form id = "asigna_tecnico_admin_form" method="post">
+                    <form id="asigna_tecnico_admin_form" method="POST">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label><?= $this->lang->line('tecnico_admin'); ?></label>
@@ -35,15 +57,15 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
-                            <input  type="submit" id="asignar" value = "<?= $this->lang->line('asignar'); ?>" class="btn btn-primary">
+                            <input  type="submit" id="asignar" value="<?= $this->lang->line('asignar'); ?>" class="btn btn-primary">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <!-- END Modal ASIGNAR TÉCNICO ADMIN ----------->
+        <!-- FIN Modal ASIGNAR TÉCNICO ADMIN -->
 
-        <!-- Modal ELIMINAR TICKET -->
+        <!-- INICIO Modal ELIMINAR TICKET -->
         <div class="modal fade" id="modal_eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog modal-danger" role="document">
                 <div class="modal-content">
@@ -51,22 +73,22 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('eliminar') . ' ticket '; ?></h4>
                     </div>
-                    <form id = "asigna_tecnico_admin_form" method="post" action="<?= site_url('admin/eliminar_ticket/' . $ticket['id_ticket']) ?>">
+                    <form id="eliminar_ticket_form" method="POST" action="<?= site_url('admin/borrar_ticket'); ?>">
                         <div class="modal-body">
                             <p><?= $this->lang->line('mensaje_eliminar'); ?></p>
                             <p><?= $this->lang->line('mensaje_eliminar2'); ?></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
-                            <input  type="submit" id="eliminar" value = "<?= $this->lang->line('eliminar'); ?>" class="btn btn-danger">
+                            <button type="submit" id="eliminar_ticket" name="id_ticket" value="<?= $ticket['id_ticket']; ?>" class="btn btn-danger"><?= $this->lang->line('eliminar'); ?></button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <!-- Modal ELIMINAR TICKET ----------->
+        <!-- FIN Modal ELIMINAR TICKET -->
 
-        <!-- Modal AÑADIR TAREA -->
+        <!-- INICIO Modal AÑADIR TAREA -->
         <div class="modal fade" id="modal_tarea" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -74,7 +96,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('añadir_tarea'); ?></h4>
                     </div>
-                    <form id = "crear_tarea_form" method="post">
+                    <form id="crear_tarea_form" method="POST">
                         <div class="modal-body">
                             <div class="form-group" >
                                 <label><?= $this->lang->line('descripcion_tarea'); ?></label>
@@ -82,7 +104,7 @@
                             </div>
                             <div class="form-group">
                                 <label><?= $this->lang->line('tecnico'); ?></label>
-                                <select required id = "seleccion_tecnicos" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                <select required id="seleccion_tecnicos" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                     <?php
                                     foreach ($tecnicos as $tecnico) {
                                         echo '<option value="' . $tecnico['id_usuario'] . '"> ' . $tecnico['usuario'] . '</option>';
@@ -102,15 +124,15 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cerrar'); ?></button>
-                            <input  type="submit" id="añadir_tarea" value = "<?= $this->lang->line('añadir_tarea'); ?>" class="btn btn-primary">
+                            <input type="submit" id="añadir_tarea" value="<?= $this->lang->line('añadir_tarea'); ?>" class="btn btn-primary">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <!-- END Modal AÑADIR TAREA ----------->
+        <!-- FIN Modal AÑADIR TAREA -->
 
-        <!-- Modal EDITAR TAREA -->
+        <!-- INICIO Modal EDITAR TAREA -->
         <div class="modal fade" id="modal_editar_tarea" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -118,7 +140,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('editar_tarea'); ?></h4>
                     </div>
-                    <form id = "editar_tarea_form" method="post">
+                    <form id="editar_tarea_form" method="post">
                         <div class="modal-body">
                             <div class="form-group" >
                                 <label><?= $this->lang->line('descripcion_tarea'); ?></label>
@@ -146,29 +168,26 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cerrar'); ?></button>
-                            <input  type="submit" id="editar_tarea" value = "<?= $this->lang->line('editar_tarea'); ?>" class="btn btn-primary">
+                            <input type="submit" id="editar_tarea" value="<?= $this->lang->line('editar_tarea'); ?>" class="btn btn-primary">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <!-- END Modal EDITAR TAREA ----------->
+        <!-- FIN Modal EDITAR TAREA -->
 
         <div class="box box-primary">
-            <!-- CABECERA TÍTULO ---------------------------->
+            <!-- CABECERA TÍTULO -->
             <div class="box-header with-border">
-                    <h3 class="box-title"><?= $ticket['titulo'] . ' <small>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) ?> </small></h3>
+                <h3 class="box-title"><?= $ticket['titulo'] . ' <small>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) ?> </small></h3>
 
-                    <div class="box-tools pull-right">
-                        <?php
-                        if ($this->session->userdata('tipo_usuario') == USUARIO_ADMIN) {
-                            echo'<button type="button" data-toggle="modal" data-target="#modal_asignar" class="btn btn-box-tool"><i class="fa fa-wrench" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('cambiar') . ' ' . $this->lang->line('tecnico_admin') . '"></i></button>';
-                            echo'<button type="button" data-toggle="modal" data-target="#modal_eliminar" class="btn btn-box-tool"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('eliminar') . '"></i></button>';
-                        }
-                        ?>
-                    </div><!-- /.box-tools -->
+                <div class="box-tools pull-right">
+                    <button type="button" data-toggle="modal" data-target="#modal_asignar" class="btn btn-box-tool"><i class="fa fa-wrench" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('cambiar') . ' ' . $this->lang->line('tecnico_admin'); ?>"></i></button>
+                    <button type="button" data-toggle="modal" data-target="#modal_eliminar" class="btn btn-box-tool"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('eliminar'); ?>"></i></button>
+                </div><!-- /.box-tools -->
             </div><!-- /.box-header -->
-            <!-- ETIQUETAS CABECERA ------------------------->
+
+            <!-- ETIQUETAS CABECERA -->
             <div class="box-body">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -257,19 +276,21 @@
                 </div>
 
             </div><!-- /.box-body -->
-            <!-- DESCRIPCIÓN Y TAREAS ----------------------->
+            <!-- DESCRIPCIÓN Y TAREAS -->
             <div class="box-group" id="accordion">
-                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
                 <div class="panel box box-primary">
                     <div class="box-header with-border">
                         <h4 class="box-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="collapsed"><i class="fa fa-pencil"></i>&nbsp;
-                                <?= $this->lang->line('descripcion'); ?>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="collapsed">
+                                <i class="fa fa-pencil"></i> &nbsp; <?= $this->lang->line('descripcion'); ?>
                             </a>
                         </h4>
+                        <div class="box-tools pull-right">
+                            <button type="button" data-toggle="modal" data-target="#modal_editar_descripcion" class="btn btn-box-tool"><i class="fa fa-wrench" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('editar_descripcion') ?>"></i></button>
+                        </div><!-- /.box-tools -->
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse" aria-expanded="true" style="height: 0px;">
-                        <div class="box-body">
+                        <div id="texto_descripcion" class="box-body">
                             <?= $mensajes[0]['texto']; ?>
                         </div>
                     </div>
@@ -277,13 +298,12 @@
                 <div class="panel box box-danger">
                     <div class="box-header with-border">
                         <h4 class="box-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="" aria-expanded="false">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
                                 <i class="ion ion-clipboard"></i> &nbsp; <?= $this->lang->line('tareas'); ?>
                             </a>
                         </h4>
                     </div>
-                    <div id="collapseTwo" class="panel-collapse collapse in " aria-expanded="false">
-                        <!-- TO DO List -->
+                    <div id="collapseTwo" class="panel-collapse collapse in" aria-expanded="false">
                         <div class="box-body">
                             <ul class="todo-list">
                                 <?php
@@ -330,16 +350,15 @@
             <ul class="timeline">
                 <?php
                 for ($i = 1; $i < count($mensajes); ++$i) {
-
                     $fecha_mensaje = date('d/m/Y H:i', strtotime($mensajes[$i]['fecha']));
                     $fecha_mensaje_anterior = date('d/m/Y H:i', strtotime($mensajes[$i - 1]['fecha']));
 
                     if (($fecha_mensaje - $fecha_mensaje_anterior) > 0) {
                         echo '<li class="time-label">
-                                      <span class="bg-red">
-                                        ' . date('j M. Y', strtotime($mensajes[$i]['fecha'])) . '
-                                      </span>
-                                  </li>';
+                                    <span class="bg-red">
+                                      ' . date('j M. Y', strtotime($mensajes[$i]['fecha'])) . '
+                                    </span>
+                                </li>';
                     }
 
                     echo '<li style="margin-right: 0px;">
@@ -361,13 +380,12 @@
                     <i class="fa fa-commenting bg-aqua"></i>
                     <div class="timeline-item">
                         <div class="timeline-body">
-                            <form method="post" action="<?= site_url('ticket/enviar_mensaje/') . $ticket['id_ticket']; ?>">
+                            <form method="POST" action="<?= site_url('ticket/enviar_mensaje/') . $ticket['id_ticket']; ?>">
                                 <div class="form-group">
-                                    <textarea name= "mensaje" maxlength="500" class= "form-control" style = "width: 100%" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
+                                    <textarea name= "mensaje" maxlength="500" class= "form-control" style="width: 100%" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
                                     <input style="margin-top: 15px" name="submit" value="<?= $this->lang->line('enviar'); ?>" type="submit" id="boton" class="btn bg-purple btn-flat btn-md">
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </li>
@@ -375,8 +393,6 @@
                 <li>
                     <a class="fa fa-repeat bg-gray"  data-toggle="tooltip" data-placement="right" title="<?= $this->lang->line('actualizar'); ?>" href="javascript:history.go(0)"></a>
                 </li>
-
-                <!-- END timeline item -->
 
             </ul>
         </div><!-- box-footer -->

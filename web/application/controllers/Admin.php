@@ -227,15 +227,14 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function obtener_tecnicos_admin() {
-        if ($this->usuario_permitido(USUARIO_ADMIN)) {
-            print_r($this->tecnico_admin->obtener_tecnicos_admin());
-        }
-    }
+    /* public function obtener_tecnicos_admin() {
+      if ($this->usuario_permitido(USUARIO_ADMIN)) {
+      print_r($this->tecnico_admin->obtener_tecnicos_admin());
+      }
+      } */
 
     public function ver_ticket($id_ticket = null) {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
-
             if ($id_ticket == null) {
                 redirect('admin');
             }
@@ -280,6 +279,17 @@ class Admin extends MY_Controller {
         }
     }
 
+    public function editar_descripcion() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $id_mensaje = $this->input->post('id_descripcion');
+            $texto = $this->input->post('descripcion');
+            $datos = [
+                'texto' => $texto
+            ];
+            $this->mensaje->editar_mensaje($id_mensaje, $datos);
+        }
+    }
+
     public function editar_tarea() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $id_tarea = $this->input->post('id_tarea');
@@ -287,7 +297,13 @@ class Admin extends MY_Controller {
             $descripcion = $this->input->post('descripcion_tarea');
             $inicio = $this->input->post('inicio');
             $fin_previsto = $this->input->post('fin_previsto');
-            $datos = array('nombre' => $descripcion, 'tecnico' => $id_tecnico, 'estado' => TAREA_EN_PROCESO, 'inicio' => $inicio, 'fin_previsto' => $fin_previsto);
+            $datos = [
+                'nombre' => $descripcion,
+                'tecnico' => $id_tecnico,
+                'estado' => TAREA_EN_PROCESO,
+                'inicio' => $inicio,
+                'fin_previsto' => $fin_previsto
+            ];
             $this->tarea->editar_tarea($id_tarea, $datos);
         }
     }
@@ -300,8 +316,9 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function eliminar_ticket($id_ticket = -1) {
+    public function borrar_ticket() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $id_ticket = $this->input->post('id_ticket');
             $this->ticket_modelo->eliminar_ticket($id_ticket);
             $this->session->set_flashdata('mensaje', 'Ticket borrado correctamente.');
             redirect('admin/tickets');

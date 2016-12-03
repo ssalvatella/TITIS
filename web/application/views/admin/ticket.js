@@ -25,8 +25,8 @@ $(".todo-list").todolist({
                     icon: 'glyphicon glyphicon-ok',
                     title: '<strong>Tarea completada!</strong>',
                     message: 'La tarea ha sido marcada como completada.',
-                },{
-                    type: 'success',delay: 100
+                }, {
+                    type: 'success', delay: 100
                 });
             }
         });
@@ -51,8 +51,8 @@ $(".todo-list").todolist({
                     icon: 'glyphicon glyphicon-ok',
                     title: '<strong>Tarea pendiente!</strong>',
                     message: 'La tarea ha sido marcada como pendiente.',
-                },{
-                    type: 'success',delay: 100
+                }, {
+                    type: 'success', delay: 100
                 });
             }
         });
@@ -122,7 +122,11 @@ $(function () {
                  }*/
     });
 
-    $(".select2").select2();
+    $('#textarea_descripcion').val(document.getElementById('texto_descripcion').innerHTML);
+    $("#textarea_descripcion").wysihtml5({
+        toolbar: {"size": "xs"},
+        locale: "es-ES"
+    });
 
     $('#asigna_tecnico_admin_form').on('submit', function (e) {
         e.preventDefault();
@@ -158,8 +162,8 @@ $(function () {
                     icon: 'glyphicon glyphicon-ok',
                     title: '<strong>Tarea creada!</strong>',
                     message: 'La tarea ha sido creada con éxito.',
-                },{
-                    type: 'success',delay: 100
+                }, {
+                    type: 'success', delay: 100
                 });
             }
         });
@@ -184,19 +188,47 @@ $(function () {
                     icon: 'glyphicon glyphicon-ok',
                     title: '<strong>Tarea editada!</strong>',
                     message: 'La tarea ha sido editada con éxito.',
-                },{
-                    type: 'success',delay: 100
+                }, {
+                    type: 'success', delay: 100
                 });
             }
         });
         $('#modal_editar_tarea').modal('hide');
     });
 
+    $('#editar_descripcion_form').on('submit', function (e) {
+        e.preventDefault();
+        var getUrl = window.location;
+        var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+        var id_descripcion = $("#id_descripcion").val();
+        var descripcion = $('#textarea_descripcion').val();
+        console.log(id_descripcion);
+        console.log(descripcion);
+        $.ajax({
+            url: baseURL + '/editar_descripcion',
+            type: 'POST',
+            data: {id_descripcion: id_descripcion, descripcion: descripcion},
+            success: function (data) {
+                setTimeout(function () {
+                    window.location.reload(true);
+                }, 1500);
+                $.notify({
+                    icon: 'glyphicon glyphicon-ok',
+                    title: '<strong>Descripción editada!</strong>',
+                    message: 'La descripción ha sido editada con éxito.',
+                }, {
+                    type: 'success', delay: 100
+                });
+            }
+        });
+        $('#modal_editar_descripcion').modal('hide');
+    });
+
     $(".boton_editar").on("click", function () {
         var li = $(this).closest('li');
         var id_tarea = li[0].value;
-        var descripcion_tarea =  li.find('.text')[0].textContent;
-        var tecnico =  li.find('.label label-primary');
+        var descripcion_tarea = li.find('.text')[0].textContent;
+        var tecnico = li.find('.label label-primary');
         $('#descripcion_tarea_editar').val(descripcion_tarea);
         tarea_editar = id_tarea;
 
@@ -222,8 +254,8 @@ $(function () {
                     icon: 'glyphicon glyphicon-ok',
                     title: '<strong>Tarea borrada!</strong>',
                     message: 'La tarea ha sido borrada con éxito.',
-                },{
-                    type: 'success',delay: 100
+                }, {
+                    type: 'success', delay: 100
                 });
             }
         });
@@ -231,6 +263,6 @@ $(function () {
 
 });
 
-$.fn.modal.Constructor.prototype.enforceFocus = function() {};
+$.fn.modal.Constructor.prototype.enforceFocus = function () {};
 
 

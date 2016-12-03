@@ -55,5 +55,9 @@ class Mensaje extends CI_Model {
         return $this->db->get()->result_array();
     }
 
+    public function editar_mensaje($id_mensaje, $datos) {
+        $this->db->where('id_mensaje', $id_mensaje);
+        return $this->db->update('Mensaje', $datos);
+    }
 
 }

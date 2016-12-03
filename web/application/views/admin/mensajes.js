@@ -51,15 +51,13 @@ $(function () {
         "stateSave": true,
         "responsive": true,
         "columnDefs": [{
-            "targets": [3],
-            "class": "not-mobile",
-        }],
+                "targets": [3],
+                "class": "not-mobile",
+            }],
         "fnInitComplete": function () {
             $("#cargador").hide();
         }
     });
-
-
 
 });
 
@@ -70,15 +68,15 @@ $('#mensajes tr td').click(function () {
 $("#mensaje").wysihtml5({
     toolbar: {"size": "xs"},
     locale: "es-ES"
-    /*showToolbarAfterInit: false,
-     "events": {
-     "focus": function () {
-     this.toolbar.show();
-     },
-     "blur": function () {
-     this.toolbar.hide();
-     }
-     }*/
+            /*showToolbarAfterInit: false,
+             "events": {
+             "focus": function () {
+             this.toolbar.show();
+             },
+             "blur": function () {
+             this.toolbar.hide();
+             }
+             }*/
 });
 
 $(function () {
@@ -89,7 +87,7 @@ $('#enviar_mensaje_form').on('submit', function (e) {
     e.preventDefault();
     var getUrl = window.location;
     var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    var id_receptor = $("#seleccion_usuarios").val() ;
+    var id_receptor = $("#seleccion_usuarios").val();
     var mensaje = $('#mensaje').val();
     $.ajax({
         url: baseURL + '/enviar_mensaje',
@@ -99,8 +97,8 @@ $('#enviar_mensaje_form').on('submit', function (e) {
             $.notify({
                 icon: 'glyphicon glyphicon-ok',
                 title: '<strong>Mensaje enviado!</strong>', message: ''
-            },{
-                type: 'success',delay: 100
+            }, {
+                type: 'success', delay: 100
             });
             $('#mensaje').value = "";
         }
@@ -108,4 +106,4 @@ $('#enviar_mensaje_form').on('submit', function (e) {
     $('#modal_mensaje').modal('hide');
 });
 
-$.fn.modal.Constructor.prototype.enforceFocus = function() {};
+$.fn.modal.Constructor.prototype.enforceFocus = function () {};

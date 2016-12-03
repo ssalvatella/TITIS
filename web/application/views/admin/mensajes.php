@@ -5,15 +5,15 @@
             <?= $this->lang->line('mensajes_titulo'); ?>
             <small>
                 <?php
-                    if ($numero_mensajes_no_vistos == 0) {
-                        echo $this->lang->line('no_hay_mensajes');
-                    } else if ($numero_mensajes_no_vistos == 1) {
-                        echo $this->lang->line('tiene_1_mensaje');
-                    } else {
-                        echo $this->lang->line('tiene') . $numero_mensajes_no_vistos . $this->lang->line('mensajes') ;
-                    }
+                if ($numero_mensajes_no_vistos == 0) {
+                    echo $this->lang->line('no_hay_mensajes');
+                } else if ($numero_mensajes_no_vistos == 1) {
+                    echo $this->lang->line('tiene_1_mensaje');
+                } else {
+                    echo $this->lang->line('tiene') . $numero_mensajes_no_vistos . $this->lang->line('mensajes');
+                }
                 ?>
-             </small>
+            </small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?= site_url('admin'); ?>"><i class="fa fa-home"></i> <?= $this->lang->line('inicio'); ?></a></li>
@@ -21,7 +21,7 @@
         </ol>
     </section>
 
-    <!-- Modal ENVIAR -->
+    <!-- INICIO Modal ENVIAR -->
     <div class="modal fade" id="modal_enviar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -29,7 +29,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('enviar_mensaje'); ?></h4>
                 </div>
-                <form id = "enviar_mensaje_form" method="post">
+                <form id="enviar_mensaje_form" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
                             <label><?= $this->lang->line('usuario'); ?></label>
@@ -49,20 +49,18 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
-                        <input  type="submit" id="enviar" value = "<?= $this->lang->line('enviar'); ?>" class="btn btn-primary">
+                        <input type="submit" id="enviar" value="<?= $this->lang->line('enviar'); ?>" class="btn btn-primary">
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <!-- END Modal ENVIAR ----------->
+    <!-- FIN Modal ENVIAR -->
 
     <section class="content">
 
         <div class="row">
-
             <div class="col-md-3">
-
                 <a href="#" data-toggle="modal" data-target="#modal_enviar" class="btn btn-primary btn-block margin-bottom"><?= $this->lang->line('enviar_mensaje'); ?></a>
 
                 <div class="box box-solid">
@@ -77,7 +75,7 @@
                     <div class="box-body no-padding">
                         <ul class="nav nav-pills nav-stacked">
                             <li class="active"><a href="#"><i class="fa fa-inbox"></i> <?= $this->lang->line('recibidos'); ?>
-                                    <span class="label label-primary pull-right"><?php if ($numero_mensajes_no_vistos > 0) echo $numero_mensajes_no_vistos;?></span></a></li>
+                                    <span class="label label-primary pull-right"><?php if ($numero_mensajes_no_vistos > 0) echo $numero_mensajes_no_vistos; ?></span></a></li>
                             <li><a href="#"><i class="fa fa-envelope-o"></i> <?= $this->lang->line('enviados'); ?></a></li>
                         </ul>
                     </div>
@@ -107,8 +105,7 @@
                         <div class="table-responsive mailbox-messages" >
                             <table id= "mensajes" class="table table-hover table-striped" >
                                 <tbody>
-                                <?php
-
+                                    <?php
                                     foreach ($mensajes as $mensaje) {
 
                                         $fecha_mensaje = new DateTime($mensaje['fecha']);
@@ -128,23 +125,21 @@
                                         echo '<tr style="cursor: pointer;"> ';
                                         echo '<td> <a  href="' . site_url('admin/ver_mensaje/' . $mensaje['id_mensaje']) . '"></a><input type="checkbox"></td>';
                                         if ($mensaje['visto'] == 0) {
-                                            echo '<td><i data-html="true" data-toggle="tooltip" data-placement="top" title="'. $this->lang->line('no_visto') .'" class="fa fa-eye-slash"></i></td>';
+                                            echo '<td><i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('no_visto') . '" class="fa fa-eye-slash"></i></td>';
                                         } else {
-                                            echo '<td><i data-html="true" data-toggle="tooltip" data-placement="top" title="'. $this->lang->line('visto').'" class="fa fa-eye"></i></td>';
+                                            echo '<td><i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('visto') . '" class="fa fa-eye"></i></td>';
                                         }
-                                        echo '<td class="mailbox-name"> <a href="'. site_url('admin/ver_usuario/' . $mensaje['id_usuario']) . '">'. $mensaje['nombre_emisor'] .'</a></td>';
-                                        echo '<td class="mailbox-subject">'. strip_tags(substr($mensaje['texto'],0,20)) .'...</td>';
+                                        echo '<td class="mailbox-name"> <a href="' . site_url('admin/ver_usuario/' . $mensaje['id_usuario']) . '">' . $mensaje['nombre_emisor'] . '</a></td>';
+                                        echo '<td class="mailbox-subject">' . strip_tags(substr($mensaje['texto'], 0, 20)) . '...</td>';
                                         if (isset($mensaje['archivo'])) {
                                             echo '<td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>';
                                         } else {
                                             echo '<td> </td>';
                                         }
-                                        echo '<td class="mailbox-date">'. $diferencia . '</td>';
+                                        echo '<td class="mailbox-date">' . $diferencia . '</td>';
                                         echo '</tr>';
-
                                     }
-
-                                ?>
+                                    ?>
                                 </tbody>
                             </table>
                             <!-- /.table -->

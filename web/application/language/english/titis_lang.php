@@ -150,7 +150,6 @@ $lang['tareas'] = 'Tasks';
 $lang['tareas_finalizadas'] = 'Completed Tasks';
 $lang['tecnico'] = 'Technician';
 $lang['tecnico_admin'] = 'Technician Admin';
-$lang['tecnico_admin'] = 'Technician administrator';
 $lang['tecnicos'] = 'Technicians';
 $lang['tecnicos_admin'] = 'Technicians Admins';
 $lang['telefono'] = 'Phone Number';
