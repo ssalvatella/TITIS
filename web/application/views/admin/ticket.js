@@ -107,32 +107,83 @@ $(".tiempo_tarea").on('cancel.daterangepicker', function (ev, picker) {
     $(this).val('');
 });
 
+$(document).ready(function () {
+    $('#mensaje').summernote({
+        lang: "es-ES"
+    });
+    $('#textarea_descripcion').summernote({
+        lang: "es-ES"
+    });
+    $('#textarea_descripcion').summernote("code", document.getElementById('texto_descripcion').innerHTML);
+    $('#textarea_mensaje').summernote({
+        lang: "es-ES"
+    });
+});
+
+$('.boton-guardar-mensaje').hide(); // Oculta los botones de guardar los mensajes
+$('.boton-cancelar-mensaje').hide(); // Oculta los botones de cancelar los mensajes
+
+function editar_mensaje(elem) {
+    $(elem).hide(); // Oculta el botón de editar
+    var boton_guardar = elem.nextElementSibling;
+    var boton_cancelar = boton_guardar.nextElementSibling;
+    $(boton_guardar).show()
+    $(boton_cancelar).show()
+    var parent = elem.parentNode;
+    var siguiente_div = parent.nextElementSibling;
+    var mensaje_div = siguiente_div.children[0];
+    $(mensaje_div).summernote({focus: true});
+}
+
+function guardar_mensaje(elem) {
+    $(elem).hide(); // Oculta el botón de guardar
+    var boton_editar = elem.previousElementSibling;
+    var boton_cancelar = elem.nextElementSibling;
+    $(boton_editar).show()
+    $(boton_cancelar).hide()
+    var parent = elem.parentNode;
+    var siguiente_div = parent.nextElementSibling;
+    var mensaje_div = siguiente_div.children[0];
+    var getUrl = window.location;
+    var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
+    var id_mensaje = $(elem).val();
+    var mensaje = $(mensaje_div).summernote('code');
+    $(mensaje_div).summernote('destroy');
+
+    $.ajax({
+        url: baseURL + '/editar_mensaje',
+        type: 'POST',
+        data: {id_mensaje: id_mensaje, mensaje: mensaje},
+        success: function (data) {
+            /* setTimeout(function () {
+             window.location.reload(true);
+             }, 1500);*/
+            $.notify({
+                icon: 'glyphicon glyphicon-ok',
+                title: '<strong>Mensaje editado!</strong>',
+                message: 'El mensaje ha sido editado con éxito.',
+            }, {
+                type: 'success', delay: 100
+            });
+        }
+    });
+}
+
+function cancelar_mensaje(elem) {
+    $(elem).hide(); // Oculta el botón de cancelar
+    boton_guardar = elem.previousElementSibling;
+    boton_editar = boton_guardar.previousElementSibling;
+    $(boton_guardar).hide()
+    $(boton_editar).show()
+    var parent = elem.parentNode;
+    var siguiente_div = parent.nextElementSibling;
+    var mensaje_div = siguiente_div.children[0];
+    $(mensaje_div).summernote('destroy');
+}
+
+
 $(function () {
-    $("#mensaje").wysihtml5({
-        toolbar: {"size": "xs"},
-        locale: "es-ES"
-                /*showToolbarAfterInit: false,
-                 "events": {
-                 "focus": function () {
-                 this.toolbar.show();
-                 },
-                 "blur": function () {
-                 this.toolbar.hide();
-                 }
-                 }*/
-    });
-
-    $('#textarea_descripcion').val(document.getElementById('texto_descripcion').innerHTML);
-    $("#textarea_descripcion").wysihtml5({
-        toolbar: {"size": "xs"},
-        locale: "es-ES"
-    });
-
-    var editor_mensaje = $("#textarea_mensaje").wysihtml5({
-        toolbar: {"size": "xs"},
-        locale: "es-ES"
-    });
-
     $('#asigna_tecnico_admin_form').on('submit', function (e) {
         e.preventDefault();
         var getUrl = window.location;
@@ -226,47 +277,6 @@ $(function () {
         });
         $('#modal_editar_descripcion').modal('hide');
     });
-
-    $('#modal_editar_mensaje').on('show.bs.modal', function (e) {
-        var id_mensaje = $(e.relatedTarget).data('id_mensaje');
-        // -----------------------------------------------> NO PUEDO DARLE UN VALOR AL TEXTAREA
-        console.log(editor_mensaje);
-        console.log(editor_mensaje.data('wysihtml5'));
-        console.log(editor_mensaje.data('wysihtml5').editor);
-        // $('#textarea_mensaje').val('aaaaaa');
-        //editor_mensaje.setValue('asd');
-        var editorInstance = editor_mensaje.data('wysihtml5').editor;
-        console.log(editorInstance);
-        editorInstance.setValue('some text to be inserted into editor', true);
-        $('#editar_mensaje_form').on('submit', function (e) {
-            e.preventDefault();
-            var getUrl = window.location;
-            var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-            var mensaje = $('#textarea_mensaje').val();
-            console.log(id_mensaje);
-            console.log(mensaje);
-            $.ajax({
-                url: baseURL + '/editar_mensaje',
-                type: 'POST',
-                data: {id_mensaje: id_mensaje, mensaje: mensaje},
-                success: function (data) {
-                    /* setTimeout(function () {
-                     window.location.reload(true);
-                     }, 1500);*/
-                    $.notify({
-                        icon: 'glyphicon glyphicon-ok',
-                        title: '<strong>Mensaje editado!</strong>',
-                        message: 'El mensaje ha sido editado con éxito.',
-                    }, {
-                        type: 'success', delay: 100
-                    });
-                }
-            });
-            $('#modal_editar_mensaje').modal('hide');
-        });
-    });
-
-
 
     $(".boton_editar").on("click", function () {
         var li = $(this).closest('li');

@@ -244,10 +244,10 @@ class Admin extends MY_Controller {
             $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
             $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO_ADMIN);
             $datos['tecnicos'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO);
-            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
-            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/summernote/summernote.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/summernote/summernote.min.js'));
             if ($this->session->userdata('idioma') == 'spanish') {
-                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.es-ES.js'));
+                $this->plantilla->poner_js(site_url('assets/plugins/summernote/lang/summernote-es-ES.js'));
             }
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
 
@@ -304,7 +304,7 @@ class Admin extends MY_Controller {
             $datos = [
                 'texto' => $texto
             ];
-            //$this->mensaje->editar_mensaje($id_mensaje, $datos);
+            $this->mensaje->editar_mensaje($id_mensaje, $datos);
         }
     }
 

@@ -85,6 +85,7 @@ $lang['facturas_recibidas'] = 'Facturas Recibidas';
 $lang['fecha'] = 'Fecha';
 $lang['fichero_adjunto'] = 'Fichero adjunto ';
 $lang['finalizado'] = 'Finalizado';
+$lang['guardar'] = 'Guardar';
 $lang['grafico_de_gastos'] = 'Gráfico de gastos';
 $lang['ha_escrito_comentario'] = 'ha escrito un comentario';
 $lang['hola'] = 'Hola';

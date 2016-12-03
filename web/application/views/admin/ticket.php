@@ -34,28 +34,6 @@
         </div>
         <!-- FIN Modal EDITAR DESCRIPCION -->
 
-        <!-- INICIO Modal EDITAR MENSAJE -->
-        <div class="modal fade" id="modal_editar_mensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('editar_mensaje'); ?></h4>
-                    </div>
-                    <form id="editar_mensaje_form" method="POST">
-                        <div class="modal-body">
-                            <textarea id="textarea_mensaje" name="mensaje" maxlength="500" class="form-control" style="width: 100%;" required></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
-                            <button type="submit" class="btn btn-primary"><?= $this->lang->line('editar'); ?></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- FIN Modal EDITAR MENSAJE -->
-
         <!-- INICIO Modal ASIGNAR TÉCNICO ADMIN -->
         <div class="modal fade" id="modal_asignar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -389,7 +367,10 @@
                         <div class="timeline-item">
                             <span class="time"><i class="fa fa-clock-o"></i> &nbsp; <?= date('H:i', strtotime($mensajes[$i]['fecha'])); ?></span>
                             <h3 class="timeline-header">
-                                <a href="#"><?= $mensajes[$i]['nombre_usuario']; ?></a> <?= $this->lang->line('ha_escrito_comentario'); ?><button type="button" data-toggle="modal" data-target="#modal_editar_mensaje" data-id_mensaje="<?= $mensajes[$i]['id_mensaje']; ?>" class="btn btn-box-tool" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-wrench" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('editar'); ?>"></i></button>
+                                <a href="#"><?= $mensajes[$i]['nombre_usuario']; ?></a> <?= $this->lang->line('ha_escrito_comentario'); ?>
+                                <button type="button" onclick="editar_mensaje(this)" class="btn btn-box-tool" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-wrench" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('editar'); ?>"></i></button>
+                                <button type="button" onclick="guardar_mensaje(this)" value="<?= $mensajes[$i]['id_mensaje']; ?>" class="btn btn-box-tool boton-guardar-mensaje" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-save" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('guardar'); ?>"></i></button>
+                                <button type="button" onclick="cancelar_mensaje(this)" class="btn btn-box-tool boton-cancelar-mensaje" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-times" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('cancelar'); ?>"></i></button>
                             </h3>
                             <div class="timeline-body">
                                 <div class="mensaje">
