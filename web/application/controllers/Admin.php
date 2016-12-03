@@ -274,7 +274,14 @@ class Admin extends MY_Controller {
             $descripcion = $this->input->post('descripcion_tarea');
             $inicio = $this->input->post('inicio');
             $fin_previsto = $this->input->post('fin_previsto');
-            $datos = array('ticket' => $id_ticket, 'nombre' => $descripcion, 'tecnico' => $id_tecnico, 'estado' => TAREA_EN_PROCESO, 'inicio' => $inicio, 'fin_previsto' => $fin_previsto);
+            $datos = [
+                'ticket' => $id_ticket,
+                'nombre' => $descripcion,
+                'tecnico' => $id_tecnico,
+                'estado' => TAREA_EN_PROCESO,
+                'inicio' => $inicio,
+                'fin_previsto' => $fin_previsto
+            ];
             $this->tarea->crear_tarea($datos);
         }
     }
@@ -287,6 +294,17 @@ class Admin extends MY_Controller {
                 'texto' => $texto
             ];
             $this->mensaje->editar_mensaje($id_mensaje, $datos);
+        }
+    }
+
+    public function editar_mensaje() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $id_mensaje = $this->input->post('id_mensaje');
+            $texto = $this->input->post('mensaje');
+            $datos = [
+                'texto' => $texto
+            ];
+            //$this->mensaje->editar_mensaje($id_mensaje, $datos);
         }
     }
 

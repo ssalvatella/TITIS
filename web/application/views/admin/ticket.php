@@ -34,6 +34,28 @@
         </div>
         <!-- FIN Modal EDITAR DESCRIPCION -->
 
+        <!-- INICIO Modal EDITAR MENSAJE -->
+        <div class="modal fade" id="modal_editar_mensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('editar_mensaje'); ?></h4>
+                    </div>
+                    <form id="editar_mensaje_form" method="POST">
+                        <div class="modal-body">
+                            <textarea id="textarea_mensaje" name="mensaje" maxlength="500" class="form-control" style="width: 100%;" required></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
+                            <button type="submit" class="btn btn-primary"><?= $this->lang->line('editar'); ?></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- FIN Modal EDITAR MENSAJE -->
+
         <!-- INICIO Modal ASIGNAR TÉCNICO ADMIN -->
         <div class="modal fade" id="modal_asignar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -286,7 +308,7 @@
                             </a>
                         </h4>
                         <div class="box-tools pull-right">
-                            <button type="button" data-toggle="modal" data-target="#modal_editar_descripcion" class="btn btn-box-tool"><i class="fa fa-wrench" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('editar_descripcion') ?>"></i></button>
+                            <button type="button" data-toggle="modal" data-target="#modal_editar_descripcion" class="btn btn-box-tool"><i class="fa fa-wrench" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('editar'); ?>"></i></button>
                         </div><!-- /.box-tools -->
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse" aria-expanded="true" style="height: 0px;">
@@ -326,8 +348,8 @@
                                     if ($tarea['estado'] == TAREA_FINALIZADA) {
                                         echo '<i style="margin-right: 10px" class="label label-info fecha_fin"><i class="fa fa-calendar"></i> &nbsp;' . $tarea['fin'] . '</i>';
                                     }
-                                    echo '<span style="cursor:pointer" data-toggle="modal"  data-target="#modal_editar_tarea"><i  data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('editar') . '"  class="fa fa-edit boton_editar"></i></span>
-                                                <i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('eliminar') . '" id = "borrar_tarea" class="fa fa-trash-o boton_borrar"></i>
+                                    echo '<span style="cursor:pointer" data-toggle="modal" data-target="#modal_editar_tarea"><i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('editar') . '" class="fa fa-edit boton_editar"></i></span>
+                                                <i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('eliminar') . '" id="borrar_tarea" class="fa fa-trash-o boton_borrar"></i>
                                             </div></li>';
                                 }
                                 ?>
@@ -354,27 +376,29 @@
                     $fecha_mensaje_anterior = date('d/m/Y H:i', strtotime($mensajes[$i - 1]['fecha']));
 
                     if (($fecha_mensaje - $fecha_mensaje_anterior) > 0) {
-                        echo '<li class="time-label">
-                                    <span class="bg-red">
-                                      ' . date('j M. Y', strtotime($mensajes[$i]['fecha'])) . '
-                                    </span>
-                                </li>';
-                    }
+                        ?>
+                        <li class="time-label">
+                            <span class="bg-red">
+                                <?= date('j M. Y', strtotime($mensajes[$i]['fecha'])); ?>
+                            </span>
+                        </li>
+                    <?php } ?>
 
-                    echo '<li style="margin-right: 0px;">
-                                <i class="fa fa-comments bg-yellow"></i>   
-                                <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i> &nbsp; ' . date('H:i', strtotime($mensajes[$i]['fecha'])) . '</span>
-                                    <h3 class="timeline-header"><a href="#">' . $mensajes[$i]['nombre_usuario'] . '</a> ' . $this->lang->line('ha_escrito_comentario') . '</h3>
-                                    <div class="timeline-body">
-                                        <div class="mensaje">
-                                        ' . $mensajes[$i]['texto'] . '
-                                        </div>
-                                    </div>
+                    <li style="margin-right: 0px;">
+                        <i class="fa fa-comments bg-yellow"></i>   
+                        <div class="timeline-item">
+                            <span class="time"><i class="fa fa-clock-o"></i> &nbsp; <?= date('H:i', strtotime($mensajes[$i]['fecha'])); ?></span>
+                            <h3 class="timeline-header">
+                                <a href="#"><?= $mensajes[$i]['nombre_usuario']; ?></a> <?= $this->lang->line('ha_escrito_comentario'); ?><button type="button" data-toggle="modal" data-target="#modal_editar_mensaje" data-id_mensaje="<?= $mensajes[$i]['id_mensaje']; ?>" class="btn btn-box-tool" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-wrench" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('editar'); ?>"></i></button>
+                            </h3>
+                            <div class="timeline-body">
+                                <div class="mensaje">
+                                    <?= $mensajes[$i]['texto']; ?>
                                 </div>
-                              </li>';
-                }
-                ?>
+                            </div>
+                        </div>
+                    </li>
+                <?php } ?>
 
                 <li style="margin-right: 0px;">
                     <i class="fa fa-commenting bg-aqua"></i>
@@ -382,7 +406,7 @@
                         <div class="timeline-body">
                             <form method="POST" action="<?= site_url('ticket/enviar_mensaje/') . $ticket['id_ticket']; ?>">
                                 <div class="form-group">
-                                    <textarea name= "mensaje" maxlength="500" class= "form-control" style="width: 100%" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
+                                    <textarea name="mensaje" maxlength="500" class="form-control" style="width: 100%" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
                                     <input style="margin-top: 15px" name="submit" value="<?= $this->lang->line('enviar'); ?>" type="submit" id="boton" class="btn bg-purple btn-flat btn-md">
                                 </div>
                             </form>

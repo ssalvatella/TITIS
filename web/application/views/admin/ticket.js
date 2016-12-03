@@ -128,6 +128,11 @@ $(function () {
         locale: "es-ES"
     });
 
+    var editor_mensaje = $("#textarea_mensaje").wysihtml5({
+        toolbar: {"size": "xs"},
+        locale: "es-ES"
+    });
+
     $('#asigna_tecnico_admin_form').on('submit', function (e) {
         e.preventDefault();
         var getUrl = window.location;
@@ -202,8 +207,6 @@ $(function () {
         var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
         var id_descripcion = $("#id_descripcion").val();
         var descripcion = $('#textarea_descripcion').val();
-        console.log(id_descripcion);
-        console.log(descripcion);
         $.ajax({
             url: baseURL + '/editar_descripcion',
             type: 'POST',
@@ -223,6 +226,47 @@ $(function () {
         });
         $('#modal_editar_descripcion').modal('hide');
     });
+
+    $('#modal_editar_mensaje').on('show.bs.modal', function (e) {
+        var id_mensaje = $(e.relatedTarget).data('id_mensaje');
+        // -----------------------------------------------> NO PUEDO DARLE UN VALOR AL TEXTAREA
+        console.log(editor_mensaje);
+        console.log(editor_mensaje.data('wysihtml5'));
+        console.log(editor_mensaje.data('wysihtml5').editor);
+        // $('#textarea_mensaje').val('aaaaaa');
+        //editor_mensaje.setValue('asd');
+        var editorInstance = editor_mensaje.data('wysihtml5').editor;
+        console.log(editorInstance);
+        editorInstance.setValue('some text to be inserted into editor', true);
+        $('#editar_mensaje_form').on('submit', function (e) {
+            e.preventDefault();
+            var getUrl = window.location;
+            var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+            var mensaje = $('#textarea_mensaje').val();
+            console.log(id_mensaje);
+            console.log(mensaje);
+            $.ajax({
+                url: baseURL + '/editar_mensaje',
+                type: 'POST',
+                data: {id_mensaje: id_mensaje, mensaje: mensaje},
+                success: function (data) {
+                    /* setTimeout(function () {
+                     window.location.reload(true);
+                     }, 1500);*/
+                    $.notify({
+                        icon: 'glyphicon glyphicon-ok',
+                        title: '<strong>Mensaje editado!</strong>',
+                        message: 'El mensaje ha sido editado con éxito.',
+                    }, {
+                        type: 'success', delay: 100
+                    });
+                }
+            });
+            $('#modal_editar_mensaje').modal('hide');
+        });
+    });
+
+
 
     $(".boton_editar").on("click", function () {
         var li = $(this).closest('li');
