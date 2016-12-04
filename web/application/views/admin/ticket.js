@@ -60,6 +60,32 @@ $(".todo-list").todolist({
     }
 });
 
+$(function () {
+    $('input[type="radio"].flat').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue'
+    });
+});
+
+var parsley_opciones = {
+    successClass: 'has-success',
+    errorClass: 'has-error',
+    classHandler: function (_el) {
+        return _el.$element.closest('.form-group');
+    },
+    errorsWrapper: '<span class="help-inline hideHelp"></span>',
+    errorTemplate: "<span></span>"
+};
+
+$(function () {
+    $('#form_enviar_mensaje').parsley(parsley_opciones).on('field:validated', function () {
+        var ok = $('.parsley-error').length === 0;
+        $('.bs-callout-info').toggleClass('hidden', !ok);
+        $('.bs-callout-warning').toggleClass('hidden', ok);
+    });
+});
+
+
 var fecha_inicio;
 var fecha_fin;
 var tarea_editar;

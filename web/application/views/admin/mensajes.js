@@ -90,7 +90,7 @@ $('#enviar_mensaje_form').on('submit', function (e) {
     var id_receptor = $("#seleccion_usuarios").val();
     var mensaje = $('#mensaje').val();
     $.ajax({
-        url: baseURL + '/enviar_mensaje',
+        url: baseURL + '/enviar_mensaje_privado',
         type: 'POST',
         data: {id_receptor: id_receptor, mensaje: mensaje},
         success: function (data) {

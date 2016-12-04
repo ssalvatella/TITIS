@@ -21,7 +21,7 @@ $(function () {
         var id_cliente =  $('#modal_mensaje').attr("value");
         var mensaje = $('#mensaje').val();
         $.ajax({
-            url: baseURL + '/enviar_mensaje',
+            url: baseURL + '/enviar_mensaje_privado',
             type: 'POST',
             data: {id_receptor: id_cliente, mensaje: mensaje},
             success: function (data) {

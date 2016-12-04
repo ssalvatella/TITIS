@@ -244,6 +244,9 @@ class Admin extends MY_Controller {
             $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
             $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO_ADMIN);
             $datos['tecnicos'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO);
+            $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/iCheck/all.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/iCheck/icheck.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/summernote/summernote.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/summernote/summernote.min.js'));
             if ($this->session->userdata('idioma') == 'spanish') {
@@ -380,7 +383,24 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function enviar_mensaje() {
+    public function enviar_mensaje($id_ticket) {
+        $datos_mensaje = [
+            'ticket' => $id_ticket,
+            'texto' => $this->input->post('mensaje'),
+            'usuario' => $this->session->userdata('id_usuario'),
+            'destinatario' => $this->input->post('destinatario'),
+            'fecha' => date("Y-m-d H:i:s")
+        ];
+
+        if ($this->mensaje->registrar_mensaje($datos_mensaje)) {
+            $datos['enviado'] = 1;
+        } else {
+            $datos['error'] = 1;
+        }
+        redirect('admin/ver_ticket/' . $id_ticket);
+    }
+
+    public function enviar_mensaje_privado() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $id_receptor = $this->input->post('id_receptor');
             $id_emisor = $this->session->userdata('id_usuario');
