@@ -16,6 +16,7 @@ class Mensaje extends CI_Model {
     }
 
     public function registrar_mensaje($datos) {
+        $datos['fecha'] = date("Y-m-d H:i:s");
         return $this->db->insert('Mensaje', $datos);
     }
 

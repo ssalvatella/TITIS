@@ -27,7 +27,9 @@ class Api extends REST_Controller {
      * registrar_cliente
      * modificar_cliente
      * crear_tarea
+     * crear_mensaje
      * modificar_tarea
+     * modificar_mensaje
      */
     public function __construct() {
         parent::__construct();
@@ -518,6 +520,67 @@ class Api extends REST_Controller {
         $this->response([
             'status' => TRUE,
             'datos' => $this->mensaje->obtener_mensajes($id_ticket)
+                ], REST_Controller::HTTP_OK);
+    }
+
+    public function crear_mensaje_post() {
+        $id_ticket = $this->input->post('id_ticket');
+        $texto = $this->input->post('texto');
+        $id_usuario = $this->input->post('id_usuario');
+        $destinatario = $this->input->post('destinatario');
+
+        if (!$id_ticket || !$texto || !$id_usuario || !$destinatario) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesitan los campos id_ticket, texto, id_usuario y destinatario'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        if ($destinatario != USUARIO_ADMIN && $destinatario != USUARIO_TECNICO_ADMIN && $destinatario != USUARIO_TECNICO && $destinatario != USUARIO_CLIENTE) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Destinatario incorrecto. Valores posibles: Admins=' . USUARIO_ADMIN . ', Técnico admin=' . USUARIO_TECNICO_ADMIN . ', Técnicos=' . USUARIO_TECNICO . ', Todos (cliente)=' . USUARIO_CLIENTE
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        $datos_mensaje = [
+            'ticket' => $id_ticket,
+            'texto' => $texto,
+            'usuario' => $id_usuario,
+            'destinatario' => $destinatario
+        ];
+
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->tarea->registrar_mensaje($datos_mensaje)
+                ], REST_Controller::HTTP_OK);
+    }
+
+    public function modificar_mensaje_post() {
+        $id_mensaje = $this->input->post('id_mensaje');
+        $texto = $this->input->post('texto');
+
+        if (!$id_mensaje) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_mensaje'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        if (!texto) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesitan el campo texto'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        $datos_mensaje = [
+            'texto' => $texto
+        ];
+
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->mensaje->editar_mensaje($id_mensaje, $datos_mensaje)
                 ], REST_Controller::HTTP_OK);
     }
 

@@ -388,8 +388,7 @@ class Admin extends MY_Controller {
             'ticket' => $id_ticket,
             'texto' => $this->input->post('mensaje'),
             'usuario' => $this->session->userdata('id_usuario'),
-            'destinatario' => $this->input->post('destinatario'),
-            'fecha' => date("Y-m-d H:i:s")
+            'destinatario' => $this->input->post('destinatario')
         ];
 
         if ($this->mensaje->registrar_mensaje($datos_mensaje)) {
