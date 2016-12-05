@@ -51,6 +51,7 @@ $lang['d_fijo_descripcion'] = 'Activa el diseño fijo. No se puede usar el dise�
 $lang['datos_login_incorrectos'] = 'Usuario y/o Contraseña incorrectos';
 $lang['datos_personales'] = 'Datos personales';
 $lang['derechos_reservados'] = 'Todos los derechos reservados';
+$lang['descargar_adjunto'] = 'Descargar archivo adjunto';
 $lang['descripcion'] = 'Descripción';
 $lang['descripcion_tarea'] = 'Descripción de la tarea';
 $lang['descripcion_tarea_place_holder'] = 'Escribe brevemente en qué consiste la tarea';

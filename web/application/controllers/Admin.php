@@ -9,6 +9,7 @@ class Admin extends MY_Controller {
         $this->load->helper('form');
         $this->load->helper('security'); // form_validation -> xss_clean
         $this->load->helper('string'); // Generar contraseña aleatoria
+        $this->load->helper('descarga'); // No se usa download porque no se puede cambiar el nombre del fichero cuando se descarga
         $this->load->library(array('form_validation', 'encryption', 'plantilla', 'upload'));
         $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'factura_modelo', 'archivo'));
         $this->encryption->initialize(
@@ -522,6 +523,25 @@ class Admin extends MY_Controller {
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
             $this->plantilla->mostrar('admin', 'factura', $datos);
+        }
+    }
+
+    public function descargar_archivo($nombre_sin_ext = '', $nombre_original = '') {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            if (!$nombre_sin_ext || !$nombre_original) {
+                $this->output->set_status_header('404');
+                $this->load->view('error_404');
+            } else {
+                // $ext = substr(strrchr($nombre_original, '.'), 1);
+                $ext = pathinfo($nombre_original, PATHINFO_EXTENSION);
+                $ruta_fichero = './files/' . $nombre_sin_ext . '.' . $ext;
+                if (!file_exists($ruta_fichero)) {
+                    $this->output->set_status_header('404');
+                    $this->load->view('error_404');
+                } else {
+                    forzar_descarga($ruta_fichero, NULL, $nombre_original);
+                }
+            }
         }
     }
 

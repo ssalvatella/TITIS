@@ -4,6 +4,7 @@ class Mensaje extends CI_Model {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('archivo');
     }
 
     public function obtener_mensajes($id_ticket) {
@@ -12,7 +13,16 @@ class Mensaje extends CI_Model {
         $this->db->where('ticket', $id_ticket);
         $this->db->join('Usuario as usuario', 'Mensaje.usuario = usuario.id_usuario', 'left');
         $this->db->order_by('fecha', 'ASC');
-        return $this->db->get()->result_array();
+        $mensajes = $this->db->get()->result_array();
+        foreach ($mensajes as $clave => $mensaje) {
+            $archivo = $this->archivo->obtener_archivo($mensaje['id_mensaje']);
+            if ($archivo) {
+                $mensaje['nombre_archivo'] = pathinfo($archivo['nombre'], PATHINFO_FILENAME);
+                $mensaje['nombre_archivo_original'] = $archivo['nombre_original'];
+                $mensajes[$clave] = $mensaje;
+            }
+        }
+        return $mensajes;
     }
 
     public function registrar_mensaje($datos) {

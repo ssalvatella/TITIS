@@ -51,6 +51,7 @@ $lang['d_fijo_descripcion'] = 'Activates the fixed design. You can not use the f
 $lang['datos_login_incorrectos'] = 'Incorrect Username or Password';
 $lang['datos_personales'] = 'Personal information';
 $lang['derechos_reservados'] = 'All rights reserved';
+$lang['descargar_adjunto'] = 'Download attachment';
 $lang['descripcion'] = 'Description';
 $lang['descripcion_tarea'] = 'Task description';
 $lang['descripcion_tarea_place_holder'] = 'Write briefly what the task is';
