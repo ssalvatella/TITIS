@@ -23,12 +23,10 @@ class Cliente_modelo extends CI_Model {
         $this->db->from('Cliente');
         $this->db->where('Cliente.id_cliente', $id_cliente);
         $this->db->join('Usuario', 'Usuario.id_usuario = Cliente.usuario');
-        $datos = $this->db->get()->result_array();
-        foreach ($datos as $clave => $d) {
-            unset($d['contrasena']);
-            $datos[$clave] = $d;
-        }
-        return $datos[0];
+        $this->db->limit(1);
+        $datos = $this->db->get()->row_array();
+        unset($datos['contrasena']); // Se elimina la contraseña
+        return $datos;
     }
 
     public function obtener_datos($id_usuario) {

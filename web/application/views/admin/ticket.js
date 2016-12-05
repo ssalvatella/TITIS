@@ -346,3 +346,10 @@ $(function () {
 $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 
 
+$('#input_archivo').fileinput({
+    language: 'es',
+    maxFileSize: 10240, // 10 MB
+    allowedFileExtensions: ['txt', 'pdf', 'gif', 'jpg', 'jpeg', 'png', 'zip'],
+    showPreview: false,
+    showUpload: false
+});

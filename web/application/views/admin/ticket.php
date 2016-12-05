@@ -385,16 +385,25 @@
                     <i class="fa fa-commenting bg-aqua"></i>
                     <div class="timeline-item">
                         <div class="timeline-body">
-                            <form id="form_enviar_mensaje" method="POST" action="<?= site_url('admin/enviar_mensaje/') . $ticket['id_ticket']; ?>" data-parsley-errors-messages-disabled="true">
+                            <form id="form_enviar_mensaje" enctype="multipart/form-data" method="POST" action="<?= site_url('admin/enviar_mensaje/') . $ticket['id_ticket']; ?>" data-parsley-errors-messages-disabled="true">
                                 <div class="form-group has-feedback">
                                     <textarea name="mensaje" maxlength="500" class="form-control" style="width: 100%" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
                                 </div>
-                                <div class="form-group has-feedback">
-                                    <div id="radio_destinatario">
-                                        <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_CLIENTE; ?>" required>Todos (cliente)</label>
-                                        <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_ADMIN; ?>" required>Admins</label>
-                                        <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_TECNICO_ADMIN; ?>" required>Técnico Admin</label>
-                                        <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_TECNICO; ?>" required>Técnicos</label>
+                                <div class="col-md-5">
+                                    <div class="form-group has-feedback">
+                                        <label class="control-label">Adjuntar archivo</label>
+                                        <input id="input_archivo" name="archivo" type="file" class="file file-loading">
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-group has-feedback">
+                                        <label class="control-label">Destinatarios</label>
+                                        <div id="radio_destinatario">
+                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_CLIENTE; ?>" required>&nbsp;Todos (cliente)</label>
+                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_ADMIN; ?>" required>&nbsp;Admins</label>
+                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_TECNICO_ADMIN; ?>" required>&nbsp;Técnico Admin</label>
+                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_TECNICO; ?>" required>&nbsp;Técnicos</label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div>

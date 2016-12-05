@@ -9,13 +9,23 @@ class Admin extends MY_Controller {
         $this->load->helper('form');
         $this->load->helper('security'); // form_validation -> xss_clean
         $this->load->helper('string'); // Generar contraseña aleatoria
-        $this->load->library(array('form_validation', 'encryption', 'plantilla'));
-        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'factura_modelo'));
+        $this->load->library(array('form_validation', 'encryption', 'plantilla', 'upload'));
+        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'factura_modelo', 'archivo'));
         $this->encryption->initialize(
                 array(
                     'cipher' => 'aes-256',
                     'mode' => 'ctr',
                     'key' => config_item('encryption_key')
+                )
+        );
+        $this->upload->initialize(
+                array(
+                    'upload_path' => "./files/",
+                    'allowed_types' => "txt|pdf|gif|jpg|jpeg|png|zip",
+                    'max_size' => "10240", // 10 MB
+                    'max_height' => "1080",
+                    'max_width' => "1920",
+                    'encrypt_name' => TRUE
                 )
         );
     }
@@ -252,6 +262,11 @@ class Admin extends MY_Controller {
             if ($this->session->userdata('idioma') == 'spanish') {
                 $this->plantilla->poner_js(site_url('assets/plugins/summernote/lang/summernote-es-ES.js'));
             }
+            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-fileinput/css/fileinput.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/fileinput.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/locales/es.js'));
+            }
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
 
             $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
@@ -393,6 +408,20 @@ class Admin extends MY_Controller {
 
         if ($this->mensaje->registrar_mensaje($datos_mensaje)) {
             $datos['enviado'] = 1;
+            $id_mensaje = $this->db->insert_id();
+            if (!$this->upload->do_upload('archivo')) {
+                // No se ha podido subir el archivo
+                // Aquí habría que borrar el mensaje
+                // $upload_error = array('error' => $this->upload->display_errors());
+            } else {
+                $datos_upload = $this->upload->data();
+                $datos_archivo = [
+                    'mensaje' => $id_mensaje,
+                    'nombre' => $datos_upload['file_name'],
+                    'nombre_original' => $datos_upload['orig_name']
+                ];
+                $this->archivo->registrar_archivo($datos_archivo);
+            }
         } else {
             $datos['error'] = 1;
         }

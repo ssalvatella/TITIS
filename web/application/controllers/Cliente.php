@@ -8,10 +8,6 @@ class Cliente extends MY_Controller {
         parent::__construct();
         $this->load->library('plantilla');
         $this->load->model(array('cliente_modelo', 'usuario', 'ticket_modelo', 'notificacion', 'mensaje'));
-
-        $config['max_size'] = '100';
-        $config['upload_path'] = './uploads/';
-        $this->load->library('upload', $config);
     }
 
     public function index() {
@@ -48,25 +44,7 @@ class Cliente extends MY_Controller {
             }
             $this->crear_ticket($datos);
             // AQUÍ SE TENDRÁ QUE SUBIR EL ARCHIVO ----------------------
-//            if($this->upload->do_upload('fichero')) {
-//
-//                print_r('Subido');
-//                $datos = $this->upload->data('fichero');
-////                $datosArchivo = array(
-////                    'mensaje' => $id_mensaje,
-////                    'nombre' => $datos['file_name'],
-////                    'nombre_original '=> $datos['file_name']
-////                );
-////
-////                $this->db->insert('Archivo', $datosArchivo);
-//            } else {
-//                print_r($this->upload->display_errors());
-//                print_r($_FILES);
-//                print_r($_POST);
-//            }
         }
-
-        // ------------------------------------------------------------
     }
 
 }
