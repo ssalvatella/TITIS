@@ -306,31 +306,24 @@
                     <div id="collapseTwo" class="panel-collapse collapse in" aria-expanded="false">
                         <div class="box-body">
                             <ul class="todo-list">
-                                <?php
-                                foreach ($tareas as $tarea) {
-                                    echo '<li value="' . $tarea['id_tarea'] . '"';
-                                    if ($tarea['estado'] == TAREA_FINALIZADA)
-                                        echo 'class="done"';echo '>
-                                            <span class="handle">
-                                                <i class="fa fa-ellipsis-v"></i>
-                                                <i class="fa fa-ellipsis-v"></i>
-                                            </span>
-                                            <input type="checkbox" ';
-                                    if ($tarea['estado'] == TAREA_FINALIZADA)
-                                        echo 'checked="true"';
-                                    echo ' value="">
-                                            <span class="text">' . $tarea['nombre'] . '</span>
-                                            <span class="label label-primary"><i class="fa fa-wrench"></i> &nbsp;' . $tarea['nombre_tecnico'] . '</span>';
-                                    echo '
-                                            <div class="tools">';
-                                    if ($tarea['estado'] == TAREA_FINALIZADA) {
-                                        echo '<i style="margin-right: 10px" class="label label-info fecha_fin"><i class="fa fa-calendar"></i> &nbsp;' . $tarea['fin'] . '</i>';
-                                    }
-                                    echo '<span style="cursor:pointer" data-toggle="modal" data-target="#modal_editar_tarea"><i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('editar') . '" class="fa fa-edit boton_editar"></i></span>
-                                                <i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('eliminar') . '" id="borrar_tarea" class="fa fa-trash-o boton_borrar"></i>
-                                            </div></li>';
-                                }
-                                ?>
+                                <?php foreach ($tareas as $tarea) { ?>
+                                    <li value="<?= $tarea['id_tarea']; ?>" class="<?= $tarea['estado'] == TAREA_FINALIZADA ? 'done' : '' ?>">
+                                        <span class="handle">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </span>
+                                        <input type="checkbox"<?= $tarea['estado'] == TAREA_FINALIZADA ? ' checked ' : ' ' ?>value=""  onchange="completar_tarea(this)">
+                                        <span class="text"><?= $tarea['nombre']; ?></span>
+                                        <span class="label label-primary"><i class="fa fa-wrench"></i> &nbsp;<?= $tarea['nombre_tecnico']; ?></span>
+                                        <div class="tools">
+                                            <?php if ($tarea['estado'] == TAREA_FINALIZADA) { ?>
+                                                <i style="margin-right: 10px" class="label label-info fecha_fin"><i class="fa fa-calendar"></i> &nbsp;<?= $tarea['fin']; ?></i>
+                                            <?php } ?>
+                                            <span style="cursor:pointer" data-toggle="modal" data-target="#modal_editar_tarea"><i data-html="true" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('editar'); ?>" class="fa fa-edit boton_editar"></i></span>
+                                            <i data-html="true" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('eliminar'); ?>" id="borrar_tarea" class="fa fa-trash-o boton_borrar"></i>
+                                        </div>
+                                    </li>
+                                <?php } ?>
                             </ul>
                         </div>
                         <!-- /.box-header -->
@@ -372,7 +365,7 @@
                                 <button type="button" onclick="guardar_mensaje(this)" value="<?= $mensajes[$i]['id_mensaje']; ?>" class="btn btn-box-tool boton-guardar-mensaje" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-save" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('guardar'); ?>"></i></button>
                                 <button type="button" onclick="cancelar_mensaje(this)" class="btn btn-box-tool boton-cancelar-mensaje" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-times" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('cancelar'); ?>"></i></button>
                                 <?php if (isset($mensajes[$i]['nombre_archivo'])) { ?>
-                                <a href="<?= site_url('admin/descargar_archivo/' . $mensajes[$i]['nombre_archivo'] . '/' . $mensajes[$i]['nombre_archivo_original']); ?>" target="_blank" role="button" class="btn btn-box-tool" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-file" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('descargar_adjunto'); ?>"></i></a>
+                                    <a href="<?= site_url('admin/descargar_archivo/' . $mensajes[$i]['nombre_archivo'] . '/' . $mensajes[$i]['nombre_archivo_original']); ?>" target="_blank" role="button" class="btn btn-box-tool" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-file" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('descargar_adjunto'); ?>"></i></a>
                                 <?php } ?>
                             </h3>
                             <div class="timeline-body">

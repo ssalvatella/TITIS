@@ -1,4 +1,4 @@
-//jQuery UI sortable for the todo list
+// Las tareas se pueden ordenar (no se mantiene el orden cuando se recarga la página)
 $(".todo-list").sortable({
     placeholder: "sort-highlight",
     handle: ".handle",
@@ -6,21 +6,23 @@ $(".todo-list").sortable({
     zIndex: 999999
 });
 
-/* The todo list plugin */
-$(".todo-list").todolist({
-    onCheck: function (ele) {
-        var id_tarea = $(this).closest("li")[0].value;
-        var getUrl = window.location;
-        var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-        var id_ticket = getUrl.pathname.split('/')[3];
+// Completar/Descompletar una tarea
+function completar_tarea(elem) {
+    var id_tarea = $(elem).closest("li")[0].value;
+    var getUrl = window.location;
+    var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    var id_ticket = getUrl.pathname.split('/')[3];
+
+    if (elem.checked) { // Completar tarea
+        $(elem.parentNode).addClass('done');
         $.ajax({
             url: baseURL + '/completar_tarea',
             type: 'POST',
             data: {id_tarea: id_tarea, id_ticket: id_ticket},
             success: function (data) {
-                setTimeout(function () {
-                    window.location.reload(true);
-                }, 1500);
+                /* setTimeout(function () {
+                 window.location.reload(true);
+                 }, 1500);*/
                 $.notify({
                     icon: 'glyphicon glyphicon-ok',
                     title: '<strong>Tarea completada!</strong>',
@@ -30,23 +32,18 @@ $(".todo-list").todolist({
                 });
             }
         });
-        return ele;
-    },
-    onUncheck: function (ele) {
-        var id_tarea = $(this).closest("li")[0].value;
-        var getUrl = window.location;
-        var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-        var id_ticket = getUrl.pathname.split('/')[3];
-        var li = $(this).closest('li').find('.fecha_fin');
+    } else { // Descompletar tarea
+        $(elem.parentNode).removeClass('done');
+        var li = $(elem).closest('li').find('.fecha_fin');
         li.remove();
         $.ajax({
             url: baseURL + '/descompletar_tarea',
             type: 'POST',
             data: {id_tarea: id_tarea, id_ticket: id_ticket},
             success: function (data) {
-                setTimeout(function () {
-                    window.location.reload(true);
-                }, 1500);
+                /*setTimeout(function () {
+                 window.location.reload(true);
+                 }, 1500);*/
                 $.notify({
                     icon: 'glyphicon glyphicon-ok',
                     title: '<strong>Tarea pendiente!</strong>',
@@ -56,15 +53,12 @@ $(".todo-list").todolist({
                 });
             }
         });
-        return ele;
     }
-});
+}
 
-$(function () {
-    $('input[type="radio"].flat').iCheck({
-        checkboxClass: 'icheckbox_flat-blue',
-        radioClass: 'iradio_flat-blue'
-    });
+$('input[type="checkbox"].flat, input[type="radio"].flat').iCheck({
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue'
 });
 
 var parsley_opciones = {
@@ -77,12 +71,10 @@ var parsley_opciones = {
     errorTemplate: "<span></span>"
 };
 
-$(function () {
-    $('#form_enviar_mensaje').parsley(parsley_opciones).on('field:validated', function () {
-        var ok = $('.parsley-error').length === 0;
-        $('.bs-callout-info').toggleClass('hidden', !ok);
-        $('.bs-callout-warning').toggleClass('hidden', ok);
-    });
+$('#form_enviar_mensaje').parsley(parsley_opciones).on('field:validated', function () {
+    var ok = $('.parsley-error').length === 0;
+    $('.bs-callout-info').toggleClass('hidden', !ok);
+    $('.bs-callout-warning').toggleClass('hidden', ok);
 });
 
 
