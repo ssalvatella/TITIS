@@ -19,7 +19,26 @@ class Pruebas extends MY_Controller {
     }
 
     public function index() {
-        
+        $a = [
+            '1' => '0',
+            '23' => '1'
+        ];
+        //echo implode(', ', $a);
+        /* echo implode(', ', array_map(
+          function ($v, $k) {
+          return sprintf("%s='%s'", $k, $v);
+          }, $a, array_keys($a)
+          )); */
+        echo str_replace('=', ':', http_build_query($a, null, ', '));
+
+        $cadena = '1:0, 23:1';
+        $destinatarios = [];
+        $asArr = explode(', ', $cadena);
+        foreach ($asArr as $val) {
+            $tmp = explode(':', $val);
+            $destinatarios[$tmp[0]] = $tmp[1];
+        }
+        print_r($destinatarios);
     }
 
     public function asd() {

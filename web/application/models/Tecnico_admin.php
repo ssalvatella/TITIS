@@ -7,7 +7,6 @@ class Tecnico_admin extends CI_Model {
     }
 
     public function obtener_tecnicos_admin() {
-
         $this->db->select('*');
         $this->db->from('Usuario');
         $this->db->where('tipo = ' . USUARIO_TECNICO_ADMIN);

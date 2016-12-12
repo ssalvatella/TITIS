@@ -7,9 +7,12 @@ class Notificacion extends CI_Model {
     }
 
     public function obtener_notificaciones($id_usuario) {
-        $datos = array('usuario' => $id_usuario);
-        $consulta = $this->db->get_where('Notificacion', $datos);
-        return $consulta->result_array();
+        $this->db->select('*');
+        $this->db->from('Notificacion');
+        $this->db->join('Destinatario_notificacion as dn', 'dn.notificacion = Notificacion.id_notificacion');
+        $this->db->where('usuario', $id_usuario);
+        $consulta = $this->db->get()->result_array();
+        return $consulta;
     }
 
     public function insertar_notificacion($datos) {
