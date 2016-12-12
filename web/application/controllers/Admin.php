@@ -272,6 +272,9 @@ class Admin extends MY_Controller {
 
             $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
+             if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/select2/i18n/es.js'));
+            }
 
             $this->plantilla->poner_js(site_url('assets/plugins/daterangepicker/moment.min.js'));
 

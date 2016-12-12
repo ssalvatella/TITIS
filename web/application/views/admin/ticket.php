@@ -46,7 +46,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label><?= $this->lang->line('tecnico_admin'); ?></label>
-                                <select required id = "seleccion_tecnicos_admins" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                <select required id="seleccion_tecnicos_admins" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                     <?php
                                     foreach ($tecnicos_admins as $tecnico_admin) {
                                         echo '<option value="' . $tecnico_admin['id_usuario'] . '"> ' . $tecnico_admin['usuario'] . '</option>';
@@ -312,7 +312,7 @@
                                             <i class="fa fa-ellipsis-v"></i>
                                             <i class="fa fa-ellipsis-v"></i>
                                         </span>
-                                        <input type="checkbox"<?= $tarea['estado'] == TAREA_FINALIZADA ? ' checked ' : ' ' ?>value=""  onchange="completar_tarea(this)">
+                                        <input data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('completar_tarea'); ?>" type="checkbox"<?= $tarea['estado'] == TAREA_FINALIZADA ? ' checked ' : ' ' ?>onchange="completar_tarea(this)">
                                         <span class="text"><?= $tarea['nombre']; ?></span>
                                         <span class="label label-primary"><i class="fa fa-wrench"></i> &nbsp;<?= $tarea['nombre_tecnico']; ?></span>
                                         <div class="tools">

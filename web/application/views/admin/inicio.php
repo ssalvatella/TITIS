@@ -191,9 +191,9 @@
                                                 echo '<span class="label label-success">' . $this->lang->line('finalizado') . '</span>';
                                                 break;
                                         }
-
                                         echo'</td>';
                                     }
+                                    echo'</tr>';
                                     ?>
                                 </tbody>
                             </table>

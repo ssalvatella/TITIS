@@ -6,6 +6,10 @@ $(".todo-list").sortable({
     zIndex: 999999
 });
 
+$(".select2").select2({
+    language: 'es'
+});
+
 // Completar/Descompletar una tarea
 function completar_tarea(elem) {
     var id_tarea = $(elem).closest("li")[0].value;
@@ -335,6 +339,7 @@ $(function () {
 
 });
 
+// Corrige el select2 en los modales
 $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 
 

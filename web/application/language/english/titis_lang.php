@@ -37,6 +37,7 @@ $lang['cliente_se_registro'] = ' registered in TITIS';
 $lang['clientes'] = 'Clients';
 $lang['clientes_nuevos'] = 'New Clients';
 $lang['comentarios'] = 'Comments';
+$lang['completar_tarea'] = 'Complete Task';
 $lang['concepto'] = 'Price';
 $lang['contacto'] = 'Contact';
 $lang['contrasena'] = 'Password';

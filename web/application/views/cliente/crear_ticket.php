@@ -31,7 +31,7 @@
 
         <div class="box box-solid">
 
-        <form method="post" action="<?= site_url('cliente/enviar_ticket'); ?>">
+        <form method="POST" action="<?= site_url('cliente/enviar_ticket'); ?>">
 
             <div class="box-body pad" style="display: block;">
                 <div class="form-group">

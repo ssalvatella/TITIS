@@ -135,37 +135,34 @@
                         <div class="table-responsive">
                             <table id="tickets" class="table table-hover no-margin">
                                 <thead>
-                                <tr>
-                                    <th><?= $this->lang->line('titulo'); ?></th>
-                                    <th><?= $this->lang->line('fecha'); ?></th>
-                                    <th><?= $this->lang->line('estado'); ?></th>
-                                </tr>
+                                    <tr>
+                                        <th><?= $this->lang->line('titulo'); ?></th>
+                                        <th><?= $this->lang->line('fecha'); ?></th>
+                                        <th><?= $this->lang->line('estado'); ?></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-
-                                <?php
-                                foreach ($tickets as $ticket) {
-                                    echo '<tr style="cursor: pointer;">
-                                              <td><a  href="'.site_url('cliente/ver_ticket/'. $ticket['id_ticket']) .'"></a>'. $ticket['titulo'] . '</td>
-                                              <td>'. date('d/m/Y H:i', strtotime($ticket['inicio'])) . '</td>
+                                    <?php
+                                    foreach ($tickets as $ticket) {
+                                        echo '<tr style="cursor: pointer;">
+                                              <td><a  href="' . site_url('cliente/ver_ticket/' . $ticket['id_ticket']) . '"></a>' . $ticket['titulo'] . '</td>
+                                              <td>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) . '</td>
                                               <td>';
-                                    switch($ticket['estado']) {
-
-                                        case TICKET_PENDIENTE:
-                                            echo '<span class="label label-warning">'.  $this->lang->line('pendiente') .'</span>';
-                                            break;
-                                        case TICKET_EN_PROCESO:
-                                            echo '<span class="label label-info">'.  $this->lang->line('en_proceso') .'</span>';
-                                            break;
-                                        case TICKET_FINALIZADO:
-                                            echo '<span class="label label-success">'.  $this->lang->line('finalizado') .'</span>';
-                                            break;
+                                        switch ($ticket['estado']) {
+                                            case TICKET_PENDIENTE:
+                                                echo '<span class="label label-warning">' . $this->lang->line('pendiente') . '</span>';
+                                                break;
+                                            case TICKET_EN_PROCESO:
+                                                echo '<span class="label label-info">' . $this->lang->line('en_proceso') . '</span>';
+                                                break;
+                                            case TICKET_FINALIZADO:
+                                                echo '<span class="label label-success">' . $this->lang->line('finalizado') . '</span>';
+                                                break;
+                                        }
+                                        echo'</td>';
                                     }
-
-                                    echo'</td>';
-
-                                }
-                                ?>
+                                    echo'</tr>';
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
@@ -173,7 +170,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
-                        <a href="<?= site_url('admin/tickets') ?>" class="btn btn-sm btn-default btn-flat pull-right"><?= $this->lang->line('ver todos'); ?></a>
+                        <a href="<?= site_url('admin/tickets') ?>" class="btn btn-sm btn-default btn-flat pull-right"><?= $this->lang->line('ver_todos'); ?></a>
                     </div>
                     <!-- /.box-footer -->
                 </div>
@@ -183,7 +180,7 @@
 
         </div>
     </section>
-    </section>
-    <!-- /.content -->
+</section>
+<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
