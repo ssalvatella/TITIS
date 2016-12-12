@@ -364,8 +364,8 @@
                                 <button type="button" onclick="editar_mensaje(this)" class="btn btn-box-tool" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-wrench" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('editar'); ?>"></i></button>
                                 <button type="button" onclick="guardar_mensaje(this)" value="<?= $mensajes[$i]['id_mensaje']; ?>" class="btn btn-box-tool boton-guardar-mensaje" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-save" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('guardar'); ?>"></i></button>
                                 <button type="button" onclick="cancelar_mensaje(this)" class="btn btn-box-tool boton-cancelar-mensaje" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-times" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('cancelar'); ?>"></i></button>
-                                <?php if (isset($mensajes[$i]['nombre_archivo'])) { ?>
-                                    <a href="<?= site_url('admin/descargar_archivo/' . $mensajes[$i]['nombre_archivo'] . '/' . $mensajes[$i]['nombre_archivo_original']); ?>" target="_blank" role="button" class="btn btn-box-tool" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-file" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('descargar_adjunto'); ?>"></i></a>
+                                <?php if (isset($mensajes[$i]['archivos'])) { ?>
+                                    <a href="<?= site_url('admin/descargar_archivo/' . $mensajes[$i]['archivos'][0]['nombre_archivo'] . '/' . $mensajes[$i]['archivos'][0]['nombre_archivo_original']); ?>" target="_blank" role="button" class="btn btn-box-tool" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-file" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('descargar_adjunto'); ?>"></i></a>
                                 <?php } ?>
                             </h3>
                             <div class="timeline-body">

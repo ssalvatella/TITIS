@@ -10,12 +10,11 @@ class Archivo extends CI_Model {
         return $this->db->insert('Archivo', $datos);
     }
 
-    public function obtener_archivo($id_mensaje) {
+    public function obtener_archivos($id_mensaje) {
         $this->db->select('*');
         $this->db->from('Archivo');
         $this->db->where('Archivo.mensaje', $id_mensaje);
-        $this->db->limit(1);
-        $datos = $this->db->get()->row_array();
+        $datos = $this->db->get()->result_array();
         return $datos;
     }
 

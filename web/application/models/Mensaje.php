@@ -15,12 +15,14 @@ class Mensaje extends CI_Model {
         $this->db->order_by('fecha', 'ASC');
         $mensajes = $this->db->get()->result_array();
         foreach ($mensajes as $clave => $mensaje) {
-            $archivo = $this->archivo->obtener_archivo($mensaje['id_mensaje']);
-            if ($archivo) {
-                $mensaje['nombre_archivo'] = pathinfo($archivo['nombre'], PATHINFO_FILENAME);
-                $mensaje['nombre_archivo_original'] = $archivo['nombre_original'];
-                $mensajes[$clave] = $mensaje;
-            }
+            $archivos = $this->archivo->obtener_archivos($mensaje['id_mensaje']);
+            $mensaje['archivos'] = array();
+                foreach($archivos as $archivo) {
+                    $archivo['nombre_archivo'] = pathinfo($archivo['nombre'], PATHINFO_FILENAME);
+                    $archivo['nombre_archivo_original'] = $archivo['nombre_original'];
+                    array_push($mensaje['archivos'], $archivo);
+                    $mensajes[$clave] = $mensaje;
+                }
         }
         return $mensajes;
     }
@@ -63,7 +65,7 @@ class Mensaje extends CI_Model {
         $this->db->where('id_mensaje', $id_mensaje);
         $this->db->join('Usuario as emisor', 'Mensaje.usuario = emisor.id_usuario', 'left');
         $this->db->join('Archivo as archivo', 'Mensaje.id_mensaje = archivo.mensaje', 'left');
-        return $this->db->get()->result_array();
+        return $this->db->get()->result_array()[0];
     }
 
     public function editar_mensaje($id_mensaje, $datos) {
