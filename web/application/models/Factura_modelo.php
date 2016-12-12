@@ -26,7 +26,7 @@ class Factura_modelo extends CI_Model {
         $consulta = $this->db->get();
         return $consulta->row_array();
     }
-
+    
     public function facturas_pendientes() {
         $this->db->from('Ticket');
         $this->db->where('factura', NULL);

@@ -56,6 +56,7 @@ $lang['descargar_adjunto'] = 'Descargar archivo adjunto';
 $lang['descripcion'] = 'Descripción';
 $lang['descripcion_tarea'] = 'Descripción de la tarea';
 $lang['descripcion_tarea_place_holder'] = 'Escribe brevemente en qué consiste la tarea';
+$lang['desglose'] = 'Desglose';
 $lang['dias'] = ' dias';
 $lang['direccion'] = 'Dirección';
 $lang['diseño_en_caja'] = 'Diseño en caja';

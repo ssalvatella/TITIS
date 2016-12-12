@@ -65,4 +65,9 @@ class Tarea extends CI_Model {
         return $this->db->get()->num_rows();
     }
 
+    public function obtener_suma_precios($id_ticket) {
+        $this->db->from('Tarea');
+        $this->db->where('ticket', $id_ticket);
+        
+    }
 }

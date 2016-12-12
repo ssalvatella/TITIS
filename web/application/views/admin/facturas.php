@@ -37,7 +37,7 @@
                                 <?php
                                 foreach ($facturas as $factura) {
                                     echo '<tr style="cursor: pointer;">
-                                            <td>' . $factura['id_factura'] . '</td>
+                                            <td><a href="' . site_url('admin/ver_factura/' . $factura['id_factura']) . '"></a>' . $factura['id_factura'] . '</td>
                                             <td><a href="' . site_url('admin/ver_cliente/' . $factura['cliente']) . '">' . $factura['nombre_cliente'] . '</a></td>
                                             <td><a href="' . site_url('admin/ver_ticket/' . $factura['id_ticket']) . '">' . $factura['id_ticket'] . '</a></td>
                                             <td>' . $factura['precio'] . '</td>

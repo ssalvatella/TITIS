@@ -62,6 +62,39 @@
                     </div>
                 </div>
             </div>
+            <!-- CLIENTE Y DETALLES TICKET -->
+            <div class="box-group" id="accordion">
+                <div class="panel box box-primary">
+                    <div class="box-header with-border">
+                        <h4 class="box-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="collapsed">
+                                <i class="fa fa-user"></i> &nbsp; <?= $this->lang->line('cliente'); ?>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" aria-expanded="true" style="height: 0px;">
+                        <div id="info_cliente" class="box-body">
+                            <?= $factura['nombre_cliente']; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel box box-danger">
+                    <div class="box-header with-border">
+                        <h4 class="box-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
+                                <i class="ion ion-clipboard"></i> &nbsp; <?= $this->lang->line('desglose'); ?>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse in" aria-expanded="false">
+                        <div class="box-header">
+                            <h3 class="box-title">
+                                <?= $factura['titulo']; ?>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </div>

@@ -28,7 +28,7 @@ class Cliente_modelo extends CI_Model {
         unset($datos['contrasena']); // Se elimina la contraseña
         return $datos;
     }
-
+    
     public function obtener_datos($id_usuario) {
         $this->db->select('*');
         $this->db->from('Cliente');
