@@ -39,8 +39,8 @@ class Mensaje extends CI_Model {
 
     public function contar_mensajes_no_vistos($id_usuario) {
         $this->db->from('Mensaje');
-        $this->db->where('usuario', $id_usuario);
-        $this->db->where('ticket ');
+        $this->db->where('destinatario', $id_usuario);
+        $this->db->where('ticket', NULL);
         $this->db->where('visto', '0');
         return $this->db->get()->num_rows();
     }

@@ -1,4 +1,9 @@
 $(function () {
+
+        $('#mensaje').summernote({
+            lang: "es-ES"
+        });
+
     //Enable iCheck plugin for checkboxes
     //iCheck for checkbox and radio inputs
     $('.mailbox-messages input[type="checkbox"]').iCheck({
@@ -51,9 +56,9 @@ $(function () {
         "stateSave": true,
         "responsive": true,
         "columnDefs": [{
-                "targets": [3],
-                "class": "not-mobile",
-            }],
+            "targets": [3],
+            "class": "not-mobile",
+        }],
         "fnInitComplete": function () {
             $("#cargador").hide();
         }
@@ -65,18 +70,8 @@ $('#mensajes tr td').click(function () {
     window.location.href = $(this).parent().find('td:first-child a:first').attr('href');
 });
 
-$("#mensaje").wysihtml5({
-    toolbar: {"size": "xs"},
-    locale: "es-ES"
-            /*showToolbarAfterInit: false,
-             "events": {
-             "focus": function () {
-             this.toolbar.show();
-             },
-             "blur": function () {
-             this.toolbar.hide();
-             }
-             }*/
+$(".select2").select2({
+    language: 'es'
 });
 
 $(function () {
@@ -103,7 +98,8 @@ $('#enviar_mensaje_form').on('submit', function (e) {
             $('#mensaje').value = "";
         }
     });
-    $('#modal_mensaje').modal('hide');
+    $('#modal_enviar').modal('hide');
 });
 
 $.fn.modal.Constructor.prototype.enforceFocus = function () {};
+

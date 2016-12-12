@@ -89,6 +89,9 @@
                         <h3 class="box-title"><?= $this->lang->line('recibidos'); ?></h3>
                         <!-- /.box-tools -->
                     </div>
+                    <div id = "cargador" class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
                     <!-- /.box-header -->
                     <div class="box-body no-padding " >
                         <div class="mailbox-controls">
@@ -102,8 +105,18 @@
                             <a href = "javascript:history.go(0)" type="button" class="btn btn-default btn-sm" data-html="true" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('actualizar'); ?>"><i class="fa fa-refresh"></i></a>
                             <!-- /.pull-right -->
                         </div>
-                        <div class="table-responsive mailbox-messages" >
+                        <div class=" mailbox-messages" >
                             <table id= "mensajes" class="table table-hover table-striped" >
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
                                 <tbody>
                                     <?php
                                     foreach ($mensajes as $mensaje) {

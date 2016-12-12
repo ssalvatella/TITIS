@@ -453,23 +453,28 @@ class Admin extends MY_Controller {
             $datos['numero_mensajes_no_vistos'] = $this->mensaje->contar_mensajes_no_vistos($this->session->userdata('id_usuario'));
             ;
             $datos['usuarios'] = $this->usuario->obtener_usuarios();
-
-            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
-            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/summernote/summernote.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/summernote/summernote.min.js'));
             if ($this->session->userdata('idioma') == 'spanish') {
-                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.es-ES.js'));
+                $this->plantilla->poner_js(site_url('assets/plugins/summernote/lang/summernote-es-ES.js'));
             }
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+
             $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/select2/i18n/es.js'));
+            }
 
             $this->plantilla->poner_js(site_url('assets/plugins/iCheck/iCheck.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/iCheck/flat/blue.css'));
+
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css'));
+
             $this->plantilla->poner_js('assets/plugins/bootstrap-notify/bootstrap-notify.min.js');
             $this->plantilla->mostrar('admin', 'mensajes', $datos);
         }
