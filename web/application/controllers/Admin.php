@@ -272,7 +272,7 @@ class Admin extends MY_Controller {
 
             $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
-             if ($this->session->userdata('idioma') == 'spanish') {
+            if ($this->session->userdata('idioma') == 'spanish') {
                 $this->plantilla->poner_js(site_url('assets/plugins/select2/i18n/es.js'));
             }
 
@@ -369,6 +369,13 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $id_tarea = $this->input->post('id_tarea');
             $this->tarea->borrar_tarea($id_tarea);
+        }
+    }
+
+    public function borrar_notificacion() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $id_notificacion = $this->input->post('id_notificacion');
+            $this->notificacion->borrar_notificacion($id_notificacion, $this->session->userdata('id_usuario'));
         }
     }
 
@@ -525,7 +532,7 @@ class Admin extends MY_Controller {
     public function ver_factura($id_factura) {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('facturas');
-            $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura);           
+            $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura);
             $datos['concepto'] = $this->concepto->obtener_concepto($id_factura);
             $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));

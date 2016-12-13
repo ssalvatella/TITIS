@@ -13,7 +13,7 @@ class Archivo extends CI_Model {
     public function obtener_archivos($id_mensaje) {
         $this->db->select('*');
         $this->db->from('Archivo');
-        $this->db->where('Archivo.mensaje', $id_mensaje);
+        $this->db->where('mensaje', $id_mensaje);
         $datos = $this->db->get()->result_array();
         return $datos;
     }

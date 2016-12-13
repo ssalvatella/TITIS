@@ -83,7 +83,7 @@
                                                             <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="img-circle" alt="<?= $this->lang->line('imagen_perfil'); ?>">
                                                         </div>
                                                         <h4><?= $mensaje_privado['usuario']; ?><small><i class="fa fa-clock-o"></i><?= $diferencia; ?></small></h4>
-                                                        <p><?= strip_tags(substr($mensaje_privado['texto'],0,20)); ?></p>
+                                                        <p><?= strip_tags(substr($mensaje_privado['texto'], 0, 20)); ?></p>
                                                     </a>
                                                 </li>
                                             <?php } ?>
@@ -130,13 +130,21 @@
                                     </li>
                                     <li>
                                         <ul class="menu">
-                                            <?php foreach ($notificaciones as $n) { ?>
+                                            <?php
+                                            $i = 0;
+                                            foreach ($notificaciones as $n) {
+                                                ?>
                                                 <li>
-                                                    <a href="<?= $n['url']; ?>">
+                                                    <a href="<?= site_url($n['url']); ?>">
                                                         <i class="fa fa-users text-aqua"></i> <?= sprintf($this->lang->line($n['texto']), '<b>' . $n['parametros'] . '</b>'); ?>
                                                     </a>
                                                 </li>
-                                            <?php } ?>
+                                                <?php
+                                                if (++$i == 4) {
+                                                    break;
+                                                }
+                                            }
+                                            ?>
                                         </ul>
                                     </li>
                                     <li class="footer"><a href="<?php

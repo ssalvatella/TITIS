@@ -552,7 +552,7 @@ class Api extends REST_Controller {
 
         $this->response([
             'status' => TRUE,
-            'datos' => $this->tarea->registrar_mensaje($datos_mensaje)
+            'datos' => $this->mensaje->registrar_mensaje($datos_mensaje)
                 ], REST_Controller::HTTP_OK);
     }
 

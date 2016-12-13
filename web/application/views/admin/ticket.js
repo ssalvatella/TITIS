@@ -17,13 +17,13 @@ function completar_tarea(elem) {
     var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     var id_ticket = getUrl.pathname.split('/')[3];
 
-    if (elem.checked) { // Completar tarea
-        $(elem.parentNode).addClass('done');
+    if (elem.checked) { // Completar tarea        
         $.ajax({
             url: baseURL + '/completar_tarea',
             type: 'POST',
             data: {id_tarea: id_tarea, id_ticket: id_ticket},
             success: function (data) {
+                $(elem.parentNode).addClass('done');
                 /* setTimeout(function () {
                  window.location.reload(true);
                  }, 1500);*/
@@ -36,15 +36,15 @@ function completar_tarea(elem) {
                 });
             }
         });
-    } else { // Descompletar tarea
-        $(elem.parentNode).removeClass('done');
-        var li = $(elem).closest('li').find('.fecha_fin');
-        li.remove();
+    } else { // Descompletar tarea        
         $.ajax({
             url: baseURL + '/descompletar_tarea',
             type: 'POST',
             data: {id_tarea: id_tarea, id_ticket: id_ticket},
             success: function (data) {
+                $(elem.parentNode).removeClass('done');
+                var li = $(elem).closest('li').find('.fecha_fin');
+                li.remove();
                 /*setTimeout(function () {
                  window.location.reload(true);
                  }, 1500);*/
