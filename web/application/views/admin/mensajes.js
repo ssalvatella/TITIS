@@ -1,6 +1,7 @@
 $(function () {
 
         $('#mensaje').summernote({
+            height: 200,
             lang: "es-ES"
         });
 
@@ -77,29 +78,12 @@ $(".select2").select2({
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
-
-$('#enviar_mensaje_form').on('submit', function (e) {
-    e.preventDefault();
-    var getUrl = window.location;
-    var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    var id_receptor = $("#seleccion_usuarios").val();
-    var mensaje = $('#mensaje').val();
-    $.ajax({
-        url: baseURL + '/enviar_mensaje_privado',
-        type: 'POST',
-        data: {id_receptor: id_receptor, mensaje: mensaje},
-        success: function (data) {
-            $.notify({
-                icon: 'glyphicon glyphicon-ok',
-                title: '<strong>Mensaje enviado!</strong>', message: ''
-            }, {
-                type: 'success', delay: 100
-            });
-            $('#mensaje').value = "";
-        }
-    });
-    $('#modal_enviar').modal('hide');
+$('#input_archivo').fileinput({
+    language: 'es',
+    maxFileSize: 10240, // 10 MB
+    allowedFileExtensions: ['txt', 'pdf', 'gif', 'jpg', 'jpeg', 'png', 'zip'],
+    showPreview: false,
+    showUpload: false
 });
-
 $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 

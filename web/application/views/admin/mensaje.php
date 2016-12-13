@@ -23,17 +23,17 @@
 
     <!-- Modal ENVIAR -->
     <div class="modal fade" id="modal_enviar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-lg modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('enviar_mensaje'); ?></h4>
                 </div>
-                <form id = "enviar_mensaje_form" method="post">
+                <form enctype="multipart/form-data" id = "enviar_mensaje_form" method="post" action="<?= site_url('admin/enviar_mensaje_privado/'. $this->uri->segment(2) . '/' .$this->uri->segment(3)) ; ?>" >
                     <div class="modal-body">
                         <div class="form-group">
                             <label><?= $this->lang->line('usuario'); ?></label>
-                            <select required id = "seleccion_usuarios" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                            <select name="id_receptor" required id = "seleccion_usuarios" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                 <?php
                                 foreach ($usuarios as $usuario) {
                                     if ($usuario['id_usuario'] != $this->session->userdata('id_usuario'))
@@ -45,6 +45,10 @@
                         <div class="form-group">
                             <label><?= $this->lang->line('mensaje'); ?></label>
                             <textarea name= "mensaje" maxlength="500" class= "form-control" style = "width: 100%" id="mensaje" placeholder="<?= $this->lang->line('escribir_mensaje'); ?>" required></textarea>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label class="control-label">Adjuntar archivo</label>
+                            <input id="input_archivo" name="archivo" type="file" class="file file-loading">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -99,7 +103,7 @@
                     <div class="box-body no-padding">
                         <div class="mailbox-read-info">
                             <h5>From: <?= $mensaje['nombre_emisor'] ?>
-                                <span class="mailbox-read-time pull-right">15 Feb. 2016 11:03 PM</span></h5>
+                                <span class="mailbox-read-time pull-right"><?= date('d/m/Y H:i', strtotime($mensaje['fecha']))?></span></h5>
                         </div>
                         <!-- /.mailbox-read-info -->
                         <div class="mailbox-controls with-border text-center">
@@ -122,54 +126,34 @@
                         <!-- /.mailbox-read-message -->
                     </div>
                     <!-- /.box-body -->
-                    <div class="box-footer">
-                        <ul class="mailbox-attachments clearfix">
-                            <li>
-                                <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
+                        <?php
+                        if (count($mensaje['archivos']) != 0) {
+                            echo '<div class="box-footer">';
+                            echo '  <ul class="mailbox-attachments clearfix">';
 
-                                <div class="mailbox-attachment-info">
-                                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> Sep2014-report.pdf</a>
-                                    <span class="mailbox-attachment-size">
-                          1,245 KB
-                          <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
-                        </span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="mailbox-attachment-icon"><i class="fa fa-file-word-o"></i></span>
-
-                                <div class="mailbox-attachment-info">
-                                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> App Description.docx</a>
-                                    <span class="mailbox-attachment-size">
-                          1,245 KB
-                          <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
-                        </span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="mailbox-attachment-icon has-img"><img src="../../dist/img/photo1.png" alt="Attachment"></span>
-
-                                <div class="mailbox-attachment-info">
-                                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-camera"></i> photo1.png</a>
-                                    <span class="mailbox-attachment-size">
-                          2.67 MB
-                          <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
-                        </span>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="mailbox-attachment-icon has-img"><img src="../../dist/img/photo2.png" alt="Attachment"></span>
-
-                                <div class="mailbox-attachment-info">
-                                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-camera"></i> photo2.png</a>
-                                    <span class="mailbox-attachment-size">
-                          1.9 MB
-                          <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
-                        </span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                            foreach ($mensaje['archivos'] as $archivo) {
+                                echo '<li>';
+                                echo '<span class="mailbox-attachment-icon"><i class="';
+                                $extension = pathinfo($archivo['nombre_original'], PATHINFO_EXTENSION);
+                                switch ($extension) {
+                                    case '.pdf':
+                                        echo 'fa fa-file-pdf-o';
+                                        break;
+                                }
+                                echo '"></i></span>';
+                                echo '<div class="mailbox-attachment-info">
+                                     <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ' . $archivo['nombre_original'] . '</a>
+                                     <span class="mailbox-attachment-size">
+                                         ' . $archivo['tamano'] . ' KB
+                                        <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                                     </span>
+                                  </div>';
+                                echo '</li>';
+                            }
+                            echo '</ul>';
+                            echo '</div>';
+                        }
+                        ?>
                     <!-- /.box-footer -->
                     <div class="box-footer">
                         <div class="pull-right">

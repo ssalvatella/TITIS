@@ -7,6 +7,7 @@ class Pruebas extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('cliente_modelo');
+        $this->load->model('mensaje');
         $this->load->library('encryption');
         $this->load->helper(array('form', 'url'));
         $this->encryption->initialize(
@@ -42,7 +43,7 @@ class Pruebas extends MY_Controller {
     }
 
     public function asd() {
-        echo '<a href="' . site_url('admin/descargar_archivo/518bfc837c35d76da6761ecebfcda86d/hola.txt') . '">archivo</a>';
+        print_r($this->mensaje->obtener_mensajes(5));
     }
 
 }

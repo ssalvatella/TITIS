@@ -52,7 +52,8 @@ class Cliente extends MY_Controller {
                     $datos_archivo = [
                         'mensaje' => $id_mensaje,
                         'nombre' => $datos_upload['file_name'],
-                        'nombre_original' => $datos_upload['orig_name']
+                        'nombre_original' => $datos_upload['orig_name'],
+                        'tamano' => $datos_upload['file_size']
                     ];
                     $this->archivo->registrar_archivo($datos_archivo);
                 }

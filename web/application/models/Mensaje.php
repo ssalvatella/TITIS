@@ -19,7 +19,6 @@ class Mensaje extends CI_Model {
             $mensaje['archivos'] = array();
                 foreach($archivos as $archivo) {
                     $archivo['nombre_archivo'] = pathinfo($archivo['nombre'], PATHINFO_FILENAME);
-                    $archivo['nombre_archivo_original'] = $archivo['nombre_original'];
                     array_push($mensaje['archivos'], $archivo);
                     $mensajes[$clave] = $mensaje;
                 }
@@ -64,8 +63,14 @@ class Mensaje extends CI_Model {
         $this->db->from('Mensaje');
         $this->db->where('id_mensaje', $id_mensaje);
         $this->db->join('Usuario as emisor', 'Mensaje.usuario = emisor.id_usuario', 'left');
-        $this->db->join('Archivo as archivo', 'Mensaje.id_mensaje = archivo.mensaje', 'left');
-        return $this->db->get()->result_array()[0];
+        $mensaje = $this->db->get()->result_array()[0];
+        $archivos = $this->archivo->obtener_archivos($id_mensaje);
+        $mensaje['archivos'] = array();
+        foreach($archivos as $archivo) {
+            $archivo['nombre_archivo'] = pathinfo($archivo['nombre'], PATHINFO_FILENAME);
+            array_push($mensaje['archivos'], $archivo);
+        }
+        return $mensaje;
     }
 
     public function editar_mensaje($id_mensaje, $datos) {

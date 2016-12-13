@@ -429,7 +429,8 @@ class Admin extends MY_Controller {
                 $datos_archivo = [
                     'mensaje' => $id_mensaje,
                     'nombre' => $datos_upload['file_name'],
-                    'nombre_original' => $datos_upload['orig_name']
+                    'nombre_original' => $datos_upload['orig_name'],
+                    'tamano' => $datos_upload['file_size']
                 ];
                 $this->archivo->registrar_archivo($datos_archivo);
             }
@@ -439,17 +440,40 @@ class Admin extends MY_Controller {
         redirect('admin/ver_ticket/' . $id_ticket);
     }
 
-    public function enviar_mensaje_privado() {
+    public function enviar_mensaje_privado($origen, $id_mensaje = '') {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $id_receptor = $this->input->post('id_receptor');
             $id_emisor = $this->session->userdata('id_usuario');
             $mensaje = $this->input->post('mensaje');
-            $datos = [
+            $datos_mensaje = [
                 'usuario' => $id_emisor,
                 'destinatario' => $id_receptor,
                 'texto' => $mensaje
             ];
-            $this->mensaje->registrar_mensaje($datos);
+            var_dump($datos_mensaje);
+            if ($this->mensaje->registrar_mensaje($datos_mensaje)) {
+                $datos['enviado'] = 1;
+                $id_mensaje = $this->db->insert_id();
+                if (!$this->upload->do_upload('archivo')) {
+                    // No se ha podido subir el archivo
+                    // Aquí habría que borrar el mensaje
+                    // $upload_error = array('error' => $this->upload->display_errors());
+                    var_dump($this->upload->display_errors());
+                } else {
+                    $datos_upload = $this->upload->data();
+                    $datos_archivo = [
+                        'mensaje' => $id_mensaje,
+                        'nombre' => $datos_upload['file_name'],
+                        'nombre_original' => $datos_upload['orig_name'],
+                        'tamano' => $datos_upload['file_size']
+                    ];
+                    $this->archivo->registrar_archivo($datos_archivo);
+                }
+            } else {
+                $datos['error'] = 1;
+                var_dump('Mensaje no registrado');
+            }
+//            redirect('/admin/'. $origen . '/' . $id_mensaje);
         }
     }
 
@@ -482,6 +506,12 @@ class Admin extends MY_Controller {
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css'));
 
+            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-fileinput/css/fileinput.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/fileinput.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/locales/es.js'));
+            }
+
             $this->plantilla->poner_js('assets/plugins/bootstrap-notify/bootstrap-notify.min.js');
             $this->plantilla->mostrar('admin', 'mensajes', $datos);
         }
@@ -495,14 +525,25 @@ class Admin extends MY_Controller {
             ;
             $datos['usuarios'] = $this->usuario->obtener_usuarios();
 
-            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
-            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/summernote/summernote.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/summernote/summernote.min.js'));
             if ($this->session->userdata('idioma') == 'spanish') {
-                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/locales/bootstrap-wysihtml5.es-ES.js'));
+                $this->plantilla->poner_js(site_url('assets/plugins/summernote/lang/summernote-es-ES.js'));
             }
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+
             $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/select2/i18n/es.js'));
+            }
+
+            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-fileinput/css/fileinput.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/fileinput.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/locales/es.js'));
+            }
+
             $this->plantilla->poner_js('assets/plugins/bootstrap-notify/bootstrap-notify.min.js');
             $this->plantilla->mostrar('admin', 'mensaje', $datos);
         }

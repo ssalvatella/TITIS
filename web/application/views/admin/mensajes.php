@@ -21,19 +21,19 @@
         </ol>
     </section>
 
-    <!-- INICIO Modal ENVIAR -->
+    <!-- Modal ENVIAR -->
     <div class="modal fade" id="modal_enviar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-lg modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('enviar_mensaje'); ?></h4>
                 </div>
-                <form id="enviar_mensaje_form" method="POST">
+                <form enctype="multipart/form-data" id = "enviar_mensaje_form" method="post" action="<?= site_url('admin/enviar_mensaje_privado/mensajes') ; ?>" >
                     <div class="modal-body">
                         <div class="form-group">
                             <label><?= $this->lang->line('usuario'); ?></label>
-                            <select required id = "seleccion_usuarios" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                            <select name="id_receptor" required id = "seleccion_usuarios" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                 <?php
                                 foreach ($usuarios as $usuario) {
                                     if ($usuario['id_usuario'] != $this->session->userdata('id_usuario'))
@@ -46,16 +46,20 @@
                             <label><?= $this->lang->line('mensaje'); ?></label>
                             <textarea name= "mensaje" maxlength="500" class= "form-control" style = "width: 100%" id="mensaje" placeholder="<?= $this->lang->line('escribir_mensaje'); ?>" required></textarea>
                         </div>
+                        <div class="form-group has-feedback">
+                            <label class="control-label">Adjuntar archivo</label>
+                            <input id="input_archivo" name="archivo" type="file" class="file file-loading">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
-                        <input type="submit" id="enviar" value="<?= $this->lang->line('enviar'); ?>" class="btn btn-primary">
+                        <input  type="submit" id="enviar" value = "<?= $this->lang->line('enviar'); ?>" class="btn btn-primary">
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <!-- FIN Modal ENVIAR -->
+    <!-- END Modal ENVIAR ----------->
 
     <section class="content">
 
