@@ -16,7 +16,6 @@ class Notificacion extends CI_Model {
     }
 
     public function insertar_notificacion($datos) {
-        // $datos['vista'] = 0;
         $datos['fecha'] = date("Y-m-d H:i:s");
         return $this->db->insert('Notificacion', $datos);
     }
@@ -25,11 +24,6 @@ class Notificacion extends CI_Model {
         $this->db->where('notificacion', $id_notificacion);
         $this->db->where('usuario', $id_usuario);
         return $this->db->delete('Destinatario_notificacion');
-    }
-
-    public function marcar_como_vista($id_notificacion) {
-        $this->db->where('id_notificacion', $id_notificacion);
-        return $this->db->update('Usuario', array('vista' => NOTIFICACION_VISTA));
     }
 
     public function insertar_notificacion_admins($id_usuario, $datos) {

@@ -36,15 +36,15 @@
                         <li style="margin-right: 0px;">
                             <i class="fa fa-bell bg-yellow"></i>   
                             <div class="timeline-item">
-                                <span class="time"><a style="cursor: pointer;" onClick="borrar_notificacion(this, <?= $notificaciones[$i]['id_notificacion']; ?>)"><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></span> <span class="time"><i class="fa fa-clock-o"></i> &nbsp; <?= date('H:i', strtotime($notificaciones[$i]['fecha'])); ?></span>
+                                <span class="time"><a href="#" onClick="borrar_notificacion(this, <?= $notificaciones[$i]['id_notificacion']; ?>)"><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></span> <span class="time"><i class="fa fa-clock-o"></i> &nbsp; <?= date('H:i', strtotime($notificaciones[$i]['fecha'])); ?></span>
                                 <div class="timeline-body">
-                                    <a target="_blank" href="<?= site_url($notificaciones[$i]['url']); ?>"><?= sprintf($this->lang->line($notificaciones[$i]['texto']), '<b>' . $notificaciones[$i]['parametros'] . '</b>'); ?></a>
+                                    <a target="_blank" href="<?= site_url($notificaciones[$i]['url']); ?>" onClick="borrar_notificacion(this, <?= $notificaciones[$i]['id_notificacion']; ?>)"><?= sprintf($this->lang->line($notificaciones[$i]['texto']), '<b>' . $notificaciones[$i]['parametros'] . '</b>'); ?></a>
                                 </div>
                             </div>
                         </li>
                     <?php } ?>
 
-                    <li>
+                    <li class="actualizar">
                         <a class="fa fa-repeat bg-gray"  data-toggle="tooltip" data-placement="right" title="<?= $this->lang->line('actualizar'); ?>" href="javascript:history.go(0)"></a>
                     </li>
 

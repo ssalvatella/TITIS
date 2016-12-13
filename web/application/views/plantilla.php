@@ -110,23 +110,24 @@
 
                             <!-- Menú de notificaciones -->
                             <li class="dropdown notifications-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <a id="icono_notificaciones" href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-bell-o"></i>
-                                    <?php if (count($notificaciones) >= 1) { ?>
-                                        <span class="label label-warning"><?= count($notificaciones); ?></span>
-                                    <?php } ?>
+                                    <?php //if (count($notificaciones) >= 1) { ?>
+                                                <!--span class="label label-warning"><?= count($notificaciones); ?></span-->
+                                    <?php //} ?>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">
+                                    <li id="header_notificaciones" class="header">
                                         <?php
-                                        if (count($notificaciones) == 0) {
-                                            echo $this->lang->line('no_hay_notificaciones');
-                                        } else if (count($notificaciones) == 1) {
-                                            echo $this->lang->line('tiene_1_notificacion');
-                                        } else {
-                                            echo sprintf($this->lang->line('tiene_notificaciones'), count($notificaciones));
-                                        }
-                                        ?>
+                                        /*  if (count($notificaciones) == 0) {
+                                          echo $this->lang->line('no_hay_notificaciones');
+                                          } else if (count($notificaciones) == 1) {
+                                          echo $this->lang->line('tiene_1_notificacion');
+                                          } else {
+                                          echo sprintf($this->lang->line('tiene_notificaciones'), count($notificaciones));
+                                          } */
+                                        echo $this->lang->line('tiene_notificaciones')
+                                        ?>                                        
                                     </li>
                                     <li>
                                         <ul class="menu">
@@ -476,6 +477,9 @@
         <!-- JAVASCRIPTS REQUERIDOS -->
         <?= $js ?>
         <?= script_tag(base_url('assets/js/AdminLTE.min.js')) ?>
+        <script>
+            var id_usuario = <?= $this->session->userdata('id_usuario') ?>
+        </script>
         <?= script_tag(base_url('assets/js/TITIS.js')) ?>
         <?php
         if (isset($js_pagina) and $js_pagina != '') {
