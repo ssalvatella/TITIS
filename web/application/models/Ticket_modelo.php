@@ -10,8 +10,8 @@ class Ticket_modelo extends CI_Model {
     public function obtener_tickets($inicio = 0, $cantidad = 9999, $id_cliente = '') {
         $this->db->select('Ticket.*, cliente.nombre as nombre_cliente, usuarioTecnico.usuario as nombre_tecnico_admin');
         $this->db->from('Ticket');
-        if (isset($id_cliente) && $id_cliente != '') {
-            $this->db->where('cliente', $id_cliente);
+        if ($id_cliente != '') {
+            $this->db->where('Ticket.cliente', $id_cliente);
         }
         $this->db->join('Cliente as cliente', 'cliente.id_cliente = Ticket.cliente');
         $this->db->join('Usuario as usuarioTecnico', 'usuarioTecnico.id_usuario = Ticket.tecnico_admin', 'left');
