@@ -31,6 +31,11 @@ class Mensaje extends CI_Model {
         return $this->db->insert('Mensaje', $datos);
     }
 
+    public function eliminar_mensaje($id_mensaje) {
+        $this->db->where('id_mensaje', $id_mensaje);
+        return $this->db->delete('Mensaje');
+    }
+
     public function contar_comentarios_usuario($id_usuario) {
         $this->db->from('Mensaje');
         $this->db->where('usuario', $id_usuario);
@@ -55,6 +60,7 @@ class Mensaje extends CI_Model {
             $this->db->where('visto', '0');
         }
         $this->db->join('Usuario as emisor', 'emisor.id_usuario = Mensaje.usuario', 'left');
+        $this->db->order_by('fecha', 'DESC');
         return $this->db->get()->result_array();
     }
 
@@ -71,6 +77,11 @@ class Mensaje extends CI_Model {
             array_push($mensaje['archivos'], $archivo);
         }
         return $mensaje;
+    }
+
+    public function marcar_visto($id_mensaje) {
+        $this->db->where('id_mensaje', $id_mensaje);
+        return $this->db->update('Mensaje', array('visto' => 1));
     }
 
     public function editar_mensaje($id_mensaje, $datos) {

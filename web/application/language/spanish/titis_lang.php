@@ -191,3 +191,6 @@ $lang['verde'] = 'Verde';
 $lang['verde_claro'] = 'Verde Claro';
 $lang['visto'] = 'Visto';
 
+$lang['leer_mensaje'] = 'Leer Mensaje';
+$lang['desde'] = 'De';
+

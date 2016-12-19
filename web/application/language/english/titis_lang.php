@@ -191,3 +191,5 @@ $lang['verde'] = 'Green';
 $lang['verde_claro'] = 'Light Green';
 $lang['visto'] = 'Viewed';
 
+$lang['leer_mensaje'] = 'Read Message';
+$lang['desde'] = 'From';

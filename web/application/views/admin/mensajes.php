@@ -80,7 +80,6 @@
                         <ul class="nav nav-pills nav-stacked">
                             <li class="active"><a href="#"><i class="fa fa-inbox"></i> <?= $this->lang->line('recibidos'); ?>
                                     <span class="label label-primary pull-right"><?php if ($numero_mensajes_no_vistos > 0) echo $numero_mensajes_no_vistos; ?></span></a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i> <?= $this->lang->line('enviados'); ?></a></li>
                         </ul>
                     </div>
 
@@ -103,7 +102,7 @@
                             <button data-html="true" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('seleccionar_todos'); ?>" type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
                             </button>
                             <div class="btn-group">
-                                <button data-html="true" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('eliminar_marcados'); ?>" type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                                <button id="eliminar" data-html="true" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('eliminar_marcados'); ?>" type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
                             </div>
                             <!-- /.btn-group -->
                             <a href = "javascript:history.go(0)" type="button" class="btn btn-default btn-sm" data-html="true" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('actualizar'); ?>"><i class="fa fa-refresh"></i></a>
@@ -139,7 +138,7 @@
                                             $diferencia = $intervalo_tiempo->format('%i min');
                                         }
 
-                                        echo '<tr style="cursor: pointer;"> ';
+                                        echo '<tr style="cursor: pointer;"value="' . $mensaje['id_mensaje']. '">' ;
                                         echo '<td> <a  href="' . site_url('admin/ver_mensaje/' . $mensaje['id_mensaje']) . '"></a><input type="checkbox"></td>';
                                         if ($mensaje['visto'] == 0) {
                                             echo '<td><i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('no_visto') . '" class="fa fa-eye-slash"></i></td>';

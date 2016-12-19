@@ -82,7 +82,6 @@
                         <ul class="nav nav-pills nav-stacked">
                             <li class="active"><a href="<?= site_url('admin/mensajes') ?>"><i class="fa fa-inbox"></i> <?= $this->lang->line('recibidos'); ?>
                                     <span class="label label-primary pull-right"><?php if ($numero_mensajes_no_vistos > 0) echo $numero_mensajes_no_vistos;?></span></a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i> <?= $this->lang->line('enviados'); ?></a></li>
                         </ul>
                     </div>
 
@@ -92,7 +91,7 @@
             <div class="col-md-9">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Read Mail</h3>
+                        <h3 class="box-title"><?= $this->lang->line('leer_mensaje'); ?></h3>
 
                         <div class="box-tools pull-right">
                             <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Previous"><i class="fa fa-chevron-left"></i></a>
@@ -102,14 +101,14 @@
                     <!-- /.box-header -->
                     <div class="box-body no-padding">
                         <div class="mailbox-read-info">
-                            <h5>From: <?= $mensaje['nombre_emisor'] ?>
+                            <h5><?= $this->lang->line('desde'); ?>: <?= $mensaje['nombre_emisor'] ?>
                                 <span class="mailbox-read-time pull-right"><?= date('d/m/Y H:i', strtotime($mensaje['fecha']))?></span></h5>
                         </div>
                         <!-- /.mailbox-read-info -->
                         <div class="mailbox-controls with-border text-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="" data-original-title="Delete">
-                                    <i class="fa fa-trash-o"></i></button>
+                                <a href="<?= site_url('admin/eliminar_mensaje/' . $mensaje['id_mensaje'])?>" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="" data-original-title="<?= $this->lang->line('eliminar'); ?>">
+                                    <i class="fa fa-trash-o"></i></a>
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
                                     <i class="fa fa-reply"></i></button>
                                 <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Forward">
@@ -136,16 +135,41 @@
                                 echo '<span class="mailbox-attachment-icon"><i class="';
                                 $extension = pathinfo($archivo['nombre_original'], PATHINFO_EXTENSION);
                                 switch ($extension) {
-                                    case '.pdf':
+                                    case 'pdf':
                                         echo 'fa fa-file-pdf-o';
+                                        break;
+                                    case 'txt':
+                                        echo 'fa fa-file-text-o';
+                                        break;
+                                    case 'doc':
+                                    case 'docx':
+                                        echo 'fa fa-word-o';
+                                        break;
+                                    case 'xls':
+                                    case 'xlsx':
+                                        echo 'fa fa-excel-o';
+                                        break;
+                                    case 'zip':
+                                    case 'rar':
+                                        echo 'fa fa-archive-o';
+                                        break;
+                                    case 'ppt':
+                                    case 'pptm':
+                                        echo 'fa fa-powerpoint-o';
+                                        break;
+                                    case 'png':
+                                    case 'jpg':
+                                    case 'gif':
+                                    case 'jpeg':
+                                        echo 'fa fa-image-o';
                                         break;
                                 }
                                 echo '"></i></span>';
                                 echo '<div class="mailbox-attachment-info">
-                                     <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ' . $archivo['nombre_original'] . '</a>
+                                     <a href="'. site_url('admin/descargar_archivo/' . $archivo['nombre_archivo'] . '/' . $archivo['nombre_original']) .'" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> ' . $archivo['nombre_original'] . '</a>
                                      <span class="mailbox-attachment-size">
                                          ' . $archivo['tamano'] . ' KB
-                                        <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                                        <a href="'. site_url('admin/descargar_archivo/' . $archivo['nombre_archivo'] . '/' . $archivo['nombre_original']) .'" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
                                      </span>
                                   </div>';
                                 echo '</li>';
@@ -160,7 +184,7 @@
                             <button type="button" class="btn btn-default"><i class="fa fa-reply"></i> Reply</button>
                             <button type="button" class="btn btn-default"><i class="fa fa-share"></i> Forward</button>
                         </div>
-                        <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
+                        <a href="<?= site_url('admin/eliminar_mensaje/' . $mensaje['id_mensaje'])?>" type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> <?= $this->lang->line('eliminar'); ?></a>
                         <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
                     </div>
                     <!-- /.box-footer -->

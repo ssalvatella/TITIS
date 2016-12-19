@@ -78,7 +78,7 @@
                                                 }
                                                 ?>
                                                 <li>
-                                                    <a href="#">
+                                                    <a href="<?= site_url("admin/ver_mensaje/" . $mensaje_privado['id_mensaje']) ?>">
                                                         <div class="pull-left">
                                                             <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="img-circle" alt="<?= $this->lang->line('imagen_perfil'); ?>">
                                                         </div>

@@ -22,7 +22,7 @@ class Admin extends MY_Controller {
         $this->upload->initialize(
                 array(
                     'upload_path' => "./files/",
-                    'allowed_types' => "txt|pdf|gif|jpg|jpeg|png|zip",
+                    'allowed_types' => "txt|pdf|gif|jpg|jpeg|png|zip|doc|docx|xls|xlsx|rar|ppt|pptm",
                     'max_size' => "10240", // 10 MB
                     'max_height' => "1080",
                     'max_width' => "1920",
@@ -409,6 +409,18 @@ class Admin extends MY_Controller {
         }
     }
 
+    public function eliminar_mensaje($id_mensaje) {
+        $this->mensaje->eliminar_mensaje($id_mensaje);
+        redirect('admin/mensajes/');
+    }
+
+    public function eliminar_mensajes() {
+        $mensajes = $this->input->post('mensajes');
+        foreach($mensajes as $id) {
+            $this->mensaje->eliminar_mensaje($id);
+        }
+    }
+
     public function enviar_mensaje($id_ticket) {
         $datos_mensaje = [
             'ticket' => $id_ticket,
@@ -450,7 +462,6 @@ class Admin extends MY_Controller {
                 'destinatario' => $id_receptor,
                 'texto' => $mensaje
             ];
-            var_dump($datos_mensaje);
             if ($this->mensaje->registrar_mensaje($datos_mensaje)) {
                 $datos['enviado'] = 1;
                 $id_mensaje = $this->db->insert_id();
@@ -458,7 +469,7 @@ class Admin extends MY_Controller {
                     // No se ha podido subir el archivo
                     // Aquí habría que borrar el mensaje
                     // $upload_error = array('error' => $this->upload->display_errors());
-                    var_dump($this->upload->display_errors());
+                    $this->upload->display_errors();
                 } else {
                     $datos_upload = $this->upload->data();
                     $datos_archivo = [
@@ -471,9 +482,8 @@ class Admin extends MY_Controller {
                 }
             } else {
                 $datos['error'] = 1;
-                var_dump('Mensaje no registrado');
             }
-//            redirect('/admin/'. $origen . '/' . $id_mensaje);
+           redirect('/admin/'. $origen . '/' . $id_mensaje);
         }
     }
 
@@ -521,8 +531,8 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('mensajes_titulo');
             $datos['mensaje'] = $this->mensaje->obtener_mensaje($id_mensaje);
+            $this->mensaje->marcar_visto($id_mensaje);
             $datos['numero_mensajes_no_vistos'] = $this->mensaje->contar_mensajes_no_vistos($this->session->userdata('id_usuario'));
-            ;
             $datos['usuarios'] = $this->usuario->obtener_usuarios();
 
             $this->plantilla->poner_css(site_url('assets/plugins/summernote/summernote.css'));

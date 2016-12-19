@@ -87,3 +87,32 @@ $('#input_archivo').fileinput({
 });
 $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 
+$('#eliminar').click(function() {
+    var seleccionados = [];
+    $.each($('#mensajes').find('input[type="checkbox"]:checked'), function() {
+        $(this).closest("tr").remove();
+        seleccionados.push($(this).closest("tr").valueOf().attr("value"));
+    })
+
+    var getUrl = window.location;
+    var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
+    $.ajax({
+        url: baseURL + '/eliminar_mensajes',
+        type: 'POST',
+        data: {mensajes: seleccionados},
+        success: function (data) {
+            /* setTimeout(function () {
+             window.location.reload(true);
+             }, 1500); */
+            $.notify({
+                icon: 'glyphicon glyphicon-ok',
+                title: '<strong>Mensajes eliminados!</strong>',
+                message: 'Los mensajes han sido eliminados con éxito.',
+            }, {
+                type: 'success', delay: 100
+            });
+        }
+    });
+
+});
