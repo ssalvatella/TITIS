@@ -43,7 +43,8 @@ class Pruebas extends MY_Controller {
     }
 
     public function asd() {
-        print_r($this->mensaje->obtener_mensajes(5));
+       // print_r($this->mensaje->obtener_mensajes(5));
+        print_r($this->cliente_modelo->obtener_id_usuario(3));
     }
 
 }

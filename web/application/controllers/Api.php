@@ -26,6 +26,7 @@ class Api extends REST_Controller {
      * registrar_empleado
      * registrar_cliente
      * modificar_cliente
+     * crear_ticket
      * crear_tarea
      * crear_mensaje
      * modificar_tarea
@@ -581,6 +582,30 @@ class Api extends REST_Controller {
         $this->response([
             'status' => TRUE,
             'datos' => $this->mensaje->editar_mensaje($id_mensaje, $datos_mensaje)
+                ], REST_Controller::HTTP_OK);
+    }
+
+    public function crear_ticket_post() {
+        $titulo = $this->post('titulo');
+        $descripcion = $this->post('descripcion');
+        $id_cliente = $this->post('id_cliente');
+
+        if (!$titulo || !$descripcion || !$id_cliente) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesitan los campos titulo, descripcion, id_cliente'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        $datos_ticket = [
+            'titulo' => $titulo,
+            'mensaje' => $descripcion,
+            'cliente' => $id_cliente
+        ];
+
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->ticket_modelo->registrar_ticket($datos_ticket)
                 ], REST_Controller::HTTP_OK);
     }
 

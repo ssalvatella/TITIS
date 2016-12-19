@@ -28,7 +28,7 @@ class Cliente_modelo extends CI_Model {
         unset($datos['contrasena']); // Se elimina la contraseña
         return $datos;
     }
-    
+
     public function obtener_datos($id_usuario) {
         $this->db->select('*');
         $this->db->from('Cliente');
@@ -93,6 +93,18 @@ class Cliente_modelo extends CI_Model {
         $this->db->where('fecha_Registro >= ', strtotime('-' . $dias . ' days'));
         $this->db->where('tipo', USUARIO_CLIENTE);
         return $this->db->get()->num_rows();
+    }
+
+    public function obtener_id_usuario($id_cliente) {
+        $this->db->select('usuario');
+        $this->db->from('Cliente');
+        $this->db->where('id_cliente', $id_cliente)->limit(1);
+        $consulta = $this->db->get();
+        if ($consulta->num_rows() == 1) {
+            return $consulta->row()->usuario;
+        } else {
+            return FALSE;
+        }
     }
 
 }

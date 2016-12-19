@@ -9,8 +9,18 @@ class Cliente extends MY_Controller {
         $this->load->helper('form');
         $this->load->helper('security'); // form_validation -> xss_clean
         $this->load->helper('descarga'); // No se usa download porque no se puede cambiar el nombre del fichero cuando se descarga
-        $this->load->library('plantilla');
+        $this->load->library(array('form_validation', 'plantilla', 'upload'));
         $this->load->model(array('cliente_modelo', 'usuario', 'ticket_modelo', 'notificacion', 'mensaje'));
+        $this->upload->initialize(
+                array(
+                    'upload_path' => "./files/",
+                    'allowed_types' => "txt|pdf|gif|jpg|jpeg|png|zip",
+                    'max_size' => "10240", // 10 MB
+                    'max_height' => "1080",
+                    'max_width' => "1920",
+                    'encrypt_name' => TRUE
+                )
+        );
     }
 
     public function index() {
@@ -38,6 +48,7 @@ class Cliente extends MY_Controller {
             $datos_ticket = [
                 'titulo' => $this->input->post('titulo'),
                 'mensaje' => $this->input->post('mensaje'),
+                'cliente' => $this->session->userdata('id_cliente'),
             ];
 
             if ($this->ticket_modelo->registrar_ticket($datos_ticket)) {
