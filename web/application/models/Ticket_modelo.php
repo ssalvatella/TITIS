@@ -13,7 +13,7 @@ class Ticket_modelo extends CI_Model {
         if ($id_cliente != '') {
             $this->db->where('Ticket.cliente', $id_cliente);
         }
-        $this->db->join('Cliente as cliente', 'cliente.id_cliente = Ticket.cliente');
+        $this->db->join('Cliente as cliente', 'cliente.id_cliente = Ticket.cliente', 'left');
         $this->db->join('Usuario as usuarioTecnico', 'usuarioTecnico.id_usuario = Ticket.tecnico_admin', 'left');
         $this->db->limit($cantidad, $inicio);
         $tickets = $this->db->get()->result_array();

@@ -85,7 +85,7 @@ class Cliente extends MY_Controller {
     public function tickets() {
         if ($this->usuario_permitido(USUARIO_CLIENTE)) {
             $datos['titulo'] = $this->lang->line('tickets');
-            $datos['tickets'] = $this->ticket_modelo->obtener_tickets($id_cliente = $this->session->userdata('id_cliente'));
+            $datos['tickets'] = $this->ticket_modelo->obtener_tickets(0, 9999, $this->session->userdata('id_cliente'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
