@@ -32,23 +32,32 @@
 
         <div class="box box-solid">
 
-            <form method="POST" action="<?= site_url('cliente/enviar_ticket'); ?>">
+            <form id="form_crear_ticket" method="POST" action="<?= site_url('cliente/enviar_ticket'); ?>" data-parsley-errors-messages-disabled="true">
                 <div class="box-body pad" style="display: block;">
-                    <div class="form-group">
-                        <label><?= $this->lang->line('asunto'); ?></label>
-                        <input name= "titulo" type="text" class="form-control" id="titulo" placeholder="<?= $this->lang->line('asunto_descripcion'); ?>" maxlength="100" required>
+                    <div class="col-md-12">
+                        <div class="form-group has-feedback">
+                            <label><?= $this->lang->line('asunto'); ?></label>
+                            <input name= "titulo" type="text" class="form-control" id="titulo" placeholder="<?= $this->lang->line('asunto_descripcion'); ?>" maxlength="100" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label><?= $this->lang->line('mensaje'); ?></label>
-                        <textarea name= "mensaje" maxlength="500" class= "form-control" style = "width: 1000px" id="mensaje" placeholder="<?= $this->lang->line('mensaje_descripcion'); ?>" required></textarea>
+                    <div class="col-md-12">
+                        <div class="form-group has-feedback">
+                            <label><?= $this->lang->line('mensaje'); ?></label>
+                            <textarea name="mensaje" maxlength="500" class= "form-control" style="width: 1000px" id="mensaje" required></textarea>
+                            <script>
+                                var placeholder_mensaje = "<?= $this->lang->line('mensaje_descripcion'); ?>"
+                            </script>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label><?= $this->lang->line('fichero_adjunto'); ?> <small><?= $this->lang->line('aun no funcional'); ?></small></label>
-                        <input name = "fichero" type="file" id="archivo">
+                    <div class="col-md-5">
+                        <div class="form-group has-feedback">
+                            <label><?= $this->lang->line('fichero_adjunto'); ?></label>
+                            <input id="input_archivo" name="archivo" type="file" class="file file-loading">
+                        </div>
                     </div>
                 </div>
                 <div class="box-footer">
-                    <input name="submit" value="<?= $this->lang->line('enviar_ticket'); ?>" type="submit" id="boton" class="btn bg-purple btn-flat btn-lg">
+                    <input name="submit" value="<?= $this->lang->line('enviar_ticket'); ?>" type="submit" id="boton" class="btn bg-purple btn-flat">
                 </div><!-- box-footer -->
             </form>
 

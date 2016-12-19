@@ -36,9 +36,16 @@ class Cliente extends MY_Controller {
     public function crear_ticket($datos = null) {
         if ($this->usuario_permitido(USUARIO_CLIENTE)) {
             $datos['titulo'] = $this->lang->line('crear_ticket');
-            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
-            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'));
+            $this->plantilla->poner_css(site_url('assets/plugins/summernote/summernote.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/summernote/summernote.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-fileinput/css/fileinput.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/fileinput.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/summernote/lang/summernote-es-ES.js'));
+                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/locales/es.js'));
+            }
+            $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
             $this->plantilla->mostrar('cliente', 'crear_ticket', $datos);
         }
     }

@@ -17,15 +17,16 @@ $(function () {
         $('.bs-callout-warning').toggleClass('hidden', ok);
     });
 
-    $("textarea").wysihtml5({
-        toolbar: {"size": "xs"},
-        locale: "es-ES"
-    });
-
     $("[data-mask]").inputmask();
 
     $('#pais').flagStrap({
         placeholder: false
+    });
+});
+
+$(document).ready(function () {
+    $('textarea').summernote({
+        lang: "es-ES"
     });
 });
 

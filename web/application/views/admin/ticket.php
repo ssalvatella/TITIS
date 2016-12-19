@@ -387,7 +387,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">Adjuntar archivo</label>
+                                        <label class="control-label"><?= $this->lang->line('fichero_adjunto'); ?></label>
                                         <input id="input_archivo" name="archivo" type="file" class="file file-loading">
                                     </div>
                                 </div>
