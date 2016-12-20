@@ -478,9 +478,10 @@
         <?= $js ?>
         <?= script_tag(base_url('assets/js/AdminLTE.min.js')) ?>
         <script>
-            var id_usuario = <?= $this->session->userdata('id_usuario') ?>
+            var id_usuario = "<?= $this->session->userdata('id_usuario'); ?>";
         </script>
         <?= script_tag(base_url('assets/js/TITIS.js')) ?>
+        <?= script_tag(base_url('assets/js/websocket.js')) ?>
         <?php
         if (isset($js_pagina) and $js_pagina != '') {
             echo '<script>' . PHP_EOL;

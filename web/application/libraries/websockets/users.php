@@ -14,6 +14,8 @@ class WebSocketUser {
   public $partialMessage = "";
   
   public $hasSentClose = false;
+  
+  public $id_usuario = "";
 
   function __construct($id, $socket) {
     $this->id = $id;

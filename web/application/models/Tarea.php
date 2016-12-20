@@ -33,6 +33,7 @@ class Tarea extends CI_Model {
     }
 
     public function crear_tarea($datos) {
+        $datos['estado'] = TAREA_EN_PROCESO;
         return $this->db->insert('Tarea', $datos);
     }
 
@@ -68,6 +69,6 @@ class Tarea extends CI_Model {
     public function obtener_suma_precios($id_ticket) {
         $this->db->from('Tarea');
         $this->db->where('ticket', $id_ticket);
-        
     }
+
 }
