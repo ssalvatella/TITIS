@@ -82,7 +82,7 @@
                                                         <div class="pull-left">
                                                             <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="img-circle" alt="<?= $this->lang->line('imagen_perfil'); ?>">
                                                         </div>
-                                                        <h4><?= $mensaje_privado['usuario']; ?><small><i class="fa fa-clock-o"></i><?= $diferencia; ?></small></h4>
+                                                        <h4><?= $mensaje_privado['nombre_emisor']; ?><small><i class="fa fa-clock-o"></i><?= $diferencia; ?></small></h4>
                                                         <p><?= strip_tags(substr($mensaje_privado['texto'], 0, 20)); ?></p>
                                                     </a>
                                                 </li>

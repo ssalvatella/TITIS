@@ -216,9 +216,20 @@ $(function () {
             url: baseURL + '/asignar_ticket',
             type: 'POST',
             data: {id_ticket: id_ticket, id_tecnico_admin: id_tecnico_admin},
+            success: function (data) {
+                setTimeout(function () {
+                    window.location.reload(true);
+                }, 1500);
+                $.notify({
+                    icon: 'glyphicon glyphicon-ok',
+                    title: '<strong>Técnico asignado!</strong>',
+                    message: 'El técnico ha sido asignado!',
+                }, {
+                    type: 'success', delay: 100
+                });
+            }
         });
         $('#modal_asignar').modal('hide');
-        window.location.reload();
     });
 
     $('#crear_tarea_form').on('submit', function (e) {

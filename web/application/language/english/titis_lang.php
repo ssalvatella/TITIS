@@ -192,4 +192,8 @@ $lang['verde_claro'] = 'Light Green';
 $lang['visto'] = 'Viewed';
 
 $lang['leer_mensaje'] = 'Read Message';
+$lang['responder_mensaje'] = 'Reply Message';
+$lang['en_respuesta'] = 'In response to the message: ';
+$lang['reenviar_mensaje'] = 'Forward Message';
+$lang['mensaje_reenviado'] = 'Message forward';
 $lang['desde'] = 'From';

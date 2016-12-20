@@ -1,4 +1,4 @@
-$('#mensaje').summernote({
+$('.summer').summernote({
     height: 200,
     lang: "es-ES"
 });

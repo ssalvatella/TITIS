@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-group">
                             <label><?= $this->lang->line('mensaje'); ?></label>
-                            <textarea name= "mensaje" maxlength="500" class= "form-control" style = "width: 100%" id="mensaje" placeholder="<?= $this->lang->line('escribir_mensaje'); ?>" required></textarea>
+                            <textarea name= "mensaje" maxlength="500" class= "form-control summer" style = "width: 100%" id="mensaje" placeholder="<?= $this->lang->line('escribir_mensaje'); ?>" required></textarea>
                         </div>
                         <div class="form-group has-feedback">
                             <label class="control-label">Adjuntar archivo</label>
@@ -60,6 +60,81 @@
         </div>
     </div>
     <!-- END Modal ENVIAR ----------->
+
+    <!-- Modal RESPONDER -->
+    <div class="modal fade" id="modal_responder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-lg modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('responder_mensaje'); ?></h4>
+                </div>
+                <form enctype="multipart/form-data" id = "enviar_mensaje_form" method="post" action="<?= site_url('admin/enviar_mensaje_privado/'. $this->uri->segment(2) . '/' .$this->uri->segment(3)) ; ?>" >
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label><?= $this->lang->line('usuario'); ?></label>
+                            <select disabled="true" name="id_receptor" required id = "seleccion_usuarios" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                <?=  '<option value="' . $mensaje['id_usuario'] . '"> ' . $mensaje['nombre_emisor'] . '</option>';?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><?= $this->lang->line('mensaje'); ?></label>
+                            <textarea name= "mensaje" maxlength="500" class= "form-control summer" style = "width: 100%" id="mensaje" placeholder="<?= $this->lang->line('escribir_mensaje'); ?>" required><?= '<br /><br /><br /><br />'.$this->lang->line('en_respuesta') . '<br />' . '--------------------------------------------------------------- <br />' . $mensaje['texto']?></textarea>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label class="control-label">Adjuntar archivo</label>
+                            <input id="input_archivo" name="archivo" type="file" class="file file-loading">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
+                        <input  type="submit" id="enviar" value = "<?= $this->lang->line('enviar'); ?>" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END Modal RESPONDER ----------->
+
+    <!-- Modal REENVIAR -->
+    <div class="modal fade" id="modal_reenviar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-lg modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('reenviar_mensaje'); ?></h4>
+                </div>
+                <form enctype="multipart/form-data" id = "enviar_mensaje_form" method="post" action="<?= site_url('admin/enviar_mensaje_privado/'. $this->uri->segment(2) . '/' .$this->uri->segment(3)) ; ?>" >
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label><?= $this->lang->line('usuario'); ?></label>
+                            <select name="id_receptor" required id = "seleccion_usuarios" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                <?php
+                                foreach ($usuarios as $usuario) {
+                                    if ($usuario['id_usuario'] != $this->session->userdata('id_usuario'))
+                                        echo '<option value="' . $usuario['id_usuario'] . '"> ' . $usuario['usuario'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><?= $this->lang->line('mensaje'); ?></label>
+                            <textarea name= "mensaje" maxlength="500" class= "form-control summer" style = "width: 100%" id="mensaje" placeholder="<?= $this->lang->line('escribir_mensaje'); ?>" required><?= $this->lang->line('mensaje_reenviado').'<br />'. $this->lang->line('desde').': '. $mensaje['nombre_emisor'] .'<br />' . '--------------------------------------------------------------- <br />' . $mensaje['texto']?>  </textarea>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label class="control-label">Adjuntar archivo</label>
+                            <input id="input_archivo" name="archivo" type="file" class="file file-loading">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
+                        <input  type="submit" id="enviar" value = "<?= $this->lang->line('enviar'); ?>" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END Modal REENVIAR ----------->
 
     <section class="content">
 
@@ -99,7 +174,7 @@
                         </div>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body no-padding">
+                    <div class="box-body no-padding" >
                         <div class="mailbox-read-info">
                             <h5><?= $this->lang->line('desde'); ?>: <?= $mensaje['nombre_emisor'] ?>
                                 <span class="mailbox-read-time pull-right"><?= date('d/m/Y H:i', strtotime($mensaje['fecha']))?></span></h5>
@@ -109,10 +184,10 @@
                             <div class="btn-group">
                                 <a href="<?= site_url('admin/eliminar_mensaje/' . $mensaje['id_mensaje'])?>" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="" data-original-title="<?= $this->lang->line('eliminar'); ?>">
                                     <i class="fa fa-trash-o"></i></a>
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
-                                    <i class="fa fa-reply"></i></button>
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Forward">
-                                    <i class="fa fa-share"></i></button>
+                                <a  data-toggle="modal" data-target="#modal_responder"><button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Reply">
+                                    <i class="fa fa-reply"></i></button></a>
+                                <a  data-toggle="modal" data-target="#modal_reenviar" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Forward">
+                                    <i class="fa fa-share"></i></a>
                             </div>
                             <!-- /.btn-group -->
                             <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print">
@@ -163,6 +238,9 @@
                                     case 'jpeg':
                                         echo 'fa fa-image-o';
                                         break;
+                                    default:
+                                        echo 'fa fa-file-o';
+                                        break;
                                 }
                                 echo '"></i></span>';
                                 echo '<div class="mailbox-attachment-info">
@@ -181,8 +259,8 @@
                     <!-- /.box-footer -->
                     <div class="box-footer">
                         <div class="pull-right">
-                            <button type="button" class="btn btn-default"><i class="fa fa-reply"></i> Reply</button>
-                            <button type="button" class="btn btn-default"><i class="fa fa-share"></i> Forward</button>
+                            <a data-toggle="modal" data-target="#modal_responder" type="button" class="btn btn-default"><i class="fa fa-reply"></i> Reply</a>
+                            <a data-toggle="modal" data-target="#modal_reenviar" type="button" class="btn btn-default"><i class="fa fa-share"></i> Forward</a>
                         </div>
                         <a href="<?= site_url('admin/eliminar_mensaje/' . $mensaje['id_mensaje'])?>" type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> <?= $this->lang->line('eliminar'); ?></a>
                         <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
