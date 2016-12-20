@@ -2,99 +2,133 @@
     <!-- Cabecera -->
     <section class="content-header">
         <h1>
-            <?= $this->lang->line('ver_factura'); ?>
+            <?= $this->lang->line('factura'); ?>
+            <small><?= $factura['titulo']; ?></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?= site_url('admin'); ?>"><i class="fa fa-home"></i><?= $this->lang->line('inicio'); ?></a></li>
             <li class="active"></i><?= $this->lang->line('ver_factura'); ?></li>
         </ol>
     </section>
-    <!-- Contenido --> 
-    <section class="content">
-
-        <div class="box box-primary">
-            <!-- CABECERA TITULO -->
-            <div class="box-header with-border">
-                <h3 class="box-title"><?= $factura['descripcion'] . ' <small>' . $factura['titulo'] ?></small></h3>
-                <div class="box-tools pull-right">
-
-                </div><!-- /.box-tools -->
-            </div><!-- /.box-header -->
-            <!-- ETIQUETAS CABECERA -->
-            <div class="box-body">
-
-                <div class="row">
-                    <div class="col-lg-3 col-xs-6 col-md-6">
-                        <div class="info-box bg-red">
-                            <span class="info-box-icon"><i class="fa fa-user"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text"><?= $this->lang->line('cliente'); ?></span>
-                                <span class="info-box-number"><?= $factura['nombre_cliente'] ?></span>
-                            </div><!-- /.info-box-content -->
-                        </div><!-- /.info-box -->
-                    </div>
-                    <div class="col-lg-3 col-xs-6 col-md-6">
-                        <div class="info-box bg-green">
-                            <span class="info-box-icon"><i class="fa fa-ticket"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text"><?= $this->lang->line('ticket'); ?></span>
-                                <span class="info-box-number"><?= $factura['titulo'] ?></span>
-                            </div><!-- /.info-box-content -->
-                        </div><!-- /.info-box -->
-                    </div>
-                    <div class="col-lg-3 col-xs-6 col-md-6">
-                        <div class="info-box bg-aqua">
-                            <span class="info-box-icon"><i class="fa fa-euro"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text"><?= $this->lang->line('concepto'); ?></span>
-                                <span class="info-box-number"><?= $concepto['precio'] . ' €' ?></span>
-                            </div><!-- /.info-box-content -->
-                        </div><!-- /.info-box -->
-                    </div>
-                    <div class="col-lg-3 col-xs-6 col-md-6">
-                        <div class="info-box bg-yellow">
-                            <span class="info-box-icon"><i class="fa fa-percent"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text"><?= $this->lang->line('iva'); ?></span>
-                                <span class="info-box-number"><?= $factura['iva'] ?></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- CLIENTE Y DETALLES TICKET -->
-            <div class="box-group" id="accordion">
-                <div class="panel box box-primary">
-                    <div class="box-header with-border">
-                        <h4 class="box-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="collapsed">
-                                <i class="fa fa-user"></i> &nbsp; <?= $this->lang->line('cliente'); ?>
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse" aria-expanded="true" style="height: 0px;">
-                        <div id="info_cliente" class="box-body">
-                            <?= $factura['nombre_cliente']; ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel box box-danger">
-                    <div class="box-header with-border">
-                        <h4 class="box-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
-                                <i class="ion ion-clipboard"></i> &nbsp; <?= $this->lang->line('desglose'); ?>
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse in" aria-expanded="false">
-                        <div class="box-header">
-                            <h3 class="box-title">
-                                <?= $factura['titulo']; ?>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section class="invoice">
+      <!-- title row -->
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="page-header">
+            <i class="fa fa-globe"></i> TITIS
+            <small class="pull-right"><?= $this->lang->line('fecha'); ?>: 2/10/2014</small>
+          </h2>
         </div>
+        <!-- /.col -->
+      </div>
+      <!-- info row -->
+      <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+          <?= $this->lang->line('desde'); ?>
+          <address>
+            <strong>TITIS</strong><br>
+            EUPT, Universidad de Zaragoza<br>
+            Teruel, SPA 44003<br>
+            <?= $this->lang->line('telefono'); ?>: (978) 60 00 00<br>
+            <?= $this->lang->line('email'); ?>: titis@titis.com
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+          <?= $this->lang->line('a'); ?>
+          <address>
+            <strong><?= $factura['nombre_cliente']; ?></strong><br>
+            <?= $factura['direccion_cliente']; ?><br>
+            <?= $factura['localidad_cliente']; ?>, <?= $factura['pais_cliente']; ?> <?= $factura['cp_cliente']; ?><br>
+            <?= $this->lang->line('telefono'); ?>: <?= $factura['telefono_cliente']; ?><br>
+            <?= $this->lang->line('email'); ?>: <?= $factura['email_cliente']; ?>
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+          <b><?= $this->lang->line('factura'); ?>: <?= $factura['titulo']; ?></b><br>
+          <br>
+          <b><?= $this->lang->line('factura_id'); ?>:</b> <?= $factura['id_factura']; ?><br>
+          <b><?= $this->lang->line('factura_fecha'); ?>:</b> <?= $factura['fecha']; ?><br>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- Table row -->
+      <div class="row">
+        <div class="col-xs-12 table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th><?= $this->lang->line('tarea'); ?></th>
+              <th><?= $this->lang->line('descripcion'); ?></th>
+              <th><?= $this->lang->line('precio'); ?></th>
+            </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($tareas as $tarea) {
+                    echo '<tr>
+                            <td>' . $tarea['id_tarea'] . '</td>
+                            <td>' . $tarea['nombre'] . '</td>
+                            <td>' . $tarea['precio'] . ' €</td>';
+                }
+                ?>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <!-- accepted payments column -->
+        <div class="col-xs-6">
+          <p class="lead"><?= $this->lang->line('metodos_pago'); ?>:</p>
+          <img src="<?= site_url('assets/img/pago/visa.png'); ?>" alt="Visa">
+          <img src="<?= site_url('assets/img/pago/mastercard.png'); ?>" alt="Mastercard">
+          <img src="<?= site_url('assets/img/pago/american-express.png'); ?>" alt="American Express">
+          <img src="<?= site_url('assets/img/pago/paypal2.png'); ?>" alt="Paypal">
+
+          
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-6">
+          <p class="lead"><?= $this->lang->line('cantidad_pagar'); ?> 2/22/2014</p>
+
+          <div class="table-responsive">
+            <table class="table">
+              <tr>
+                <th style="width:50%"><?= $this->lang->line('subtotal'); ?>:</th>
+                <td><?= $total_tareas; ?> €</td>
+              </tr>
+              <tr>
+                <th><?= $this->lang->line('iva'); ?> (21%)</th>
+                <td>$10.34</td>
+              </tr>
+              <tr>
+                <th><?= $this->lang->line('total'); ?>:</th>
+                <td>$265.24</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- this row will not appear when printing -->
+      <div class="row no-print">
+        <div class="col-xs-12">
+          <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> <?= $this->lang->line('imprimir'); ?></a>
+          <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> <?= $this->lang->line('confirmar_pago'); ?>
+          </button>
+          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+            <i class="fa fa-download"></i> <?= $this->lang->line('generar_pdf'); ?>
+          </button>
+        </div>
+      </div>
     </section>
+    <!-- /.content -->
 </div>

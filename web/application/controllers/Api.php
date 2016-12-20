@@ -26,12 +26,16 @@ class Api extends REST_Controller {
      * login
      * registrar_empleado
      * registrar_cliente
+     * activar_usuario
+     * banear_usuario
      * modificar_cliente
      * crear_ticket
      * crear_tarea
      * crear_mensaje
      * modificar_tarea
      * modificar_mensaje
+     * borrar_tarea
+     * borrar_ticket
      */
     public function __construct() {
         parent::__construct();
@@ -378,7 +382,6 @@ class Api extends REST_Controller {
             'ticket' => $id_ticket,
             'nombre' => $descripcion,
             'tecnico' => $id_tecnico,
-            'estado' => TAREA_EN_PROCESO,
             'inicio' => $inicio,
             'fin_previsto' => $fin_previsto
         ];
@@ -390,28 +393,35 @@ class Api extends REST_Controller {
 
     public function modificar_tarea_post() {
         $id_tarea = $this->input->post('id_tarea');
+        $id_ticket = $this->input->post('id_ticket');
         $id_tecnico = $this->input->post('id_tecnico');
         $descripcion = $this->input->post('descripcion_tarea');
         $inicio = $this->input->post('inicio');
         $fin_previsto = $this->input->post('fin_previsto');
+        $estado = $this->input->post('estado');
 
-        if (!$id_tarea) {
+        if (!$id_tarea || !$id_ticket) {
             $this->response([
                 'status' => FALSE,
-                'error' => 'Se necesita el campo id_tarea'
+                'error' => 'Se necesita el campo id_tarea y el campo id_ticket'
                     ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
-        if (!$id_tecnico && !$descripcion && !$inicio && !$fin_previsto) {
+        if (!$id_tecnico && !$descripcion && !$inicio && !$fin_previsto && !$estado) {
             $this->response([
                 'status' => FALSE,
-                'error' => 'Se necesitan al menos alguno de los siguientes campos: id_tecnico, descripcion, inicio o fin_previsto'
+                'error' => 'Se necesitan al menos alguno de los siguientes campos: id_tecnico, descripcion, inicio, fin_previsto o estado'
                     ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
-        $datos_tarea = [
-            'estado' => TAREA_EN_PROCESO
-        ];
+        if ($estado != TAREA_EN_PROCESO && $estado != TAREA_FINALIZADA) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Destinatario incorrecto. Valores posibles: Procesando=' . TAREA_EN_PROCESO . ', Finalizada=' . TAREA_FINALIZADA
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        $datos_tarea = [];
         if ($id_tecnico != NULL) {
             $datos_tarea['tecnico'] = $id_tecnico;
         }
@@ -425,9 +435,20 @@ class Api extends REST_Controller {
             $datos_tarea['fin_previsto'] = $fin_previsto;
         }
 
+        if ($estado != NULL) {
+            $datos_tarea['estado'] = $estado;
+        }
+
+        $tarea_editada = $this->tarea->editar_tarea($id_tarea, $datos_tarea);
+
+        // Se actualiza el estado del ticket si se ha modificado el estado de la factura
+        if ($tarea_editada && $estado != NULL) {
+            $this->ticket_modelo->comprobar_estado($id_ticket);
+        }
+
         $this->response([
             'status' => TRUE,
-            'datos' => $this->tarea->editar_tarea($id_tarea, $datos_tarea)
+            'datos' => $tarea_editada
                 ], REST_Controller::HTTP_OK);
     }
 
@@ -629,6 +650,62 @@ class Api extends REST_Controller {
         $this->response([
             'status' => TRUE,
             'datos' => $this->ticket_modelo->registrar_ticket($datos_ticket)
+                ], REST_Controller::HTTP_OK);
+    }
+
+    public function borrar_tarea_post() {
+        $id_tarea = $this->post('id_tarea');
+        if (!$id_tarea) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_tarea'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->tarea->borrar_tarea($id_tarea)
+                ], REST_Controller::HTTP_OK);
+    }
+
+    public function borrar_ticket_post() {
+        $id_ticket = $this->post('id_ticket');
+        if (!$id_ticket) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_ticket'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->ticket_modelo->eliminar_ticket($id_ticket)
+                ], REST_Controller::HTTP_OK);
+    }
+
+    public function activar_usuario_post() {
+        $id_usuario = $this->post('id_usuario');
+        if (!$id_usuario) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_usuario'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->usuario->modificar_datos($id_usuario, ['activo' => 1])
+                ], REST_Controller::HTTP_OK);
+    }
+
+    public function banear_usuario_post() {
+        $id_usuario = $this->post('id_usuario');
+        if (!$id_usuario) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_usuario'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->usuario->modificar_datos($id_usuario, ['activo' => 0])
                 ], REST_Controller::HTTP_OK);
     }
 

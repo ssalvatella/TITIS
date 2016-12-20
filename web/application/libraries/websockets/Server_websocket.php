@@ -7,30 +7,42 @@ require_once(APPPATH . 'libraries/websockets/websockets.php');
 class Server_websocket extends WebSocketServer {
 
     //protected $maxBufferSize = 1048576; //1MB... overkill for an echo server, but potentially plausible for other applications.
-
-
-    protected $interactive = false; // No muestra mensajes de información
+    //protected $interactive = false; // No muestra mensajes de información
     // Instancia de CI
-    protected $ci;
+    protected $CI;
 
     public function __construct($args = array()) {
         call_user_func_array('parent::__construct', $args);
 
         // Se instancia CodeIgniter
-        $this->ci = & get_instance();
+        $this->CI = & get_instance();
+
+        // Bucle infinito
+        $this->run();
     }
 
     protected function process($user, $message) {
-        foreach ($this->users as $u) {
-            $message = htmlspecialchars($message);
-            $this->send($u, $message);
+        /* foreach ($this->users as $u) {
+          $message = htmlspecialchars($message);
+          $this->send($u, $message);
+          } */
+        // $user->id_usuario = 
+        $mensaje = json_decode($message);
+        switch ($mensaje->tipo) {
+            case 'conexion':
+                $user->id_usuario = $mensaje->datos->id_usuario;
+                break;
+            case 'notificaciones':
+                break;
         }
+
+        var_dump($user->id_usuario);
     }
 
     protected function connected($user) {
-        // Do nothing: This is just an echo server, there's no need to track the user.
-        // However, if we did care about the users, we would probably have a cookie to
-        // parse at this step, would be looking them up in permanent storage, etc.
+        //$session_id = explode('ci_session=', $user->headers['cookie'])[1];
+        //$this->CI->session->set_userdata(array('session_id', $session_id));
+        //print_r($this->CI->session->userdata());
     }
 
     protected function closed($user) {

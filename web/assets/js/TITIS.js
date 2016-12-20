@@ -195,30 +195,32 @@ $(function () {
         }
     });
 });
-function notificaciones() {
-    var getUrl = window.location;
-    var feedback = $.ajax({
-        type: "GET",
-        url: getUrl.protocol + "//" + getUrl.host + "/api/notificaciones?id_usuario=" + id_usuario,
-        async: false,
-        dataType: "json",
-        success: function (data) {
-            var datos = data.datos;
-            var numero_notificaciones = Object.keys(datos).length;
-            var texto_header_notificaciones = $("#header_notificaciones").text();
-            $("#header_notificaciones").text(texto_header_notificaciones.replace('%d', numero_notificaciones));
-            $('#numero_notificaciones').remove()
-            $('#icono_notificaciones').append('<span id="numero_notificaciones" class="label label-warning">' + numero_notificaciones + '</span>');
-        }
-    }).complete(function () {
-        setTimeout(function () {
-            notificaciones();
-        }, 100000);
-    }).responseText;
-    // $('div.feedback-box-complete').html('complete feedback');
-}
 
-$(function () {
-    notificaciones();
-});
-
+/*
+ function notificaciones() {
+ var getUrl = window.location;
+ var feedback = $.ajax({
+ type: "GET",
+ url: getUrl.protocol + "//" + getUrl.host + "/api/notificaciones?id_usuario=" + id_usuario,
+ async: false,
+ dataType: "json",
+ success: function (data) {
+ var datos = data.datos;
+ var numero_notificaciones = Object.keys(datos).length;
+ var texto_header_notificaciones = $("#header_notificaciones").text();
+ $("#header_notificaciones").text(texto_header_notificaciones.replace('%d', numero_notificaciones));
+ $('#numero_notificaciones').remove()
+ $('#icono_notificaciones').append('<span id="numero_notificaciones" class="label label-warning">' + numero_notificaciones + '</span>');
+ }
+ }).complete(function () {
+ setTimeout(function () {
+ notificaciones();
+ }, 100000);
+ }).responseText;
+ // $('div.feedback-box-complete').html('complete feedback');
+ }
+ 
+ $(function () {
+ notificaciones();
+ });
+ */

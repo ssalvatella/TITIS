@@ -11,7 +11,6 @@ class Admin extends MY_Controller {
         $this->load->helper('string'); // Generar contraseña aleatoria
         $this->load->helper('descarga'); // No se usa download porque no se puede cambiar el nombre del fichero cuando se descarga
         $this->load->library(array('form_validation', 'encryption', 'plantilla', 'upload'));
-        $this->load->library('websockets/server_websocket', array('0.0.0.0', '8080'));
         $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'factura_modelo', 'archivo'));
         $this->encryption->initialize(
                 array(
@@ -418,7 +417,7 @@ class Admin extends MY_Controller {
 
     public function eliminar_mensajes() {
         $mensajes = $this->input->post('mensajes');
-        foreach($mensajes as $id) {
+        foreach ($mensajes as $id) {
             $this->mensaje->eliminar_mensaje($id);
         }
     }
@@ -485,7 +484,7 @@ class Admin extends MY_Controller {
             } else {
                 $datos['error'] = 1;
             }
-           redirect('/admin/'. $origen . '/' . $id_mensaje);
+            redirect('/admin/' . $origen . '/' . $id_mensaje);
         }
     }
 
@@ -587,6 +586,8 @@ class Admin extends MY_Controller {
             $datos['titulo'] = $this->lang->line('facturas');
             $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura);
             $datos['concepto'] = $this->concepto->obtener_concepto($id_factura);
+            $datos['tareas'] = $this->factura_modelo->obtener_tareas($id_factura);
+            $datos['total_tareas'] = $this->factura_modelo->sumar_precios($id_factura);
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
             $this->plantilla->mostrar('admin', 'factura', $datos);
         }
