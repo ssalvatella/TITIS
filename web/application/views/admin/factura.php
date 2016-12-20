@@ -101,7 +101,7 @@
             <table class="table">
               <tr>
                 <th style="width:50%"><?= $this->lang->line('subtotal'); ?>:</th>
-                <td><?= $total_tareas; ?></td>
+                <td><?= $total_tareas; ?> €</td>
               </tr>
               <tr>
                 <th><?= $this->lang->line('iva'); ?> (21%)</th>

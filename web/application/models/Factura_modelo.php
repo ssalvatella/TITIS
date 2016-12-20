@@ -50,7 +50,7 @@ class Factura_modelo extends CI_Model {
         $this->db->where('id_factura', $id_factura);
         $this->db->join('Factura', 'Factura.id_factura = Ticket.factura');
         $this->db->join('Tarea', 'Tarea.ticket = Ticket.id_ticket');
-        return $this->db->get();
+        return $this->db->get()->row()->precio;
     }
     
     public function facturas_pendientes() {
