@@ -17,11 +17,11 @@ class Mensaje extends CI_Model {
         foreach ($mensajes as $clave => $mensaje) {
             $archivos = $this->archivo->obtener_archivos($mensaje['id_mensaje']);
             $mensaje['archivos'] = array();
-                foreach($archivos as $archivo) {
-                    $archivo['nombre_archivo'] = pathinfo($archivo['nombre'], PATHINFO_FILENAME);
-                    array_push($mensaje['archivos'], $archivo);
-                    $mensajes[$clave] = $mensaje;
-                }
+            foreach ($archivos as $archivo) {
+                $archivo['nombre_archivo'] = pathinfo($archivo['nombre'], PATHINFO_FILENAME);
+                array_push($mensaje['archivos'], $archivo);
+                $mensajes[$clave] = $mensaje;
+            }
         }
         return $mensajes;
     }
@@ -47,17 +47,17 @@ class Mensaje extends CI_Model {
         $this->db->from('Mensaje');
         $this->db->where('destinatario', $id_usuario);
         $this->db->where('ticket', NULL);
-        $this->db->where('visto', '0');
+        $this->db->where('visto', MENSAJE_PRIVADO_NO_VISTO);
         return $this->db->get()->num_rows();
     }
 
     public function ver_mensajes_privados($id_usuario, $no_vistos = null) {
-        $this->db->select('Mensaje.*, emisor.usuario as nombre_emisor, emisor.*');
+        $this->db->select('Mensaje.id_mensaje, Mensaje.usuario as emisor, emisor.usuario as nombre_emisor, Mensaje.texto, Mensaje.fecha, Mensaje.visto');
         $this->db->from('Mensaje');
         $this->db->where('destinatario', $id_usuario);
-
+        $this->db->where('ticket', NULL);
         if (isset($no_vistos)) {
-            $this->db->where('visto', '0');
+            $this->db->where('visto', MENSAJE_PRIVADO_NO_VISTO);
         }
         $this->db->join('Usuario as emisor', 'emisor.id_usuario = Mensaje.usuario', 'left');
         $this->db->order_by('fecha', 'DESC');
@@ -72,7 +72,7 @@ class Mensaje extends CI_Model {
         $mensaje = $this->db->get()->result_array()[0];
         $archivos = $this->archivo->obtener_archivos($id_mensaje);
         $mensaje['archivos'] = array();
-        foreach($archivos as $archivo) {
+        foreach ($archivos as $archivo) {
             $archivo['nombre_archivo'] = pathinfo($archivo['nombre'], PATHINFO_FILENAME);
             array_push($mensaje['archivos'], $archivo);
         }
@@ -81,7 +81,7 @@ class Mensaje extends CI_Model {
 
     public function marcar_visto($id_mensaje) {
         $this->db->where('id_mensaje', $id_mensaje);
-        return $this->db->update('Mensaje', array('visto' => 1));
+        return $this->db->update('Mensaje', array('visto' => MENSAJE_PRIVADO_VISTO));
     }
 
     public function editar_mensaje($id_mensaje, $datos) {

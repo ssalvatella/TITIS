@@ -20,6 +20,7 @@ class Api extends REST_Controller {
      * tareas
      * notificaciones
      * mensajes
+     * mensajes_privados
      * 
      * --- POST ---
      * login
@@ -160,9 +161,17 @@ class Api extends REST_Controller {
     }
 
     public function usuarios_get() {
+        $tipo = $this->get('tipo');
+        if ($tipo && ($tipo != USUARIO_ADMIN && $tipo != USUARIO_TECNICO_ADMIN && $tipo != USUARIO_TECNICO)) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Tipo incorrecto. Valores posibles: Admin=' . USUARIO_ADMIN . ', Técnico admin=' . USUARIO_TECNICO_ADMIN . ', Técnico=' . USUARIO_TECNICO
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
         $this->response([
             'status' => TRUE,
-            'datos' => $this->usuario->obtener_usuarios()
+            'datos' => $this->usuario->obtener_usuarios($tipo)
                 ], REST_Controller::HTTP_OK);
     }
 
@@ -521,6 +530,20 @@ class Api extends REST_Controller {
         $this->response([
             'status' => TRUE,
             'datos' => $this->mensaje->obtener_mensajes($id_ticket)
+                ], REST_Controller::HTTP_OK);
+    }
+
+    public function mensajes_privados_get() {
+        $id_usuario = $this->get('id_usuario');
+        if (!$id_usuario) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_usuario'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->mensaje->ver_mensajes_privados($id_usuario)
                 ], REST_Controller::HTTP_OK);
     }
 

@@ -254,8 +254,8 @@ class Admin extends MY_Controller {
             $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket)[0];
             $datos['tareas'] = $this->tarea->obtener_tareas($id_ticket);
             $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
-            $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO_ADMIN);
-            $datos['tecnicos'] = $this->usuario->obtener_usuarios_tipo(USUARIO_TECNICO);
+            $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios(USUARIO_TECNICO_ADMIN);
+            $datos['tecnicos'] = $this->usuario->obtener_usuarios(USUARIO_TECNICO);
             $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/iCheck/all.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/iCheck/icheck.min.js'));

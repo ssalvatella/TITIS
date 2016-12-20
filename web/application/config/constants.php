@@ -107,3 +107,6 @@ define('TICKET_FINALIZADO', 3);
 define('TAREA_EN_PROCESO', 1);
 define('TAREA_FINALIZADA', 2);
 
+define('MENSAJE_PRIVADO_NO_VISTO', 0);
+define('MENSAJE_PRIVADO_VISTO', 1);
+

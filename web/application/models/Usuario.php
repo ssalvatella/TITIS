@@ -74,7 +74,7 @@ class Usuario extends CI_Model {
     public function obtener_id_cliente($id_usuario) {
         $this->db->select('id_cliente');
         $this->db->from('Cliente');
-        $this->db->where('usuario', $id_usuario) -> limit(1);
+        $this->db->where('usuario', $id_usuario)->limit(1);
         $consulta = $this->db->get();
         if ($consulta->num_rows() == 1) {
             return $consulta->row()->id_cliente;
@@ -89,15 +89,12 @@ class Usuario extends CI_Model {
         return $this->db->get()->num_rows();
     }
 
-    public function obtener_usuarios_tipo($tipo) {
-        $this->db->from('Usuario');
-        $this->db->where('tipo', $tipo);
-        return $this->db->get()->result_array();
-    }
-
-    public function obtener_usuarios() {
+    public function obtener_usuarios($tipo = '') {
         $this->db->select('id_usuario, tipo, usuario, email, activo');
         $this->db->from('Usuario');
+        if ($tipo != '') {
+            $this->db->where('tipo', $tipo);
+        }
         return $this->db->get()->result_array();
     }
 

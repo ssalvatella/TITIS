@@ -29,7 +29,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('enviar_mensaje'); ?></h4>
                 </div>
-                <form enctype="multipart/form-data" id = "enviar_mensaje_form" method="post" action="<?= site_url('admin/enviar_mensaje_privado/mensajes') ; ?>" >
+                <form enctype="multipart/form-data" id = "enviar_mensaje_form" method="post" action="<?= site_url('admin/enviar_mensaje_privado/mensajes'); ?>" >
                     <div class="modal-body">
                         <div class="form-group">
                             <label><?= $this->lang->line('usuario'); ?></label>
@@ -111,14 +111,14 @@
                         <div class=" mailbox-messages" >
                             <table id= "mensajes" class="table table-hover table-striped" >
                                 <thead>
-                                <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <?php
@@ -138,14 +138,14 @@
                                             $diferencia = $intervalo_tiempo->format('%i min');
                                         }
 
-                                        echo '<tr style="cursor: pointer;"value="' . $mensaje['id_mensaje']. '">' ;
+                                        echo '<tr style="cursor: pointer;"value="' . $mensaje['id_mensaje'] . '">';
                                         echo '<td> <a  href="' . site_url('admin/ver_mensaje/' . $mensaje['id_mensaje']) . '"></a><input type="checkbox"></td>';
                                         if ($mensaje['visto'] == 0) {
                                             echo '<td><i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('no_visto') . '" class="fa fa-eye-slash"></i></td>';
                                         } else {
                                             echo '<td><i data-html="true" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('visto') . '" class="fa fa-eye"></i></td>';
                                         }
-                                        echo '<td class="mailbox-name"> <a href="' . site_url('admin/ver_usuario/' . $mensaje['id_usuario']) . '">' . $mensaje['nombre_emisor'] . '</a></td>';
+                                        echo '<td class="mailbox-name"> <a href="' . site_url('admin/ver_usuario/' . $mensaje['emisor']) . '">' . $mensaje['nombre_emisor'] . '</a></td>';
                                         echo '<td class="mailbox-subject">' . strip_tags(substr($mensaje['texto'], 0, 20)) . '...</td>';
                                         if (isset($mensaje['archivo'])) {
                                             echo '<td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>';
