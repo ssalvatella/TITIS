@@ -211,3 +211,7 @@ $lang['en_respuesta'] = 'In response to the message: ';
 $lang['reenviar_mensaje'] = 'Forward Message';
 $lang['mensaje_reenviado'] = 'Message forward';
 $lang['desde'] = 'From';
+$lang['tareas_pendientes'] = 'Pending Tasks';
+$lang['tarea_completada'] = 'Task Finished';
+$lang['descompletar_tarea'] = 'Unpair task';
+$lang['tarea_no_completada'] = 'Task not completed';

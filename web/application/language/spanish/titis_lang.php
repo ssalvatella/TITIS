@@ -211,4 +211,7 @@ $lang['en_respuesta'] = 'En respuesta al mensaje: ';
 $lang['reenviar_mensaje'] = 'Reenviar Mensaje';
 $lang['mensaje_reenviado'] = 'Mensaje reenviado';
 $lang['desde'] = 'De';
-
+$lang['tareas_pendientes'] = 'Tareas Pendientes';
+$lang['tarea_completada'] = 'Tarea Completada';
+$lang['descompletar_tarea'] = 'Descompletar Tarea';
+$lang['tarea_no_completada'] = 'Tarea no completada';

@@ -1,5 +1,5 @@
 $('.summer').summernote({
-    height: 200,
+    height: 300,
     lang: "es-ES"
 });
 
