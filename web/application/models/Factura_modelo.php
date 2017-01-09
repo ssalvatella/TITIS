@@ -60,4 +60,19 @@ class Factura_modelo extends CI_Model {
         return $this->db->get()->num_rows();
     }
 
+    public function crear_factura($datos) {
+        $factura = [
+            'descripcion' => $datos['descripcion'],
+            'cliente' => $datos['cliente'],
+            'ticket' => $datos['ticket'],
+            'iva' => $datos['iva']
+        ];
+        
+        //insertamos la factura
+        if ($this->db->insert('Factura', $factura)) {
+            return $this->db->insert_id();
+        } else {
+            return FALSE;
+        }
+    }
 }

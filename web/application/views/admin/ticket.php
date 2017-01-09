@@ -175,6 +175,39 @@
             </div>
         </div>
         <!-- FIN Modal EDITAR TAREA -->
+        
+        <!-- INICIO Modal CREAR FACTURA -->
+        <div class="modal fade" id="modal_factura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('crear_factura'); ?></h4>
+                    </div>
+                    <form id="crear_factura_form" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group" >
+                                <label><?= $this->lang->line('descripcion_factura'); ?></label>
+                                <input required id="descripcion_factura" maxlength="200" name="descripcion_factura" type="text" class="form-control" placeholder="<?= $this->lang->line('descripcion_factura_place_holder'); ?>">
+                            </div>
+                            <div class="form-group">
+                                <label><?= $this->lang->line('precios_tareas'); ?></label>
+                                <?php
+                                foreach ($tareas_finalizadas as $tarea_finalizada) { ?>
+                                <h6><?= $tarea_finalizada['nombre']; ?></h6><input required id="precio_tarea" name="precio_tarea" type="number" step="any" class="form-control" placeholder="<?= $this->lang->line('precio'); ?>">
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cerrar'); ?></button>
+                            <input type="submit" id="crear_factura" value="<?= $this->lang->line('crear_factura'); ?>" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <div class="box box-primary">
             <!-- CABECERA TÍTULO -->
@@ -330,6 +363,9 @@
 
                         <!-- /.box-body -->
                         <div class="box-footer clearfix no-border">
+                            <?php if ($ticket['estado'] == TICKET_FINALIZADO) { ?>
+                                <button data-toggle="modal" data-target="#modal_factura" type="button" class="btn btn-default pull-right"><i class="fa fa-euro"></i> <?= $this->lang->line('crear_factura'); ?></button>
+                            <?php } ?>
                             <button data-toggle="modal" data-target="#modal_tarea" type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> <?= $this->lang->line('añadir_tarea'); ?></button>
                         </div>
                         <!-- /.box -->

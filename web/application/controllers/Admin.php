@@ -252,6 +252,7 @@ class Admin extends MY_Controller {
             $datos['titulo'] = $this->lang->line('tickets');
             $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket)[0];
             $datos['tareas'] = $this->tarea->obtener_tareas($id_ticket);
+            $datos['tareas_finalizadas'] = $this->tarea->obtener_tareas_finalizadas($id_ticket);
             $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
             $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios(USUARIO_TECNICO_ADMIN);
             $datos['tecnicos'] = $this->usuario->obtener_usuarios(USUARIO_TECNICO);
@@ -572,6 +573,7 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('facturas');
             $datos['facturas'] = $this->factura_modelo->obtener_facturas();
+            //$datos['total_tareas'] = $this->factura_modelo->sumar_precios($id_factura);
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));

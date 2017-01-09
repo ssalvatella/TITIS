@@ -105,11 +105,11 @@
               </tr>
               <tr>
                 <th><?= $this->lang->line('iva'); ?> (21%)</th>
-                <td>$10.34</td>
+                <td><?= $iva = $total_tareas * 0.21; ?> €</td>
               </tr>
               <tr>
                 <th><?= $this->lang->line('total'); ?>:</th>
-                <td>$265.24</td>
+                <td><?= $total_tareas + $iva; ?> €</td>
               </tr>
             </table>
           </div>
