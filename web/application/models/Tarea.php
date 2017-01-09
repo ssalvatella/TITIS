@@ -31,6 +31,14 @@ class Tarea extends CI_Model {
         $this->db->join('Usuario as usuario', 'usuario.id_usuario = Tarea.tecnico', 'left');
         return $this->db->get()->result_array();
     }
+    
+    public function obtener_tareas_tecnico($id_tecnico) {
+        $this->db->select('*');
+        $this->db->from('Tarea');
+        $this->db->where('tecnico', $id_tecnico);
+        return $this->db->get()->result_array();
+    }
+
 
     public function crear_tarea($datos) {
         $datos['estado'] = TAREA_EN_PROCESO;
