@@ -14,7 +14,7 @@
             <li id="menu_registro_cliente"><a href="<?= site_url('admin/registrar_cliente') ?>"><i class="fa fa-circle-o"></i> <?= $this->lang->line('cliente'); ?></a></li>
         </ul>
     </li>
-    <li id="menu_tickets"><a href="<?= site_url('admin/tickets') ?>"><i class="fa fa-ticket" aria-hidden="true"></i> <span>Tickets</span></a></li>
+    <li id="menu_tickets"><a href="<?= site_url('admin/tickets') ?>"><i class="fa fa-ticket" aria-hidden="true"></i> <span><?= $this->lang->line('tickets'); ?></span></a></li>
     <li id="menu_clientes"><a href="<?= site_url('admin/clientes') ?>"><i class="fa fa-address-book" aria-hidden="true"></i> <span><?= $this->lang->line('clientes'); ?></span></a></li>
     <li id="menu_facturas"><a href="<?= site_url('admin/facturas') ?>"><i class="fa fa-money" aria-hidden="true"></i> <span><?= $this->lang->line('facturas'); ?></span></a></li>
     <li class="header"><?= $this->lang->line('ajustes'); ?></li>

@@ -31,6 +31,7 @@ class Tarea extends CI_Model {
         $this->db->join('Usuario as usuario', 'usuario.id_usuario = Tarea.tecnico', 'left');
         return $this->db->get()->result_array();
     }
+
     public function obtener_tareas_tecnico($id_tecnico) {
         $this->db->select('Tarea.*, usuario.usuario as nombre_tecnico');
         $this->db->from('Tarea');
@@ -74,6 +75,12 @@ class Tarea extends CI_Model {
         return $this->db->get()->num_rows();
     }
 
+    public function obtener_tareas_finalizadas($id_ticket) {
+        $this->db->from('Tarea');
+        $this->db->where('ticket', $id_ticket);
+        $this->db->where('estado', TAREA_FINALIZADA);
+        return $this->db->get()->result_array();
+    }
     public function obtener_suma_precios($id_ticket) {
         $this->db->from('Tarea');
         $this->db->where('ticket', $id_ticket);

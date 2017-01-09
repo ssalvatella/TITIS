@@ -18,9 +18,11 @@ class Api extends REST_Controller {
      * ultimos_tickets
      * ultimos_tickets_cliente
      * tareas
+     * tareas_tecnico
      * notificaciones
      * mensajes
      * mensajes_privados
+     * tecnicos
      * 
      * --- POST ---
      * login
@@ -40,7 +42,7 @@ class Api extends REST_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->model(array('usuario', 'cliente_modelo', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion'));
+        $this->load->model(array('usuario', 'cliente_modelo', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'tecnico_admin'));
         $this->load->library('encryption');
         $this->encryption->initialize(
                 array(
@@ -395,7 +397,7 @@ class Api extends REST_Controller {
         $id_tarea = $this->input->post('id_tarea');
         $id_ticket = $this->input->post('id_ticket');
         $id_tecnico = $this->input->post('id_tecnico');
-        $descripcion = $this->input->post('descripcion_tarea');
+        $descripcion = $this->input->post('descripcion');
         $inicio = $this->input->post('inicio');
         $fin_previsto = $this->input->post('fin_previsto');
         $estado = $this->input->post('estado');
@@ -707,6 +709,50 @@ class Api extends REST_Controller {
             'status' => TRUE,
             'datos' => $this->usuario->modificar_datos($id_usuario, ['activo' => 0])
                 ], REST_Controller::HTTP_OK);
+    }
+
+    public function tecnicos_get() {
+        $tecnico_admin = $this->get('tecnico_admin');
+        if (!$tecnico_admin) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo tecnico_admin'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $datos_tecnicos = $this->tecnico_admin->obtener_tecnicos($tecnico_admin);
+        if ($datos_tecnicos) {
+            $this->response([
+                'status' => TRUE,
+                'datos' => $datos_tecnicos
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'El técnico admin no existe o no tiene técnicos'
+                    ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function tareas_tecnico_get() {
+        $id_tecnico = $this->get('id_tecnico');
+        if (!$id_tecnico) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_tecnico'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $datos_ticket = $this->tarea->obtener_tareas_tecnico($id_tecnico);
+        if ($datos_ticket) {
+            $this->response([
+                'status' => TRUE,
+                'datos' => $datos_ticket
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'El tecnico no existe o no tiene tareas'
+                    ], REST_Controller::HTTP_NOT_FOUND);
+        }
     }
 
 }
