@@ -32,13 +32,22 @@ class Tarea extends CI_Model {
         return $this->db->get()->result_array();
     }
 
-    public function obtener_tareas_tecnico($id_tecnico) {
+    public function obtener_tareas_tecnico($id_tecnico, $sin_completar = '') {
         $this->db->select('Tarea.*, usuario.usuario as nombre_tecnico');
         $this->db->from('Tarea');
         $this->db->where('tecnico', $id_tecnico);
-        $this->db->where('fin', NULL);
+        if ($sin_completar) {
+            $this->db->where('fin', NULL);
+        }
         $this->db->join('Usuario as usuario', 'usuario.id_usuario = Tarea.tecnico', 'left');
         return $this->db->get()->result_array();
+    }
+
+    public function tareas_nuevas($dias = 7, $id_tecnico) {
+        $this->db->from('Tarea');
+        $this->db->where('fin >= ', strtotime('-' . $dias . ' days'));
+        $this->db->where('tecnico', $id_tecnico);
+        return $this->db->get()->num_rows();
     }
 
     public function crear_tarea($datos) {

@@ -25,7 +25,13 @@ class Tecnico extends MY_Controller {
     public function index() {
         if ($this->usuario_permitido(USUARIO_TECNICO)) {
             $datos['titulo'] = 'Inicio';
-            $datos['tareas_pendientes'] = sizeof($this->tarea->obtener_tareas_tecnico($this->session->userdata('id_usuario')));
+            $datos['tareas_pendientes'] = $this->tarea->obtener_tareas_tecnico($this->session->userdata('id_usuario'),true);
+            $datos['ultimas_tareas'] = $this->tarea->tareas_nuevas(7, $this->session->userdata('id_usuario'));
+
+            $this->plantilla->poner_js(site_url('assets/plugins/datepicker/bootstrap-datepicker.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datepicker/datepicker3.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+            $this->plantilla->poner_js('assets/plugins/bootstrap-notify/bootstrap-notify.min.js');
             $this->plantilla->mostrar('tecnico', 'inicio', $datos);
         }
     }
@@ -85,6 +91,78 @@ class Tecnico extends MY_Controller {
 
             $this->plantilla->poner_js('assets/plugins/bootstrap-notify/bootstrap-notify.min.js');
             $this->plantilla->mostrar('tecnico', 'ticket', $datos);
+        }
+    }
+
+    public function mensajes() {
+        if ($this->usuario_permitido(USUARIO_TECNICO)) {
+            $datos['titulo'] = $this->lang->line('mensajes_titulo');
+            $datos['mensajes'] = $this->mensaje->ver_mensajes_privados($this->session->userdata('id_usuario'));
+            $datos['numero_mensajes_no_vistos'] = $this->mensaje->contar_mensajes_no_vistos($this->session->userdata('id_usuario'));
+            ;
+            $datos['usuarios'] = $this->usuario->obtener_usuarios();
+            $this->plantilla->poner_css(site_url('assets/plugins/summernote/summernote.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/summernote/summernote.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/summernote/lang/summernote-es-ES.js'));
+            }
+            $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+
+            $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/select2/i18n/es.js'));
+            }
+
+            $this->plantilla->poner_js(site_url('assets/plugins/iCheck/iCheck.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/iCheck/flat/blue.css'));
+
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css'));
+
+            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-fileinput/css/fileinput.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/fileinput.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/locales/es.js'));
+            }
+
+            $this->plantilla->poner_js('assets/plugins/bootstrap-notify/bootstrap-notify.min.js');
+            $this->plantilla->mostrar('tecnico', 'mensajes', $datos);
+        }
+    }
+
+    public function ver_mensaje($id_mensaje) {
+        if ($this->usuario_permitido(USUARIO_TECNICO)) {
+            $datos['titulo'] = $this->lang->line('mensajes_titulo');
+            $datos['mensaje'] = $this->mensaje->obtener_mensaje($id_mensaje);
+            $this->mensaje->marcar_visto($id_mensaje);
+            $datos['numero_mensajes_no_vistos'] = $this->mensaje->contar_mensajes_no_vistos($this->session->userdata('id_usuario'));
+            $datos['usuarios'] = $this->usuario->obtener_usuarios();
+
+            $this->plantilla->poner_css(site_url('assets/plugins/summernote/summernote.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/summernote/summernote.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/summernote/lang/summernote-es-ES.js'));
+            }
+            $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+
+            $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/select2/i18n/es.js'));
+            }
+
+            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-fileinput/css/fileinput.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/fileinput.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/locales/es.js'));
+            }
+
+            $this->plantilla->poner_js('assets/plugins/bootstrap-notify/bootstrap-notify.min.js');
+            $this->plantilla->mostrar('tecnico', 'mensaje', $datos);
         }
     }
 
@@ -167,6 +245,85 @@ class Tecnico extends MY_Controller {
             $datos['error'] = 1;
         }
         redirect('tecnico/ver_ticket/' . $id_ticket);
+    }
+
+    public function enviar_mensaje_privado($origen, $id_mensaje = '') {
+        if ($this->usuario_permitido(USUARIO_TECNICO)) {
+            $id_receptor = $this->input->post('id_receptor');
+            $id_emisor = $this->session->userdata('id_usuario');
+            $mensaje = $this->input->post('mensaje');
+            $datos_mensaje = [
+                'usuario' => $id_emisor,
+                'destinatario' => $id_receptor,
+                'texto' => $mensaje
+            ];
+            if ($this->mensaje->registrar_mensaje($datos_mensaje)) {
+                $datos['enviado'] = 1;
+                $id_mensaje = $this->db->insert_id();
+                if (!$this->upload->do_upload('archivo')) {
+                    // No se ha podido subir el archivo
+                    // Aquí habría que borrar el mensaje
+                    // $upload_error = array('error' => $this->upload->display_errors());
+                    $this->upload->display_errors();
+                } else {
+                    $datos_upload = $this->upload->data();
+                    $datos_archivo = [
+                        'mensaje' => $id_mensaje,
+                        'nombre' => $datos_upload['file_name'],
+                        'nombre_original' => $datos_upload['orig_name'],
+                        'tamano' => $datos_upload['file_size']
+                    ];
+                    $this->archivo->registrar_archivo($datos_archivo);
+                }
+            } else {
+                $datos['error'] = 1;
+            }
+            redirect('/tecnico/' . $origen . '/' . $id_mensaje);
+        }
+    }
+
+    public function ver_cliente($id_cliente) {
+        if ($this->usuario_permitido(USUARIO_TECNICO)) {
+            $datos['titulo'] = $this->lang->line('cliente');
+            $datos['cliente'] = $this->cliente_modelo->obtener_cliente($id_cliente);
+            $datos['numero_tickets'] = $this->ticket_modelo->contar_tickets_cliente($id_cliente);
+            $datos['tickets'] = $this->cliente_modelo->obtener_tickets($id_cliente);
+            $datos['numero_mensajes'] = $this->mensaje->contar_comentarios_usuario($datos['cliente']['id_usuario']);
+            $this->plantilla->poner_css(site_url('assets/plugins/summernote/summernote.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/summernote/summernote.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/summernote/lang/summernote-es-ES.js'));
+            }
+            $this->plantilla->poner_js('assets/plugins/bootstrap-notify/bootstrap-notify.min.js');
+            $this->plantilla->mostrar('tecnico', 'cliente', $datos);
+        }
+    }
+
+    public function eliminar_mensaje($id_mensaje) {
+        $this->mensaje->eliminar_mensaje($id_mensaje);
+        redirect('tecnico/mensajes/');
+    }
+
+    public function eliminar_mensajes() {
+        $mensajes = $this->input->post('mensajes');
+        foreach ($mensajes as $id) {
+            $this->mensaje->eliminar_mensaje($id);
+        }
+    }
+
+    public function borrar_notificacion() {
+        if ($this->usuario_permitido(USUARIO_TECNICO)) {
+            $id_notificacion = $this->input->post('id_notificacion');
+            $this->notificacion->borrar_notificacion($id_notificacion, $this->session->userdata('id_usuario'));
+        }
+    }
+
+    public function notificaciones() {
+        if ($this->usuario_permitido(USUARIO_TECNICO)) {
+            $datos['titulo'] = $this->lang->line('notificaciones');
+            $datos['notificaciones'] = $this->notificacion->obtener_notificaciones($this->session->userdata('id_usuario'));
+            $this->plantilla->mostrar('tecnico', 'notificaciones', $datos);
+        }
     }
 
 }

@@ -219,3 +219,7 @@ $lang['tareas_pendientes'] = 'Tareas Pendientes';
 $lang['tarea_completada'] = 'Tarea Completada';
 $lang['descompletar_tarea'] = 'Descompletar Tarea';
 $lang['tarea_no_completada'] = 'Tarea no completada';
+
+$lang['tareas_nuevas'] = 'Tareas Nuevas';
+$lang['no_hay_tareas_pendientes'] = 'No tienes tareas pendientes';
+

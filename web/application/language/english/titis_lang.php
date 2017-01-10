@@ -219,3 +219,6 @@ $lang['tareas_pendientes'] = 'Pending Tasks';
 $lang['tarea_completada'] = 'Task Finished';
 $lang['descompletar_tarea'] = 'Unpair task';
 $lang['tarea_no_completada'] = 'Task not completed';
+
+$lang['tareas_nuevas'] = 'New Tasks';
+$lang['no_hay_tareas_pendientes'] = 'You do not have any pending tasks';

@@ -78,7 +78,22 @@
                                                 }
                                                 ?>
                                                 <li>
-                                                    <a href="<?= site_url("admin/ver_mensaje/" . $mensaje_privado['id_mensaje']) ?>">
+                                                    <a href="<?php
+                                                    switch ($this->session->tipo_usuario) {
+                                                        case USUARIO_ADMIN:
+                                                            echo site_url("admin/ver_mensaje/" . $mensaje_privado['id_mensaje']);
+                                                            break;
+                                                        case USUARIO_TECNICO_ADMIN:
+                                                            echo site_url("tecnico_admin/ver_mensaje/" . $mensaje_privado['id_mensaje']);
+                                                            break;
+                                                        case USUARIO_TECNICO:
+                                                            echo site_url("tecnico/ver_mensaje/" . $mensaje_privado['id_mensaje']);
+                                                            break;
+                                                        case USUARIO_CLIENTE:
+                                                            echo site_url("cliente/ver_mensaje/" . $mensaje_privado['id_mensaje']);
+                                                            break;
+                                                    };
+                                                    ?>">
                                                         <div class="pull-left">
                                                             <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="img-circle" alt="<?= $this->lang->line('imagen_perfil'); ?>">
                                                         </div>

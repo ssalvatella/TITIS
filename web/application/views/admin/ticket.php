@@ -356,7 +356,8 @@
                                             <i data-html="true" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('eliminar'); ?>" id="borrar_tarea" class="fa fa-trash-o boton_borrar"></i>
                                         </div>
                                     </li>
-                                <?php } ?>
+                                <?php }
+                                ?>
                             </ul>
                         </div>
                         <!-- /.box-header -->
