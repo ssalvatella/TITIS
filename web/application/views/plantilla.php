@@ -127,40 +127,21 @@
                             <li class="dropdown notifications-menu">
                                 <a id="icono_notificaciones" href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-bell-o"></i>
-                                    <?php //if (count($notificaciones) >= 1) { ?>
-                                                <!--span class="label label-warning"><?= count($notificaciones); ?></span-->
-                                    <?php //} ?>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li id="header_notificaciones" class="header">
                                         <?php
-                                        /*  if (count($notificaciones) == 0) {
-                                          echo $this->lang->line('no_hay_notificaciones');
-                                          } else if (count($notificaciones) == 1) {
-                                          echo $this->lang->line('tiene_1_notificacion');
-                                          } else {
-                                          echo sprintf($this->lang->line('tiene_notificaciones'), count($notificaciones));
-                                          } */
-                                        echo $this->lang->line('tiene_notificaciones')
+                                        if (count($notificaciones) == 0) {
+                                            echo $this->lang->line('no_hay_notificaciones');
+                                        } else if (count($notificaciones) == 1) {
+                                            echo $this->lang->line('tiene_1_notificacion');
+                                        } else {
+                                            echo sprintf($this->lang->line('tiene_notificaciones'), count($notificaciones));
+                                        }
                                         ?>                                        
                                     </li>
                                     <li>
-                                        <ul class="menu">
-                                            <?php
-                                            $i = 0;
-                                            foreach ($notificaciones as $n) {
-                                                ?>
-                                                <li>
-                                                    <a href="<?= site_url($n['url']); ?>">
-                                                        <i class="fa fa-users text-aqua"></i> <?= sprintf($this->lang->line($n['texto']), '<b>' . $n['parametros'] . '</b>'); ?>
-                                                    </a>
-                                                </li>
-                                                <?php
-                                                if (++$i == 4) {
-                                                    break;
-                                                }
-                                            }
-                                            ?>
+                                        <ul id="menu_notificaciones" class="menu">                                            
                                         </ul>
                                     </li>
                                     <li class="footer"><a href="<?php
@@ -494,6 +475,7 @@
         <?= script_tag(base_url('assets/js/AdminLTE.min.js')) ?>
         <script>
             var id_usuario = "<?= $this->session->userdata('id_usuario'); ?>";
+            var idioma = "<?= $this->session->userdata('idioma'); ?>";
         </script>
         <?= script_tag(base_url('assets/js/TITIS.js')) ?>
         <?= script_tag(base_url('assets/js/websocket.js')) ?>

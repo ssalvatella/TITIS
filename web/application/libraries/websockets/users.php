@@ -16,6 +16,7 @@ class WebSocketUser {
   public $hasSentClose = false;
   
   public $id_usuario = "";
+  public $idioma = "";
 
   function __construct($id, $socket) {
     $this->id = $id;

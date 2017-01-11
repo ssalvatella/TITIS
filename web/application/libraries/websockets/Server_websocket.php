@@ -17,6 +17,9 @@ class Server_websocket extends WebSocketServer {
         // Se instancia CodeIgniter
         $this->CI = & get_instance();
 
+        $this->CI->load->model(array('mensaje', 'notificacion'));
+
+
         // Bucle infinito
         $this->run();
     }
@@ -26,13 +29,16 @@ class Server_websocket extends WebSocketServer {
           $message = htmlspecialchars($message);
           $this->send($u, $message);
           } */
-        // $user->id_usuario = 
-        $mensaje = json_decode($message);
-        switch ($mensaje->tipo) {
+        $mensaje_entrada = json_decode($message);
+        switch ($mensaje_entrada->tipo) {
             case 'conexion':
-                $user->id_usuario = $mensaje->datos->id_usuario;
-                break;
-            case 'notificaciones':
+                $user->id_usuario = $mensaje_entrada->datos->id_usuario;
+                $user->idioma = $mensaje_entrada->datos->idioma;
+                $mensaje_salida = json_encode([
+                    'tipo' => 'notificaciones',
+                    'datos' => $this->formatear_notificaciones($user)
+                ]);
+                $this->send($user, $mensaje_salida);
                 break;
         }
 
@@ -49,6 +55,22 @@ class Server_websocket extends WebSocketServer {
         // Do nothing: This is where cleanup would go, in case the user had any sort of
         // open files or other objects associated with them.  This runs after the socket 
         // has been closed, so there is no need to clean up the socket itself here.
+    }
+
+    private function formatear_notificaciones($user) {
+        $notificaciones_sin_formatear = $this->CI->notificacion->obtener_notificaciones($user->id_usuario);
+        $this->CI->lang->load('titis', $user->idioma);
+        $notificaciones = [];
+        foreach ($notificaciones_sin_formatear as $n) {
+            $notificacion = [
+                'id_notificacion' => $n['id_notificacion'],
+                'texto' => sprintf($this->CI->lang->line($n['texto']), '<b>' . $n['parametros'] . '</b>'),
+                'fecha' => $n['fecha'],
+                'url' => $n['url']
+            ];
+            array_push($notificaciones, $notificacion);
+        }
+        return $notificaciones;
     }
 
 }
