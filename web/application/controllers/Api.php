@@ -23,6 +23,8 @@ class Api extends REST_Controller {
      * mensajes
      * mensajes_privados
      * tecnicos
+     * facturas
+     * factura
      * 
      * --- POST ---
      * login
@@ -755,4 +757,40 @@ class Api extends REST_Controller {
         }
     }
 
+    public function facturas_get() {
+        $facturas = $this->factura_modelo->obtener_facturas();
+        if ($facturas) {
+            $this->response([
+                'status' => TRUE,
+                'datos' => $facturas
+            ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'No hay facturas'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+    
+    public function factura_get() {
+        $id_factura = $this->get('id_factura');
+        if (!$id_factura) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_factura'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $datos_factura = $this->factura_modelo->obtener_factura($id_factura);
+        if ($datos_factura) {
+            $this->response([
+                'status' => TRUE,
+                'datos' => $datos_factura
+            ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'La factura no existe'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }           
+    }
 }
