@@ -29,7 +29,8 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('enviar_mensaje'); ?></h4>
                 </div>
-                <form enctype="multipart/form-data" id = "enviar_mensaje_form" method="post" action="<?= site_url('admin/enviar_mensaje_privado/mensajes'); ?>" >
+                <form enctype="multipart/form-data" id ="enviar_mensaje_form" method="POST" action="<?= site_url('admin/enviar_mensaje_privado/mensajes'); ?>" >
+                    <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                     <div class="modal-body">
                         <div class="form-group">
                             <label><?= $this->lang->line('usuario'); ?></label>

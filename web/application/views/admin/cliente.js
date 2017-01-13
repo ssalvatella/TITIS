@@ -10,7 +10,7 @@ $(function () {
         $.ajax({
             url: baseURL + '/enviar_mensaje_privado',
             type: 'POST',
-            data: {id_receptor: id_cliente, mensaje: mensaje},
+            data: {token_csrf: token_csrf, id_receptor: id_cliente, mensaje: mensaje},
             success: function (data) {
                 $.notify({
                     icon: 'glyphicon glyphicon-ok',

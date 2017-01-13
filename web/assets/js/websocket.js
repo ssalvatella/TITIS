@@ -22,7 +22,10 @@ function iniciar_socket() {
             var mensaje = JSON.parse(msg.data);
             switch (mensaje.tipo) {
                 case 'notificaciones':
-                    insertar_ultimas_notificaciones(mensaje.datos)
+                    insertar_ultimas_notificaciones(mensaje.datos);
+                    break;
+                case 'nueva_notificacion':
+                    nueva_notificacion(mensaje.datos);
                     break;
 
             }
@@ -63,6 +66,10 @@ function insertar_ultimas_notificaciones(notificaciones) {
     $('#icono_notificaciones').append('<span id="numero_notificaciones" class="label label-warning">' + notificaciones.length + '</span>');
 }
 
+
+function nueva_notificacion(notificacion) {
+    console.log(notificacion);
+}
 
 
 $(function () {

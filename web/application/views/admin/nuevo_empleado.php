@@ -16,6 +16,7 @@
         <div class="row">
             <div class="col-lg-offset-1 col-lg-10">
                 <form id="form-registro-empleado" action="<?= site_url('admin/registrar_empleado'); ?>" method="POST" role="form" data-parsley-errors-messages-disabled="true">
+                    <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                     <div class="box">
                         <div class="box-header with-border">
                             <h3 class="box-title"><?= $this->lang->line('registrar'); ?></h3>

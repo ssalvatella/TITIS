@@ -18,7 +18,7 @@ function borrar_notificacion(elem, id_notificacion) {
     $.ajax({
         url: baseURL + '/borrar_notificacion',
         type: 'POST',
-        data: {id_notificacion: id_notificacion},
+        data: {token_csrf: token_csrf, id_notificacion: id_notificacion},
         success: function (data) {
             /*$.notify({
                 icon: 'glyphicon glyphicon-ok',

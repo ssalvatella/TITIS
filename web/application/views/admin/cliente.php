@@ -21,6 +21,7 @@
                     <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('enviar_mensaje_a') . $cliente['nombre'] ?></h4>
                 </div>
                 <form id="enviar_mensaje_form" method="POST">
+                    <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                     <div class="modal-body">
                         <div class="form-group">
                             <label><?= $this->lang->line('mensaje'); ?></label>

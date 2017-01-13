@@ -46,8 +46,8 @@
                     <?php } ?>
                 </div>
 
-
                 <form action="<?= site_url('login'); ?>" method="POST" data-toggle="validator" role="form">
+                    <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                     <div class="form-group has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?>">
                         <input type="text" class="form-control" placeholder="<?= $this->lang->line('usuario'); ?>" name="usuario" value="<?= set_value('usuario'); ?>" required>
                         <span class="fa fa-user form-control-feedback" style="font-size: 130%;"></span>
@@ -90,6 +90,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <form id="form_contrasena_olvidada" class="form-horizontal" action="<?= site_url('contrasena_olvidada') ?>" method="POST" data-toggle="validator">
+                                <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span></button>

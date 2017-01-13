@@ -100,7 +100,7 @@ $('#eliminar').click(function() {
     $.ajax({
         url: baseURL + '/eliminar_mensajes',
         type: 'POST',
-        data: {mensajes: seleccionados},
+        data: {token_csrf: token_csrf, mensajes: seleccionados},
         success: function (data) {
             /* setTimeout(function () {
              window.location.reload(true);

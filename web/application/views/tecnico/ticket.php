@@ -21,6 +21,7 @@
                         <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('editar_descripcion'); ?></h4>
                     </div>
                     <form id="editar_descripcion_form" method="POST">
+                        <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                         <div class="modal-body">
                             <textarea id="textarea_descripcion" name="descripcion" maxlength="500" class="form-control" style="width: 100%;"  required></textarea>
                         </div>
@@ -43,6 +44,7 @@
                         <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('asignar') . ' ' . $this->lang->line('tecnico_admin'); ?></h4>
                     </div>
                     <form id="asigna_tecnico_admin_form" method="POST">
+                        <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                         <div class="modal-body">
                             <div class="form-group">
                                 <label><?= $this->lang->line('tecnico_admin'); ?></label>
@@ -74,6 +76,7 @@
                         <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('eliminar') . ' ticket '; ?></h4>
                     </div>
                     <form id="eliminar_ticket_form" method="POST" action="<?= site_url('admin/borrar_ticket'); ?>">
+                        <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                         <div class="modal-body">
                             <p><?= $this->lang->line('mensaje_eliminar'); ?></p>
                             <p><?= $this->lang->line('mensaje_eliminar2'); ?></p>
@@ -97,6 +100,7 @@
                         <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('añadir_tarea'); ?></h4>
                     </div>
                     <form id="crear_tarea_form" method="POST">
+                        <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                         <div class="modal-body">
                             <div class="form-group" >
                                 <label><?= $this->lang->line('descripcion_tarea'); ?></label>
@@ -140,7 +144,8 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('editar_tarea'); ?></h4>
                     </div>
-                    <form id="editar_tarea_form" method="post">
+                    <form id="editar_tarea_form" method="POST">
+                        <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                         <div class="modal-body">
                             <div class="form-group" >
                                 <label><?= $this->lang->line('descripcion_tarea'); ?></label>
@@ -376,6 +381,7 @@
                     <div class="timeline-item">
                         <div class="timeline-body">
                             <form id="form_enviar_mensaje" enctype="multipart/form-data" method="POST" action="<?= site_url('tecnico/enviar_mensaje/') . $ticket['id_ticket']; ?>" data-parsley-errors-messages-disabled="true">
+                                <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                                 <div class="form-group has-feedback">
                                     <textarea name="mensaje" maxlength="500" class="form-control" style="width: 100%" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
                                 </div>

@@ -238,12 +238,6 @@ class Admin extends MY_Controller {
         }
     }
 
-    /* public function obtener_tecnicos_admin() {
-      if ($this->usuario_permitido(USUARIO_ADMIN)) {
-      print_r($this->tecnico_admin->obtener_tecnicos_admin());
-      }
-      } */
-
     public function ver_ticket($id_ticket = null) {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             if ($id_ticket == null) {

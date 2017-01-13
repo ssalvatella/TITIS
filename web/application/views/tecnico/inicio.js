@@ -8,7 +8,7 @@ function completar_tarea(elem) {
         $.ajax({
             url: baseURL + '/completar_tarea',
             type: 'POST',
-            data: {id_tarea: id_tarea, id_ticket: id_ticket},
+            data: {token_csrf: token_csrf, id_tarea: id_tarea, id_ticket: id_ticket},
             success: function (data) {
                 $(elem.parentNode).addClass('done');
                 /* setTimeout(function () {
@@ -27,7 +27,7 @@ function completar_tarea(elem) {
         $.ajax({
             url: baseURL + '/descompletar_tarea',
             type: 'POST',
-            data: {id_tarea: id_tarea, id_ticket: id_ticket},
+            data: {token_csrf: token_csrf, id_tarea: id_tarea, id_ticket: id_ticket},
             success: function (data) {
                 $(elem.parentNode).removeClass('done');
                 var li = $(elem).closest('li').find('.fecha_fin');

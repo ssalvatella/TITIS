@@ -19,7 +19,6 @@ class Server_websocket extends WebSocketServer {
 
         $this->CI->load->model(array('mensaje', 'notificacion'));
 
-
         // Bucle infinito
         $this->run();
     }
@@ -71,6 +70,19 @@ class Server_websocket extends WebSocketServer {
             array_push($notificaciones, $notificacion);
         }
         return $notificaciones;
+    }
+
+    public function enviar_notificacion($id_usuario, $notificacion) {
+        foreach ($this->users as $u) {
+            if ($u->id_usuario == $id_usuario) {
+                $mensaje = json_encode([
+                    'tipo' => 'nueva_notificacion',
+                    'datos' => $notificacion
+                ]);
+                $this->send($u, $mensaje);
+                break;
+            }
+        }
     }
 
 }
