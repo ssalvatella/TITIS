@@ -44,7 +44,7 @@ class Api extends REST_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->model(array('usuario', 'cliente_modelo', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'tecnico_admin'));
+        $this->load->model(array('usuario', 'cliente_modelo', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'tecnico_admin', 'factura_modelo'));
         $this->load->library('encryption');
         $this->encryption->initialize(
                 array(
