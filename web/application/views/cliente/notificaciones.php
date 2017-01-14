@@ -5,7 +5,7 @@
             <?= $this->lang->line('notificaciones'); ?>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="<?= site_url('admin'); ?>"><i class="fa fa-home"></i><?= $this->lang->line('inicio'); ?></a></li>
+            <li><a href="<?= site_url('cliente'); ?>"><i class="fa fa-home"></i><?= $this->lang->line('inicio'); ?></a></li>
             <li class="active"></i><?= $this->lang->line('notificaciones'); ?></li>
         </ol>
     </section>

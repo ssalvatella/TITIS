@@ -168,4 +168,19 @@ class Cliente extends MY_Controller {
         redirect('cliente/ver_ticket/' . $id_ticket);
     }
 
+    public function notificaciones() {
+        if ($this->usuario_permitido(USUARIO_CLIENTE)) {
+            $datos['titulo'] = $this->lang->line('notificaciones');
+            $datos['notificaciones'] = $this->notificacion->obtener_notificaciones($this->session->userdata('id_usuario'));
+            $this->plantilla->mostrar('cliente', 'notificaciones', $datos);
+        }
+    }
+
+    public function borrar_notificacion() {
+        if ($this->usuario_permitido(USUARIO_CLIENTE)) {
+            $id_notificacion = $this->input->post('id_notificacion');
+            $this->notificacion->borrar_notificacion($id_notificacion, $this->session->userdata('id_usuario'));
+        }
+    }
+
 }

@@ -29,23 +29,6 @@
                             class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-            <!-- Cuadro de clientes -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-yellow">
-                    <div class="inner">
-                        <h3>44</h3>
-                        <p><?= $this->lang->line('tareas_finalizadas'); ?></p>
-                    </div>
-                    <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/registrar_cliente'); ?>"><i
-                                class="fa fa-tasks"></i></a>
-                    </div>
-                    <a href="<?= site_url('admin/clientes') ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i
-                            class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-
             <!-- Cuadro de facturas -->
             <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
@@ -55,10 +38,9 @@
                         <p><?= $this->lang->line('facturas_recibidas'); ?></p>
                     </div>
                     <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);" href="<?= site_url('admin/clientes'); ?>"><i
-                                class="fa fa-money"></i></a>
+                        <a style="color: rgba(0,0,0,0.15);"><i class="fa fa-money"></i></a>
                     </div>
-                    <a href="#" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?= site_url('cliente/facturas'); ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- Cuadro de tareas -->
@@ -70,9 +52,9 @@
                         <p><?= $this->lang->line('tickets_finalizados'); ?></p>
                     </div>
                     <div class="icon">
-                        <a style="color: rgba(0,0,0,0.15);"" href="<?= site_url('admin/clientes'); ?>"><i style="font-size: 80%" class="glyphicon glyphicon-ok"></i></a>
+                        <a style="color: rgba(0,0,0,0.15);"><i style="font-size: 80%" class="glyphicon glyphicon-ok"></i></a>
                     </div>
-                    <a href="#" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i class="fa fa-arrow-circle-right"></i>
+                    <a href="<?= site_url('cliente/tickets'); ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>  <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
@@ -170,7 +152,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
-                        <a href="<?= site_url('admin/tickets') ?>" class="btn btn-sm btn-default btn-flat pull-right"><?= $this->lang->line('ver_todos'); ?></a>
+                        <a href="<?= site_url('cliente/tickets') ?>" class="btn btn-sm btn-default btn-flat pull-right"><?= $this->lang->line('ver_todos'); ?></a>
                     </div>
                     <!-- /.box-footer -->
                 </div>

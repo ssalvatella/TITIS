@@ -608,4 +608,30 @@ class Admin extends MY_Controller {
         }
     }
 
+    public function perfil() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['titulo'] = $this->lang->line('perfil');
+            $datos['usuario'] = $this->usuario->obtener_datos($this->session->userdata('nombre_usuario'));
+            $datos['tab_activa'] = 'datos';
+            $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $datos['tab_activa'] = 'editar';
+                $this->form_validation->set_error_delimiters('<div class="help-block">', '</div>');
+                $this->form_validation->set_rules('contrasena_antigua', $this->lang->line('contrasena_antigua'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('contrasena_nueva', $this->lang->line('contrasena_nueva'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('contrasena_nueva_conf', $this->lang->line('contrasena_nueva_conf'), 'trim|required|xss_clean|matches[contrasena_nueva]');
+
+                if ($this->form_validation->run() == TRUE) {
+                    $contrasena_antigua = $this->input->post('contrasena_antigua');
+                    $contrasena_nueva = $this->input->post('contrasena_nueva');
+                    $contrasena_nueva_conf = $this->input->post('contrasena_nueva_conf');
+                    // -----> SIN TERMINARRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+                   // $datos['mensaje'] ='Contraseña cambiada correctamente';
+                   // $datos['mensaje_error'] = 'Las contraseña antigua es incorrecta';
+                }
+            }
+            $this->plantilla->mostrar('admin', 'perfil', $datos);
+        }
+    }
+
 }

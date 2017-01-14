@@ -7,7 +7,7 @@ $(function () {
         "info": true,
         "autoWidth": false,
         "stateSave": true,
-        "fnInitComplete" : function() {
+        "fnInitComplete": function () {
             $("#cargador").hide();
         }
     });
