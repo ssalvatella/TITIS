@@ -35,13 +35,13 @@
                     <?php if (isset($mensaje)) { ?>
                         <div class="alert alert-success">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <?php echo $mensaje . '.'; ?>
+                            <?= $mensaje . '.'; ?>
                         </div>
                     <?php } ?>
                     <?php if (isset($mensaje_error)) { ?>
                         <div class="alert alert-danger">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <?php echo $mensaje_error . '.'; ?>
+                            <?= $mensaje_error . '.'; ?>
                         </div>
                     <?php } ?>
                 </div>

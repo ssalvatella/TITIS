@@ -11,7 +11,7 @@ class Admin extends MY_Controller {
         $this->load->helper('string'); // Generar contraseña aleatoria
         $this->load->helper('descarga'); // No se usa download porque no se puede cambiar el nombre del fichero cuando se descarga
         $this->load->library(array('form_validation', 'encryption', 'plantilla', 'upload'));
-        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'factura_modelo', 'archivo'));
+        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin_modelo', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'factura_modelo', 'archivo'));
         $this->encryption->initialize(
                 array(
                     'cipher' => 'aes-256',
@@ -695,6 +695,7 @@ class Admin extends MY_Controller {
             $datos['titulo'] = $this->lang->line('perfil');
             $datos['usuario'] = $this->usuario->obtener_datos($this->session->userdata('nombre_usuario'));
             $datos['numero_comentarios'] = $this->mensaje->contar_comentarios_usuario($datos['usuario']['id_usuario']);
+            $datos['usuario'] = $this->usuario->obtener_datos($this->session->userdata('nombre_usuario'), TRUE);
             $datos['tab_activa'] = 'datos';
             $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
             if ($this->input->server('REQUEST_METHOD') == 'POST') {
@@ -708,9 +709,15 @@ class Admin extends MY_Controller {
                     $contrasena_antigua = $this->input->post('contrasena_antigua');
                     $contrasena_nueva = $this->input->post('contrasena_nueva');
                     $contrasena_nueva_conf = $this->input->post('contrasena_nueva_conf');
-                    // -----> SIN TERMINARRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
-                   // $datos['mensaje'] ='Contraseña cambiada correctamente';
-                   // $datos['mensaje_error'] = 'Las contraseña antigua es incorrecta';
+                    if ($this->encryption->decrypt($datos['usuario']['contrasena']) == $contrasena_antigua) {
+                        $nuevos_datos = [
+                            'contrasena' => $this->encryption->encrypt($contrasena_nueva)
+                        ];
+                        $this->usuario->modificar_datos($this->session->userdata('nombre_usuario'), $nuevos_datos);
+                        $datos['mensaje'] = $this->lang->line('contrasena_cambiada_ok');
+                    } else {
+                        $datos['mensaje_error'] = $this->lang->line('contrasena_no_cambiada');
+                    }
                 }
             }
             $this->plantilla->mostrar('admin', 'perfil', $datos);

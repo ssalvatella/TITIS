@@ -7,7 +7,7 @@ class Pruebas extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('cliente_modelo');
-        $this->load->model('mensaje');
+        $this->load->model(array('mensaje','usuario'));
         $this->load->library('encryption');
         $this->load->helper(array('form', 'url'));
         $this->encryption->initialize(
@@ -44,7 +44,8 @@ class Pruebas extends MY_Controller {
 
     public function asd() {
        // print_r($this->mensaje->obtener_mensajes(5));
-        print_r($this->cliente_modelo->obtener_id_usuario(3));
+        //print_r($this->cliente_modelo->obtener_id_usuario(3));
+        print_r($this->usuario->obtener_datos('admin', TRUE));
     }
 
 }

@@ -6,26 +6,34 @@ class Tecnico extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-
+        $this->load->helper('form');
+        $this->load->helper('security'); // form_validation -> xss_clean
         $this->load->helper('descarga'); // No se usa download porque no se puede cambiar el nombre del fichero cuando se descarga
-        $this->load->library(array('plantilla','upload'));
-        $this->load->model(array('notificacion','usuario','mensaje', 'tarea','archivo'));
+        $this->load->library(array('plantilla', 'encryption', 'upload'));
+        $this->load->model(array('notificacion', 'usuario', 'mensaje', 'tarea', 'archivo'));
+        $this->encryption->initialize(
+                array(
+                    'cipher' => 'aes-256',
+                    'mode' => 'ctr',
+                    'key' => config_item('encryption_key')
+                )
+        );
         $this->upload->initialize(
-            array(
-                'upload_path' => "./files/",
-                'allowed_types' => "txt|pdf|gif|jpg|jpeg|png|zip|doc|docx|xls|xlsx|rar|ppt|pptm",
-                'max_size' => "10240", // 10 MB
-                'max_height' => "1080",
-                'max_width' => "1920",
-                'encrypt_name' => TRUE
-            )
+                array(
+                    'upload_path' => "./files/",
+                    'allowed_types' => "txt|pdf|gif|jpg|jpeg|png|zip|doc|docx|xls|xlsx|rar|ppt|pptm",
+                    'max_size' => "10240", // 10 MB
+                    'max_height' => "1080",
+                    'max_width' => "1920",
+                    'encrypt_name' => TRUE
+                )
         );
     }
 
     public function index() {
         if ($this->usuario_permitido(USUARIO_TECNICO)) {
             $datos['titulo'] = 'Inicio';
-            $datos['tareas_pendientes'] = $this->tarea->obtener_tareas_tecnico($this->session->userdata('id_usuario'),true);
+            $datos['tareas_pendientes'] = $this->tarea->obtener_tareas_tecnico($this->session->userdata('id_usuario'), true);
             $datos['ultimas_tareas'] = $this->tarea->tareas_nuevas(7, $this->session->userdata('id_usuario'));
 
             $this->plantilla->poner_js(site_url('assets/plugins/datepicker/bootstrap-datepicker.js'));
@@ -200,7 +208,6 @@ class Tecnico extends MY_Controller {
         }
     }
 
-
     public function descompletar_tarea() {
         if ($this->usuario_permitido(USUARIO_TECNICO)) {
             $id_tarea = $this->input->post('id_tarea');
@@ -323,6 +330,38 @@ class Tecnico extends MY_Controller {
             $datos['titulo'] = $this->lang->line('notificaciones');
             $datos['notificaciones'] = $this->notificacion->obtener_notificaciones($this->session->userdata('id_usuario'));
             $this->plantilla->mostrar('tecnico', 'notificaciones', $datos);
+        }
+    }
+
+    public function perfil() {
+        if ($this->usuario_permitido(USUARIO_TECNICO)) {
+            $datos['titulo'] = $this->lang->line('perfil');
+            $datos['usuario'] = $this->usuario->obtener_datos($this->session->userdata('nombre_usuario'), TRUE);
+            $datos['tab_activa'] = 'datos';
+            $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $datos['tab_activa'] = 'editar';
+                $this->form_validation->set_error_delimiters('<div class="help-block">', '</div>');
+                $this->form_validation->set_rules('contrasena_antigua', $this->lang->line('contrasena_antigua'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('contrasena_nueva', $this->lang->line('contrasena_nueva'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('contrasena_nueva_conf', $this->lang->line('contrasena_nueva_conf'), 'trim|required|xss_clean|matches[contrasena_nueva]');
+
+                if ($this->form_validation->run() == TRUE) {
+                    $contrasena_antigua = $this->input->post('contrasena_antigua');
+                    $contrasena_nueva = $this->input->post('contrasena_nueva');
+                    $contrasena_nueva_conf = $this->input->post('contrasena_nueva_conf');
+                    if ($this->encryption->decrypt($datos['usuario']['contrasena']) == $contrasena_antigua) {
+                        $nuevos_datos = [
+                            'contrasena' => $this->encryption->encrypt($contrasena_nueva)
+                        ];
+                        $this->usuario->modificar_datos($this->session->userdata('nombre_usuario'), $nuevos_datos);
+                        $datos['mensaje'] = $this->lang->line('contrasena_cambiada_ok');
+                    } else {
+                        $datos['mensaje_error'] = $this->lang->line('contrasena_no_cambiada');
+                    }
+                }
+            }
+            $this->plantilla->mostrar('tecnico', 'perfil', $datos);
         }
     }
 

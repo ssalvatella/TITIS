@@ -44,7 +44,7 @@ class Api extends REST_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->model(array('usuario', 'cliente_modelo', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'tecnico_admin', 'factura_modelo'));
+        $this->load->model(array('usuario', 'cliente_modelo', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'tecnico_admin_modelo', 'factura_modelo'));
         $this->load->library('encryption');
         $this->encryption->initialize(
                 array(
@@ -721,7 +721,7 @@ class Api extends REST_Controller {
                 'error' => 'Se necesita el campo tecnico_admin'
                     ], REST_Controller::HTTP_BAD_REQUEST);
         }
-        $datos_tecnicos = $this->tecnico_admin->obtener_tecnicos($tecnico_admin);
+        $datos_tecnicos = $this->tecnico_admin_modelo->obtener_tecnicos($tecnico_admin);
         if ($datos_tecnicos) {
             $this->response([
                 'status' => TRUE,
