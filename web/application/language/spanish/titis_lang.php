@@ -228,3 +228,23 @@ $lang['ver_todos_los_mensajes'] = 'Ver Todos';
 $lang['verde'] = 'Verde';
 $lang['verde_claro'] = 'Verde Claro';
 $lang['visto'] = 'Visto';
+
+$lang['leer_mensaje'] = 'Leer Mensaje';
+$lang['responder_mensaje'] = 'Responder Mensaje';
+$lang['en_respuesta'] = 'En respuesta al mensaje: ';
+$lang['reenviar_mensaje'] = 'Reenviar Mensaje';
+$lang['mensaje_reenviado'] = 'Mensaje reenviado';
+$lang['desde'] = 'De';
+$lang['tareas_pendientes'] = 'Tareas Pendientes';
+$lang['tarea_completada'] = 'Tarea Completada';
+$lang['descompletar_tarea'] = 'Descompletar Tarea';
+$lang['tarea_no_completada'] = 'Tarea no completada';
+
+$lang['tareas_nuevas'] = 'Tareas Nuevas';
+$lang['no_hay_tareas_pendientes'] = 'No tienes tareas pendientes';
+$lang['empleados'] = 'Empleados';
+
+$lang['tipo'] = 'Tipo';
+$lang['usuario_comento_en_ticket'] = ' comentó en el ticket ';
+
+

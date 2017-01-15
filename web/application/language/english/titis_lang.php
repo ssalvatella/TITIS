@@ -228,3 +228,19 @@ $lang['verde'] = 'Green';
 $lang['verde_claro'] = 'Light Green';
 $lang['visto'] = 'Viewed';
 
+$lang['leer_mensaje'] = 'Read Message';
+$lang['responder_mensaje'] = 'Reply Message';
+$lang['en_respuesta'] = 'In response to the message: ';
+$lang['reenviar_mensaje'] = 'Forward Message';
+$lang['mensaje_reenviado'] = 'Message forward';
+$lang['desde'] = 'From';
+$lang['tareas_pendientes'] = 'Pending Tasks';
+$lang['tarea_completada'] = 'Task Finished';
+$lang['descompletar_tarea'] = 'Unpair task';
+$lang['tarea_no_completada'] = 'Task not completed';
+
+$lang['tareas_nuevas'] = 'New Tasks';
+$lang['no_hay_tareas_pendientes'] = 'You do not have any pending tasks';
+$lang['empleados'] = 'Workers';
+$lang['tipo'] = 'Type';
+$lang['usuario_comento_en_ticket'] = ' write a comment in ticket ';

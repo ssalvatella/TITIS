@@ -69,7 +69,7 @@
                                 <b><?= $this->lang->line('tickets'); ?></b> <a class="pull-right"><?= $numero_tickets; ?></a>
                             </li>
                             <li class="list-group-item">
-                                <b><?= $this->lang->line('comentarios'); ?></b> <a class="pull-right"><?= $numero_mensajes - $numero_tickets; ?></a>
+                                <b><?= $this->lang->line('comentarios'); ?></b> <a class="pull-right"><?= max(($numero_mensajes - $numero_tickets), 0); ?></a>
                             </li>
                             <li class="list-group-item">
                                 <b><?= $this->lang->line('registrado'); ?></b> <a class="pull-right"><?= date('d/m/Y H:i', strtotime($cliente['fecha_registro'])); ?></a>
