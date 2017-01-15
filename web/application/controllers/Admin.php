@@ -90,7 +90,7 @@ class Admin extends MY_Controller {
                             break;
                         case USUARIO_TECNICO_ADMIN:
                             $datos['tickets'] = $this->ticket_modelo->obtener_tickets_tecnico_admin($datos['usuario']['id_usuario']);
-                            $datos['numero_tickets'] = sizeof( $datos['tickets'] );
+                            $datos['numero_tickets'] = sizeof($datos['tickets']);
                             break;
                         case USUARIO_TECNICO:
                             $datos['tareas'] = $this->tarea->obtener_tareas_tecnico($datos['usuario']['id_usuario'], true);
@@ -100,7 +100,6 @@ class Admin extends MY_Controller {
                     $this->plantilla->mostrar('admin', 'ver_usuario', $datos);
                 }
             }
-
         }
     }
 

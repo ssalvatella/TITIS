@@ -48,9 +48,11 @@ class Tecnico_admin_modelo extends CI_Model {
         // Se borran primero todos los técnicos que tenía
         $this->db->where('tecnico_admin', $id_tecnico_admin);
         $this->db->delete('Tecnico');
-        // Se asignan los nuevos
-        foreach ($id_tecnicos as $id_tecnico) {
-            $this->db->replace('Tecnico', ['id_tecnico' => $id_tecnico, 'tecnico_admin' => $id_tecnico_admin]);
+        if ($id_tecnicos != NULL) {
+            // Se asignan los nuevos
+            foreach ($id_tecnicos as $id_tecnico) {
+                $this->db->replace('Tecnico', ['id_tecnico' => $id_tecnico, 'tecnico_admin' => $id_tecnico_admin]);
+            }
         }
     }
 

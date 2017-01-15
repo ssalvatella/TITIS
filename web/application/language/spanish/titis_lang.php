@@ -69,7 +69,6 @@ $lang['descripcion_factura'] = 'Descripción de la factura';
 $lang['descripcion_factura_place_holder'] = 'Escribe brevemente de qué es la factura';
 $lang['descripcion_tarea'] = 'Descripción de la tarea';
 $lang['descripcion_tarea_place_holder'] = 'Escribe brevemente en qué consiste la tarea';
-$lang['desde'] = 'De';
 $lang['desde'] = 'Desde';
 $lang['desglose'] = 'Desglose';
 $lang['dias'] = ' dias';
@@ -217,8 +216,10 @@ $lang['total'] = 'Total';
 $lang['ultimos_dias'] = 'Últimos %d días';
 $lang['ultimos_tickets'] = 'Últimos tickets';
 $lang['usuario'] = 'Usuario';
+$lang['usuario_comento_en_ticket'] = ' comentó en el ticket ';
 $lang['usuario_es'] = 'Su usuario es';
 $lang['usuario_inactivo'] = 'La cuenta del usuario "%s" no está activa';
+$lang['ver_empleados'] = 'Ver empleados';
 $lang['ver_enviados'] = 'Ver Enviados';
 $lang['ver_factura'] = 'Ver Factura';
 $lang['ver_ticket'] = 'Ver Ticket';
@@ -228,23 +229,3 @@ $lang['ver_todos_los_mensajes'] = 'Ver Todos';
 $lang['verde'] = 'Verde';
 $lang['verde_claro'] = 'Verde Claro';
 $lang['visto'] = 'Visto';
-
-$lang['leer_mensaje'] = 'Leer Mensaje';
-$lang['responder_mensaje'] = 'Responder Mensaje';
-$lang['en_respuesta'] = 'En respuesta al mensaje: ';
-$lang['reenviar_mensaje'] = 'Reenviar Mensaje';
-$lang['mensaje_reenviado'] = 'Mensaje reenviado';
-$lang['desde'] = 'De';
-$lang['tareas_pendientes'] = 'Tareas Pendientes';
-$lang['tarea_completada'] = 'Tarea Completada';
-$lang['descompletar_tarea'] = 'Descompletar Tarea';
-$lang['tarea_no_completada'] = 'Tarea no completada';
-
-$lang['tareas_nuevas'] = 'Tareas Nuevas';
-$lang['no_hay_tareas_pendientes'] = 'No tienes tareas pendientes';
-$lang['empleados'] = 'Empleados';
-
-$lang['tipo'] = 'Tipo';
-$lang['usuario_comento_en_ticket'] = ' comentó en el ticket ';
-
-

@@ -25,7 +25,7 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li id="menu_empleados"><a href="<?= site_url('admin/empleados') ?>"><i class="fa fa-circle-o"></i> Ver empleados</a></li>
+            <li id="menu_empleados"><a href="<?= site_url('admin/empleados') ?>"><i class="fa fa-circle-o"></i> <?= $this->lang->line('ver_empleados'); ?></a></li>
             <li id="menu_asignar_tecnicos"><a href="<?= site_url('admin/asignar_tecnicos') ?>"><i class="fa fa-circle-o"></i> <?= $this->lang->line('asignar_tecnicos'); ?></a></li>
         </ul>
     </li>
