@@ -243,13 +243,13 @@
                             <span class="info-box-icon"><i class="fa fa-wrench"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text"><?= $this->lang->line('tecnico_admin'); ?></span>
-                                <span class="info-box-number" style="font-size:17px;"><?php
+                                <span class="info-box-number" style="font-size:17px;"><a style="color: inherit;" href="<?= site_url('admin/ver_usuario/') . $ticket['tecnico_admin'] ?>"><?php
                                     if (isset($ticket['tecnico_admin'])) {
                                         echo $ticket['nombre_tecnico_admin'];
                                     } else {
                                         echo $this->lang->line('no_asignado');
                                     }
-                                    ?></span>
+                                    ?></a></span>
                                 <?php
                                 if (!isset($ticket['tecnico_admin'])) {
                                     echo '<button data-toggle="modal" data-target="#modal_asignar" style="min-width: 100px" class="col-xs-offset-3 col-xs-6 col-sm-offset-0 btn bg-orange btn-flat btn-sm"> <i class="ionicons ion-person-add"></i> &nbsp;' . $this->lang->line('asignar') . ' </button>';
@@ -403,7 +403,7 @@
                         <div class="timeline-item">
                             <span class="time"><i class="fa fa-clock-o"></i> &nbsp; <?= date('H:i', strtotime($mensajes[$i]['fecha'])); ?></span>
                             <h3 class="timeline-header">
-                                <a href="#"><?= $mensajes[$i]['nombre_usuario']; ?></a> <?= $this->lang->line('ha_escrito_comentario'); ?>
+                                <a href="<?= site_url('admin/ver_usuario/' . $mensajes[$i]['usuario'])?>"><?= $mensajes[$i]['nombre_usuario']; ?></a> <?= $this->lang->line('ha_escrito_comentario'); ?>
                                 <button type="button" onclick="editar_mensaje(this)" class="btn btn-box-tool" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-wrench" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('editar'); ?>"></i></button>
                                 <button type="button" onclick="guardar_mensaje(this)" value="<?= $mensajes[$i]['id_mensaje']; ?>" class="btn btn-box-tool boton-guardar-mensaje" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-save" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('guardar'); ?>"></i></button>
                                 <button type="button" onclick="cancelar_mensaje(this)" class="btn btn-box-tool boton-cancelar-mensaje" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-times" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('cancelar'); ?>"></i></button>
@@ -427,7 +427,7 @@
                             <form id="form_enviar_mensaje" enctype="multipart/form-data" method="POST" action="<?= site_url('admin/enviar_mensaje/') . $ticket['id_ticket']; ?>" data-parsley-errors-messages-disabled="true">
                                 <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                                 <div class="form-group has-feedback">
-                                    <textarea name="mensaje" maxlength="500" class="form-control" style="width: 100%" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
+                                    <textarea name="mensaje" maxlength="50000" class="form-control" style="width: 100%" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group has-feedback">

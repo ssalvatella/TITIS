@@ -54,7 +54,7 @@
                                             <td><a href="' . site_url('admin/ver_cliente/') . $ticket['cliente'] . '">' . $ticket['nombre_cliente'] . '</a></td>
                                             <td>' . $ticket['titulo'] . '</td>
                                             <td>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) . '</td>
-                                            <td>' . $ticket['nombre_tecnico_admin'] . '</td>
+                                            <td><a href"' . site_url('admin/ver_usuario/') . $ticket['tecnico_admin'] .'">' . $ticket['nombre_tecnico_admin'] . '</a></td>
                                             <td>';
                                     switch ($ticket['estado']) {
                                         case TICKET_PENDIENTE:
