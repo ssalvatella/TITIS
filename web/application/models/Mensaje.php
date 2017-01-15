@@ -26,6 +26,15 @@ class Mensaje extends CI_Model {
         return $mensajes;
     }
 
+    public function obtener_comentarios_usuario($id_usuario) {
+        $this->db->select('Mensaje.*, Ticket.*');
+        $this->db->from('Mensaje');
+        $this->db->where('usuario', $id_usuario);
+        $this->db->join('Ticket', 'Mensaje.ticket = Ticket.id_ticket');
+        $this->db->order_by('fecha', 'DESC');
+        return $this->db->get()->result_array();
+    }
+
     public function registrar_mensaje($datos) {
         $datos['fecha'] = date("Y-m-d H:i:s");
         return $this->db->insert('Mensaje', $datos);

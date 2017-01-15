@@ -225,4 +225,5 @@ $lang['no_hay_tareas_pendientes'] = 'No tienes tareas pendientes';
 $lang['empleados'] = 'Empleados';
 
 $lang['tipo'] = 'Tipo';
+$lang['usuario_comento_en_ticket'] = ' comentó en el ticket ';
 

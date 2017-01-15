@@ -38,7 +38,7 @@
                             <?php
                             foreach ($empleados as $empleado) {
                                 echo '<tr style="cursor: pointer;">
-                                            <td><a  href="' . site_url('admin/ver_cliente/' . $empleado['id_usuario']) . '"></a>' . $empleado['usuario'] . '</td>
+                                            <td><a  href="' . site_url('admin/ver_usuario/' . $empleado['id_usuario']) . '"></a>' . $empleado['usuario'] . '</td>
                                             <td>' . $empleado['email'] . '</td>
                                             <td>' .date('d/m/Y H:i', strtotime($empleado['fecha_registro'])) . '</td>
                                             <td>';

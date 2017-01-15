@@ -51,6 +51,19 @@ class Usuario extends CI_Model {
         }
     }
 
+    public function obtener_datos_usuario($usuario) {
+        $this->db->select('id_usuario, tipo, usuario, email, activo, fecha_registro'); // La contraseña no la devuelve
+        $this->db->from('Usuario');
+        $this->db->where('id_usuario', $usuario);
+        $consulta = $this->db->limit(1)->get();
+
+        if ($consulta->num_rows() == 1) {
+            return $consulta->result_array();
+        } else {
+            return FALSE;
+        }
+    }
+
     public function modificar_datos($usuario, $datos) {
         $this->db->where('usuario', $usuario);
         return $this->db->update('Usuario', $datos);

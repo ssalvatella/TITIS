@@ -74,6 +74,36 @@ class Admin extends MY_Controller {
         }
     }
 
+    public function ver_usuario($id_usuario) {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            if ($id_usuario == $this->session->userdata('id_usuario')) {
+                $this->perfil();
+            } else {
+                $datos['usuario'] = $this->usuario->obtener_datos_usuario($id_usuario)[0];
+                if ($datos['usuario']['tipo'] == USUARIO_CLIENTE) {
+                    $this->ver_cliente($id_usuario);
+                } else {
+                    $datos['titulo'] = $this->lang->line('usuario') . ' ' . $datos['usuario']['usuario'];
+                    $datos['numero_comentarios'] = $this->mensaje->contar_comentarios_usuario($datos['usuario']['id_usuario']);
+                    switch ($datos['usuario']['tipo']) {
+                        case USUARIO_ADMIN:
+                            break;
+                        case USUARIO_TECNICO_ADMIN:
+                            $datos['tickets'] = $this->ticket_modelo->obtener_tickets_tecnico_admin($datos['usuario']['id_usuario']);
+                            $datos['numero_tickets'] = sizeof( $datos['tickets'] );
+                            break;
+                        case USUARIO_TECNICO:
+                            $datos['tareas'] = $this->tarea->obtener_tareas_tecnico($datos['usuario']['id_usuario'], true);
+                            break;
+                    }
+                    $datos['comentarios'] = $this->mensaje->obtener_comentarios_usuario($datos['usuario']['id_usuario']);
+                    $this->plantilla->mostrar('admin', 'ver_usuario', $datos);
+                }
+            }
+
+        }
+    }
+
     public function ver_cliente($id_cliente) {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('cliente');
@@ -664,6 +694,7 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('perfil');
             $datos['usuario'] = $this->usuario->obtener_datos($this->session->userdata('nombre_usuario'));
+            $datos['numero_comentarios'] = $this->mensaje->contar_comentarios_usuario($datos['usuario']['id_usuario']);
             $datos['tab_activa'] = 'datos';
             $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
             if ($this->input->server('REQUEST_METHOD') == 'POST') {

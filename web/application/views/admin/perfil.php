@@ -26,6 +26,9 @@
 
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
+                                <b><?= $this->lang->line('comentarios'); ?></b> <a class="pull-right"><?= $numero_comentarios   ; ?></a>
+                            </li>
+                            <li class="list-group-item">
                                 <b><?= $this->lang->line('registrado'); ?></b> <a class="pull-right"><?= date('d/m/Y H:i', strtotime($usuario['fecha_registro'])); ?></a>
                             </li>
                         </ul>

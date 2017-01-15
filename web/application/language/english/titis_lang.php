@@ -224,3 +224,4 @@ $lang['tareas_nuevas'] = 'New Tasks';
 $lang['no_hay_tareas_pendientes'] = 'You do not have any pending tasks';
 $lang['empleados'] = 'Workers';
 $lang['tipo'] = 'Type';
+$lang['usuario_comento_en_ticket'] = ' write a comment in ticket ';
