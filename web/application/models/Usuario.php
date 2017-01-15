@@ -98,4 +98,12 @@ class Usuario extends CI_Model {
         return $this->db->get()->result_array();
     }
 
+    public function obtener_empleados($tipo = '') {
+        $this->db->select('*');
+        $this->db->from('Usuario');
+        $this->db->where('tipo != ', USUARIO_CLIENTE);
+
+        return $this->db->get()->result_array();
+    }
+
 }

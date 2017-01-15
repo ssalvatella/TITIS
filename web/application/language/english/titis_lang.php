@@ -222,3 +222,5 @@ $lang['tarea_no_completada'] = 'Task not completed';
 
 $lang['tareas_nuevas'] = 'New Tasks';
 $lang['no_hay_tareas_pendientes'] = 'You do not have any pending tasks';
+$lang['empleados'] = 'Workers';
+$lang['tipo'] = 'Type';

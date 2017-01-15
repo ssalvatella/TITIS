@@ -48,6 +48,19 @@ class Admin extends MY_Controller {
         }
     }
 
+    public function empleados() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['titulo'] = $this->lang->line('empleados');
+            $datos['empleados'] = $this->usuario->obtener_empleados();
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css'));
+            $this->plantilla->mostrar('admin', 'empleados', $datos);
+        }
+    }
+
     public function clientes() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('clientes');
@@ -233,6 +246,22 @@ class Admin extends MY_Controller {
             $datos['activo'] = '0';
             $this->usuario->modificar_datos($id, $datos);
             redirect('admin/clientes');
+        }
+    }
+
+    public function activar_usuario($id) {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['activo'] = '1';
+            $this->usuario->modificar_datos($id, $datos);
+            redirect('admin/empleados');
+        }
+    }
+
+    public function banear_usuario($id) {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['activo'] = '0';
+            $this->usuario->modificar_datos($id, $datos);
+            redirect('admin/empleados');
         }
     }
 
