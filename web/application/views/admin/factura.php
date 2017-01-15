@@ -121,12 +121,9 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> <?= $this->lang->line('imprimir'); ?></a>
           <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> <?= $this->lang->line('confirmar_pago'); ?>
           </button>
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class="fa fa-download"></i> <?= $this->lang->line('generar_pdf'); ?>
-          </button>
+          <a href="<?= site_url('admin/imprimir_factura/' . $factura['id_factura']) ?>" target="_blank" class="btn btn-primary pull-right"><i class="fa fa-download"></i> <?= $this->lang->line('generar_pdf'); ?></a>
         </div>
       </div>
     </section>

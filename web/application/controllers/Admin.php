@@ -588,6 +588,18 @@ class Admin extends MY_Controller {
             $this->plantilla->mostrar('admin', 'factura', $datos);
         }
     }
+    
+    public function imprimir_factura($id_factura) {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['titulo'] = $this->lang->line('facturas');
+            $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura);
+            $datos['concepto'] = $this->concepto->obtener_concepto($id_factura);
+            $datos['tareas'] = $this->factura_modelo->obtener_tareas($id_factura);
+            $datos['total_tareas'] = $this->factura_modelo->sumar_precios($id_factura);
+            $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+            $this->plantilla->mostrar('admin', 'imprimir_factura', $datos);
+        }
+    }
 
     public function descargar_archivo($nombre_sin_ext = '', $nombre_original = '') {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
