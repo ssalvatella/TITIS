@@ -26,21 +26,21 @@
                         <a href = "javascript:history.go(0)" class="btn btn-app"><i class="fa fa-spin fa-refresh"></i><?= $this->lang->line('actualizar'); ?></a>
                         <table data-link="" id="empleados" class="table table-bordered table-hover display nowrap">
                             <thead>
-                            <tr>
-                                <th><i class="fa fa-user" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('usuario'); ?></th>
-                                <th><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp; Email</th>
-                                <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('registrado'); ?></th>
-                                <th><i class="fa fa-black-tie" aria-hidden="true"></i>&nbsp; <?= $this->lang->line('tipo'); ?></th>
-                                <td></td>
-                            </tr>
+                                <tr>
+                                    <th><i class="fa fa-user" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('usuario'); ?></th>
+                                    <th><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp; Email</th>
+                                    <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('registrado'); ?></th>
+                                    <th><i class="fa fa-black-tie" aria-hidden="true"></i>&nbsp; <?= $this->lang->line('tipo'); ?></th>
+                                    <td></td>
+                                </tr>
                             </thead>
                             <tbody>
-                            <?php
-                            foreach ($empleados as $empleado) {
-                                echo '<tr style="cursor: pointer;">
+                                <?php
+                                foreach ($empleados as $empleado) {
+                                    echo '<tr style="cursor: pointer;">
                                             <td><a  href="' . site_url('admin/ver_cliente/' . $empleado['id_usuario']) . '"></a>' . $empleado['usuario'] . '</td>
                                             <td>' . $empleado['email'] . '</td>
-                                            <td>' .date('d/m/Y H:i', strtotime($empleado['fecha_registro'])) . '</td>
+                                            <td>' . date('d/m/Y H:i', strtotime($empleado['fecha_registro'])) . '</td>
                                             <td>';
                                     switch ($empleado['tipo']) {
                                         case USUARIO_TECNICO:
@@ -53,25 +53,25 @@
                                             echo $this->lang->line('tecnico_admin');
                                             break;
                                     }
-                                echo '</td>
+                                    echo '</td>
                                             <td align="center">';
-                                if ($empleado['activo'] == 1) {
-                                    echo '<a data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('banear') . '" href ="' . site_url('admin/banear_usuario/' . $empleado['usuario']) . '" class="btn btn-xs btn-danger"><i class="fa fa-user-times"></i></a></td></tr>';
-                                } else {
-                                    echo '<a data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('activar') . '" href ="' . site_url('admin/activar_usuario/' . $empleado['usuario']) . '"class="btn btn-xs btn-success"><i class="fa fa-user-plus"></i></a></td></tr>';
+                                    if ($empleado['activo'] == 1) {
+                                        echo '<a data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('banear') . '" href ="' . site_url('admin/banear_usuario/' . $empleado['usuario']) . '" class="btn btn-xs btn-danger"><i class="fa fa-user-times"></i></a></td></tr>';
+                                    } else {
+                                        echo '<a data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('activar') . '" href ="' . site_url('admin/activar_usuario/' . $empleado['usuario']) . '"class="btn btn-xs btn-success"><i class="fa fa-user-plus"></i></a></td></tr>';
+                                    }
                                 }
-                            }
-                            ?>
+                                ?>
 
                             </tbody>
                             <tfoot>
-                            <tr>
-                                <th><i class="fa fa-user" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('usuario'); ?></th>
-                                <th><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp; Email</th>
-                                <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('registrado'); ?></th>
-                                <th><i class="fa fa-black-tie" aria-hidden="true"></i>&nbsp; <?= $this->lang->line('tipo'); ?></th>
-                                <td></td>
-                            </tr>
+                                <tr>
+                                    <th><i class="fa fa-user" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('usuario'); ?></th>
+                                    <th><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp; Email</th>
+                                    <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('registrado'); ?></th>
+                                    <th><i class="fa fa-black-tie" aria-hidden="true"></i>&nbsp; <?= $this->lang->line('tipo'); ?></th>
+                                    <td></td>
+                                </tr>
                             </tfoot>
                         </table>
                     </div>

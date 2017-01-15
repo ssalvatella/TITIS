@@ -16,6 +16,7 @@ $lang['ajustes'] = 'Ajustes';
 $lang['amarillo'] = 'Amarillo';
 $lang['amarillo_claro'] = 'Amarillo Claro';
 $lang['asignar'] = 'Asignar';
+$lang['asignar_tecnicos'] = 'Asignar Técnicos';
 $lang['asunto'] = 'Asunto';
 $lang['asunto_descripcion'] = 'Introduce un título para el ticket';
 $lang['aun_no_funcional'] = '(aún no funcional)';

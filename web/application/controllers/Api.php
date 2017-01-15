@@ -695,7 +695,7 @@ class Api extends REST_Controller {
         }
         $this->response([
             'status' => TRUE,
-            'datos' => $this->usuario->modificar_datos($id_usuario, ['activo' => 1])
+            'datos' => $this->usuario->modificar_datos_por_id($id_usuario, ['activo' => 1])
                 ], REST_Controller::HTTP_OK);
     }
 
@@ -709,7 +709,7 @@ class Api extends REST_Controller {
         }
         $this->response([
             'status' => TRUE,
-            'datos' => $this->usuario->modificar_datos($id_usuario, ['activo' => 0])
+            'datos' => $this->usuario->modificar_datos_por_id($id_usuario, ['activo' => 0])
                 ], REST_Controller::HTTP_OK);
     }
 

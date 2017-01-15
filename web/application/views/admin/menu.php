@@ -16,7 +16,19 @@
     </li>
     <li id="menu_tickets"><a href="<?= site_url('admin/tickets') ?>"><i class="fa fa-ticket" aria-hidden="true"></i> <span><?= $this->lang->line('tickets'); ?></span></a></li>
     <li id="menu_clientes"><a href="<?= site_url('admin/clientes') ?>"><i class="fa fa-address-book" aria-hidden="true"></i> <span><?= $this->lang->line('clientes'); ?></span></a></li>
-    <li id="menu_empleados"><a href="<?= site_url('admin/empleados') ?>"><i class="fa fa-users" aria-hidden="true"></i> <span><?= $this->lang->line('empleados'); ?></span></a></li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-users"></i>
+            <span><?= $this->lang->line('empleados'); ?></span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li id="menu_empleados"><a href="<?= site_url('admin/empleados') ?>"><i class="fa fa-circle-o"></i> Ver empleados</a></li>
+            <li id="menu_asignar_tecnicos"><a href="<?= site_url('admin/asignar_tecnicos') ?>"><i class="fa fa-circle-o"></i> <?= $this->lang->line('asignar_tecnicos'); ?></a></li>
+        </ul>
+    </li>
     <li id="menu_facturas"><a href="<?= site_url('admin/facturas') ?>"><i class="fa fa-money" aria-hidden="true"></i> <span><?= $this->lang->line('facturas'); ?></span></a></li>
     <li class="header"><?= $this->lang->line('ajustes'); ?></li>
     <li id="menu_perfil"><a href="<?= site_url('admin/perfil') ?>"><i class="fa fa-cog"></i> <span><?= $this->lang->line('perfil'); ?></span></a></li>

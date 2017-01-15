@@ -628,7 +628,7 @@ class Admin extends MY_Controller {
             $this->plantilla->mostrar('admin', 'factura', $datos);
         }
     }
-    
+
     public function imprimir_factura($id_factura) {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('facturas');
@@ -689,6 +689,25 @@ class Admin extends MY_Controller {
                 }
             }
             $this->plantilla->mostrar('admin', 'perfil', $datos);
+        }
+    }
+
+    public function asignar_tecnicos() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $datos['titulo'] = $this->lang->line('asignar_tecnicos');
+            $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/select2/i18n/es.js'));
+            }
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $tecnico_admin = $this->input->post('tecnico_admin');
+                $tecnicos = $this->input->post('tecnicos');
+                $this->tecnico_admin_modelo->asignar_tecnicos($tecnico_admin, $tecnicos);
+            }
+            $datos['tecnicos_admin'] = $this->tecnico_admin_modelo->obtener_tecnicos_admin();
+            $datos['tecnicos'] = $this->tecnico_admin_modelo->obtener_tecnicos();
+            $this->plantilla->mostrar('admin', 'asignar_tecnicos', $datos);
         }
     }
 

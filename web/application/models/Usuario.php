@@ -59,6 +59,11 @@ class Usuario extends CI_Model {
         return $this->db->update('Usuario', $datos);
     }
 
+    public function modificar_datos_por_id($id_usuario, $datos) {
+        $this->db->where('id_usuario', $id_usuario);
+        return $this->db->update('Usuario', $datos);
+    }
+
     public function registrar_empleado($datos) {
         $datos['activo'] = 1;
         $this->db->select('*');
@@ -107,6 +112,23 @@ class Usuario extends CI_Model {
         $this->db->where('tipo != ', USUARIO_CLIENTE);
 
         return $this->db->get()->result_array();
+    }
+
+    public function obtener_datos_por_id($id_usuario, $devolver_contrasena = FALSE) {
+        $this->db->select('*');
+        $this->db->from('Usuario');
+        $this->db->where('id_usuario', $id_usuario);
+        $consulta = $this->db->limit(1)->get();
+
+        if ($consulta->num_rows() == 1) {
+            $datos_usuario = $consulta->row_array();
+            if (!$devolver_contrasena) {
+                unset($datos_usuario['contrasena']);
+            }
+            return $datos_usuario;
+        } else {
+            return FALSE;
+        }
     }
 
 }
