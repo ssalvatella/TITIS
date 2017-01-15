@@ -12,31 +12,41 @@
         </ol>
     </section>
 
-    <!-- Modal ENVIAR MENSAJE -->
-    <div class="modal fade" value="<?= $cliente['id_usuario'] ?>" id="modal_mensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+    <!-- Modal RESPONDER -->
+    <div class="modal fade" id="modal_mensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-lg modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('enviar_mensaje_a') . $cliente['nombre'] ?></h4>
+                    <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('enviar_mensaje'); ?></h4>
                 </div>
-                <form id="enviar_mensaje_form" method="POST">
+                <form enctype="multipart/form-data" id ="enviar_mensaje_form" method="POST" action="<?= site_url('admin/enviar_mensaje_privado/'. $this->uri->segment(2) . '/' .$this->uri->segment(3)) ; ?>" >
                     <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                     <div class="modal-body">
                         <div class="form-group">
+                            <label><?= $this->lang->line('usuario'); ?></label>
+                            <select readonly="readonly" name="id_receptor" required id = "seleccion_usuarios" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                <?=  '<option value="' . $cliente['id_usuario'] . '"> ' . $cliente['nombre'] . '</option>';?>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label><?= $this->lang->line('mensaje'); ?></label>
-                            <textarea name="mensaje" maxlength="500" class="form-control" style="width: 100%" id="mensaje" placeholder="<?= $this->lang->line('escribir_mensaje'); ?>" required></textarea>
+                            <textarea name= "mensaje" maxlength="500" class= "form-control summer" style = "width: 100%" id="mensaje" placeholder="<?= $this->lang->line('escribir_mensaje'); ?>" required></textarea>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label class="control-label">Adjuntar archivo</label>
+                            <input id="input_archivo" name="archivo" type="file" class="file file-loading">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
-                        <input  type="submit" id="asignar" value = "<?= $this->lang->line('enviar'); ?>" class="btn btn-primary">
+                        <input  type="submit" id="enviar" value = "<?= $this->lang->line('enviar'); ?>" class="btn btn-primary">
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <!-- END Modal ENVIAR MENSAJE ----------->
+    <!-- END Modal RESPONDER ----------->
 
     <section class="content">
 

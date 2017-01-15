@@ -75,7 +75,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label><?= $this->lang->line('usuario'); ?></label>
-                            <select disabled="true" name="id_receptor" required id = "seleccion_usuarios" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                            <select readonly="readonly" name="id_receptor" required id = "seleccion_usuarios" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                 <?=  '<option value="' . $mensaje['id_usuario'] . '"> ' . $mensaje['nombre_emisor'] . '</option>';?>
                             </select>
                         </div>
