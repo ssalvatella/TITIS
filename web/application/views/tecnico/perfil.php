@@ -5,7 +5,7 @@
             <?= $this->lang->line('perfil'); ?>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="<?= site_url('admin'); ?>"><i class="fa fa-home"></i><?= $this->lang->line('inicio'); ?></a></li>
+            <li><a href="<?= site_url('tecnico'); ?>"><i class="fa fa-home"></i><?= $this->lang->line('inicio'); ?></a></li>
             <li class="active"></i><?= $this->lang->line('perfil'); ?></li>
         </ol>
     </section>
@@ -26,7 +26,7 @@
                                 <div class="col-md-offset-2 col-md-8">
                                     <img class="profile-user-img img-responsive img-circle" src="<?= site_url('assets/img/avatar/1.png'); ?>" alt="<?= $this->lang->line('imagen_perfil'); ?>">
                                     <h3 class="profile-username text-center"><?= $usuario['usuario']; ?></h3>
-                                    <p class="text-muted text-center"><?= $this->lang->line('admin'); ?></p>
+                                    <p class="text-muted text-center"><?= $this->lang->line('tecnico'); ?></p>
                                     <ul class="list-group list-group-unbordered">
                                         <li class="list-group-item">
                                             <b><?= $this->lang->line('registrado'); ?></b> <a class="pull-right"><?= date('d/m/Y H:i', strtotime($usuario['fecha_registro'])); ?></a>
@@ -60,7 +60,7 @@
                                     </div>
                                 </div>
                             <?php } ?>
-                            <form id="form-perfil" class="form-horizontal"  action="<?= site_url('admin/perfil'); ?>" method="POST" role="form" data-parsley-errors-messages-disabled="true">
+                            <form id="form-perfil" class="form-horizontal"  action="<?= site_url('tecnico/perfil'); ?>" method="POST" role="form" data-parsley-errors-messages-disabled="true">
                                 <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                                 <div class="form-group has-feedback <?= form_error('contrasena_antigua') != '' ? 'has-error ' : '' ?>">
                                     <label for="contrasena_antigua" class="col-sm-2 control-label"><?= $this->lang->line('contrasena_antigua'); ?></label>

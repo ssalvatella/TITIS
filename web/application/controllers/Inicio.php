@@ -40,12 +40,10 @@ class Inicio extends CI_Controller {
                     break;
                 default:
                     redirect('login');
-                    // $this->load->view('login');
                     break;
             }
         } else {
             redirect('login');
-            //$this->load->view('login');
         }
     }
 
@@ -71,7 +69,6 @@ class Inicio extends CI_Controller {
                     }
                     $this->session->set_userdata('logged_in', TRUE);
                     $this->session->set_userdata('nombre_usuario', $usuario);
-                    //$datos_usuario = $this->usuario->obtener_datos($usuario);
                     $this->session->set_userdata('tipo_usuario', $datos_usuario['tipo']);
                     if ($this->input->post('recordarme')) {
                         $this->load->helper('cookie');
@@ -86,9 +83,7 @@ class Inicio extends CI_Controller {
                     }
                     $this->cargar_inicio();
                 } else {
-                    $datos = array(
-                        'mensaje_error' => $this->lang->line('datos_login_incorrectos'),
-                    );
+                    $datos['mensaje_error'] = $this->lang->line('datos_login_incorrectos');
                     $this->load->view('login', $datos);
                 }
             }

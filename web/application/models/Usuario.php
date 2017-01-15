@@ -6,6 +6,33 @@ class Usuario extends CI_Model {
         parent::__construct();
     }
 
+    public function obtener_id($usuario) {
+        $datos = array('usuario' => $usuario);
+        $consulta = $this->db->get_where('Usuario', $datos, 1);
+        if ($consulta->num_rows() == 1) {
+            return $consulta->row()->id_usuario;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function obtener_datos($usuario, $devolver_contrasena = FALSE) {
+        $this->db->select('*');
+        $this->db->from('Usuario');
+        $this->db->where('usuario', $usuario);
+        $consulta = $this->db->limit(1)->get();
+
+        if ($consulta->num_rows() == 1) {
+            $datos_usuario = $consulta->row_array();
+            if (!$devolver_contrasena) {
+                unset($datos_usuario['contrasena']);
+            }
+            return $datos_usuario;
+        } else {
+            return FALSE;
+        }
+    }
+
     public function login($usuario, $contrasena) {
         $datos = array('usuario' => $usuario);
         $consulta = $this->db->get_where('Usuario', $datos, 1);
@@ -18,7 +45,6 @@ class Usuario extends CI_Model {
                         'key' => config_item('encryption_key')
                     )
             );
-            //return $this->encryption->decrypt($consulta->row_array()['contrasena']) == $contrasena;
             $datos_usuario = $consulta->row_array();
             if ($this->encryption->decrypt($datos_usuario['contrasena']) == $contrasena) {
                 unset($datos_usuario['contrasena']); // Se elimina la contraseña
@@ -26,29 +52,6 @@ class Usuario extends CI_Model {
             }
         }
         return FALSE;
-    }
-
-    public function obtener_id($usuario) {
-        $datos = array('usuario' => $usuario);
-        $consulta = $this->db->get_where('Usuario', $datos, 1);
-        if ($consulta->num_rows() == 1) {
-            return $consulta->row()->id_usuario;
-        } else {
-            return FALSE;
-        }
-    }
-
-    public function obtener_datos($usuario) {
-        $this->db->select('id_usuario, tipo, usuario, email, activo, fecha_registro'); // La contraseña no la devuelve
-        $this->db->from('Usuario');
-        $this->db->where('usuario', $usuario);
-        $consulta = $this->db->limit(1)->get();
-
-        if ($consulta->num_rows() == 1) {
-            return $consulta->row_array();
-        } else {
-            return FALSE;
-        }
     }
 
     public function modificar_datos($usuario, $datos) {
