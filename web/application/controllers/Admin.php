@@ -11,7 +11,7 @@ class Admin extends MY_Controller {
         $this->load->helper('string'); // Generar contraseña aleatoria
         $this->load->helper('descarga'); // No se usa download porque no se puede cambiar el nombre del fichero cuando se descarga
         $this->load->library(array('form_validation', 'encryption', 'plantilla', 'upload'));
-        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'factura_modelo', 'archivo'));
+        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin_modelo', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'factura_modelo', 'archivo'));
         $this->encryption->initialize(
                 array(
                     'cipher' => 'aes-256',
