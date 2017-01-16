@@ -183,4 +183,103 @@ class Cliente extends MY_Controller {
         }
     }
 
+    public function perfil() {
+        if ($this->usuario_permitido(USUARIO_CLIENTE)) {
+            $datos['titulo'] = $this->lang->line('perfil');
+            $datos['tab_activa'] = 'datos';
+            $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/flagstrap/css/flags.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/flagstrap/js/jquery.flagstrap.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/summernote/summernote.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/summernote/summernote.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/summernote/lang/summernote-es-ES.js'));
+            }
+            $this->plantilla->poner_js(site_url('assets/plugins/input-mask/jquery.inputmask.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/input-mask/jquery.inputmask.extensions.js'));
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $datos['tab_activa'] = 'editar';
+                $this->form_validation->set_error_delimiters('<div class="help-block">', '</div>');
+                $cambio_contrasena = $this->input->post('cambio_contrasena');
+
+                // Cambio contraseña
+                if ($cambio_contrasena) {
+                    $this->form_validation->set_rules('contrasena_antigua', $this->lang->line('contrasena_antigua'), 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('contrasena_nueva', $this->lang->line('contrasena_nueva'), 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('contrasena_nueva_conf', $this->lang->line('contrasena_nueva_conf'), 'trim|required|xss_clean|matches[contrasena_nueva]');
+
+                    if ($this->form_validation->run() == TRUE) {
+                        $contrasena_antigua = $this->input->post('contrasena_antigua');
+                        $contrasena_nueva = $this->input->post('contrasena_nueva');
+                        $contrasena_nueva_conf = $this->input->post('contrasena_nueva_conf');
+                        if ($this->encryption->decrypt($datos['usuario']['contrasena']) == $contrasena_antigua) {
+                            $nuevos_datos = [
+                                'contrasena' => $this->encryption->encrypt($contrasena_nueva)
+                            ];
+                            $this->usuario->modificar_datos($this->session->userdata('nombre_usuario'), $nuevos_datos);
+                            $datos['mensaje'] = $this->lang->line('contrasena_cambiada_ok');
+                        } else {
+                            $datos['mensaje_error'] = $this->lang->line('contrasena_no_cambiada');
+                        }
+                    }
+                }
+                // Cambio datos cliente
+                else {
+                    $this->form_validation->set_rules('nombre', $this->lang->line('nombre'), 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('cp', $this->lang->line('cp'), 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('direccion', $this->lang->line('direccion'), 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('pais', $this->lang->line('pais'), 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('provincia', $this->lang->line('provincia'), 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('localidad', $this->lang->line('localidad'), 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('nif', $this->lang->line('nif'), 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('telefono', $this->lang->line('telefono'), 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('numero_cuenta', $this->lang->line('numero_cuenta'), 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('contacto', $this->lang->line('contacto'), 'trim|xss_clean');
+                    $this->form_validation->set_rules('email_opcional', $this->lang->line('email_opcional'), 'trim|valid_email|xss_clean|is_unique[Cliente.email_opcional]');
+                    $this->form_validation->set_rules('observaciones', $this->lang->line('observaciones'), 'trim|xss_clean');
+                    if ($this->form_validation->run() == TRUE) {
+                        $nombre = $this->input->post('nombre');
+                        $cp = $this->input->post('cp');
+                        $direccion = $this->input->post('direccion');
+                        $pais = $this->input->post('pais');
+                        $provincia = $this->input->post('provincia');
+                        $localidad = $this->input->post('localidad');
+                        $nif = $this->input->post('nif');
+                        $telefono = $this->input->post('telefono');
+                        $telefono = str_replace("+34 ", "", $telefono);
+                        $telefono = str_replace("-", "", $telefono);
+                        $numero_cuenta = $this->input->post('numero_cuenta');
+                        $contacto = $this->input->post('contacto');
+                        $email_opcional = $this->input->post('email_opcional');
+                        $observacion = $this->input->post('observaciones');
+                        $datos_cliente = [
+                            'nombre' => $nombre,
+                            'cp' => $cp,
+                            'direccion' => $direccion,
+                            'pais' => $pais,
+                            'provincia' => $provincia,
+                            'localidad' => $localidad,
+                            'nif' => $nif,
+                            'telefono' => $telefono,
+                            'numero_cuenta' => $numero_cuenta
+                        ];
+                        if ($contacto != NULL) {
+                            $datos_cliente['contacto'] = $contacto;
+                        }
+                        if ($email_opcional != NULL) {
+                            $datos_cliente['email_opcional'] = $email_opcional;
+                        }
+                        if ($observacion != NULL) {
+                            $datos_cliente['observacion'] = $observacion;
+                        }
+                        $this->cliente_modelo->modificar_datos($this->session->userdata('id_cliente'), $datos_cliente);
+                        $datos['mensaje'] = $this->lang->line('perfil_actualizado');
+                    }
+                }
+            }
+            $datos['cliente'] = $this->cliente_modelo->obtener_datos($this->session->userdata('id_usuario'));
+            $this->plantilla->mostrar('cliente', 'perfil', $datos);
+        }
+    }
+
 }

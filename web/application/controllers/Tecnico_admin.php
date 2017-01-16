@@ -154,4 +154,47 @@ class Tecnico_admin extends MY_Controller {
         }
     }
 
+    public function ver_cliente($id_cliente) {
+        if ($this->usuario_permitido(USUARIO_TECNICO_ADMIN)) {
+            $datos['titulo'] = $this->lang->line('cliente');
+            $datos['cliente'] = $this->cliente_modelo->obtener_cliente($id_cliente);
+            $datos['numero_tickets'] = $this->ticket_modelo->contar_tickets_cliente($id_cliente);
+            $datos['tickets'] = $this->cliente_modelo->obtener_tickets($id_cliente);
+            $datos['numero_mensajes'] = $this->mensaje->contar_comentarios_usuario($datos['cliente']['id_usuario']);
+            $this->plantilla->poner_css(site_url('assets/plugins/summernote/summernote.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/summernote/summernote.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/summernote/lang/summernote-es-ES.js'));
+            }
+            $this->plantilla->poner_js('assets/plugins/bootstrap-notify/bootstrap-notify.min.js');
+            $this->plantilla->poner_css(site_url('assets/plugins/bootstrap-fileinput/css/fileinput.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/fileinput.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/bootstrap-fileinput/js/locales/es.js'));
+            }
+            $this->plantilla->poner_css(site_url('assets/plugins/select2/select2.min.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/select2/select2.full.min.js'));
+            if ($this->session->userdata('idioma') == 'spanish') {
+                $this->plantilla->poner_js(site_url('assets/plugins/select2/i18n/es.js'));
+            }
+
+            $this->plantilla->mostrar('tecnico_admin', 'cliente', $datos);
+        }
+    }
+
+    public function borrar_notificacion() {
+        if ($this->usuario_permitido(USUARIO_TECNICO_ADMIN)) {
+            $id_notificacion = $this->input->post('id_notificacion');
+            $this->notificacion->borrar_notificacion($id_notificacion, $this->session->userdata('id_usuario'));
+        }
+    }
+
+    public function notificaciones() {
+        if ($this->usuario_permitido(USUARIO_TECNICO_ADMIN)) {
+            $datos['titulo'] = $this->lang->line('notificaciones');
+            $datos['notificaciones'] = $this->notificacion->obtener_notificaciones($this->session->userdata('id_usuario'));
+            $this->plantilla->mostrar('tecnico_admin', 'notificaciones', $datos);
+        }
+    }
+
 }

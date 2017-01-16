@@ -42,8 +42,8 @@
                                     </div>
                                 </div>
                             <?php } ?>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?>">
-                                <label for="input_usuario"><?= $this->lang->line('usuario'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?> required">
+                                <label class="control-label" for="input_usuario"><?= $this->lang->line('usuario'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -52,8 +52,8 @@
                                 </div>    
                                 <?= form_error('usuario'); ?>
                             </div>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('email') != '' ? 'has-error ' : '' ?>">
-                                <label for="input_email"><?= $this->lang->line('email'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('email') != '' ? 'has-error ' : '' ?> required">
+                                <label class="control-label" for="input_email"><?= $this->lang->line('email'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="ion ion-android-mail"></i>
@@ -62,8 +62,8 @@
                                 </div>   
                                 <?= form_error('email'); ?>
                             </div>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('tipo_empleado') != '' ? 'has-error ' : '' ?>" id="radio_tipo">
-                                <label for="radio_tipo"><?= $this->lang->line('tipo_empleado'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('tipo_empleado') != '' ? 'has-error ' : '' ?> required" id="radio_tipo">
+                                <label class="control-label" for="radio_tipo"><?= $this->lang->line('tipo_empleado'); ?></label>
                                 <div id="radio_tipo">
                                     <text><input type="radio" name="tipo_empleado" class="flat" value="<?= USUARIO_ADMIN; ?>" <?= set_value('tipo_empleado') == USUARIO_ADMIN ? 'checked' : ''; ?> required> <?= $this->lang->line('admin'); ?></text>&nbsp;&nbsp;
                                     <text><input type="radio" name="tipo_empleado" class="flat" value="<?= USUARIO_TECNICO_ADMIN; ?>" <?= set_value('tipo_empleado') == USUARIO_TECNICO_ADMIN ? 'checked' : ''; ?> required> <?= $this->lang->line('tecnico_admin'); ?></text>&nbsp;&nbsp;

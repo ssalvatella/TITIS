@@ -382,7 +382,8 @@
                         <div class="timeline-body">
                             <form id="form_enviar_mensaje" enctype="multipart/form-data" method="POST" action="<?= site_url('tecnico/enviar_mensaje/') . $ticket['id_ticket']; ?>" data-parsley-errors-messages-disabled="true">
                                 <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
-                                <div class="form-group has-feedback">
+                                <div class="form-group has-feedback required">
+                                    <label class="control-label"><?= $this->lang->line('comentario'); ?></label>
                                     <textarea name="mensaje" maxlength="500" class="form-control" style="width: 100%" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
                                 </div>
                                 <div class="col-md-5">
@@ -392,8 +393,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-7">
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label">Destinatarios</label>
+                                    <div class="form-group has-feedback required">
+                                        <label class="control-label"><?= $this->lang->line('destinatarios'); ?></label>
                                         <div id="radio_destinatario">
                                             <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_CLIENTE; ?>" required>&nbsp;Todos (cliente)</label>
                                             <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_TECNICO; ?>" required>&nbsp;Técnicos</label>

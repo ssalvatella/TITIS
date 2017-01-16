@@ -59,8 +59,8 @@ class Cliente_modelo extends CI_Model {
         }
     }
 
-    public function modificar_datos($cliente, $datos) {
-        $this->db->where('id_cliente', $cliente);
+    public function modificar_datos($id_cliente, $datos) {
+        $this->db->where('id_cliente', $id_cliente);
         return $this->db->update('Cliente', $datos);
     }
 

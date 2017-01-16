@@ -42,8 +42,8 @@
                                     </div>
                                 </div>
                             <?php } ?>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?>">
-                                <label for="input_usuario"><?= $this->lang->line('usuario'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?> required">
+                                <label class="control-label" for="input_usuario"><?= $this->lang->line('usuario'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -52,8 +52,8 @@
                                 </div>   
                                 <?= form_error('usuario'); ?>
                             </div>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('nombre') != '' ? 'has-error ' : '' ?>">
-                                <label><?= $this->lang->line('nombre'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('nombre') != '' ? 'has-error ' : '' ?> required">
+                                <label class="control-label"><?= $this->lang->line('nombre'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -62,8 +62,8 @@
                                 </div>      
                                 <?= form_error('nombre'); ?>
                             </div>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('email') != '' ? 'has-error ' : '' ?>">
-                                <label><?= $this->lang->line('email'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('email') != '' ? 'has-error ' : '' ?> required">
+                                <label class="control-label"><?= $this->lang->line('email'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="ion ion-android-mail"></i>
@@ -73,7 +73,7 @@
                                 <?= form_error('email'); ?>
                             </div>
                             <div class="form-group col-md-6 has-feedback <?= form_error('email_opcional') != '' ? 'has-error ' : '' ?>">
-                                <label><?= $this->lang->line('email_opcional'); ?></label>
+                                <label class="control-label"><?= $this->lang->line('email_opcional'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="ion ion-android-mail"></i>
@@ -82,8 +82,8 @@
                                 </div>
                                 <?= form_error('email_opcional'); ?>
                             </div>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('pais') != '' ? 'has-error ' : '' ?>">
-                                <label><?= $this->lang->line('pais'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('pais') != '' ? 'has-error ' : '' ?> required">
+                                <label class="control-label"><?= $this->lang->line('pais'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-map-marker"></i>
@@ -92,8 +92,8 @@
                                 </div>
                                 <?= form_error('pais'); ?>
                             </div>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('provincia') != '' ? 'has-error ' : '' ?>">
-                                <label><?= $this->lang->line('provincia'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('provincia') != '' ? 'has-error ' : '' ?> required">
+                                <label class="control-label"><?= $this->lang->line('provincia'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -102,8 +102,8 @@
                                     <?= form_error('provincia'); ?>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('localidad') != '' ? 'has-error ' : '' ?>">
-                                <label><?= $this->lang->line('localidad'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('localidad') != '' ? 'has-error ' : '' ?> required">
+                                <label class="control-label"><?= $this->lang->line('localidad'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-map-marker"></i>
@@ -112,8 +112,8 @@
                                     <?= form_error('localidad'); ?>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('cp') != '' ? 'has-error ' : '' ?>">
-                                <label><?= $this->lang->line('cp'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('cp') != '' ? 'has-error ' : '' ?> required">
+                                <label class="control-label"><?= $this->lang->line('cp'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-map-marker"></i>
@@ -122,8 +122,8 @@
                                     <?= form_error('cp'); ?>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('direccion') != '' ? 'has-error ' : '' ?>">
-                                <label><?= $this->lang->line('direccion'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('direccion') != '' ? 'has-error ' : '' ?> required">
+                                <label class="control-label"><?= $this->lang->line('direccion'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-map-marker"></i>
@@ -132,8 +132,8 @@
                                     <?= form_error('direccion'); ?>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('nif') != '' ? 'has-error ' : '' ?>">
-                                <label><?= $this->lang->line('nif'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('nif') != '' ? 'has-error ' : '' ?> required">
+                                <label class="control-label"><?= $this->lang->line('nif'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -143,7 +143,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-6 has-feedback <?= form_error('contacto') != '' ? 'has-error ' : '' ?>">
-                                <label><?= $this->lang->line('contacto'); ?></label>
+                                <label class="control-label"><?= $this->lang->line('contacto'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-address-card"></i>
@@ -152,8 +152,8 @@
                                 </div>     
                                 <?= form_error('contacto'); ?>
                             </div>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('telefono') != '' ? 'has-error ' : '' ?>">
-                                <label><?= $this->lang->line('telefono'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('telefono') != '' ? 'has-error ' : '' ?> required">
+                                <label class="control-label"><?= $this->lang->line('telefono'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-phone"></i>
@@ -162,8 +162,8 @@
                                 </div>
                                 <?= form_error('telefono'); ?>
                             </div>
-                            <div class="form-group col-md-6 has-feedback <?= form_error('numero_cuenta') != '' ? 'has-error ' : '' ?>">
-                                <label for="input_numero_cuenta"><?= $this->lang->line('numero_cuenta'); ?></label>
+                            <div class="form-group col-md-6 has-feedback <?= form_error('numero_cuenta') != '' ? 'has-error ' : '' ?> required">
+                                <label class="control-label" for="input_numero_cuenta"><?= $this->lang->line('numero_cuenta'); ?></label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-address-card"></i>
@@ -173,7 +173,7 @@
                                 <?= form_error('numero_cuenta'); ?>
                             </div>
                             <div class="form-group col-md-12 has-feedback <?= form_error('observaciones') != '' ? 'has-error ' : '' ?>">
-                                <label><?= $this->lang->line('observaciones'); ?></label>
+                                <label class="control-label"><?= $this->lang->line('observaciones'); ?></label>
                                 <textarea type="text" class="form-control" placeholder="<?= $this->lang->line('observaciones') . '...'; ?>" name="observaciones"><?= set_value('observaciones'); ?></textarea>
                                 <?= form_error('observaciones'); ?>
                             </div>

@@ -51,3 +51,19 @@ input.parsley-error, textarea.parsley-error, select.parsley-error {
 .flagstrap button {
     width: 100%;
 }
+
+/* Añade '*' en los label requeridos en un formulario */
+.form-group.required .control-label:after { 
+    /* color: #d00;
+      content: "*";
+      position: absolute;
+      margin-left: 8px;
+      top:7px;
+    */
+    color: #d00;
+    font-family: 'FontAwesome';
+    font-weight: normal;
+    font-size: 7px;
+    margin-left: 8px;
+    content: "\f069";
+}

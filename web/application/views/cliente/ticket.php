@@ -141,12 +141,13 @@
                         <div class="timeline-body">
                             <form id="form_enviar_mensaje" enctype="multipart/form-data" method="POST" action="<?= site_url('cliente/enviar_mensaje/') . $ticket['id_ticket']; ?>" data-parsley-errors-messages-disabled="true">
                                 <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
-                                <div class="form-group has-feedback">
+                                <div class="form-group has-feedback required">
+                                    <label class="control-label"><?= $this->lang->line('comentario'); ?></label>
                                     <textarea name="mensaje" maxlength="500" class="form-control" style="width: 100%" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">Adjuntar archivo</label>
+                                        <label class="control-label"><?= $this->lang->line('fichero_adjunto'); ?></label>
                                         <input id="input_archivo" name="archivo" type="file" class="file file-loading">
                                     </div>
                                 </div>

@@ -197,9 +197,9 @@ class Admin extends MY_Controller {
                 $this->form_validation->set_rules('nif', $this->lang->line('nif'), 'trim|required|xss_clean');
                 $this->form_validation->set_rules('telefono', $this->lang->line('telefono'), 'trim|required|xss_clean');
                 $this->form_validation->set_rules('numero_cuenta', $this->lang->line('numero_cuenta'), 'trim|required|xss_clean');
-                $this->form_validation->set_rules('contacto', $this->lang->line('contacto'), 'trim|required|xss_clean');
-                $this->form_validation->set_rules('email_opcional', $this->lang->line('email_opcional'), 'trim|required|valid_email|xss_clean|is_unique[Cliente.email_opcional]');
-                $this->form_validation->set_rules('observaciones', $this->lang->line('observaciones'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('contacto', $this->lang->line('contacto'), 'trim|xss_clean');
+                $this->form_validation->set_rules('email_opcional', $this->lang->line('email_opcional'), 'trim|valid_email|xss_clean|is_unique[Cliente.email_opcional]');
+                $this->form_validation->set_rules('observaciones', $this->lang->line('observaciones'), 'trim|xss_clean');
 
                 if ($this->form_validation->run() == TRUE) {
                     $usuario = $this->input->post('usuario');
@@ -213,6 +213,8 @@ class Admin extends MY_Controller {
                     $localidad = $this->input->post('localidad');
                     $nif = $this->input->post('nif');
                     $telefono = $this->input->post('telefono');
+                    $telefono = str_replace("+34 ", "", $telefono);
+                    $telefono = str_replace("-", "", $telefono);
                     $numero_cuenta = $this->input->post('numero_cuenta');
                     $contacto = $this->input->post('contacto');
                     $email_opcional = $this->input->post('email_opcional');
@@ -693,8 +695,6 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('perfil');
             $datos['usuario'] = $this->usuario->obtener_datos($this->session->userdata('nombre_usuario'));
-            $datos['numero_comentarios'] = $this->mensaje->contar_comentarios_usuario($datos['usuario']['id_usuario']);
-            $datos['usuario'] = $this->usuario->obtener_datos($this->session->userdata('nombre_usuario'), TRUE);
             $datos['tab_activa'] = 'datos';
             $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
             if ($this->input->server('REQUEST_METHOD') == 'POST') {
