@@ -39,7 +39,7 @@
                                             <td><a href="' . site_url('cliente/ver_factura/' . $factura['id_factura']) . '"></a>' . $factura['id_factura'] . '</td>
                                             <td><a href="' . site_url('cliente/ver_ticket/' . $factura['id_ticket']) . '">' . $factura['id_ticket'] . '</a></td>
                                             <td>' . $factura['precio'] . '</td>
-                                            <td>' . $factura['iva'] . '</td>
+                                            <td>' . round((float)$factura['iva'] * 100 ) . ' %' . '</td>
                                         </tr>
                                          ';
                                 }

@@ -15,6 +15,7 @@
             <li id="menu_ver_tickets"><a href="<?= site_url('cliente/tickets') ?>"><i class="fa fa-circle-o"></i> <?= $this->lang->line('ver_enviados'); ?></a></li>
         </ul>
     </li>
+    <li id="menu_facturas"><a href="<?= site_url('cliente/facturas') ?>"><i class="fa fa-money" aria-hidden="true"></i> <span><?= $this->lang->line('facturas'); ?></span></a></li>
     <li class="header"><?= $this->lang->line('ajustes'); ?></li>
     <li id="menu_perfil"><a href="<?= site_url('cliente/perfil') ?>"><i class="fa fa-cog"></i> <span><?= $this->lang->line('perfil'); ?></span></a></li>
 

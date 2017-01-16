@@ -10,7 +10,7 @@ class Cliente extends MY_Controller {
         $this->load->helper('security'); // form_validation -> xss_clean
         $this->load->helper('descarga'); // No se usa download porque no se puede cambiar el nombre del fichero cuando se descarga
         $this->load->library(array('form_validation', 'plantilla', 'upload'));
-        $this->load->model(array('cliente_modelo', 'usuario', 'ticket_modelo', 'notificacion', 'mensaje'));
+        $this->load->model(array('cliente_modelo', 'factura_modelo', 'usuario', 'ticket_modelo', 'notificacion', 'mensaje'));
         $this->upload->initialize(
                 array(
                     'upload_path' => "./files/",
@@ -292,6 +292,18 @@ class Cliente extends MY_Controller {
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.responsive.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugin/datatables/responsive.dataTables.min.css'));
             $this->plantilla->mostrar('cliente', 'facturas', $datos);
+        }
+    }
+    
+    public function ver_factura($id_factura) {
+        if ($this->usuario_permitido(USUARIO_CLIENTE)) {
+            $datos['titulo'] = $this->lang->line('facturas');
+            $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura);
+            $datos['concepto'] = $this->concepto->obtener_concepto($id_factura);
+            $datos['tareas'] = $this->factura_modelo->obtener_tareas($id_factura);
+            $datos['total_tareas'] = $this->factura_modelo->sumar_precios($id_factura);
+            $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+            $this->plantilla->mostrar('cliente', 'factura', $datos);
         }
     }
 }
