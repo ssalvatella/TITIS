@@ -110,6 +110,7 @@ class Admin extends MY_Controller {
             $datos['numero_tickets'] = $this->ticket_modelo->contar_tickets_cliente($id_cliente);
             $datos['tickets'] = $this->cliente_modelo->obtener_tickets($id_cliente);
             $datos['numero_mensajes'] = $this->mensaje->contar_comentarios_usuario($datos['cliente']['id_usuario']);
+            $datos['facturas'] = $this->cliente_modelo->obtener_facturas($id_cliente);
             $this->plantilla->poner_css(site_url('assets/plugins/summernote/summernote.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/summernote/summernote.min.js'));
             if ($this->session->userdata('idioma') == 'spanish') {

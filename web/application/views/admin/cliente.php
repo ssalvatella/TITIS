@@ -131,6 +131,7 @@
                         <li class="active"><a href="#activity" data-toggle="tab"><?= $this->lang->line('tickets_enviados'); ?></a></li>
                         <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
                         <li><a href="#settings" data-toggle="tab"><?= $this->lang->line('editar'); ?></a></li>
+                        <li><a href="#invoices" data-toggle="tab"><?= $this->lang->line('facturas'); ?></a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
@@ -308,6 +309,43 @@
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                        <!-- /.tab-pane -->
+                        
+                        <div class="tab-pane" id="invoices">
+                            <a href="javascript:history.go(0)" class="btn btn-app"><i class="fa fa-spin fa-refresh"></i><?= $this->lang->line('actualizar'); ?></a>
+                            <table data-link="" id="facturas" class="table table-bordered table-hover display nowrap">
+                                <thead>
+                                    <tr>
+                                        <th><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('numero'); ?></th>
+                                        <th><i class="fa fa-ticket" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('ticket'); ?></th>
+                                        <th><i class="fa fa-euro" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('concepto'); ?></th>
+                                        <th><i class="fa fa-percent" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('iva'); ?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    foreach ($facturas as $factura) {
+                                        echo '<tr style="cursor: pointer;">
+                                                <td><a href="' . site_url('cliente/ver_factura/' . $factura['id_factura']) . '"></a>' . $factura['id_factura'] . '</td>
+                                                <td><a href="' . site_url('cliente/ver_ticket/' . $factura['id_ticket']) . '">' . $factura['id_ticket'] . '</a></td>
+                                                <td>' . $factura['precio'] . '</td>
+                                                <td>' . $factura['iva'] . '</td>
+                                            </tr>
+                                             ';
+                                    }
+                                    ?>
+                                </tbody>
+
+                                <tfoot>
+                                    <tr>
+                                        <th><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('numero'); ?></th>
+                                        <th><i class="fa fa-ticket" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('ticket'); ?></th>
+                                        <th><i class="fa fa-euro" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('concepto'); ?></th>
+                                        <th><i class="fa fa-percent" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('iva'); ?></th>
+                                    </tr>
+                                </tfoot>
+                            </table>         
                         </div>
                         <!-- /.tab-pane -->
                     </div>
