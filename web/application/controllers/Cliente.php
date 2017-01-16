@@ -282,4 +282,16 @@ class Cliente extends MY_Controller {
         }
     }
 
+    public function facturas() {
+        if ($this->usuario_permitido(USUARIO_CLIENTE)) {
+            $datos['titulo'] = $this->lang->line('facturas');
+            $datos['facturas'] = $this->cliente_modelo->obtener_facturas($this->session->userdata('id_cliente'), 7);
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.responsive.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugin/datatables/responsive.dataTables.min.css'));
+            $this->plantilla->mostrar('cliente', 'facturas', $datos);
+        }
+    }
 }

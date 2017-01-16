@@ -107,4 +107,16 @@ class Cliente_modelo extends CI_Model {
         }
     }
 
+    public function obtener_facturas($id_cliente, $numero = null) {
+        $this->db->select('Factura.*, Ticket.*, Concepto.*');
+        $this->db->from('Factura');
+        $this->db->where('Factura.cliente', $id_cliente);
+        $this->db->join('Ticket', 'Ticket.factura = Factura.id_factura', 'left');
+        $this->db->join('Concepto', 'Concepto.factura = Factura.id_factura', 'left');
+        if (isset($numero)) {
+            $this->db->limit($numero);
+        }
+        $facturas = $this->db->get()->result_array();
+        return $facturas;
+    }
 }
