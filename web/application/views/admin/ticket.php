@@ -180,7 +180,7 @@
             </div>
         </div>
         <!-- FIN Modal EDITAR TAREA -->
-        
+
         <!-- INICIO Modal CREAR FACTURA -->
         <div class="modal fade" id="modal_factura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -198,10 +198,9 @@
                             </div>
                             <div class="form-group">
                                 <label><?= $this->lang->line('precios_tareas'); ?></label>
-                                <?php
-                                foreach ($tareas_finalizadas as $tarea_finalizada) { ?>
-                                <h6><?= $tarea_finalizada['nombre']; ?></h6><input required id="precio_tarea" name="precio_tarea" type="number" step="any" class="form-control" placeholder="<?= $this->lang->line('precio'); ?>">
-                                <?php
+                                <?php foreach ($tareas_finalizadas as $tarea_finalizada) { ?>
+                                    <h6><?= $tarea_finalizada['nombre']; ?></h6><input required id="precio_tarea" name="precio_tarea" type="number" step="any" class="form-control" placeholder="<?= $this->lang->line('precio'); ?>">
+                                    <?php
                                 }
                                 ?>
                             </div>
@@ -244,12 +243,12 @@
                             <div class="info-box-content">
                                 <span class="info-box-text"><?= $this->lang->line('tecnico_admin'); ?></span>
                                 <span class="info-box-number" style="font-size:17px;"><a style="color: inherit;" href="<?= site_url('admin/ver_usuario/') . $ticket['tecnico_admin'] ?>"><?php
-                                    if (isset($ticket['tecnico_admin'])) {
-                                        echo $ticket['nombre_tecnico_admin'];
-                                    } else {
-                                        echo $this->lang->line('no_asignado');
-                                    }
-                                    ?></a></span>
+                                        if (isset($ticket['tecnico_admin'])) {
+                                            echo $ticket['nombre_tecnico_admin'];
+                                        } else {
+                                            echo $this->lang->line('no_asignado');
+                                        }
+                                        ?></a></span>
                                 <?php
                                 if (!isset($ticket['tecnico_admin'])) {
                                     echo '<button data-toggle="modal" data-target="#modal_asignar" style="min-width: 100px" class="col-xs-offset-3 col-xs-6 col-sm-offset-0 btn bg-orange btn-flat btn-sm"> <i class="ionicons ion-person-add"></i> &nbsp;' . $this->lang->line('asignar') . ' </button>';
@@ -403,7 +402,15 @@
                         <div class="timeline-item">
                             <span class="time"><i class="fa fa-clock-o"></i> &nbsp; <?= date('H:i', strtotime($mensajes[$i]['fecha'])); ?></span>
                             <h3 class="timeline-header">
-                                <a href="<?= site_url('admin/ver_usuario/' . $mensajes[$i]['usuario'])?>"><?= $mensajes[$i]['nombre_usuario']; ?></a> <?= $this->lang->line('ha_escrito_comentario'); ?>
+                                <a href="<?= site_url('admin/ver_usuario/' . $mensajes[$i]['usuario']) ?>"><?= $mensajes[$i]['nombre_usuario']; ?></a> <?= $this->lang->line('ha_escrito_comentario'); ?> <?php if ($mensajes[$i]['destinatario'] == USUARIO_CLIENTE) { ?>
+                                    <span style="font-size: 70%;" class="label label-primary"><?= $this->lang->line('todos_cliente'); ?></span>
+                                <?php } else if ($mensajes[$i]['destinatario'] == USUARIO_ADMIN) { ?>
+                                    <span style="font-size: 70%;" class="label label-danger"><?= $this->lang->line('admins'); ?></span>
+                                <?php } else if ($mensajes[$i]['destinatario'] == USUARIO_TECNICO_ADMIN) { ?>
+                                    <span style="font-size: 70%;" class="label label-warning"><?= $this->lang->line('tecnico_admin'); ?></span>
+                                <?php } else if ($mensajes[$i]['destinatario'] == USUARIO_TECNICO) { ?>
+                                    <span style="font-size: 70%;" class="label label-success"><?= $this->lang->line('tecnicos'); ?></span>
+                                <?php } ?>
                                 <button type="button" onclick="editar_mensaje(this)" class="btn btn-box-tool" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-wrench" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('editar'); ?>"></i></button>
                                 <button type="button" onclick="guardar_mensaje(this)" value="<?= $mensajes[$i]['id_mensaje']; ?>" class="btn btn-box-tool boton-guardar-mensaje" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-save" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('guardar'); ?>"></i></button>
                                 <button type="button" onclick="cancelar_mensaje(this)" class="btn btn-box-tool boton-cancelar-mensaje" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-times" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('cancelar'); ?>"></i></button>
@@ -427,7 +434,7 @@
                             <form id="form_enviar_mensaje" enctype="multipart/form-data" method="POST" action="<?= site_url('admin/enviar_mensaje/') . $ticket['id_ticket']; ?>" data-parsley-errors-messages-disabled="true">
                                 <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                                 <div class="form-group has-feedback required">
-                                     <label class="control-label"><?= $this->lang->line('comentario'); ?></label>
+                                    <label class="control-label"><?= $this->lang->line('comentario'); ?></label>
                                     <textarea name="mensaje" maxlength="50000" class="form-control" style="width: 100%" id="mensaje" placeholder="<?= $this->lang->line('añadir_comentario'); ?>" required></textarea>
                                 </div>
                                 <div class="col-md-5">
@@ -440,10 +447,10 @@
                                     <div class="form-group has-feedback required">
                                         <label class="control-label"><?= $this->lang->line('destinatarios'); ?></label>
                                         <div id="radio_destinatario">
-                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_CLIENTE; ?>" required>&nbsp;Todos (cliente)</label>
-                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_ADMIN; ?>" required>&nbsp;Admins</label>
-                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_TECNICO_ADMIN; ?>" required>&nbsp;Técnico Admin</label>
-                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_TECNICO; ?>" required>&nbsp;Técnicos</label>
+                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_CLIENTE; ?>" required>&nbsp;<?= $this->lang->line('todos_cliente'); ?></label>
+                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_ADMIN; ?>" required>&nbsp;<?= $this->lang->line('admins'); ?></label>
+                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_TECNICO_ADMIN; ?>" required>&nbsp;<?= $this->lang->line('tecnico_admin'); ?></label>
+                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_TECNICO; ?>" required>&nbsp;<?= $this->lang->line('tecnicos'); ?></label>
                                         </div>
                                     </div>
                                 </div>

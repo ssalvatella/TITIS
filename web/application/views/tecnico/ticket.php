@@ -362,7 +362,11 @@
                         <div class="timeline-item">
                             <span class="time"><i class="fa fa-clock-o"></i> &nbsp; <?= date('H:i', strtotime($mensajes[$i]['fecha'])); ?></span>
                             <h3 class="timeline-header">
-                                <a href="#"><?= $mensajes[$i]['nombre_usuario']; ?></a> <?= $this->lang->line('ha_escrito_comentario'); ?>
+                                <a href="#"><?= $mensajes[$i]['nombre_usuario']; ?></a> <?= $this->lang->line('ha_escrito_comentario'); ?> <?php if ($mensajes[$i]['destinatario'] == USUARIO_CLIENTE) { ?>
+                                    <span style="font-size: 70%;" class="label label-primary"><?= $this->lang->line('todos_cliente'); ?></span>
+                                <?php } else if ($mensajes[$i]['destinatario'] == USUARIO_TECNICO) { ?>
+                                    <span style="font-size: 70%;" class="label label-success"><?= $this->lang->line('tecnicos'); ?></span>
+                                <?php } ?>
                                 <?php if (isset($mensajes[$i]['archivos'])) { ?>
                                     <a href="<?= site_url('tecnico/descargar_archivo/' . $mensajes[$i]['archivos'][0]['nombre_archivo'] . '/' . $mensajes[$i]['archivos'][0]['nombre_original']); ?>" target="_blank" role="button" class="btn btn-box-tool" style="padding-top: 0px; padding-bottom: 0px;"><i class="fa fa-file" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('descargar_adjunto'); ?>"></i></a>
                                 <?php } ?>
@@ -396,8 +400,8 @@
                                     <div class="form-group has-feedback required">
                                         <label class="control-label"><?= $this->lang->line('destinatarios'); ?></label>
                                         <div id="radio_destinatario">
-                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_CLIENTE; ?>" required>&nbsp;Todos (cliente)</label>
-                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_TECNICO; ?>" required>&nbsp;Técnicos</label>
+                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_CLIENTE; ?>" required>&nbsp;<?= $this->lang->line('todos_cliente'); ?></label>
+                                            <label class="radio-inline"><input type="radio" name="destinatario" class="flat" value="<?= USUARIO_TECNICO; ?>" required>&nbsp;<?= $this->lang->line('tecnicos'); ?></label>
                                         </div>
                                     </div>
                                 </div>
