@@ -7,11 +7,14 @@ class Ticket_modelo extends CI_Model {
         $this->load->model(array('tarea', 'factura_modelo', 'cliente_modelo'));
     }
 
-    public function obtener_tickets($inicio = 0, $cantidad = 9999, $id_cliente = '') {
+    public function obtener_tickets($inicio = 0, $cantidad = 9999, $id_cliente = '', $id_tecnico_admin = '') {
         $this->db->select('Ticket.*, cliente.nombre as nombre_cliente, usuarioTecnico.usuario as nombre_tecnico_admin');
         $this->db->from('Ticket');
         if ($id_cliente != '') {
             $this->db->where('Ticket.cliente', $id_cliente);
+        }
+        if ($id_tecnico_admin != '') {
+             $this->db->where('Ticket.tecnico_admin', $id_tecnico_admin);
         }
         $this->db->join('Cliente as cliente', 'cliente.id_cliente = Ticket.cliente', 'left');
         $this->db->join('Usuario as usuarioTecnico', 'usuarioTecnico.id_usuario = Ticket.tecnico_admin', 'left');
@@ -57,7 +60,7 @@ class Ticket_modelo extends CI_Model {
         return $tickets;
     }
 
-    public function obtener_tickets_tecnico_admin( $id_tecnico_admin) {
+    public function obtener_tickets_tecnico_admin($id_tecnico_admin) {
         $this->db->select('Ticket.*, cliente.nombre as nombre_cliente, usuarioTecnico.usuario as nombre_tecnico_admin');
         $this->db->from('Ticket');
         if ($id_tecnico_admin != '') {
