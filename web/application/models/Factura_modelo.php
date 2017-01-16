@@ -8,11 +8,11 @@ class Factura_modelo extends CI_Model {
     }
 
     public function obtener_facturas($inicio = 0, $cantidad = 9999) {
-        $this->db->select('Factura.*, cliente.nombre as nombre_cliente, Ticket.*, Concepto.*');
+        $this->db->select('Factura.*, cliente.nombre as nombre_cliente, Ticket.*, Concepto.*, Ticket.titulo as nombre_ticket');
         $this->db->from('Factura');
-        $this->db->join('Cliente as cliente', 'cliente.id_cliente = Factura.cliente');
-        $this->db->join('Ticket', 'Ticket.factura = Factura.id_factura');
-        $this->db->join('Concepto', 'Concepto.factura = Factura.id_factura');
+        $this->db->join('Cliente as cliente', 'cliente.id_cliente = Factura.cliente', 'left');
+        $this->db->join('Ticket', 'Ticket.factura = Factura.id_factura', 'left');
+        $this->db->join('Concepto', 'Concepto.factura = Factura.id_factura', 'left');
         $this->db->limit($cantidad, $inicio);
         return $this->db->get()->result_array();
     }
@@ -25,7 +25,7 @@ class Factura_modelo extends CI_Model {
                 . 'cliente.cp as cp_cliente, '
                 . 'cliente.telefono as telefono_cliente, '
                 . 'cliente.email_opcional as email_cliente,'
-                . ' Ticket.*');
+                . ' Ticket.titulo as nombre_ticket');
         $this->db->from('Factura');
         $this->db->where('id_factura', $id_factura);
         $this->db->join('Cliente as cliente', 'cliente.id_cliente = Factura.cliente');
