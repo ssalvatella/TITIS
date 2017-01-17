@@ -3,7 +3,7 @@
     <section class="content-header">
         <h1>
             <?= $this->lang->line('factura'); ?>
-            <small><?= $factura['titulo']; ?></small>
+            <small><?= $factura['descripcion']; ?></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?= site_url('cliente'); ?>"><i class="fa fa-home"></i><?= $this->lang->line('inicio'); ?></a></li>
@@ -46,7 +46,7 @@
             </div>
             <!-- /.col -->
             <div class="col-sm-4 invoice-col">
-                <b><?= $this->lang->line('factura'); ?>: <?= $factura['titulo']; ?></b><br>
+                <b><?= $this->lang->line('factura'); ?>: <?= $factura['descripcion']; ?></b><br>
                 <br>
                 <b><?= $this->lang->line('factura_id'); ?>:</b> <?= $factura['id_factura']; ?><br>
                 <b><?= $this->lang->line('factura_fecha'); ?>:</b> <?= $factura['fecha']; ?><br>
