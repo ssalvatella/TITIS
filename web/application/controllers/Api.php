@@ -37,6 +37,7 @@ class Api extends REST_Controller {
      * crear_ticket
      * crear_tarea
      * crear_mensaje
+     * crear_mensaje_privado
      * modificar_tarea
      * modificar_mensaje
      * borrar_tarea
@@ -693,6 +694,29 @@ class Api extends REST_Controller {
                 ], REST_Controller::HTTP_OK);
     }
 
+    public function crear_mensaje_privado_post() {
+        $id_emisor = $this->input->post('id_emisor');
+        $id_receptor = $this->input->post('id_receptor');
+        $texto = $this->input->post('texto');
+
+        if (!$id_emisor || !$id_receptor || !$texto) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesitan los campos id_emisor, id_receptor y texto'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        $datos_mensaje = [
+            'usuario' => $id_emisor,
+            'destinatario' => $id_receptor,
+            'texto' => $texto
+        ];
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->mensaje->registrar_mensaje($datos_mensaje)
+                ], REST_Controller::HTTP_OK);
+    }
+
     public function modificar_mensaje_post() {
         $id_mensaje = $this->input->post('id_mensaje');
         $texto = $this->input->post('texto');
@@ -881,19 +905,19 @@ class Api extends REST_Controller {
                     ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
-    
+
     function borrar_factura_post() {
         $id_factura = $this->post('id_factura');
         if (!$id_factura) {
             $this->response([
                 'status' => FALSE,
                 'error' => 'Se necesita el campo id_factura'
-            ], REST_Controller::HTTP_BAD_REQUEST);
+                    ], REST_Controller::HTTP_BAD_REQUEST);
         }
         $this->response([
             'status' => TRUE,
             'datos' => $this->factura_modelo->eliminar_factura($id_factura)
-        ], REST_Controller::HTTP_OK);
+                ], REST_Controller::HTTP_OK);
     }
 
     function recuperar_contrasena_post() {

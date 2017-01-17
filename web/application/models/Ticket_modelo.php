@@ -185,4 +185,36 @@ class Ticket_modelo extends CI_Model {
         return $datos['estado'];
     }
 
+    public function obtener_datos_tecnicos($id_ticket) {
+        $this->db->select('Usuario.*');
+        $this->db->from('Tarea');
+        $this->db->where('ticket', $id_ticket);
+        $this->db->join('Usuario', 'Usuario.id_usuario = Tarea.tecnico');
+        return $consulta = $this->db->distinct()->get()->result_array();
+    }
+
+    public function obtener_datos_cliente($id_ticket) {
+        $this->db->select('Usuario.*');
+        $this->db->from('Ticket');
+        $this->db->where('id_ticket', $id_ticket);
+        $this->db->join('Cliente', 'Cliente.id_cliente = Ticket.cliente');
+        $this->db->join('Usuario', 'Usuario.id_usuario = Cliente.usuario');
+        return $consulta = $this->db->get()->row_array();
+    }
+
+    public function obtener_datos_tecnico_admin($id_ticket) {
+        $this->db->select('Usuario.*');
+        $this->db->from('Ticket');
+        $this->db->where('id_ticket', $id_ticket);
+        $this->db->join('Usuario', 'Usuario.id_usuario = Ticket.tecnico_admin');
+        return $consulta = $this->db->get()->row_array();
+    }
+
+    public function obtener_datos_usuarios($id_ticket) {
+        $usuarios = $this->obtener_datos_tecnicos($id_ticket);
+        array_push($usuarios, $this->obtener_datos_cliente($id_ticket));
+        array_push($usuarios, $this->obtener_datos_tecnico_admin($id_ticket));
+        return $usuarios;
+    }
+
 }
