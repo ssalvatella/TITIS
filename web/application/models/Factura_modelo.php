@@ -90,6 +90,7 @@ class Factura_modelo extends CI_Model {
                     $this->db->where('Factura.fecha > ', date($año . '-10-01'));
                     $this->db->where('Factura.fecha < ', date($año . '-12-31'));
                 }
+
                 break;
             case "anual":
                 $this->db->where('Factura.fecha > ', date($año . '-01-01'));

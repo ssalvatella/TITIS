@@ -9,11 +9,11 @@ class Concepto extends CI_Model {
     /**
      * Devuelve el concepto de una factura en particular
      */
-    public function obtener_concepto($id_factura) {
-        $this->db->select('precio');
+    public function obtener_conceptos($id_factura) {
+        $this->db->select('Concepto.*');
         $this->db->from('Concepto');
-        $this->db->where('factura', $id_factura)->limit(1);
-        return $this->db->get()->row_array();
+        $this->db->where('factura', $id_factura);
+        return $this->db->get()->result_array();
     }
 
 }

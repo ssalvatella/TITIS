@@ -666,7 +666,7 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('facturas');
             $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura);
-            $datos['concepto'] = $this->concepto->obtener_concepto($id_factura);
+            $datos['conceptos'] = $this->concepto->obtener_conceptos($id_factura);
             $datos['tareas'] = $this->factura_modelo->obtener_tareas($id_factura);
             $datos['total_tareas'] = $this->factura_modelo->sumar_precios($id_factura);
             $datos['total'] = $datos['factura']['precio_tareas'] + $datos['factura']['precio_conceptos'];

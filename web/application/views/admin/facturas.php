@@ -40,7 +40,12 @@
                                         } else {
                                             echo 'text-yellow"><i class="fa fa-caret-left"></i> ';
                                         }
-                                    ?><?= ' '.  round((float)(($facturacion_mensual + $facturacion_mensual_pasada)/$facturacion_mensual) * 100 ) . ' %'  ?></span>
+                                        if ($facturacion_mensual_pasada > 0) {
+                                            echo ' ' . round((float)(abs($facturacion_mensual - $facturacion_mensual_pasada)/$facturacion_mensual_pasada) * 100 );
+                                        } else {
+                                            echo ' &nbsp - ';
+                                        }
+                                    ?> %</span>
 
                                     <h5 class="description-header"><?= number_format($facturacion_mensual, 2, ',', ' '); ?> <small><i class="fa fa-eur"></i> </small></h5>
                                     <span class="description-text"><?= $this->lang->line('mensual'); ?></span>
@@ -59,8 +64,12 @@
                                         } else {
                                             echo 'text-yellow"><i class="fa fa-caret-left"></i> ';
                                         }
-                                        ?><?= ' '.  round((float)(($facturacion_trimestral + $facturacion_trimestral_pasada)/$facturacion_trimestral) * 100 ) . ' %'  ?>
-                                    </span>
+                                  if ($facturacion_trimestral_pasada > 0) {
+                                      echo ' ' . round((float)(abs($facturacion_trimestral - $facturacion_trimestral_pasada)/$facturacion_trimestral_pasada) * 100 );
+                                  } else {
+                                      echo ' &nbsp - ';
+                                  }
+                                  ?> %</span>
                                     <h5 class="description-header"><?= number_format($facturacion_trimestral, 2, ',', ' '); ?> <small><i class="fa fa-eur"></i> </small></h5>
                                     <span class="description-text"><?= $this->lang->line('trimestral'); ?></span>
                                 </div>
@@ -79,8 +88,12 @@
                                      } else {
                                          echo 'text-yellow"><i class="fa fa-caret-left"></i> ';
                                      }
-                                     ?><?= ' '.  round((float)(($facturacion_anual + $facturacion_anual_pasada)/$facturacion_anual) * 100 ) . ' %'  ?>
-                                    </span>
+                                     if ($facturacion_anual_pasada > 0) {
+                                         echo ' ' . round((float)(abs($facturacion_anual - $facturacion_anual_pasada)/$facturacion_anual_pasada) * 100 );
+                                     } else {
+                                         echo ' &nbsp - ';
+                                     }
+                                     ?> %</span>
                                     <h5 class="description-header"><?= number_format($facturacion_anual, 2, ',', ' '); ?> <small><i class="fa fa-eur"></i> </small></h5>
                                     <span class="description-text"><?= $this->lang->line('anual'); ?></span>
                                 </div>

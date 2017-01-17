@@ -96,8 +96,15 @@
                         foreach ($tareas as $tarea) {
                             echo '<tr>
                             <td>' . $tarea['id_tarea'] . '</td>
-                            <td>' . $tarea['nombre'] . '</td>
-                            <td>' . $tarea['precio'] . ' €</td>';
+                            <td>' . $tarea['nombre'] . '&nbsp <i data-toggle="tooltip" title="'. $this->lang->line('tarea')  .'" class="glyphicon glyphicon-ok"></i> </td>
+                            <td>' .  number_format($tarea['precio'], 2, ',', ' ') . ' €</td>';
+                        }
+
+                        foreach ($conceptos as $concepto) {
+                            echo '<tr>
+                            <td>' . $concepto['id_concepto'] . '</td>
+                            <td>' . $concepto['nombre'] . '</td>
+                            <td>' . number_format($concepto['precio'], 2, ',', ' ')  . ' €</td>';
                         }
                         ?>
                     </tbody>
@@ -126,15 +133,15 @@
                     <table class="table">
                         <tr>
                             <th style="width:50%"><?= $this->lang->line('subtotal'); ?>:</th>
-                            <td><?= $total ?> €</td>
+                            <td><?= number_format($total, 2, ',', ' ') ?> €</td>
                         </tr>
                         <tr>
                             <th><?= $this->lang->line('iva'); ?> (21%)</th>
-                            <td><?= $total* $factura['iva']; ?> €</td>
+                            <td><?= number_format($total* $factura['iva'], 2, ',', ' ') ; ?> €</td>
                         </tr>
                         <tr>
                             <th><?= $this->lang->line('total'); ?>:</th>
-                            <td><?= $total + $total * $factura['iva']; ?> €</td>
+                            <td><?= number_format($total + $total * $factura['iva'], 2, ',', ' '); ?> €</td>
                         </tr>
                     </table>
                 </div>
