@@ -452,7 +452,14 @@ class Admin extends MY_Controller {
             $id_tarea = $this->input->post('id_tarea');
             $id_ticket = $this->input->post('id_ticket');
             $this->tarea->completar_tarea($id_tarea);
-            $this->ticket_modelo->comprobar_estado($id_ticket);
+            if ($this->ticket_modelo->comprobar_estado($id_ticket) == TICKET_FINALIZADO) {
+                $notificacion = [
+                    'url' => 'ver_ticket/' . $id_ticket,
+                    'texto' => 'notif_ticket_finalizdo',
+                    'parametros' => $this->session->userdata('nombre_usuario')
+                ];
+                $this->notificacion->insertar_notificacion_admins($this->session->userdata('id_usuario'), $notificacion);
+            }
             $notificacion = [
                 'url' => 'admin/ver_ticket/' . $id_ticket,
                 'texto' => 'notif_tarea_completada',
@@ -643,9 +650,9 @@ class Admin extends MY_Controller {
             $datos['facturacion_mensual'] = $this->factura_modelo->obtener_facturacion("mensual");
             $datos['facturacion_trimestral'] = $this->factura_modelo->obtener_facturacion("trimestral");
             $datos['facturacion_anual'] = $this->factura_modelo->obtener_facturacion("anual");
-            $datos['facturacion_mensual_pasada'] = $this->factura_modelo->obtener_facturacion("mensual", date("Y",strtotime("-1 year")));
-            $datos['facturacion_trimestral_pasada'] = $this->factura_modelo->obtener_facturacion("trimestral", date("Y",strtotime("-1 year")));
-            $datos['facturacion_anual_pasada'] = $this->factura_modelo->obtener_facturacion("anual", date("Y",strtotime("-1 year")));
+            $datos['facturacion_mensual_pasada'] = $this->factura_modelo->obtener_facturacion("mensual", date("Y", strtotime("-1 year")));
+            $datos['facturacion_trimestral_pasada'] = $this->factura_modelo->obtener_facturacion("trimestral", date("Y", strtotime("-1 year")));
+            $datos['facturacion_anual_pasada'] = $this->factura_modelo->obtener_facturacion("anual", date("Y", strtotime("-1 year")));
 
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));

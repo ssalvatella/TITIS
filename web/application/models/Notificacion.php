@@ -15,11 +15,6 @@ class Notificacion extends CI_Model {
         return $this->db->get()->result_array();
     }
 
-    public function insertar_notificacion($datos) {
-        $datos['fecha'] = date("Y-m-d H:i:s");
-        return $this->db->insert('Notificacion', $datos);
-    }
-
     public function borrar_notificacion($id_notificacion, $id_usuario) {
         $this->db->where('notificacion', $id_notificacion);
         $this->db->where('usuario', $id_usuario);
@@ -30,7 +25,10 @@ class Notificacion extends CI_Model {
         $datos['fecha'] = date("Y-m-d H:i:s");
         if ($this->db->insert('Notificacion', $datos)) {
             $id_notificacion = $this->db->insert_id();
-            $admins = $this->db->from('Usuario')->where('tipo', USUARIO_ADMIN)->where('id_usuario !=', $id_usuario)->get()->result_array();
+            $this->db->from('Usuario');
+            $this->db->where('tipo', USUARIO_ADMIN);
+            $this->db->where('id_usuario !=', $id_usuario);
+            $admins = $this->db->get()->result_array();
             foreach ($admins as $a) {
                 $datos_dn = [
                     'notificacion' => $id_notificacion,
@@ -38,6 +36,17 @@ class Notificacion extends CI_Model {
                 ];
                 $this->db->insert('Destinatario_notificacion', $datos_dn);
             }
+        }
+    }
+
+    public function insertar_notificacion_cliente($id_cliente, $datos) {
+        $datos['fecha'] = date("Y-m-d H:i:s");
+        if ($this->db->insert('Notificacion', $datos)) {
+            $datos_dn = [
+                'notificacion' => $this->db->insert_id(),
+                'usuario' => $this->cliente_modelo->obtener_cliente($id_cliente)['usuario']
+            ];
+            $this->db->insert('Destinatario_notificacion', $datos_dn);
         }
     }
 

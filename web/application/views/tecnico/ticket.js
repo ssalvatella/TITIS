@@ -21,7 +21,7 @@ function completar_tarea(elem) {
         $.ajax({
             url: baseURL + '/completar_tarea',
             type: 'POST',
-            data: {token_csrf: token_csrf, id_tarea: id_tarea, id_ticket: id_ticket},
+            data: {token_csrf: Cookies.get('token_csrf'), id_tarea: id_tarea, id_ticket: id_ticket},
             success: function (data) {
                 $(elem.parentNode).addClass('done');
                 /* setTimeout(function () {
@@ -40,7 +40,7 @@ function completar_tarea(elem) {
         $.ajax({
             url: baseURL + '/descompletar_tarea',
             type: 'POST',
-            data: {token_csrf: token_csrf, id_tarea: id_tarea, id_ticket: id_ticket},
+            data: {token_csrf: Cookies.get('token_csrf'), id_tarea: id_tarea, id_ticket: id_ticket},
             success: function (data) {
                 $(elem.parentNode).removeClass('done');
                 var li = $(elem).closest('li').find('.fecha_fin');
@@ -176,7 +176,7 @@ function guardar_mensaje(elem) {
     $.ajax({
         url: baseURL + '/editar_mensaje',
         type: 'POST',
-        data: {token_csrf: token_csrf, id_mensaje: id_mensaje, mensaje: mensaje},
+        data: {token_csrf: Cookies.get('token_csrf'), id_mensaje: id_mensaje, mensaje: mensaje},
         success: function (data) {
             /* setTimeout(function () {
              window.location.reload(true);
@@ -215,7 +215,7 @@ $(function () {
         $.ajax({
             url: baseURL + '/asignar_ticket',
             type: 'POST',
-            data: {token_csrf: token_csrf, id_ticket: id_ticket, id_tecnico_admin: id_tecnico_admin},
+            data: {token_csrf: Cookies.get('token_csrf'), id_ticket: id_ticket, id_tecnico_admin: id_tecnico_admin},
             success: function (data) {
                 setTimeout(function () {
                     window.location.reload(true);
@@ -242,7 +242,7 @@ $(function () {
         $.ajax({
             url: baseURL + '/crear_tarea',
             type: 'POST',
-            data: {token_csrf: token_csrf, id_ticket: id_ticket, id_tecnico: id_tecnico, descripcion_tarea: descripcion_tarea, inicio: fecha_inicio.format('DD/MM/YYYY HH:MM'), fin_previsto: fecha_fin.format('DD/MM/YYYY HH:MM')},
+            data: {token_csrf: Cookies.get('token_csrf'), id_ticket: id_ticket, id_tecnico: id_tecnico, descripcion_tarea: descripcion_tarea, inicio: fecha_inicio.format('DD/MM/YYYY HH:MM'), fin_previsto: fecha_fin.format('DD/MM/YYYY HH:MM')},
             success: function (data) {
                 setTimeout(function () {
                     window.location.reload(true);
@@ -268,7 +268,7 @@ $(function () {
         $.ajax({
             url: baseURL + '/editar_tarea',
             type: 'POST',
-            data: {token_csrf: token_csrf, id_tarea: tarea_editar, id_tecnico: id_tecnico, descripcion_tarea: descripcion_tarea, inicio: fecha_inicio.format('DD/MM/YYYY HH:MM'), fin_previsto: fecha_fin.format('DD/MM/YYYY HH:MM')},
+            data: {token_csrf: Cookies.get('token_csrf'), id_tarea: tarea_editar, id_tecnico: id_tecnico, descripcion_tarea: descripcion_tarea, inicio: fecha_inicio.format('DD/MM/YYYY HH:MM'), fin_previsto: fecha_fin.format('DD/MM/YYYY HH:MM')},
             success: function (data) {
                 setTimeout(function () {
                     window.location.reload(true);
@@ -294,7 +294,7 @@ $(function () {
         $.ajax({
             url: baseURL + '/editar_descripcion',
             type: 'POST',
-            data: {token_csrf: token_csrf, id_descripcion: id_descripcion, descripcion: descripcion},
+            data: {token_csrf: Cookies.get('token_csrf'), id_descripcion: id_descripcion, descripcion: descripcion},
             success: function (data) {
                 setTimeout(function () {
                     window.location.reload(true);
@@ -332,7 +332,7 @@ $(function () {
         $.ajax({
             url: baseURL + '/borrar_tarea',
             type: 'POST',
-            data: {token_csrf: token_csrf, id_tarea: id_tarea},
+            data: {token_csrf: Cookies.get('token_csrf'), id_tarea: id_tarea},
             success: function (data) {
                 setTimeout(function () {
                     window.location.reload(true);

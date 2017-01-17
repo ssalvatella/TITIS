@@ -476,7 +476,6 @@
         <script>
             var id_usuario = "<?= $this->session->userdata('id_usuario'); ?>";
             var idioma = "<?= $this->session->userdata('idioma'); ?>";
-            var token_csrf = "<?= $this->security->get_csrf_hash(); ?>";
         </script>
         <?= script_tag(base_url('assets/js/TITIS.js')) ?>
         <?= script_tag(base_url('assets/js/websocket.js')) ?>

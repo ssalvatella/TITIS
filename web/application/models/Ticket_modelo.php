@@ -14,7 +14,7 @@ class Ticket_modelo extends CI_Model {
             $this->db->where('Ticket.cliente', $id_cliente);
         }
         if ($id_tecnico_admin != '') {
-             $this->db->where('Ticket.tecnico_admin', $id_tecnico_admin);
+            $this->db->where('Ticket.tecnico_admin', $id_tecnico_admin);
         }
         $this->db->join('Cliente as cliente', 'cliente.id_cliente = Ticket.cliente', 'left');
         $this->db->join('Usuario as usuarioTecnico', 'usuarioTecnico.id_usuario = Ticket.tecnico_admin', 'left');
@@ -182,7 +182,8 @@ class Ticket_modelo extends CI_Model {
             $datos['estado'] = TICKET_PENDIENTE;
         }
         $this->db->where('id_ticket', $id_ticket);
-        return $this->db->update('Ticket', $datos);
+        $this->db->update('Ticket', $datos);
+        return $datos['estado'];
     }
 
 }

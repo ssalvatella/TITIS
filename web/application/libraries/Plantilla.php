@@ -22,6 +22,7 @@ class Plantilla {
         //$this->poner_css(base_url('assets/css/skins/_all-skins.min.css'));
         $this->poner_js(base_url('assets/plugins/jQuery/jquery.min.js'));
         $this->poner_js(base_url('assets/plugins/jQueryUI/jquery-ui.js'));
+        $this->poner_js(base_url('assets/plugins/js-cookie/js.cookie.min.js'));
         $this->poner_js(base_url('assets/js/bootstrap.min.js'));
         //$this->poner_js(base_url('assets/js/AdminLTE.min.js'));
         //$this->poner_js(base_url('assets/js/TITIS.js'));
