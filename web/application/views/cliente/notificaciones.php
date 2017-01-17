@@ -6,7 +6,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?= site_url('cliente'); ?>"><i class="fa fa-home"></i><?= $this->lang->line('inicio'); ?></a></li>
-            <li class="active"></i><?= $this->lang->line('notificaciones'); ?></li>
+            <li class="active"><?= $this->lang->line('notificaciones'); ?></li>
         </ol>
     </section>
     <!-- Contenido -->
@@ -37,7 +37,7 @@
                             <div class="timeline-item">
                                 <span class="time"><a href="#" onClick="borrar_notificacion(this, <?= $notificaciones[$i]['id_notificacion']; ?>)"><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a></span> <span class="time"><i class="fa fa-clock-o"></i> &nbsp; <?= date('H:i', strtotime($notificaciones[$i]['fecha'])); ?></span>
                                 <div class="timeline-body">
-                                    <a target="_blank" href="<?= site_url($notificaciones[$i]['url']); ?>" onClick="borrar_notificacion(this, <?= $notificaciones[$i]['id_notificacion']; ?>)"><?= sprintf($this->lang->line($notificaciones[$i]['texto']), '<b>' . $notificaciones[$i]['parametros'] . '</b>'); ?></a>
+                                    <a target="_blank" href="<?= site_url('cliente/' . $notificaciones[$i]['url']); ?>" onClick="borrar_notificacion(this, <?= $notificaciones[$i]['id_notificacion']; ?>)"><?= sprintf($this->lang->line($notificaciones[$i]['texto']), '<b>' . $notificaciones[$i]['parametros'] . '</b>'); ?></a>
                                 </div>
                             </div>
                         </li>

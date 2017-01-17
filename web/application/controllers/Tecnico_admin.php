@@ -307,7 +307,13 @@ class Tecnico_admin extends MY_Controller {
             $id_tarea = $this->input->post('id_tarea');
             $id_ticket = $this->input->post('id_ticket');
             $this->tarea->completar_tarea($id_tarea);
-            $this->ticket_modelo->comprobar_estado($id_ticket);
+            if ($this->ticket_modelo->comprobar_estado($id_ticket) == TICKET_FINALIZADO) {
+                $notificacion = [
+                    'url' => 'ver_ticket/' . $id_ticket,
+                    'texto' => 'notif_ticket_finalizado'
+                ];
+                $this->notificacion->insertar_notificacion_cliente($this->ticket_modelo->obtener_ticket($id_ticket)['cliente'], $notificacion);
+            }
             $notificacion = [
                 'url' => 'admin/ver_ticket/' . $id_ticket,
                 'texto' => 'notif_tarea_completada',

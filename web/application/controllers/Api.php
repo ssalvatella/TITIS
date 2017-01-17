@@ -528,7 +528,13 @@ class Api extends REST_Controller {
 
         // Se actualiza el estado del ticket si se ha modificado el estado de la factura
         if ($tarea_editada && $estado != NULL) {
-            $this->ticket_modelo->comprobar_estado($id_ticket);
+            if ($this->ticket_modelo->comprobar_estado($id_ticket) == TICKET_FINALIZADO) {
+                $notificacion = [
+                    'url' => 'ver_ticket/' . $id_ticket,
+                    'texto' => 'notif_ticket_finalizado'
+                ];
+                $this->notificacion->insertar_notificacion_cliente($this->ticket_modelo->obtener_ticket($id_ticket)['cliente'], $notificacion);
+            }
         }
 
         $this->response([

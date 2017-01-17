@@ -455,12 +455,12 @@ class Admin extends MY_Controller {
             if ($this->ticket_modelo->comprobar_estado($id_ticket) == TICKET_FINALIZADO) {
                 $notificacion = [
                     'url' => 'ver_ticket/' . $id_ticket,
-                    'texto' => 'notif_ticket_finalizdo'
+                    'texto' => 'notif_ticket_finalizado'
                 ];
-                $this->notificacion->insertar_notificacion_cliente($this->ticket_modelo->obtener_ticket($id_ticket)['usuario'], $notificacion);
+                $this->notificacion->insertar_notificacion_cliente($this->ticket_modelo->obtener_ticket($id_ticket)['cliente'], $notificacion);
             }
             $notificacion = [
-                'url' => 'admin/ver_ticket/' . $id_ticket,
+                'url' => 'ver_ticket/' . $id_ticket,
                 'texto' => 'notif_tarea_completada',
                 'parametros' => $this->session->userdata('nombre_usuario')
             ];
@@ -475,7 +475,7 @@ class Admin extends MY_Controller {
             $this->tarea->descompletar_tarea($id_tarea);
             $this->ticket_modelo->comprobar_estado($id_ticket);
             $notificacion = [
-                'url' => 'admin/ver_ticket/' . $id_ticket,
+                'url' => 'ver_ticket/' . $id_ticket,
                 'texto' => 'notif_tarea_descompletada',
                 'parametros' => $this->session->userdata('nombre_usuario')
             ];

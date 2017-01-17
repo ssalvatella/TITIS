@@ -56,7 +56,7 @@ function insertar_ultimas_notificaciones(notificaciones) {
     $('#menu_notificaciones').empty();
     for (i = 0; i < 4; i++) {
         var contenido_html = '<li>' +
-                '<a href="' + notificaciones[i].url + '">' +
+                '<a href="javascript:void(0)" onClick="acceder_notificacion(this, ' + notificaciones[i].id_notificacion + ', \'' + notificaciones[i].url + '\')">' +
                 '<i class="fa fa-users text-aqua"></i> ' + notificaciones[i].texto +
                 '</a>' +
                 '</li>';
@@ -71,6 +71,20 @@ function nueva_notificacion(notificacion) {
     console.log(notificacion);
 }
 
+
+function acceder_notificacion(elem, id_notificacion, url) {
+    var getUrl = window.location;
+    var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    $.ajax({
+        url: baseURL + '/borrar_notificacion',
+        type: 'POST',
+        data: {token_csrf: Cookies.get('token_csrf'), id_notificacion: id_notificacion},
+        success: function (data) {
+            location.href = baseURL + '/' + url;
+        }
+    });
+
+}
 
 $(function () {
     iniciar_socket();

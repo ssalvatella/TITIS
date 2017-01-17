@@ -42,9 +42,10 @@ class Notificacion extends CI_Model {
     public function insertar_notificacion_cliente($id_cliente, $datos) {
         $datos['fecha'] = date("Y-m-d H:i:s");
         if ($this->db->insert('Notificacion', $datos)) {
+            $id_notificacion = $this->db->insert_id();
             $datos_dn = [
-                'notificacion' => $this->db->insert_id(),
-                'usuario' => $this->cliente_modelo->obtener_cliente($id_cliente)['usuario']
+                'notificacion' => $id_notificacion,
+                'usuario' => $this->cliente_modelo->obtener_cliente($id_cliente)['id_usuario']
             ];
             $this->db->insert('Destinatario_notificacion', $datos_dn);
         }

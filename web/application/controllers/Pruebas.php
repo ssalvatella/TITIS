@@ -7,7 +7,7 @@ class Pruebas extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('cliente_modelo');
-        $this->load->model(array('mensaje', 'usuario', 'tecnico_admin_modelo'));
+        $this->load->model(array('mensaje', 'usuario', 'tecnico_admin_modelo', 'notificacion', 'ticket_modelo'));
         $this->load->library('encryption');
         $this->load->helper(array('form', 'url'));
         $this->encryption->initialize(
@@ -47,7 +47,12 @@ class Pruebas extends MY_Controller {
         //print_r($this->cliente_modelo->obtener_id_usuario(3));
         // print_r($this->usuario->obtener_datos('admin', TRUE));
         //print_r($this->tecnico_admin_modelo->obtener_tecnicos_admin());
-        print_r($this->tecnico_admin_modelo->obtener_tecnicos());
+        //print_r($this->tecnico_admin_modelo->obtener_tecnicos());
+        $notificacion = [
+            'url' => 'ver_ticket/' . 77,
+            'texto' => 'notif_ticket_finalizdo'
+        ];
+        $this->notificacion->insertar_notificacion_cliente($this->ticket_modelo->obtener_ticket(77)['cliente'], $notificacion);
     }
 
 }
