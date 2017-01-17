@@ -101,7 +101,7 @@ class Cliente extends MY_Controller {
                 redirect('cliente');
             }
             $datos['titulo'] = $this->lang->line('tickets');
-            $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket)[0];
+            $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket);
             $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
             $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/iCheck/all.css'));

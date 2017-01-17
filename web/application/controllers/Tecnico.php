@@ -63,7 +63,7 @@ class Tecnico extends MY_Controller {
                 redirect('admin');
             }
             $datos['titulo'] = $this->lang->line('tickets');
-            $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket)[0];
+            $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket);
             $datos['tareas'] = $this->tarea->obtener_tareas($id_ticket);
             $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
             $datos['tecnicos_admins'] = $this->usuario->obtener_usuarios(USUARIO_TECNICO_ADMIN);

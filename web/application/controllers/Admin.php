@@ -316,7 +316,7 @@ class Admin extends MY_Controller {
                 redirect('admin');
             }
             $datos['titulo'] = $this->lang->line('tickets');
-            $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket)[0];
+            $datos['ticket'] = $this->ticket_modelo->obtener_ticket($id_ticket);
             $datos['tareas'] = $this->tarea->obtener_tareas($id_ticket);
             $datos['tareas_finalizadas'] = $this->tarea->obtener_tareas_finalizadas($id_ticket);
             $datos['mensajes'] = $this->mensaje->obtener_mensajes($id_ticket);
@@ -455,10 +455,9 @@ class Admin extends MY_Controller {
             if ($this->ticket_modelo->comprobar_estado($id_ticket) == TICKET_FINALIZADO) {
                 $notificacion = [
                     'url' => 'ver_ticket/' . $id_ticket,
-                    'texto' => 'notif_ticket_finalizdo',
-                    'parametros' => $this->session->userdata('nombre_usuario')
+                    'texto' => 'notif_ticket_finalizdo'
                 ];
-                $this->notificacion->insertar_notificacion_admins($this->session->userdata('id_usuario'), $notificacion);
+                $this->notificacion->insertar_notificacion_cliente($this->ticket_modelo->obtener_ticket($id_ticket)['usuario'], $notificacion);
             }
             $notificacion = [
                 'url' => 'admin/ver_ticket/' . $id_ticket,

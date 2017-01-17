@@ -110,8 +110,7 @@ class Ticket_modelo extends CI_Model {
         $this->db->where('id_ticket', $id_ticket);
         $this->db->join('Cliente as cliente', 'cliente.id_cliente = Ticket.cliente');
         $this->db->join('Usuario as usuarioTecnico', 'usuarioTecnico.id_usuario = Ticket.tecnico_admin', 'left');
-        $consulta = $this->db->get();
-        return $consulta->result_array();
+        return $consulta = $this->db->get()->row_array();
     }
 
     public function contar_tickets_estado($estado) {
