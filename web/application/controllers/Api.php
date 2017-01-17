@@ -139,7 +139,7 @@ class Api extends REST_Controller {
                         'tecnico_admin' => 'ID del técnico admin'
                     ]
                 ],
-                'fatura' => [
+                'factura' => [
                     'info' => 'Obtiene los datos de una factura',
                     'param_obligatorios' => [
                         'id_factura' => 'ID de la factura'
