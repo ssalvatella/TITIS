@@ -669,6 +669,7 @@ class Admin extends MY_Controller {
             $datos['concepto'] = $this->concepto->obtener_concepto($id_factura);
             $datos['tareas'] = $this->factura_modelo->obtener_tareas($id_factura);
             $datos['total_tareas'] = $this->factura_modelo->sumar_precios($id_factura);
+            $datos['total'] = $datos['factura']['precio_tareas'] + $datos['factura']['precio_conceptos'];
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
             $this->plantilla->mostrar('admin', 'factura', $datos);
         }

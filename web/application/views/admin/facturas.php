@@ -19,7 +19,6 @@
                     <!-- <div id = "cargador" class="overlay">
                          <i class="fa fa-refresh fa-spin"></i>
                      </div> -->
-
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="row">
@@ -67,6 +66,7 @@
                                 </div>
                                 <!-- /.description-block -->
                             </div>
+
                             <!-- /.col -->
                             <div class="col-sm-3 col-xs-6">
                                 <div class="description-block">

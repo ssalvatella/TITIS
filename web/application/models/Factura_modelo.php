@@ -8,11 +8,12 @@ class Factura_modelo extends CI_Model {
     }
 
     public function obtener_facturas($inicio = 0, $cantidad = 9999) {
-        $this->db->select('Factura.*, cliente.nombre as nombre_cliente, Ticket.*, Concepto.*, Ticket.titulo as nombre_ticket');
+        $this->db->select('Factura.*, cliente.nombre as nombre_cliente, Ticket.*, Concepto.*, Ticket.titulo as nombre_ticket', FALSE);
         $this->db->from('Factura');
         $this->db->join('Cliente as cliente', 'cliente.id_cliente = Factura.cliente', 'left');
-        $this->db->join('Ticket', 'Ticket.factura = Factura.id_factura', 'left');
-        $this->db->join('Concepto', 'Concepto.factura = Factura.id_factura', 'left');
+        $this->db->join('Ticket', 'Factura.id_factura = Ticket.factura', 'left');
+        $this->db->join('Concepto', 'Factura.id_factura = Concepto.factura', 'left');
+        $this->db->join('Tarea', 'Tarea.ticket = Ticket.id_ticket', 'left');
         $this->db->limit($cantidad, $inicio);
         return $this->db->get()->result_array();
     }
@@ -25,11 +26,13 @@ class Factura_modelo extends CI_Model {
                 . 'cliente.cp as cp_cliente, '
                 . 'cliente.telefono as telefono_cliente, '
                 . 'cliente.email_opcional as email_cliente,'
-                . ' Ticket.titulo as nombre_ticket');
+                . ' Ticket.titulo as nombre_ticket, SUM(Tarea.precio) AS precio_tareas, SUM(Concepto.precio) AS precio_conceptos,');
         $this->db->from('Factura');
         $this->db->where('id_factura', $id_factura);
         $this->db->join('Cliente as cliente', 'cliente.id_cliente = Factura.cliente');
         $this->db->join('Ticket', 'Ticket.factura = Factura.id_factura');
+        $this->db->join('Concepto', 'Factura.id_factura = Concepto.factura', 'left');
+        $this->db->join('Tarea', 'Tarea.ticket = Ticket.id_ticket', 'left');
         $consulta = $this->db->get();
         return $consulta->row_array();
     }
@@ -62,7 +65,7 @@ class Factura_modelo extends CI_Model {
 
     public function obtener_facturacion($tiempo, $año = '') {
 
-        $this->db->select('SUM(Tarea.precio) AS precio_tareas, SUM(Concepto.precio) AS precio_conceptos', FALSE);
+        $this->db->select('SUM(Tarea.precio) AS precio_tareas, SUM(Concepto.precio) AS precio_conceptos, Factura.*, Ticket.*, Tarea.*, Concepto.*', FALSE);
         $this->db->from('Factura');
         if ($año == '') {
             $año = 'Y';

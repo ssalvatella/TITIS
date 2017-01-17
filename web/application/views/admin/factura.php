@@ -40,8 +40,8 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2 class="page-header">
-                    <i class="fa fa-globe"></i> TITIS
-                    <small class="pull-right"><?= $this->lang->line('fecha'); ?>: 2/10/2014</small>
+                    <i class="fa fa-globe"></i> <?= NOMBRE_WEB ?>
+                    <small class="pull-right"><?= $this->lang->line('fecha') . ': ' . date('d/m/Y', strtotime($factura['fecha'])); ?></small>
                 </h2>
             </div>
             <!-- /.col -->
@@ -120,21 +120,21 @@
             </div>
             <!-- /.col -->
             <div class="col-xs-6">
-                <p class="lead"><?= $this->lang->line('cantidad_pagar'); ?> 2/22/2014</p>
+                <p class="lead"><?= $this->lang->line('cantidad_pagar') . ' - ' . date('d/m/Y', strtotime($factura['fecha'])) ; ?></p>
 
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
                             <th style="width:50%"><?= $this->lang->line('subtotal'); ?>:</th>
-                            <td><?= $total_tareas; ?> €</td>
+                            <td><?= $total ?> €</td>
                         </tr>
                         <tr>
                             <th><?= $this->lang->line('iva'); ?> (21%)</th>
-                            <td><?= $iva = $total_tareas * 0.21; ?> €</td>
+                            <td><?= $total* $factura['iva']; ?> €</td>
                         </tr>
                         <tr>
                             <th><?= $this->lang->line('total'); ?>:</th>
-                            <td><?= $total_tareas + $iva; ?> €</td>
+                            <td><?= $total + $total * $factura['iva']; ?> €</td>
                         </tr>
                     </table>
                 </div>
