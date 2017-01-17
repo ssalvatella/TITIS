@@ -88,7 +88,10 @@ class Api extends REST_Controller {
                     ]
                 ],
                 'tickets' => [
-                    'info' => 'Obtiene los datos de todos los tickets'
+                    'info' => 'Obtiene los datos de todos los tickets',
+                    'param_obligatorios' => [
+                        'id_tecnico' => 'ID del técnico'
+                    ]
                 ],
                 'ticket' => [
                     'info' => 'Obtiene los datos de un ticket',
@@ -356,7 +359,13 @@ class Api extends REST_Controller {
     }
 
     public function tickets_get() {
-        $tickets = $this->ticket_modelo->obtener_tickets();
+        $id_tecnico = $this->get('id_tecnico');
+        if ($id_tecnico) {
+            $tickets = $this->ticket_modelo->obtener_tickets_tecnico(0, 9999, $id_tecnico);
+        } else {
+            $tickets = $this->ticket_modelo->obtener_tickets();
+        }
+
         if ($tickets) {
             $this->response([
                 'status' => TRUE,
