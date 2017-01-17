@@ -307,4 +307,15 @@ class Cliente extends MY_Controller {
         }
     }
 
+    public function imprimir_factura($id_factura) {
+        if ($this->usuario_permitido(USUARIO_CLIENTE)) {
+            $datos['titulo'] = $this->lang->line('facturas');
+            $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura);
+            $datos['concepto'] = $this->concepto->obtener_concepto($id_factura);
+            $datos['tareas'] = $this->factura_modelo->obtener_tareas($id_factura);
+            $datos['total_tareas'] = $this->factura_modelo->sumar_precios($id_factura);
+            $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
+            $this->plantilla->mostrar('cliente', 'imprimir_factura', $datos);
+        }
+    }
 }
