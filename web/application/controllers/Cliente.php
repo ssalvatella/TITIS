@@ -294,7 +294,7 @@ class Cliente extends MY_Controller {
             $this->plantilla->mostrar('cliente', 'facturas', $datos);
         }
     }
-    
+
     public function ver_factura($id_factura) {
         if ($this->usuario_permitido(USUARIO_CLIENTE)) {
             $datos['titulo'] = $this->lang->line('facturas');
@@ -306,4 +306,5 @@ class Cliente extends MY_Controller {
             $this->plantilla->mostrar('cliente', 'factura', $datos);
         }
     }
+
 }

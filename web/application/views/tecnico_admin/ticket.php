@@ -304,6 +304,9 @@
             <ul class="timeline">
                 <?php
                 for ($i = 1; $i < count($mensajes); ++$i) {
+                    if ($mensajes[$i]['destinatario'] < USUARIO_TECNICO_ADMIN) {
+                        continue;
+                    }
                     $fecha_mensaje = date('d/m/Y H:i', strtotime($mensajes[$i]['fecha']));
                     $fecha_mensaje_anterior = date('d/m/Y H:i', strtotime($mensajes[$i - 1]['fecha']));
 

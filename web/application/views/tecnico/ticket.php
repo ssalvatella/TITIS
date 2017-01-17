@@ -11,86 +11,6 @@
     </section>
     <!-- Contenido -->
     <section class="content">
-
-        <!-- INICIO Modal EDITAR DESCRIPCION -->
-        <div class="modal fade" id="modal_editar_descripcion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('editar_descripcion'); ?></h4>
-                    </div>
-                    <form id="editar_descripcion_form" method="POST">
-                        <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
-                        <div class="modal-body">
-                            <textarea id="textarea_descripcion" name="descripcion" maxlength="500" class="form-control" style="width: 100%;"  required></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
-                            <button type="submit" id="id_descripcion" name="id_descripcion" value="<?= $mensajes[0]['id_mensaje']; ?>" class="btn btn-primary"><?= $this->lang->line('editar'); ?></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- FIN Modal EDITAR DESCRIPCION -->
-
-        <!-- INICIO Modal ASIGNAR TÉCNICO ADMIN -->
-        <div class="modal fade" id="modal_asignar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('asignar') . ' ' . $this->lang->line('tecnico_admin'); ?></h4>
-                    </div>
-                    <form id="asigna_tecnico_admin_form" method="POST">
-                        <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label><?= $this->lang->line('tecnico_admin'); ?></label>
-                                <select required id="seleccion_tecnicos_admins" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                    <?php
-                                    foreach ($tecnicos_admins as $tecnico_admin) {
-                                        echo '<option value="' . $tecnico_admin['id_usuario'] . '"> ' . $tecnico_admin['usuario'] . '</option>';
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
-                            <input  type="submit" id="asignar" value="<?= $this->lang->line('asignar'); ?>" class="btn btn-primary">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- FIN Modal ASIGNAR TÉCNICO ADMIN -->
-
-        <!-- INICIO Modal ELIMINAR TICKET -->
-        <div class="modal fade" id="modal_eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog modal-danger" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('eliminar') . ' ticket '; ?></h4>
-                    </div>
-                    <form id="eliminar_ticket_form" method="POST" action="<?= site_url('admin/borrar_ticket'); ?>">
-                        <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
-                        <div class="modal-body">
-                            <p><?= $this->lang->line('mensaje_eliminar'); ?></p>
-                            <p><?= $this->lang->line('mensaje_eliminar2'); ?></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
-                            <button type="submit" id="eliminar_ticket" name="id_ticket" value="<?= $ticket['id_ticket']; ?>" class="btn btn-danger"><?= $this->lang->line('eliminar'); ?></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- FIN Modal ELIMINAR TICKET -->
-
         <!-- INICIO Modal AÑADIR TAREA -->
         <div class="modal fade" id="modal_tarea" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -311,12 +231,13 @@
                                             <i class="fa fa-ellipsis-v"></i>
                                             <i class="fa fa-ellipsis-v"></i>
                                         </span>
-                                        <input data-toggle="tooltip" data-placement="top" title="<?php if ($tarea['tecnico'] == $this->session->userdata('id_usuario')){
-                                            echo  $this->lang->line(''.$tarea['estado'] == TAREA_FINALIZADA ? 'descompletar_tarea' : 'completar_tarea');
+                                        <input data-toggle="tooltip" data-placement="top" title="<?php
+                                        if ($tarea['tecnico'] == $this->session->userdata('id_usuario')) {
+                                            echo $this->lang->line('' . $tarea['estado'] == TAREA_FINALIZADA ? 'descompletar_tarea' : 'completar_tarea');
                                         } else {
-                                            echo $this->lang->line(''.$tarea['estado'] == TAREA_FINALIZADA ? 'tarea_completada' : 'tarea_no_completada');
+                                            echo $this->lang->line('' . $tarea['estado'] == TAREA_FINALIZADA ? 'tarea_completada' : 'tarea_no_completada');
                                         }
-                                         ?>" type="checkbox"<?= $tarea['estado'] == TAREA_FINALIZADA ? ' checked ' : ' ' ?>onchange="completar_tarea(this)" <?php if($tarea['tecnico'] != $this->session->userdata('id_usuario')) echo'disabled readonly'  ?>>
+                                        ?>" type="checkbox"<?= $tarea['estado'] == TAREA_FINALIZADA ? ' checked ' : ' ' ?>onchange="completar_tarea(this)" <?php if ($tarea['tecnico'] != $this->session->userdata('id_usuario')) echo'disabled readonly' ?>>
                                         <span class="text"><?= $tarea['nombre']; ?></span>
                                         <span class="label label-primary"><i class="fa fa-wrench"></i> &nbsp;<?= $tarea['nombre_tecnico']; ?></span>
                                         <div class="tools">
@@ -344,7 +265,9 @@
             <ul class="timeline">
                 <?php
                 for ($i = 1; $i < count($mensajes); ++$i) {
-                if ($mensajes[$i]['destinatario'] == USUARIO_TECNICO) {
+                    if ($mensajes[$i]['destinatario'] < USUARIO_TECNICO) {
+                        continue;
+                    }
                     $fecha_mensaje = date('d/m/Y H:i', strtotime($mensajes[$i]['fecha']));
                     $fecha_mensaje_anterior = date('d/m/Y H:i', strtotime($mensajes[$i - 1]['fecha']));
 
@@ -355,7 +278,7 @@
                                 <?= date('j M. Y', strtotime($mensajes[$i]['fecha'])); ?>
                             </span>
                         </li>
-                    <?php } }?>
+                    <?php } ?>
 
                     <li style="margin-right: 0px;">
                         <i class="fa fa-comments bg-yellow"></i>   
