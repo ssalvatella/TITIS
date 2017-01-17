@@ -22,7 +22,73 @@
 
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <a href="javascript:history.go(0)" class="btn btn-app"><i class="fa fa-spin fa-refresh"></i><?= $this->lang->line('actualizar'); ?></a>
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-6">
+                                <div class="description-block border-right">
+                                    <a href="javascript:history.go(0)" class="btn btn-app"><i class="fa fa-spin fa-refresh"></i><?= $this->lang->line('actualizar'); ?></a>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-3 col-xs-6">
+                                <div class="description-block border-right">
+                                    <span data-toggle="tooltip" title="<?= date("Y",strtotime("-1 year")) .': ' . number_format($facturacion_mensual_pasada, 2, ',', ' ') . ' €'?>" data-placement="top" class="description-percentage
+                                    <?php
+                                        if ($facturacion_mensual > $facturacion_mensual_pasada) {
+                                            echo 'text-green"> <i class="fa fa-caret-up"></i>';
+                                        } else if ($facturacion_mensual < $facturacion_mensual_pasada) {
+                                            echo 'text-red"> <i class="fa fa-caret-down"></i>';
+                                        } else {
+                                            echo 'text-yellow"><i class="fa fa-caret-left"></i> ';
+                                        }
+                                    ?><?= ' '.  round((float)(($facturacion_mensual + $facturacion_mensual_pasada)/$facturacion_mensual) * 100 ) . ' %'  ?></span>
+
+                                    <h5 class="description-header"><?= number_format($facturacion_mensual, 2, ',', ' '); ?> <small><i class="fa fa-eur"></i> </small></h5>
+                                    <span class="description-text"><?= $this->lang->line('mensual'); ?></span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-3 col-xs-6">
+                                <div class="description-block border-right">
+                                  <span data-toggle="tooltip" title="<?= date("Y",strtotime("-1 year")) .': ' . number_format($facturacion_trimestral_pasada, 2, ',', ' ') . ' €'?>" data-placement="top" class="description-percentage
+                                  <?php
+                                        if ($facturacion_trimestral > $facturacion_trimestral_pasada) {
+                                            echo 'text-green"> <i class="fa fa-caret-up"></i>';
+                                        } else if ($facturacion_trimestral < $facturacion_trimestral_pasada) {
+                                            echo 'text-red"> <i class="fa fa-caret-down"></i>';
+                                        } else {
+                                            echo 'text-yellow"><i class="fa fa-caret-left"></i> ';
+                                        }
+                                        ?><?= ' '.  round((float)(($facturacion_trimestral + $facturacion_trimestral_pasada)/$facturacion_trimestral) * 100 ) . ' %'  ?>
+                                    </span>
+                                    <h5 class="description-header"><?= number_format($facturacion_trimestral, 2, ',', ' '); ?> <small><i class="fa fa-eur"></i> </small></h5>
+                                    <span class="description-text"><?= $this->lang->line('trimestral'); ?></span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-3 col-xs-6">
+                                <div class="description-block">
+                                     <span data-toggle="tooltip" title="<?= date("Y",strtotime("-1 year")) .': ' . number_format($facturacion_anual_pasada, 2, ',', ' ') . ' €'?>" data-placement="top" class="description-percentage
+                                  <?php
+                                     if ($facturacion_anual > $facturacion_anual_pasada) {
+                                         echo 'text-green"> <i class="fa fa-caret-up"></i>';
+                                     } else if ($facturacion_anual < $facturacion_anual_pasada) {
+                                         echo 'text-red"> <i class="fa fa-caret-down"></i>';
+                                     } else {
+                                         echo 'text-yellow"><i class="fa fa-caret-left"></i> ';
+                                     }
+                                     ?><?= ' '.  round((float)(($facturacion_anual + $facturacion_anual_pasada)/$facturacion_anual) * 100 ) . ' %'  ?>
+                                    </span>
+                                    <h5 class="description-header"><?= number_format($facturacion_anual, 2, ',', ' '); ?> <small><i class="fa fa-eur"></i> </small></h5>
+                                    <span class="description-text"><?= $this->lang->line('anual'); ?></span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
                         <table data-link="" id="facturas" class="table table-bordered table-hover display nowrap">
                             <thead>
                                 <tr>

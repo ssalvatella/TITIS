@@ -639,7 +639,14 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('facturas');
             $datos['facturas'] = $this->factura_modelo->obtener_facturas();
-            //$datos['total_tareas'] = $this->factura_modelo->sumar_precios($id_factura);
+
+            $datos['facturacion_mensual'] = $this->factura_modelo->obtener_facturacion("mensual");
+            $datos['facturacion_trimestral'] = $this->factura_modelo->obtener_facturacion("trimestral");
+            $datos['facturacion_anual'] = $this->factura_modelo->obtener_facturacion("anual");
+            $datos['facturacion_mensual_pasada'] = $this->factura_modelo->obtener_facturacion("mensual", date("Y",strtotime("-1 year")));
+            $datos['facturacion_trimestral_pasada'] = $this->factura_modelo->obtener_facturacion("trimestral", date("Y",strtotime("-1 year")));
+            $datos['facturacion_anual_pasada'] = $this->factura_modelo->obtener_facturacion("anual", date("Y",strtotime("-1 year")));
+
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));

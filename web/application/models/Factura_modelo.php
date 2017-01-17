@@ -60,6 +60,46 @@ class Factura_modelo extends CI_Model {
         return $this->db->get()->num_rows();
     }
 
+    public function obtener_facturacion($tiempo, $año = '') {
+
+        $this->db->select('SUM(Tarea.precio) AS precio_tareas, SUM(Concepto.precio) AS precio_conceptos', FALSE);
+        $this->db->from('Factura');
+        if ($año == '') {
+            $año = 'Y';
+        }
+        switch ($tiempo) {
+            case "mensual":
+                $this->db->where('Factura.fecha > ', date($año . '-m-01'));
+                $this->db->where('Factura.fecha < ', date($año . '-m-31'));
+                break;
+            case "trimestral":
+                $mes = date('n');
+                if ($mes >= 1 AND $mes <= 3 ) {
+                    $this->db->where('Factura.fecha > ', date($año . '-01-01'));
+                    $this->db->where('Factura.fecha < ', date($año . '-03-31'));
+                } else if ($mes >= 4 AND $mes <= 6) {
+                    $this->db->where('Factura.fecha > ', date($año . '-04-01'));
+                    $this->db->where('Factura.fecha < ', date($año . '-06-31'));
+                } else if ($mes >= 7 AND $mes <= 9) {
+                    $this->db->where('Factura.fecha > ', date($año . '-07-01'));
+                    $this->db->where('Factura.fecha < ', date($año . '-09-31'));
+                } else {
+                    $this->db->where('Factura.fecha > ', date($año . '-10-01'));
+                    $this->db->where('Factura.fecha < ', date($año . '-12-31'));
+                }
+                break;
+            case "anual":
+                $this->db->where('Factura.fecha > ', date($año . '-01-01'));
+                $this->db->where('Factura.fecha < ', date($año . '-12-31'));
+                break;
+        }
+        $this->db->join('Ticket', 'Factura.id_factura = Ticket.factura', 'left');
+        $this->db->join('Concepto', 'Factura.id_factura = Concepto.factura', 'left');
+        $this->db->join('Tarea', 'Tarea.ticket = Ticket.id_ticket', 'left');
+        $consulta = $this->db->get()->result_array();
+        return $consulta[0]['precio_tareas'] + $consulta[0]['precio_conceptos'];
+    }
+
     public function crear_factura($datos) {
         $factura = [
             'descripcion' => $datos['descripcion'],

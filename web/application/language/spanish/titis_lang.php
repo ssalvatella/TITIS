@@ -234,3 +234,8 @@ $lang['ver_todos_los_mensajes'] = 'Ver Todos';
 $lang['verde'] = 'Verde';
 $lang['verde_claro'] = 'Verde Claro';
 $lang['visto'] = 'Visto';
+
+$lang['mensual'] = 'Mensual';
+$lang['trimestral'] = 'Trimestral';
+$lang['anual'] = 'Anual';
+
