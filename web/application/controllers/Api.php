@@ -41,6 +41,7 @@ class Api extends REST_Controller {
      * modificar_mensaje
      * borrar_tarea
      * borrar_ticket
+     * borrar_factura
      */
     public function __construct() {
         parent::__construct();
@@ -879,6 +880,20 @@ class Api extends REST_Controller {
                 'error' => 'La factura no existe'
                     ], REST_Controller::HTTP_NOT_FOUND);
         }
+    }
+    
+    function borrar_factura_post() {
+        $id_factura = $this->post('id_factura');
+        if (!$id_factura) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesita el campo id_factura'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        $this->response([
+            'status' => TRUE,
+            'datos' => $this->factura_modelo->eliminar_factura($id_factura)
+        ], REST_Controller::HTTP_OK);
     }
 
     function recuperar_contrasena_post() {

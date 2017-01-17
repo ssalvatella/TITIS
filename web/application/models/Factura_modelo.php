@@ -115,4 +115,9 @@ class Factura_modelo extends CI_Model {
             return FALSE;
         }
     }
+    
+    public function eliminar_factura($id_factura) {
+        $this->db->where('id_factura', $id_factura);
+        return $this->db->delete('Factura');
+    }
 }

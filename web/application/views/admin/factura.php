@@ -11,6 +11,31 @@
         </ol>
     </section>
     <section class="invoice">
+        
+        <!-- INICIO Modal ELIMINAR FACTURA -->
+        <div class="modal fade" id="modal_eliminar_factura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-danger" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('eliminar_factura'); ?></h4>
+                    </div>
+                    <form id="eliminar_factura_form" method="POST" action="<?= site_url('admin/borrar_factura'); ?>">
+                        <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
+                        <div class="modal-body">
+                            <p><?= $this->lang->line('mensaje_eliminar_factura'); ?></p>
+                            <p><?= $this->lang->line('mensaje_eliminar_factura2'); ?></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
+                            <button type="submit" id="eliminar_factura" name="id_factura" value="<?= $factura['id_factura']; ?>" class="btn btn-danger"><?= $this->lang->line('eliminar'); ?></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- FIN Modal ELIMINAR FACTURA -->
+        
         <!-- title row -->
         <div class="row">
             <div class="col-xs-12">
@@ -121,9 +146,11 @@
         <!-- this row will not appear when printing -->
         <div class="row no-print">
             <div class="col-xs-12">
-                <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> <?= $this->lang->line('confirmar_pago'); ?>
+                <button type="button" data-toggle="modal" data-target="#modal_eliminar_factura" class="btn btn-danger"><i class="fa fa-remove"></i> <?= $this->lang->line('eliminar_factura'); ?>
                 </button>
-                <a href="<?= site_url('admin/imprimir_factura/' . $factura['id_factura']) ?>" target="_blank" class="btn btn-primary pull-right"><i class="fa fa-download"></i> <?= $this->lang->line('generar_pdf'); ?></a>
+                <button type="button" class="btn btn-default pull-right"><i class="fa fa-edit"></i> <?= $this->lang->line('editar_factura'); ?>
+                </button>
+                <a href="<?= site_url('admin/imprimir_factura/' . $factura['id_factura']) ?>" target="_blank" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> <?= $this->lang->line('generar_pdf'); ?></a>
             </div>
         </div>
     </section>

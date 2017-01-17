@@ -685,6 +685,15 @@ class Admin extends MY_Controller {
             $this->plantilla->mostrar('admin', 'imprimir_factura', $datos);
         }
     }
+    
+    public function borrar_factura() {
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+            $id_factura = $this->input->post('id_factura');
+            $this->factura_modelo->eliminar_factura($id_factura);
+            $this->session->set_flashdata('mensaje', 'Factura borrada correctamente.');
+            redirect('admin/facturas');
+        }
+    }
 
     public function descargar_archivo($nombre_sin_ext = '', $nombre_original = '') {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {

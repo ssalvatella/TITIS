@@ -123,7 +123,7 @@
             <div class="col-xs-12">
                 <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> <?= $this->lang->line('confirmar_pago'); ?>
                 </button>
-                <a href="<?= site_url('cliente/imprimir_factura/' . $factura['id_factura']) ?>" target="_blank" class="btn btn-primary pull-right"><i class="fa fa-download"></i> <?= $this->lang->line('generar_pdf'); ?></a>
+                <a href="<?= site_url('cliente/imprimir_factura/' . $factura['id_factura']) ?>" target="_blank" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> <?= $this->lang->line('generar_pdf'); ?></a>
             </div>
         </div>
     </section>
