@@ -28,6 +28,7 @@ class Api extends REST_Controller {
      * 
      * --- POST ---
      * login
+     * recuperar_contrasena
      * registrar_empleado
      * registrar_cliente
      * activar_usuario
@@ -64,9 +65,88 @@ class Api extends REST_Controller {
                     'info' => 'Obtiene los datos de un usuario',
                     'param_obligatorios' => [
                         'usuario' => 'Nombre del usuario'
-                    ],
-                    'param_opcionales' => [
                     ]
+                ],
+                'usuarios' => [
+                    'info' => 'Obtiene los datos de todos los usuarios',
+                    'param_opcionales' => [
+                        'tipo' => 'El tipo de usuario. Valores posibles: Admin=' . USUARIO_ADMIN . ', Técnico admin=' . USUARIO_TECNICO_ADMIN . ', Técnico=' . USUARIO_TECNICO
+                    ]
+                ],
+                'total_usuarios' => [
+                    'info' => 'Obtiene el número total de usuarios de cada tipo'
+                ],
+                'clientes' => [
+                    'info' => 'Obtiene los datos de todos los clientes'
+                ],
+                'cliente' => [
+                    'info' => 'Obtiene los datos de un cliente',
+                    'param_obligatorios' => [
+                        'id_cliente' => 'ID del cliente'
+                    ]
+                ],
+                'tickets' => [
+                    'info' => 'Obtiene los datos de todos los tickets'
+                ],
+                'ticket' => [
+                    'info' => 'Obtiene los datos de un ticket',
+                    'param_obligatorios' => [
+                        'id_ticket' => 'ID del ticket'
+                    ]
+                ],
+                'ultimos_tickets' => [
+                    'info' => 'Obtiene los datos de los últimos tickets (7 días)'
+                ],
+                'ultimos_tickets_cliente' => [
+                    'info' => 'Obtiene los datos de los últimos tickets (7 días) de un cliente',
+                    'param_obligatorios' => [
+                        'id_cliente' => 'ID del cliente'
+                    ]
+                ],
+                'tareas' => [
+                    'info' => 'Obtiene las tareas de un ticket',
+                    'param_obligatorios' => [
+                        'id_ticket' => 'ID del ticket'
+                    ]
+                ],
+                'tareas_tecnico' => [
+                    'info' => 'Obtiene las tareas que tiene un técnico',
+                    'param_obligatorios' => [
+                        'id_tecnico' => 'ID del técnico'
+                    ]
+                ],
+                'notificaciones' => [
+                    'info' => 'Obtiene las notificaciones de un usuario',
+                    'param_obligatorios' => [
+                        'id_usuario' => 'ID del usuario'
+                    ]
+                ],
+                'mensajes' => [
+                    'info' => 'Obtiene los mensajes de un ticket',
+                    'param_obligatorios' => [
+                        'id_ticket' => 'ID del ticket'
+                    ]
+                ],
+                'mensajes_privados' => [
+                    'info' => 'Obtiene los mensajes privados de un usuario',
+                    'param_obligatorios' => [
+                        'id_usuario' => 'ID del usuario'
+                    ]
+                ],
+                'tecnicos' => [
+                    'info' => 'Obtiene todos los técnicos que tiene un técnico admin',
+                    'param_obligatorios' => [
+                        'tecnico_admin' => 'ID del técnico admin'
+                    ]
+                ],
+                'fatura' => [
+                    'info' => 'Obtiene los datos de una factura',
+                    'param_obligatorios' => [
+                        'id_factura' => 'ID de la factura'
+                    ]
+                ],
+                'facturas' => [
+                    'info' => 'Obtiene los datos de todas las facturas'
                 ]
             ],
             'metodos_POST' => [
@@ -150,11 +230,12 @@ class Api extends REST_Controller {
     }
 
     public function total_usuarios_get() {
-        $datos = array();
-        $datos['admin'] = $this->usuario->contar_usuarios(USUARIO_ADMIN);
-        $datos['tecnico_admin'] = $this->usuario->contar_usuarios(USUARIO_TECNICO_ADMIN);
-        $datos['tecnico'] = $this->usuario->contar_usuarios(USUARIO_TECNICO);
-        $datos['cliente'] = $this->usuario->contar_usuarios(USUARIO_CLIENTE);
+        $datos = [
+            'admin' => $this->usuario->contar_usuarios(USUARIO_ADMIN),
+            'tecnico_admin' => $this->usuario->contar_usuarios(USUARIO_TECNICO_ADMIN),
+            'tecnico' => $this->usuario->contar_usuarios(USUARIO_TECNICO),
+            'cliente' => $this->usuario->contar_usuarios(USUARIO_CLIENTE)
+        ];
         $this->response([
             'status' => TRUE,
             'datos' => $datos
@@ -763,34 +844,107 @@ class Api extends REST_Controller {
             $this->response([
                 'status' => TRUE,
                 'datos' => $facturas
-            ], REST_Controller::HTTP_OK);
+                    ], REST_Controller::HTTP_OK);
         } else {
             $this->response([
                 'status' => FALSE,
                 'error' => 'No hay facturas'
-            ], REST_Controller::HTTP_NOT_FOUND);
+                    ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
-    
+
     public function factura_get() {
         $id_factura = $this->get('id_factura');
         if (!$id_factura) {
             $this->response([
                 'status' => FALSE,
                 'error' => 'Se necesita el campo id_factura'
-            ], REST_Controller::HTTP_BAD_REQUEST);
+                    ], REST_Controller::HTTP_BAD_REQUEST);
         }
         $datos_factura = $this->factura_modelo->obtener_factura($id_factura);
         if ($datos_factura) {
             $this->response([
                 'status' => TRUE,
                 'datos' => $datos_factura
-            ], REST_Controller::HTTP_OK);
+                    ], REST_Controller::HTTP_OK);
         } else {
             $this->response([
                 'status' => FALSE,
                 'error' => 'La factura no existe'
-            ], REST_Controller::HTTP_NOT_FOUND);
-        }           
+                    ], REST_Controller::HTTP_NOT_FOUND);
+        }
     }
+
+    function recuperar_contrasena_post() {
+        $usuario = $this->input->post('usuario');
+        $email = $this->input->post('email');
+        $idioma = $this->input->post('idioma');
+        if (!$usuario || !$email) {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'Se necesitan los campos usuario y email. Opcional el campo idioma (spanish o english)'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+        if ($idioma) {
+            $this->lang->load('titis', $idioma);
+        }
+        $datos_usuario = $this->usuario->obtener_datos($usuario);
+        if ($datos_usuario != FALSE && $datos_usuario['email'] == $email) {
+            $this->load->helper('string');
+            $nueva_contrasena = random_string('alnum', 8);
+            $datos_email = [
+                'usuario' => $usuario,
+                'nueva_contrasena' => $nueva_contrasena
+            ];
+            $this->enviar_email('plantilla_email_contrasena_olvidada', $email, $this->lang->line('contrasena_cambiada'), $datos_email);
+            $nuevos_datos = [
+                'contrasena' => $this->encryption->encrypt($nueva_contrasena)
+            ];
+
+            $this->response([
+                'status' => TRUE,
+                'datos' => $this->usuario->modificar_datos($usuario, $nuevos_datos)
+                    ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status' => FALSE,
+                'error' => 'No existe ningún usuario con ese nombre y/o email'
+                    ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
+
+    private function enviar_email($plantilla, $email, $asunto, $datos = array()) {
+        /* $config = Array(
+          'protocol' => 'smtp',
+          'smtp_host' => 'ssl://smtp.live.com',
+          'smtp_port' => 587,
+          'smtp_user' => EMAIL_PAGINA,
+          'smtp_pass' => EMAIL_PAGINA_PASS,
+          'mailtype' => 'html',
+          'charset' => 'UTF-8',
+          'wordwrap' => TRUE
+          ); */
+
+        $config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'smtp.mailtrap.io',
+            'smtp_port' => 2525,
+            'smtp_user' => 'a811e75b96f6bd',
+            'smtp_pass' => 'f9408505200962',
+            'mailtype' => 'html',
+            'charset' => 'UTF-8',
+            'wordwrap' => TRUE
+        );
+
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from(EMAIL_PAGINA);
+        $this->email->to($email);
+        $this->email->subject($asunto);
+
+        $mensaje = $this->load->view($plantilla, $datos, TRUE);
+        $this->email->message($mensaje);
+        return $this->email->send();
+    }
+
 }
