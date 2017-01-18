@@ -97,6 +97,9 @@ class Admin extends MY_Controller {
                             break;
                     }
                     $datos['comentarios'] = $this->mensaje->obtener_comentarios_usuario($datos['usuario']['id_usuario']);
+                    $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
+                    $this->plantilla->poner_css(site_url('assets/plugins/iCheck/all.css'));
+                    $this->plantilla->poner_js(site_url('assets/plugins/iCheck/icheck.min.js'));
                     $this->plantilla->mostrar('admin', 'ver_usuario', $datos);
                 }
             }
@@ -236,6 +239,7 @@ class Admin extends MY_Controller {
             $this->plantilla->mostrar('admin', 'nuevo_empleado', $datos);
         }
     }
+
 
     public function registrar_cliente() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
@@ -750,7 +754,7 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('facturas');
             $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura);
-            $datos['concepto'] = $this->concepto->obtener_concepto($id_factura);
+            $datos['concepto'] = $this->concepto->obtener_conceptos($id_factura);
             $datos['tareas'] = $this->factura_modelo->obtener_tareas($id_factura);
             $datos['total_tareas'] = $this->factura_modelo->sumar_precios($id_factura);
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));

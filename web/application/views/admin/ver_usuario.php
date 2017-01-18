@@ -78,6 +78,7 @@
                                 break;
                         } ?>
                         <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
+                        <li><a href="#editar" data-toggle="tab"><?= $this->lang->line('editar') ?></a></li>
                     </ul>
                     <div class="tab-content">
 
@@ -225,7 +226,60 @@
 
 
                         ?>
+
+                        <div class="tab-pane" id="editar">
+                            <div class="row">
+                            <form id="form-registro-empleado" action="<?= site_url('admin/editar_empleado/' . $usuario['id_usuario']); ?>" method="POST" role="form" data-parsley-errors-messages-disabled="true">
+                                <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
+                                <?php if (isset($mensaje_error)) { ?>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="alert alert-warning alert-dismissable">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                <i class="fa fa-exclamation-circle"></i> <?= $mensaje_error . '.' ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } else if (isset($mensaje)) { ?>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="alert alert-success alert-dismissable">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                <i class="fa fa-check-circle"></i> <?= $mensaje . '.' ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                                <div class="form-group col-md-6 has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?> required">
+                                    <label class="control-label" for="input_usuario"><?= $this->lang->line('usuario'); ?></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="input_usuario" placeholder="<?= $this->lang->line('usuario'); ?>" name="usuario" value="<?= $usuario['usuario']; ?>" required>
+                                    </div>
+                                    <?= form_error('usuario'); ?>
+                                </div>
+                                <div class="form-group col-md-6 has-feedback <?= form_error('email') != '' ? 'has-error ' : '' ?> required">
+                                    <label class="control-label" for="input_email"><?= $this->lang->line('email'); ?></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="ion ion-android-mail"></i>
+                                        </div>
+                                        <input type="email" class="form-control" id="input_email" placeholder="<?= $this->lang->line('email'); ?>" name="email" value="<?= $usuario['email']; ?>" required>
+                                    </div>
+                                    <?= form_error('email'); ?>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-info pull-right"><?= $this->lang->line('guardar'); ?></button>
+                                </div>
+
+                            <!-- /.box-footer -->
+                            </form>
+                        </div>
                         <!-- /.tab-pane -->
+                        </div>
                     </div>
                     <!-- /.tab-content -->
                 </div>
