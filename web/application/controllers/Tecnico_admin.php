@@ -398,4 +398,23 @@ class Tecnico_admin extends MY_Controller {
         }
     }
 
+    public function descargar_archivo($nombre_sin_ext = '', $nombre_original = '') {
+        if ($this->usuario_permitido(USUARIO_TECNICO_ADMIN)) {
+            if (!$nombre_sin_ext || !$nombre_original) {
+                $this->output->set_status_header('404');
+                $this->load->view('error_404');
+            } else {
+                // $ext = substr(strrchr($nombre_original, '.'), 1);
+                $ext = pathinfo($nombre_original, PATHINFO_EXTENSION);
+                $ruta_fichero = './files/' . $nombre_sin_ext . '.' . $ext;
+                if (!file_exists($ruta_fichero)) {
+                    $this->output->set_status_header('404');
+                    $this->load->view('error_404');
+                } else {
+                    forzar_descarga($ruta_fichero, NULL, $nombre_original);
+                }
+            }
+        }
+    }
+
 }

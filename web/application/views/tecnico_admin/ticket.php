@@ -310,7 +310,7 @@
                     $fecha_mensaje = date('d/m/Y H:i', strtotime($mensajes[$i]['fecha']));
                     $fecha_mensaje_anterior = date('d/m/Y H:i', strtotime($mensajes[$i - 1]['fecha']));
 
-                    if (($fecha_mensaje - $fecha_mensaje_anterior) > 0) {
+                    if (($fecha_mensaje - $fecha_mensaje_anterior) > 0 || $i == 1) {
                         ?>
                         <li class="time-label">
                             <span class="bg-red">

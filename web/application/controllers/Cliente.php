@@ -10,11 +10,11 @@ class Cliente extends MY_Controller {
         $this->load->helper('security'); // form_validation -> xss_clean
         $this->load->helper('descarga'); // No se usa download porque no se puede cambiar el nombre del fichero cuando se descarga
         $this->load->library(array('form_validation', 'plantilla', 'upload'));
-        $this->load->model(array('cliente_modelo', 'factura_modelo', 'usuario', 'ticket_modelo', 'notificacion', 'mensaje'));
+        $this->load->model(array('cliente_modelo', 'factura_modelo', 'usuario', 'ticket_modelo', 'notificacion', 'mensaje', 'archivo'));
         $this->upload->initialize(
                 array(
                     'upload_path' => "./files/",
-                    'allowed_types' => "txt|pdf|gif|jpg|jpeg|png|zip",
+                    'allowed_types' => "txt|pdf|gif|jpg|jpeg|png|zip|doc|docx|xls|xlsx|rar|ppt|pptm",
                     'max_size' => "10240", // 10 MB
                     'max_height' => "1080",
                     'max_width' => "1920",
@@ -317,6 +317,25 @@ class Cliente extends MY_Controller {
             $datos['total_tareas'] = $this->factura_modelo->sumar_precios($id_factura);
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
             $this->plantilla->mostrar('cliente', 'imprimir_factura', $datos);
+        }
+    }
+
+    public function descargar_archivo($nombre_sin_ext = '', $nombre_original = '') {
+        if ($this->usuario_permitido(USUARIO_CLIENTE)) {
+            if (!$nombre_sin_ext || !$nombre_original) {
+                $this->output->set_status_header('404');
+                $this->load->view('error_404');
+            } else {
+                // $ext = substr(strrchr($nombre_original, '.'), 1);
+                $ext = pathinfo($nombre_original, PATHINFO_EXTENSION);
+                $ruta_fichero = './files/' . $nombre_sin_ext . '.' . $ext;
+                if (!file_exists($ruta_fichero)) {
+                    $this->output->set_status_header('404');
+                    $this->load->view('error_404');
+                } else {
+                    forzar_descarga($ruta_fichero, NULL, $nombre_original);
+                }
+            }
         }
     }
 
