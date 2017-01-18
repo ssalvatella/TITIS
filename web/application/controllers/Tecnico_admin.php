@@ -6,28 +6,6 @@ class Tecnico_admin extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->helper('form');
-        $this->load->helper('security'); // form_validation -> xss_clean
-        $this->load->helper('descarga'); // No se usa download porque no se puede cambiar el nombre del fichero cuando se descarga
-        $this->load->library(array('form_validation', 'encryption', 'plantilla', 'upload'));
-        $this->load->model(array('usuario', 'cliente_modelo', 'tecnico_admin_modelo', 'ticket_modelo', 'tarea', 'mensaje', 'notificacion', 'factura_modelo', 'archivo'));
-        $this->encryption->initialize(
-                array(
-                    'cipher' => 'aes-256',
-                    'mode' => 'ctr',
-                    'key' => config_item('encryption_key')
-                )
-        );
-        $this->upload->initialize(
-                array(
-                    'upload_path' => "./files/",
-                    'allowed_types' => "txt|pdf|gif|jpg|jpeg|png|zip|doc|docx|xls|xlsx|rar|ppt|pptm",
-                    'max_size' => "10240", // 10 MB
-                    'max_height' => "1080",
-                    'max_width' => "1920",
-                    'encrypt_name' => TRUE
-                )
-        );
     }
 
     public function index() {

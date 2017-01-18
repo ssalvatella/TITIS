@@ -163,7 +163,7 @@
                                     <!-- Menú Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="#" class="btn btn-default btn-flat"><?= $this->lang->line('perfil'); ?></a>
+                                            <a href="<?= $url_pagina . '/perfil'; ?>" class="btn btn-default btn-flat"><?= $this->lang->line('perfil'); ?></a>
                                         </div>
                                         <div class="pull-right">
                                             <a href="<?= site_url('cerrar_sesion'); ?>" class="btn btn-default btn-flat"><?= $this->lang->line('cerrar_sesion'); ?></a>

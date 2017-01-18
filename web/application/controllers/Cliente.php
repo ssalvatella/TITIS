@@ -6,21 +6,6 @@ class Cliente extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->helper('form');
-        $this->load->helper('security'); // form_validation -> xss_clean
-        $this->load->helper('descarga'); // No se usa download porque no se puede cambiar el nombre del fichero cuando se descarga
-        $this->load->library(array('form_validation', 'plantilla', 'upload'));
-        $this->load->model(array('cliente_modelo', 'factura_modelo', 'usuario', 'ticket_modelo', 'notificacion', 'mensaje', 'archivo'));
-        $this->upload->initialize(
-                array(
-                    'upload_path' => "./files/",
-                    'allowed_types' => "txt|pdf|gif|jpg|jpeg|png|zip|doc|docx|xls|xlsx|rar|ppt|pptm",
-                    'max_size' => "10240", // 10 MB
-                    'max_height' => "1080",
-                    'max_width' => "1920",
-                    'encrypt_name' => TRUE
-                )
-        );
     }
 
     public function index() {
@@ -192,6 +177,7 @@ class Cliente extends MY_Controller {
     public function perfil() {
         if ($this->usuario_permitido(USUARIO_CLIENTE)) {
             $datos['titulo'] = $this->lang->line('perfil');
+            $datos['usuario'] = $this->usuario->obtener_datos($this->session->userdata('nombre_usuario'), TRUE);
             $datos['tab_activa'] = 'datos';
             $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/flagstrap/css/flags.css'));
@@ -338,6 +324,7 @@ class Cliente extends MY_Controller {
             }
         }
     }
+
     public function eliminar_mensaje($id_mensaje) {
         $this->mensaje->eliminar_mensaje($id_mensaje);
         redirect('cliente/mensajes/');
@@ -349,6 +336,7 @@ class Cliente extends MY_Controller {
             $this->mensaje->eliminar_mensaje($id);
         }
     }
+
     public function enviar_mensaje_privado($origen, $id_mensaje = '') {
         if ($this->usuario_permitido(USUARIO_CLIENTE)) {
             $id_receptor = $this->input->post('id_receptor');
