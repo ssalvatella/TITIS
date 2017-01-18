@@ -201,6 +201,13 @@
                             </a>
                         </h4>
                         <div class="box-tools pull-right">
+                            <?php
+                            if (isset($mensajes[0]['archivos'])) {
+                                foreach ($mensajes[0]['archivos'] as $archivo) {
+                                    echo '<a data-toggle="tooltip" data-placement="top" title="' . $archivo['nombre_original'] . '" href="' . site_url('tecnico/descargar_archivo/' . $archivo['nombre_archivo'] . '/' . $archivo['nombre_original']) . '"type="button" class="btn btn-box-tool"><i class="fa fa-file" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('fichero') . '"></i></a>';
+                                }
+                            }
+                            ?>
                         </div><!-- /.box-tools -->
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse" aria-expanded="true" style="height: 0px;">

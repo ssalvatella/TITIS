@@ -83,7 +83,7 @@
                                         <?php
                                         foreach ($tickets_pendientes as $ticket) {
                                             echo '<tr style="cursor: pointer;">
-                                            <td>' . $ticket['titulo'] . '</td>
+                                            <td><a  href="' . site_url('tecnico_admin/ver_ticket/' . $ticket['id_ticket']) . '"></a>' . $ticket['titulo'] . '</td>
                                             <td>' . date('d/m/Y H:i', strtotime($ticket['inicio'])) . '</td>
                                             <td>';
                                             switch ($ticket['estado']) {

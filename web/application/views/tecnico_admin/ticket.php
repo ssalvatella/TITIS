@@ -243,6 +243,13 @@
                             </a>
                         </h4>
                         <div class="box-tools pull-right">
+                            <?php
+                            if (isset($mensajes[0]['archivos'])) {
+                                foreach ($mensajes[0]['archivos'] as $archivo) {
+                                    echo '<a data-toggle="tooltip" data-placement="top" title="' . $archivo['nombre_original'] . '" href="' . site_url('tecnico_admin/descargar_archivo/' . $archivo['nombre_archivo'] . '/' . $archivo['nombre_original']) . '"type="button" class="btn btn-box-tool"><i class="fa fa-file" data-toggle="tooltip" data-placement="top" title="' . $this->lang->line('fichero') . '"></i></a>';
+                                }
+                            }
+                            ?>
                             <button type="button" data-toggle="modal" data-target="#modal_editar_descripcion" class="btn btn-box-tool"><i class="fa fa-wrench" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('editar'); ?>"></i></button>
                         </div><!-- /.box-tools -->
                     </div>
