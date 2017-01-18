@@ -136,10 +136,16 @@
                     <div class="tab-content">
                         <div class="<?= $tab_activa == 'tickets' ? 'active' : '' ?> tab-pane" id="activity">
                             <div class="row">
-
-                                <?php
+                                <?php if (sizeof($tickets) == 0) { ?>                                   
+                                    <div class="col-sm-12">
+                                        <div class="alert alert-success alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                            <i class="fa fa-check-circle"></i> <?= $this->lang->line('cliente_no_tiene_tickets') . '.' ?>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
                                 foreach ($tickets as $ticket) {
-
                                     echo '<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">';
                                     echo '<div class="info-box bg-';
                                     switch ($ticket['estado']) {

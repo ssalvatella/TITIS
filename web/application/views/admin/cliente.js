@@ -51,15 +51,11 @@ $(function () {
     });
 
     $('[data-toggle="tooltip"]').tooltip();
-})
+});
 
 $(document).ready(function () {
-    $('.summer').summernote({
-        height: 300,
-        lang: "es-ES"
-    });
-
     $('textarea').summernote({
+        height: 150,
         lang: "es-ES"
     });
 });

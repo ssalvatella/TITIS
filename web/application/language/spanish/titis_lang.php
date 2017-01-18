@@ -37,6 +37,7 @@ $lang['cerrar_sesion'] = 'Cerrar Sesión';
 $lang['ciudad'] = 'Ciudad';
 $lang['cliente'] = 'Cliente';
 $lang['cliente_envio_ticket'] = 'envió el ticket ';
+$lang['cliente_no_tiene_tickets'] = 'El cliente no tiene tickets';
 $lang['cliente_registrado'] = 'Cliente %s registrado correctamente';
 $lang['cliente_se_registro'] = ' se registró en TITIS';
 $lang['clientes'] = 'Clientes';

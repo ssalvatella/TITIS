@@ -34,7 +34,8 @@
                                 case USUARIO_TECNICO_ADMIN:
                                     echo $this->lang->line('tecnico_admin');
                                     break;
-                            } ?></p>
+                            }
+                            ?></p>
 
                         <ul class="list-group list-group-unbordered">
                             <?php
@@ -46,12 +47,13 @@
                                     break;
                                 case USUARIO_TECNICO_ADMIN:
                                     echo '<li class="list-group-item">
-                                                <b>'.  $this->lang->line('tickets') . '</b> <a class="pull-right">' .  $numero_tickets.  ' </a>
+                                                <b>' . $this->lang->line('tickets') . '</b> <a class="pull-right">' . $numero_tickets . ' </a>
                                           </li>';
                                     break;
-                            } ?>
+                            }
+                            ?>
                             <li class="list-group-item">
-                                <b><?= $this->lang->line('comentarios'); ?></b> <a class="pull-right"><?= $numero_comentarios   ; ?></a>
+                                <b><?= $this->lang->line('comentarios'); ?></b> <a class="pull-right"><?= $numero_comentarios; ?></a>
                             </li>
                             <li class="list-group-item">
                                 <b><?= $this->lang->line('registrado'); ?></b> <a class="pull-right"><?= date('d/m/Y H:i', strtotime($usuario['fecha_registro'])); ?></a>
@@ -69,14 +71,15 @@
                         <?php
                         switch ($usuario['tipo']) {
                             case USUARIO_TECNICO:
-                                echo '<li class="'. (isset($mensaje)) ? 'active' : '' . '><a href="#tareas" data-toggle="tab">'.  $this->lang->line('tareas_pendientes') . '</a></li>';
+                                echo '<li class="' . (isset($mensaje)) ? 'active' : '' . '><a href="#tareas" data-toggle="tab">' . $this->lang->line('tareas_pendientes') . '</a></li>';
                                 break;
                             case USUARIO_ADMIN:
                                 break;
                             case USUARIO_TECNICO_ADMIN:
-                                echo '<li ><a href="#tickets" data-toggle="tab">'.  $this->lang->line('tickets') . '</a></li>';
+                                echo '<li ><a href="#tickets" data-toggle="tab">' . $this->lang->line('tickets') . '</a></li>';
                                 break;
-                        }?>
+                        }
+                        ?>
                         <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
                         <li class="<?= (isset($mensaje)) ? 'active' : '' ?>"><a href="#editar" data-toggle="tab"><?= $this->lang->line('editar') ?></a></li>
                     </ul>
@@ -131,7 +134,6 @@
 
                                 <?php
                                 for ($i = 0; $i < count($comentarios); ++$i) {
-
                                     $fecha = date('d/m/Y H:i', strtotime($comentarios[$i]['inicio']));
                                     if ($i == 0) {
                                         echo '<li class="time-label">
@@ -196,89 +198,86 @@
                         <!-- /.tab-pane -->
 
                         <?php
-
-                            if ($usuario['tipo'] == USUARIO_TECNICO) {
-                                echo '<div class="active tab-pane" id="tareas">';
-                                    echo '<div class="row">';
-                                        echo '<div class="box-body">';
-                                        echo ' <ul class="todo-list">';
-                                        foreach ($tareas as $tarea) { ?>
-                                            <li ticket="<?= $tarea['ticket']; ?>" value="<?= $tarea['id_tarea']; ?>" class="<?= $tarea['estado'] == TAREA_FINALIZADA ? 'done' : '' ?>">
-                                                        <span class="handle">
-                                                            <i class="fa fa-ellipsis-v"></i>
-                                                            <i class="fa fa-ellipsis-v"></i>
-                                                        </span>
-                                                <input readonly="readonly" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('completar_tarea'); ?>" type="checkbox"<?= $tarea['estado'] == TAREA_FINALIZADA ? ' checked ' : ' ' ?>>
-                                                <span class="text"><?= $tarea['nombre']; ?></span>
-                                                <span class="label label-primary"><i class="fa fa-wrench"></i> &nbsp;<?= $tarea['nombre_tecnico']; ?></span>
-                                                <div class="tools">
-                                                    <?php if ($tarea['estado'] == TAREA_FINALIZADA) { ?>
-                                                        <i style="margin-right: 10px" class="label label-info fecha_fin"><i class="fa fa-calendar"></i> &nbsp;<?= $tarea['fin']; ?></i>
-                                                    <?php } ?>
-                                                </div>
-                                            </li>
-                                        <?php }
-                                     echo ' </ul> ';
-                                    echo '</div>';
-                                    echo '</div>';
-                                echo '</div>';
+                        if ($usuario['tipo'] == USUARIO_TECNICO) {
+                            echo '<div class="active tab-pane" id="tareas">';
+                            echo '<div class="row">';
+                            echo '<div class="box-body">';
+                            echo ' <ul class="todo-list">';
+                            foreach ($tareas as $tarea) {
+                                ?>
+                                <li ticket="<?= $tarea['ticket']; ?>" value="<?= $tarea['id_tarea']; ?>" class="<?= $tarea['estado'] == TAREA_FINALIZADA ? 'done' : '' ?>">
+                                    <span class="handle">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </span>
+                                    <input readonly="readonly" data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('completar_tarea'); ?>" type="checkbox"<?= $tarea['estado'] == TAREA_FINALIZADA ? ' checked ' : ' ' ?>>
+                                    <span class="text"><?= $tarea['nombre']; ?></span>
+                                    <span class="label label-primary"><i class="fa fa-wrench"></i> &nbsp;<?= $tarea['nombre_tecnico']; ?></span>
+                                    <div class="tools">
+                                        <?php if ($tarea['estado'] == TAREA_FINALIZADA) { ?>
+                                            <i style="margin-right: 10px" class="label label-info fecha_fin"><i class="fa fa-calendar"></i> &nbsp;<?= $tarea['fin']; ?></i>
+                                        <?php } ?>
+                                    </div>
+                                </li>
+                                <?php
                             }
-
-
+                            echo ' </ul> ';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
                         ?>
 
                         <div class="<?= (isset($mensaje)) ? 'active' : '' ?> tab-pane" id="editar">
                             <div class="row">
-                            <form id="form-registro-empleado" action="<?= site_url('admin/ver_usuario/' . $usuario['id_usuario']); ?>" method="POST" role="form" data-parsley-errors-messages-disabled="true">
-                                <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
-                                <?php if (isset($mensaje_error)) { ?>
-                                    <div class="row">
+                                <form id="form-registro-empleado" action="<?= site_url('admin/ver_usuario/' . $usuario['id_usuario']); ?>" method="POST" role="form" data-parsley-errors-messages-disabled="true">
+                                    <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
+                                    <?php if (isset($mensaje_error)) { ?>
                                         <div class="col-sm-12">
                                             <div class="alert alert-warning alert-dismissable">
                                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                                 <i class="fa fa-exclamation-circle"></i> <?= $mensaje_error . '.' ?>
                                             </div>
                                         </div>
-                                    </div>
-                                <?php } else if (isset($mensaje)) { ?>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="alert alert-success alert-dismissable">
-                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                                <i class="fa fa-check-circle"></i> <?= $mensaje . '.' ?>
+                                    <?php } else if (isset($mensaje)) { ?>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="alert alert-success alert-dismissable">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    <i class="fa fa-check-circle"></i> <?= $mensaje . '.' ?>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                <?php } ?>
-                                <div class="form-group col-md-6 has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?> required">
-                                    <label class="control-label" for="input_usuario"><?= $this->lang->line('usuario'); ?></label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-user"></i>
+                                    <?php } ?>
+                                    <div class="form-group col-md-6 has-feedback <?= form_error('usuario') != '' ? 'has-error ' : '' ?> required">
+                                        <label class="control-label" for="input_usuario"><?= $this->lang->line('usuario'); ?></label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </div>
+                                            <input type="text" class="form-control" id="input_usuario" placeholder="<?= $this->lang->line('usuario'); ?>" name="usuario" value="<?= $usuario['usuario']; ?>" required>
                                         </div>
-                                        <input type="text" class="form-control" id="input_usuario" placeholder="<?= $this->lang->line('usuario'); ?>" name="usuario" value="<?= $usuario['usuario']; ?>" required>
+                                        <?= form_error('usuario'); ?>
                                     </div>
-                                    <?= form_error('usuario'); ?>
-                                </div>
-                                <div class="form-group col-md-6 has-feedback <?= form_error('email') != '' ? 'has-error ' : '' ?> required">
-                                    <label class="control-label" for="input_email"><?= $this->lang->line('email'); ?></label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="ion ion-android-mail"></i>
+                                    <div class="form-group col-md-6 has-feedback <?= form_error('email') != '' ? 'has-error ' : '' ?> required">
+                                        <label class="control-label" for="input_email"><?= $this->lang->line('email'); ?></label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="ion ion-android-mail"></i>
+                                            </div>
+                                            <input type="email" class="form-control" id="input_email" placeholder="<?= $this->lang->line('email'); ?>" name="email" value="<?= $usuario['email']; ?>" required>
                                         </div>
-                                        <input type="email" class="form-control" id="input_email" placeholder="<?= $this->lang->line('email'); ?>" name="email" value="<?= $usuario['email']; ?>" required>
+                                        <?= form_error('email'); ?>
                                     </div>
-                                    <?= form_error('email'); ?>
-                                </div>
-                                <!-- /.box-body -->
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-info pull-right"><?= $this->lang->line('guardar'); ?></button>
-                                </div>
+                                    <!-- /.box-body -->
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-info pull-right"><?= $this->lang->line('guardar'); ?></button>
+                                    </div>
 
-                            <!-- /.box-footer -->
-                            </form>
-                        </div>
-                        <!-- /.tab-pane -->
+                                    <!-- /.box-footer -->
+                                </form>
+                            </div>
+                            <!-- /.tab-pane -->
                         </div>
                     </div>
                     <!-- /.tab-content -->
