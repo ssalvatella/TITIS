@@ -162,6 +162,12 @@ class Cliente extends MY_Controller {
                 ];
                 $this->archivo->registrar_archivo($datos_archivo);
             }
+            $notificacion = [
+                'url' => 'ver_ticket/' . $id_ticket,
+                'texto' => 'notif_comentario_ticket',
+                'parametros' => $this->session->userdata('nombre_usuario')
+            ];
+            $this->notificacion->insertar_notificacion_ticket($id_ticket, $this->session->userdata('id_usuario'), $this->input->post('destinatario'), $notificacion);
         } else {
             $datos['error'] = 1;
         }
@@ -318,4 +324,5 @@ class Cliente extends MY_Controller {
             $this->plantilla->mostrar('cliente', 'imprimir_factura', $datos);
         }
     }
+
 }

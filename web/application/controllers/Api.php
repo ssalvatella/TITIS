@@ -697,6 +697,13 @@ class Api extends REST_Controller {
             'destinatario' => $destinatario
         ];
 
+        $notificacion = [
+            'url' => 'ver_ticket/' . $id_ticket,
+            'texto' => 'notif_comentario_ticket',
+            'parametros' => $this->usuario->obtener_datos_por_id($id_usuario)['usuario']
+        ];
+        $this->notificacion->insertar_notificacion_ticket($id_ticket, $this->session->userdata('id_usuario'), $this->input->post('destinatario'), $notificacion);
+
         $this->response([
             'status' => TRUE,
             'datos' => $this->mensaje->registrar_mensaje($datos_mensaje)
