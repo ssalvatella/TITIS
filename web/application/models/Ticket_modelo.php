@@ -44,7 +44,7 @@ class Ticket_modelo extends CI_Model {
         $this->db->join('Usuario as tecnico', 'tarea.tecnico = tecnico.id_usuario AND tarea.tecnico = ' . $id_tecnico);
         $this->db->limit($cantidad, $inicio);
 
-        $tickets = $this->db->get()->result_array();
+        $tickets = $this->db->distinct()->get()->result_array();
         foreach ($tickets as $clave => $ticket) {
             $total_tareas = $this->tarea->contar_tareas($ticket['id_ticket']);
             $tareas_completadas = $this->tarea->contar_tareas($ticket['id_ticket'], TAREA_FINALIZADA);

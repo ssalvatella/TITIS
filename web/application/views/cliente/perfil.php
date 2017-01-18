@@ -70,12 +70,7 @@
                                         </li>
                                         <li class="list-group-item">
                                             <b><?= $this->lang->line('numero_cuenta'); ?></b> <a class="pull-right"><?= $cliente['numero_cuenta']; ?></a>
-                                        </li>
-                                        <?php if ($cliente['observacion'] != NULL) { ?>
-                                            <li class="list-group-item">
-                                                <b><?= $this->lang->line('observaciones'); ?></b> <a class="pull-right"><?= $cliente['observacion']; ?></a>
-                                            </li>
-                                        <?php } ?>
+                                        </li>    
                                     </ul>
                                 </div>
                             </div>
@@ -210,14 +205,7 @@
                                         <input type="text" class="form-control" id="numero_cuenta" name="numero_cuenta" placeholder="<?= $this->lang->line('numero_cuenta'); ?>" value="<?= $cliente['numero_cuenta']; ?>" required>
                                         <?= form_error('numero_cuenta'); ?>
                                     </div>
-                                </div>
-                                <div class="form-group has-feedback <?= form_error('observaciones') != '' ? 'has-error ' : '' ?>">
-                                    <label for="observaciones" class="col-sm-2 control-label"><?= $this->lang->line('observaciones'); ?></label>
-                                    <div class="col-sm-10">
-                                        <textarea type="text" class="form-control" id="observaciones" placeholder="<?= $this->lang->line('observaciones') . '...'; ?>" name="observaciones"><?= $cliente['observacion']; ?></textarea>
-                                        <?= form_error('observaciones'); ?>
-                                    </div>
-                                </div>
+                                </div>                                
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <button type="submit" class="btn btn-danger"><?= $this->lang->line('actualizar'); ?></button>

@@ -106,11 +106,7 @@ class Admin extends MY_Controller {
     public function ver_cliente($id_cliente) {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('cliente');
-            $datos['cliente'] = $this->cliente_modelo->obtener_cliente($id_cliente);
-            $datos['numero_tickets'] = $this->ticket_modelo->contar_tickets_cliente($id_cliente);
-            $datos['tickets'] = $this->cliente_modelo->obtener_tickets($id_cliente);
-            $datos['numero_mensajes'] = $this->mensaje->contar_comentarios_usuario($datos['cliente']['id_usuario']);
-            $datos['facturas'] = $this->cliente_modelo->obtener_facturas($id_cliente);
+            $datos['tab_activa'] = 'tickets';
             $this->plantilla->poner_css(site_url('assets/plugins/summernote/summernote.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/summernote/summernote.min.js'));
             if ($this->session->userdata('idioma') == 'spanish') {
@@ -127,7 +123,76 @@ class Admin extends MY_Controller {
             if ($this->session->userdata('idioma') == 'spanish') {
                 $this->plantilla->poner_js(site_url('assets/plugins/select2/i18n/es.js'));
             }
-
+            $this->plantilla->poner_js(site_url('assets/plugins/input-mask/jquery.inputmask.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/input-mask/jquery.inputmask.extensions.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/flagstrap/css/flags.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/flagstrap/js/jquery.flagstrap.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css'));
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $datos['tab_activa'] = 'editar';
+                $this->form_validation->set_error_delimiters('<div class="help-block">', '</div>');
+                $this->form_validation->set_rules('nombre', $this->lang->line('nombre'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('cp', $this->lang->line('cp'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('direccion', $this->lang->line('direccion'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('pais', $this->lang->line('pais'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('provincia', $this->lang->line('provincia'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('localidad', $this->lang->line('localidad'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('nif', $this->lang->line('nif'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('telefono', $this->lang->line('telefono'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('numero_cuenta', $this->lang->line('numero_cuenta'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('contacto', $this->lang->line('contacto'), 'trim|xss_clean');
+                $this->form_validation->set_rules('email_opcional', $this->lang->line('email_opcional'), 'trim|valid_email|xss_clean|is_unique[Cliente.email_opcional]');
+                $this->form_validation->set_rules('observaciones', $this->lang->line('observaciones'), 'trim|xss_clean');
+                if ($this->form_validation->run() == TRUE) {
+                    $nombre = $this->input->post('nombre');
+                    $cp = $this->input->post('cp');
+                    $direccion = $this->input->post('direccion');
+                    $pais = $this->input->post('pais');
+                    $provincia = $this->input->post('provincia');
+                    $localidad = $this->input->post('localidad');
+                    $nif = $this->input->post('nif');
+                    $telefono = $this->input->post('telefono');
+                    $telefono = str_replace("+34 ", "", $telefono);
+                    $telefono = str_replace("-", "", $telefono);
+                    $numero_cuenta = $this->input->post('numero_cuenta');
+                    $contacto = $this->input->post('contacto');
+                    $email_opcional = $this->input->post('email_opcional');
+                    $observacion = $this->input->post('observaciones');
+                    $datos_cliente = [
+                        'nombre' => $nombre,
+                        'cp' => $cp,
+                        'direccion' => $direccion,
+                        'pais' => $pais,
+                        'provincia' => $provincia,
+                        'localidad' => $localidad,
+                        'nif' => $nif,
+                        'telefono' => $telefono,
+                        'numero_cuenta' => $numero_cuenta
+                    ];
+                    if ($contacto != NULL) {
+                        $datos_cliente['contacto'] = $contacto;
+                    }
+                    if ($email_opcional != NULL) {
+                        $datos_cliente['email_opcional'] = $email_opcional;
+                    }
+                    if ($observacion != NULL) {
+                        $datos_cliente['observacion'] = $observacion;
+                    }
+                    $this->cliente_modelo->modificar_datos($id_cliente, $datos_cliente);
+                    $datos['mensaje'] = $this->lang->line('perfil_actualizado');
+                }
+            }
+            $datos['cliente'] = $this->cliente_modelo->obtener_cliente($id_cliente);
+            $datos['numero_tickets'] = $this->ticket_modelo->contar_tickets_cliente($id_cliente);
+            $datos['tickets'] = $this->cliente_modelo->obtener_tickets($id_cliente);
+            $datos['numero_mensajes'] = $this->mensaje->contar_comentarios_usuario($datos['cliente']['id_usuario']);
+            $datos['facturas'] = $this->cliente_modelo->obtener_facturas($id_cliente);
+            $datos['id_cliente'] = $id_cliente;
             $this->plantilla->mostrar('admin', 'cliente', $datos);
         }
     }

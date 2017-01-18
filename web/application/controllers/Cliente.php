@@ -242,7 +242,6 @@ class Cliente extends MY_Controller {
                     $this->form_validation->set_rules('numero_cuenta', $this->lang->line('numero_cuenta'), 'trim|required|xss_clean');
                     $this->form_validation->set_rules('contacto', $this->lang->line('contacto'), 'trim|xss_clean');
                     $this->form_validation->set_rules('email_opcional', $this->lang->line('email_opcional'), 'trim|valid_email|xss_clean|is_unique[Cliente.email_opcional]');
-                    $this->form_validation->set_rules('observaciones', $this->lang->line('observaciones'), 'trim|xss_clean');
                     if ($this->form_validation->run() == TRUE) {
                         $nombre = $this->input->post('nombre');
                         $cp = $this->input->post('cp');
@@ -257,7 +256,6 @@ class Cliente extends MY_Controller {
                         $numero_cuenta = $this->input->post('numero_cuenta');
                         $contacto = $this->input->post('contacto');
                         $email_opcional = $this->input->post('email_opcional');
-                        $observacion = $this->input->post('observaciones');
                         $datos_cliente = [
                             'nombre' => $nombre,
                             'cp' => $cp,
@@ -274,9 +272,6 @@ class Cliente extends MY_Controller {
                         }
                         if ($email_opcional != NULL) {
                             $datos_cliente['email_opcional'] = $email_opcional;
-                        }
-                        if ($observacion != NULL) {
-                            $datos_cliente['observacion'] = $observacion;
                         }
                         $this->cliente_modelo->modificar_datos($this->session->userdata('id_cliente'), $datos_cliente);
                         $datos['mensaje'] = $this->lang->line('perfil_actualizado');

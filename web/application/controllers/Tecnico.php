@@ -47,7 +47,7 @@ class Tecnico extends MY_Controller {
     public function tickets() {
         if ($this->usuario_permitido(USUARIO_TECNICO)) {
             $datos['titulo'] = $this->lang->line('tickets');
-            $datos['tickets'] = $this->ticket_modelo->obtener_tickets_tecnico(null, null, $this->session->userdata('id_usuario'));
+            $datos['tickets'] = $this->ticket_modelo->obtener_tickets_tecnico(0, 9999, $this->session->userdata('id_usuario'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));

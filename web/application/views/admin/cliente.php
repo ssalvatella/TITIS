@@ -20,13 +20,13 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('enviar_mensaje'); ?></h4>
                 </div>
-                <form enctype="multipart/form-data" id ="enviar_mensaje_form" method="POST" action="<?= site_url('admin/enviar_mensaje_privado/'. $this->uri->segment(2) . '/' .$this->uri->segment(3)) ; ?>" >
+                <form enctype="multipart/form-data" id ="enviar_mensaje_form" method="POST" action="<?= site_url('admin/enviar_mensaje_privado/' . $this->uri->segment(2) . '/' . $this->uri->segment(3)); ?>" >
                     <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                     <div class="modal-body">
                         <div class="form-group">
                             <label><?= $this->lang->line('usuario'); ?></label>
                             <select readonly="readonly" name="id_receptor" required id = "seleccion_usuarios" class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                <?=  '<option value="' . $cliente['id_usuario'] . '"> ' . $cliente['nombre'] . '</option>';?>
+                                <?= '<option value="' . $cliente['id_usuario'] . '"> ' . $cliente['nombre'] . '</option>'; ?>
                             </select>
                         </div>
                         <div class="form-group">
@@ -107,7 +107,7 @@
 
                         <p>
                         <p class="text-muted">
-                            <?= $cliente['telefono'] ?>
+                            <?= '+34 ' . substr($cliente['telefono'], 0, 3) . '-' . substr($cliente['telefono'], 3, 3) . '-' . substr($cliente['telefono'], 6, 3); ?>
                         </p>
                         </p>
 
@@ -128,13 +128,13 @@
             <div class="col-md-9">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#activity" data-toggle="tab"><?= $this->lang->line('tickets_enviados'); ?></a></li>
+                        <li class="<?= $tab_activa == 'tickets' ? 'active' : '' ?>"><a href="#activity" data-toggle="tab"><?= $this->lang->line('tickets_enviados'); ?></a></li>
                         <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-                        <li><a href="#settings" data-toggle="tab"><?= $this->lang->line('editar'); ?></a></li>
                         <li><a href="#invoices" data-toggle="tab"><?= $this->lang->line('facturas'); ?></a></li>
+                        <li class="<?= $tab_activa == 'editar' ? 'active' : '' ?>"><a href="#settings" data-toggle="tab"><?= $this->lang->line('editar'); ?></a></li>                        
                     </ul>
                     <div class="tab-content">
-                        <div class="active tab-pane" id="activity">
+                        <div class="<?= $tab_activa == 'tickets' ? 'active' : '' ?> tab-pane" id="activity">
                             <div class="row">
 
                                 <?php
@@ -245,73 +245,122 @@
                         </div>
                         <!-- /.tab-pane -->
 
-                        <div class="tab-pane" id="settings">
-                            <form class="form-horizontal">
-                                <div class="form-group">
-                                    <label for="inputName" class="col-sm-2 control-label"><?= $this->lang->line('nombre'); ?></label>
-
-                                    <div class="col-sm-10">
-                                        <input value="<?= $cliente['nombre'] ?>" type="email" class="form-control" id="inputName" placeholder="<?= $this->lang->line('nombre'); ?>">
+                        <div class="<?= $tab_activa == 'editar' ? 'active' : '' ?> tab-pane" id="settings">
+                            <?php if (isset($mensaje_error)) { ?>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="alert alert-warning alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                            <i class="fa fa-exclamation-circle"></i> <?= $mensaje_error . '.' ?>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-                                    <div class="col-sm-10">
-                                        <input  value="<?= $cliente['email'] ?>" type="email" class="form-control" id="inputEmail" placeholder="Email">
+                            <?php } else if (isset($mensaje)) { ?>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="alert alert-success alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                            <i class="fa fa-check-circle"></i> <?= $mensaje . '.' ?>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputDireccion" class="col-sm-2 control-label"><?= $this->lang->line('direccion'); ?></label>
-
+                            <?php } ?>
+                            <form id="form-editar" class="form-horizontal"  action="<?= site_url('admin/ver_cliente/' . $id_cliente); ?>" method="POST" role="form" data-parsley-errors-messages-disabled="true">
+                                <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
+                                <input type="hidden" name="id_cliente" value="<?= $id_cliente; ?>" />
+                                <div class="form-group has-feedback <?= form_error('nombre') != '' ? 'has-error ' : '' ?> required">
+                                    <label for="nombre" class="col-sm-2 control-label"><?= $this->lang->line('nombre'); ?></label>
                                     <div class="col-sm-10">
-                                        <input value="<?= $cliente['direccion'] ?>" type="text" class="form-control" id="inputDireccion" placeholder="<?= $this->lang->line('direccion'); ?>">
+                                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="<?= $this->lang->line('nombre'); ?>" value="<?= $cliente['nombre']; ?>" required>
+                                        <?= form_error('nombre'); ?>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputLocalidad" class="col-sm-2 control-label"><?= $this->lang->line('localidad'); ?></label>
-
+                                <div class="form-group has-feedback <?= form_error('email_opcional') != '' ? 'has-error ' : '' ?>">
+                                    <label for="email_opcional" class="col-sm-2 control-label"><?= $this->lang->line('email_opcional'); ?></label>
                                     <div class="col-sm-10">
-                                        <input value="<?= $cliente['localidad'] ?>" type="text" class="form-control" id="inputLocalidad" placeholder="<?= $this->lang->line('localidad'); ?>">
+                                        <input type="email" class="form-control" id="email_opcional" name="email_opcional" placeholder="<?= $this->lang->line('email_opcional'); ?>" value="<?= $cliente['email_opcional']; ?>">
+                                        <?= form_error('email_opcional'); ?>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputProvincia" class="col-sm-2 control-label"><?= $this->lang->line('provincia'); ?></label>
-
+                                <div class="form-group has-feedback <?= form_error('pais') != '' ? 'has-error ' : '' ?> required">
+                                    <label for="pais" class="col-sm-2 control-label"><?= $this->lang->line('pais'); ?></label>
                                     <div class="col-sm-10">
-                                        <input value="<?= $cliente['provincia'] ?>" type="text" class="form-control" id="inputProvincia" placeholder="<?= $this->lang->line('provincia'); ?>">
+                                        <div id="pais" class="flagstrap" data-input-name="pais" data-input-name="<?= $this->lang->line('pais'); ?>" data-selected-country="<?= ($cliente['pais'] != NULL) ? $cliente['pais'] : 'ES' ?>" required></div>
+                                        <?= form_error('pais'); ?>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputPais" class="col-sm-2 control-label"><?= $this->lang->line('pais'); ?></label>
-
+                                <div class="form-group has-feedback <?= form_error('povincia') != '' ? 'has-error ' : '' ?> required">
+                                    <label for="provincia" class="col-sm-2 control-label"><?= $this->lang->line('provincia'); ?></label>
                                     <div class="col-sm-10">
-                                        <input value="<?= $cliente['pais'] ?>" type="text" class="form-control" id="inputPais" placeholder="<?= $this->lang->line('pais'); ?>">
+                                        <input type="text" class="form-control" id="provincia" name="provincia" placeholder="<?= $this->lang->line('provincia'); ?>" value="<?= $cliente['provincia']; ?>" required>
+                                        <?= form_error('provincia'); ?>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputTelefono" class="col-sm-2 control-label"><?= $this->lang->line('numero_telefono'); ?></label>
-
+                                <div class="form-group has-feedback <?= form_error('localidad') != '' ? 'has-error ' : '' ?> required">
+                                    <label for="localidad" class="col-sm-2 control-label"><?= $this->lang->line('localidad'); ?></label>
                                     <div class="col-sm-10">
-                                        <input value="<?= $cliente['telefono'] ?>" type="text" class="form-control" id="inputTelefono" placeholder="<?= $this->lang->line('telefono'); ?>">
+                                        <input type="text" class="form-control" id="localidad" name="localidad" placeholder="<?= $this->lang->line('localidad'); ?>" value="<?= $cliente['localidad']; ?>" required>
+                                        <?= form_error('localidad'); ?>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputObservaciones" class="col-sm-2 control-label"><?= $this->lang->line('observaciones'); ?></label>
-
+                                <div class="form-group has-feedback <?= form_error('cp') != '' ? 'has-error ' : '' ?> required">
+                                    <label for="cp" class="col-sm-2 control-label"><?= $this->lang->line('cp'); ?></label>
                                     <div class="col-sm-10">
-                                        <textarea value="<?= $cliente['observacion'] ?>" type="text" class="form-control" id="inputObservaciones" placeholder="<?= $this->lang->line('observaciones'); ?>"></textarea>
+                                        <input type="number" class="form-control" id="cp" name="cp" placeholder="<?= $this->lang->line('cp'); ?>" value="<?= $cliente['cp']; ?>" required>
+                                        <?= form_error('cp'); ?>
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback <?= form_error('povincia') != '' ? 'has-error ' : '' ?> required">
+                                    <label for="direccion" class="col-sm-2 control-label"><?= $this->lang->line('direccion'); ?></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="<?= $this->lang->line('direccion'); ?>" value="<?= $cliente['direccion']; ?>" required>
+                                        <?= form_error('direccion'); ?>
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback <?= form_error('nif') != '' ? 'has-error ' : '' ?> required">
+                                    <label for="nif" class="col-sm-2 control-label"><?= $this->lang->line('nif'); ?></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="nif" name="nif" placeholder="<?= $this->lang->line('nif'); ?>" value="<?= $cliente['nif']; ?>" required>
+                                        <?= form_error('nif'); ?>
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback <?= form_error('contacto') != '' ? 'has-error ' : '' ?>">
+                                    <label for="contacto" class="col-sm-2 control-label"><?= $this->lang->line('contacto'); ?></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="contacto" name="contacto" placeholder="<?= $this->lang->line('contacto'); ?>" value="<?= $cliente['contacto']; ?>">
+                                        <?= form_error('contacto'); ?>
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback <?= form_error('telefono') != '' ? 'has-error ' : '' ?> required">
+                                    <label for="telefono" class="col-sm-2 control-label"><?= $this->lang->line('telefono'); ?></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="<?= $this->lang->line('telefono'); ?>" value="<?= $cliente['telefono']; ?>" data-inputmask='"mask": "+34 999-999-999"' data-mask required>
+                                        <?= form_error('telefono'); ?>
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback <?= form_error('numero_cuenta') != '' ? 'has-error ' : '' ?> required">
+                                    <label for="numero_cuenta" class="col-sm-2 control-label"><?= $this->lang->line('numero_cuenta'); ?></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="numero_cuenta" name="numero_cuenta" placeholder="<?= $this->lang->line('numero_cuenta'); ?>" value="<?= $cliente['numero_cuenta']; ?>" required>
+                                        <?= form_error('numero_cuenta'); ?>
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback <?= form_error('observaciones') != '' ? 'has-error ' : '' ?>">
+                                    <label for="observaciones" class="col-sm-2 control-label"><?= $this->lang->line('observaciones'); ?></label>
+                                    <div class="col-sm-10">
+                                        <textarea type="text" class="form-control" id="observaciones" placeholder="<?= $this->lang->line('observaciones') . '...'; ?>" name="observaciones"><?= $cliente['observacion']; ?></textarea>
+                                        <?= form_error('observaciones'); ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                        <button type="submit" class="btn btn-danger"><?= $this->lang->line('actualizar'); ?></button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <!-- /.tab-pane -->
-                        
+
                         <div class="tab-pane" id="invoices">
                             <a href="javascript:history.go(0)" class="btn btn-app"><i class="fa fa-spin fa-refresh"></i><?= $this->lang->line('actualizar'); ?></a>
                             <table data-link="" id="facturas" class="table table-bordered table-hover display nowrap">
@@ -330,7 +379,7 @@
                                                 <td><a href="' . site_url('admin/ver_factura/' . $factura['id_factura']) . '"></a>' . $factura['id_factura'] . '</td>
                                                 <td><a href="' . site_url('admin/ver_ticket/' . $factura['id_ticket']) . '">' . $factura['id_ticket'] . '</a></td>
                                                 <td>' . $factura['precio'] . '</td>
-                                                <td>' . round((float)$factura['iva'] * 100 ) . ' %' . '</td>
+                                                <td>' . round((float) $factura['iva'] * 100) . ' %' . '</td>
                                             </tr>
                                              ';
                                     }
