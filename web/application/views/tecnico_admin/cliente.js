@@ -30,20 +30,6 @@ $(function () {
         language: 'es'
     });
 
-    $('#facturas').DataTable({
-        "paging": true,
-        "lengthChane": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "stateSave": true,
-        "autoWidth": false,
-        "responsive": true,
-        "fnInitComplete": function () {
-            $("#cargador").hide();
-        }
-    });
-
     $("[data-mask]").inputmask();
 
     $('#pais').flagStrap({

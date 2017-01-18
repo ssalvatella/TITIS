@@ -131,11 +131,6 @@
                                         echo $this->lang->line('no_asignado');
                                     }
                                     ?></span>
-                                <?php
-                                if (!isset($ticket['tecnico_admin'])) {
-                                    echo '<button data-toggle="modal" data-target="#modal_asignar" style="min-width: 100px" class="col-xs-offset-3 col-xs-6 col-sm-offset-0 btn bg-orange btn-flat btn-sm"> <i class="ionicons ion-person-add"></i> &nbsp;' . $this->lang->line('asignar') . ' </button>';
-                                }
-                                ?>
                             </div><!-- /.info-box-content -->
                         </div><!-- /.info-box -->
                     </div>

@@ -56,9 +56,8 @@ class Notificacion extends CI_Model {
         if ($this->db->insert('Notificacion', $datos)) {
             $id_notificacion = $this->db->insert_id();
             $usuarios = $this->ticket_modelo->obtener_datos_usuarios($id_ticket);
-
             foreach ($usuarios as $u) {
-                if ($u['tipo'] <= $destinatarios) {
+                if ($u['tipo'] <= $destinatarios && $u['id_usuario'] != $id_usuario) {
                     $datos_dn = [
                         'notificacion' => $id_notificacion,
                         'usuario' => $u['id_usuario']
@@ -75,11 +74,13 @@ class Notificacion extends CI_Model {
             $id_notificacion = $this->db->insert_id();
             $usuarios = $this->ticket_modelo->obtener_datos_empleados($id_ticket);
             foreach ($usuarios as $u) {
-                $datos_dn = [
-                    'notificacion' => $id_notificacion,
-                    'usuario' => $u['id_usuario']
-                ];
-                $this->db->insert('Destinatario_notificacion', $datos_dn);
+                if ($u['id_usuario'] != $id_usuario) {
+                    $datos_dn = [
+                        'notificacion' => $id_notificacion,
+                        'usuario' => $u['id_usuario']
+                    ];
+                    $this->db->insert('Destinatario_notificacion', $datos_dn);
+                }
             }
         }
     }

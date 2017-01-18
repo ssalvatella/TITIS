@@ -140,92 +140,7 @@ $(document).ready(function () {
     });
 });
 
-$('.boton-guardar-mensaje').hide(); // Oculta los botones de guardar los mensajes
-$('.boton-cancelar-mensaje').hide(); // Oculta los botones de cancelar los mensajes
-
-function editar_mensaje(elem) {
-    $(elem).hide(); // Oculta el botón de editar
-    var boton_guardar = elem.nextElementSibling;
-    var boton_cancelar = boton_guardar.nextElementSibling;
-    $(boton_guardar).show()
-    $(boton_cancelar).show()
-    var parent = elem.parentNode;
-    var siguiente_div = parent.nextElementSibling;
-    var mensaje_div = siguiente_div.children[0];
-    $(mensaje_div).summernote({focus: true});
-}
-
-function guardar_mensaje(elem) {
-    $(elem).hide(); // Oculta el botón de guardar
-    var boton_editar = elem.previousElementSibling;
-    var boton_cancelar = elem.nextElementSibling;
-    $(boton_editar).show()
-    $(boton_cancelar).hide()
-    var parent = elem.parentNode;
-    var siguiente_div = parent.nextElementSibling;
-    var mensaje_div = siguiente_div.children[0];
-
-    var id_mensaje = $(elem).val();
-    var mensaje = $(mensaje_div).summernote('code');
-    $(mensaje_div).summernote('destroy');
-
-    $.ajax({
-        url: url_pagina + '/editar_mensaje',
-        type: 'POST',
-        data: {token_csrf: Cookies.get('token_csrf'), id_mensaje: id_mensaje, mensaje: mensaje},
-        success: function (data) {
-            /* setTimeout(function () {
-             window.location.reload(true);
-             }, 1500);*/
-            $.notify({
-                icon: 'glyphicon glyphicon-ok',
-                title: '<strong>Mensaje editado!</strong>',
-                message: 'El mensaje ha sido editado con éxito.',
-            }, {
-                type: 'success', delay: 100
-            });
-        }
-    });
-}
-
-function cancelar_mensaje(elem) {
-    $(elem).hide(); // Oculta el botón de cancelar
-    boton_guardar = elem.previousElementSibling;
-    boton_editar = boton_guardar.previousElementSibling;
-    $(boton_guardar).hide()
-    $(boton_editar).show()
-    var parent = elem.parentNode;
-    var siguiente_div = parent.nextElementSibling;
-    var mensaje_div = siguiente_div.children[0];
-    $(mensaje_div).summernote('destroy');
-}
-
-
 $(function () {
-    $('#asigna_tecnico_admin_form').on('submit', function (e) {
-        e.preventDefault();
-        var id_ticket = window.location.pathname.split('/').pop();
-        var id_tecnico_admin = $("#seleccion_tecnicos_admins").val();
-        $.ajax({
-            url: url_pagina + '/asignar_ticket',
-            type: 'POST',
-            data: {token_csrf: Cookies.get('token_csrf'), id_ticket: id_ticket, id_tecnico_admin: id_tecnico_admin},
-            success: function (data) {
-                setTimeout(function () {
-                    window.location.reload(true);
-                }, 1500);
-                $.notify({
-                    icon: 'glyphicon glyphicon-ok',
-                    title: '<strong>Técnico asignado!</strong>',
-                    message: 'El técnico ha sido asignado!',
-                }, {
-                    type: 'success', delay: 100
-                });
-            }
-        });
-        $('#modal_asignar').modal('hide');
-    });
-
     $('#crear_tarea_form').on('submit', function (e) {
         e.preventDefault();
         var id_ticket = window.location.pathname.split('/').pop();
@@ -273,30 +188,6 @@ $(function () {
             }
         });
         $('#modal_editar_tarea').modal('hide');
-    });
-
-    $('#editar_descripcion_form').on('submit', function (e) {
-        e.preventDefault();
-        var id_descripcion = $("#id_descripcion").val();
-        var descripcion = $('#textarea_descripcion').val();
-        $.ajax({
-            url: url_pagina + '/editar_descripcion',
-            type: 'POST',
-            data: {token_csrf: Cookies.get('token_csrf'), id_descripcion: id_descripcion, descripcion: descripcion},
-            success: function (data) {
-                setTimeout(function () {
-                    window.location.reload(true);
-                }, 1500);
-                $.notify({
-                    icon: 'glyphicon glyphicon-ok',
-                    title: '<strong>Descripción editada!</strong>',
-                    message: 'La descripción ha sido editada con éxito.',
-                }, {
-                    type: 'success', delay: 100
-                });
-            }
-        });
-        $('#modal_editar_descripcion').modal('hide');
     });
 
     $(".boton_editar").on("click", function () {

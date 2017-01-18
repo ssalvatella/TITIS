@@ -180,11 +180,6 @@ class Tecnico_admin extends MY_Controller {
             $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/flagstrap/css/flags.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/flagstrap/js/jquery.flagstrap.min.js'));
-            $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
-            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
-            $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
-            $this->plantilla->poner_js(site_url('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'));
-            $this->plantilla->poner_css(site_url('assets/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css'));
             if ($this->input->server('REQUEST_METHOD') == 'POST') {
                 $datos['tab_activa'] = 'editar';
                 $this->form_validation->set_error_delimiters('<div class="help-block">', '</div>');

@@ -206,7 +206,7 @@ class Ticket_modelo extends CI_Model {
     public function obtener_datos_tecnico_admin($id_ticket) {
         $this->db->select('Usuario.*');
         $this->db->from('Ticket');
-        $this->db->where('id_ticket', $id_ticket);
+        $this->db->where('id_ticket =' . $id_ticket . ' AND tecnico_admin !=', NULL);
         $this->db->join('Usuario', 'Usuario.id_usuario = Ticket.tecnico_admin');
         return $consulta = $this->db->get()->row_array();
     }
@@ -214,7 +214,11 @@ class Ticket_modelo extends CI_Model {
     public function obtener_datos_usuarios($id_ticket) {
         $usuarios = $this->obtener_datos_tecnicos($id_ticket);
         array_push($usuarios, $this->obtener_datos_cliente($id_ticket));
-        array_push($usuarios, $this->obtener_datos_tecnico_admin($id_ticket));
+        $datos_tecnico_admin = $this->obtener_datos_tecnico_admin($id_ticket);
+        // Se comprueba que el ticket tiene asignado un técnico admin
+        if ($datos_tecnico_admin != NULL) {
+            array_push($usuarios, $datos_tecnico_admin);
+        }
         return $usuarios;
     }
 

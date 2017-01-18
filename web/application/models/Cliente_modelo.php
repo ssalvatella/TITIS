@@ -119,4 +119,5 @@ class Cliente_modelo extends CI_Model {
         $facturas = $this->db->get()->result_array();
         return $facturas;
     }
+
 }
