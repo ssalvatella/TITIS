@@ -238,6 +238,13 @@ class Tecnico_admin extends MY_Controller {
         }
     }
 
+    public function borrar_tarea() {
+        if ($this->usuario_permitido(USUARIO_TECNICO_ADMIN)) {
+            $id_tarea = $this->input->post('id_tarea');
+            $this->tarea->borrar_tarea($id_tarea);
+        }
+    }
+
     public function ver_ticket($id_ticket = null) {
         if ($this->usuario_permitido(USUARIO_TECNICO_ADMIN)) {
             if ($id_ticket == null) {
