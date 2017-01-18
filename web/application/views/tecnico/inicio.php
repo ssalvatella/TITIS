@@ -28,7 +28,7 @@
                             <i class="fa fa-thumb-tack"></i>
                         </a>
                     </div>
-                    <a href="" class="small-box-footer"><?= $this->lang->line('acceder'); ?>
+                    <a href="<?= site_url('tecnico/tickets'); ?>" class="small-box-footer"><?= $this->lang->line('acceder'); ?>
                         <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -50,41 +50,43 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 col-xs-6 connectedSortable">
+            <div class="col-lg-6 col-xs-12 connectedSortable">
                 <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><?= $this->lang->line('tareas'); ?></h3>
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><?= $this->lang->line('tareas'); ?></h3>
 
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                class="fa fa-minus"></i>
-                        </button>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <ul class="todo-list">
+                            <?php foreach ($tareas_pendientes as $tarea) { ?>
+                                <li ticket="<?= $tarea['ticket']; ?>" value="<?= $tarea['id_tarea']; ?>" class="<?= $tarea['estado'] == TAREA_FINALIZADA ? 'done' : '' ?>">
+                                    <span class="handle">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </span>
+                                    <input data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('completar_tarea'); ?>" type="checkbox"<?= $tarea['estado'] == TAREA_FINALIZADA ? ' checked ' : ' ' ?>onchange="completar_tarea(this)">
+                                    <span class="text"><?= $tarea['nombre']; ?></span>
+                                    <span class="label label-primary"><i class="fa fa-wrench"></i> &nbsp;<?= $tarea['nombre_tecnico']; ?></span>
+                                    <div class="tools">
+                                        <?php if ($tarea['estado'] == TAREA_FINALIZADA) { ?>
+                                            <i style="margin-right: 10px" class="label label-info fecha_fin"><i class="fa fa-calendar"></i> &nbsp;<?= $tarea['fin']; ?></i>
+                                        <?php } ?>
+                                    </div>
+                                </li>
+                            <?php
+                            }
+                            if (sizeof($tareas_pendientes) == 0) {
+                                echo '<p>' . $this->lang->line('no_hay_tareas_pendientes') . '</p>';
+                            }
+                            ?>
+                        </ul>
                     </div>
                 </div>
-                <div class="box-body">
-                    <ul class="todo-list">
-                        <?php foreach ($tareas_pendientes as $tarea) { ?>
-                            <li ticket="<?= $tarea['ticket']; ?>" value="<?= $tarea['id_tarea']; ?>" class="<?= $tarea['estado'] == TAREA_FINALIZADA ? 'done' : '' ?>">
-                                        <span class="handle">
-                                            <i class="fa fa-ellipsis-v"></i>
-                                            <i class="fa fa-ellipsis-v"></i>
-                                        </span>
-                                <input data-toggle="tooltip" data-placement="top" title="<?= $this->lang->line('completar_tarea'); ?>" type="checkbox"<?= $tarea['estado'] == TAREA_FINALIZADA ? ' checked ' : ' ' ?>onchange="completar_tarea(this)">
-                                <span class="text"><?= $tarea['nombre']; ?></span>
-                                <span class="label label-primary"><i class="fa fa-wrench"></i> &nbsp;<?= $tarea['nombre_tecnico']; ?></span>
-                                <div class="tools">
-                                    <?php if ($tarea['estado'] == TAREA_FINALIZADA) { ?>
-                                        <i style="margin-right: 10px" class="label label-info fecha_fin"><i class="fa fa-calendar"></i> &nbsp;<?= $tarea['fin']; ?></i>
-                                    <?php } ?>
-                                </div>
-                            </li>
-                        <?php }
-                        if (sizeof($tareas_pendientes) == 0) {
-                            echo '<p>' . $this->lang->line('no_hay_tareas_pendientes') . '</p>';
-                        }?>
-                    </ul>
-                </div>
-            </div>
             </div>
 
         </div>

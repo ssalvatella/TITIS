@@ -60,11 +60,12 @@ class Ticket_modelo extends CI_Model {
         return $tickets;
     }
 
-    public function obtener_tickets_tecnico_admin($id_tecnico_admin) {
+    public function obtener_tickets_tecnico_admin($id_tecnico_admin, $pendientes = FALSE) {
         $this->db->select('Ticket.*, cliente.nombre as nombre_cliente, usuarioTecnico.usuario as nombre_tecnico_admin');
         $this->db->from('Ticket');
-        if ($id_tecnico_admin != '') {
-            $this->db->where('Ticket.tecnico_admin', $id_tecnico_admin);
+        $this->db->where('Ticket.tecnico_admin', $id_tecnico_admin);
+        if ($pendientes) {
+            $this->db->where('Ticket.estado !=', TICKET_FINALIZADO);
         }
         $this->db->join('Cliente as cliente', 'cliente.id_cliente = Ticket.cliente', 'left');
         $this->db->join('Usuario as usuarioTecnico', 'usuarioTecnico.id_usuario = Ticket.tecnico_admin', 'left');

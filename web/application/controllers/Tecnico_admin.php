@@ -33,6 +33,7 @@ class Tecnico_admin extends MY_Controller {
     public function index() {
         if ($this->usuario_permitido(USUARIO_TECNICO_ADMIN)) {
             $datos['titulo'] = 'Inicio';
+            $datos['tickets_pendientes'] = $this->ticket_modelo->obtener_tickets($this->session->userdata('id_usuario'), TRUE);
             $this->plantilla->mostrar('tecnico_admin', 'inicio', $datos);
         }
     }
@@ -70,7 +71,7 @@ class Tecnico_admin extends MY_Controller {
                 $this->plantilla->poner_js(site_url('assets/plugins/select2/i18n/es.js'));
             }
 
-            $this->plantilla->poner_js(site_url('assets/plugins/iCheck/iCheck.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/iCheck/icheck.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/iCheck/flat/blue.css'));
 
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
@@ -371,7 +372,7 @@ class Tecnico_admin extends MY_Controller {
     }
 
     public function enviar_mensaje_privado($origen, $id_mensaje = '') {
-        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+        if ($this->usuario_permitido(USUARIO_TECNICO_ADMIN)) {
             $id_receptor = $this->input->post('id_receptor');
             $id_emisor = $this->session->userdata('id_usuario');
             $mensaje = $this->input->post('mensaje');

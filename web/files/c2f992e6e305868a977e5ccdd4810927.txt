@@ -1,0 +1,7 @@
+var getUrl = window.location;
+var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    
+url_pagina
+
+var id_ticket = getUrl.pathname.split('/')[3];
+var id_ticket = window.location.pathname.split('/').pop()

@@ -122,7 +122,7 @@ class Tecnico extends MY_Controller {
                 $this->plantilla->poner_js(site_url('assets/plugins/select2/i18n/es.js'));
             }
 
-            $this->plantilla->poner_js(site_url('assets/plugins/iCheck/iCheck.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/iCheck/icheck.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/iCheck/flat/blue.css'));
 
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
