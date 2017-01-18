@@ -50,6 +50,7 @@ class Cliente extends MY_Controller {
                     // No se ha podido subir el archivo
                     // Aquí habría que borrar el mensaje
                     // $upload_error = array('error' => $this->upload->display_errors());
+                    var_dump($this->upload->display_errors());
                 } else {
                     $datos_upload = $this->upload->data();
                     $datos_archivo = [

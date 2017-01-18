@@ -32,7 +32,7 @@
 
         <div class="box box-solid">
 
-            <form id="form_crear_ticket" method="POST" action="<?= site_url('cliente/enviar_ticket'); ?>" data-parsley-errors-messages-disabled="true">
+            <form enctype="multipart/form-data" id="form_crear_ticket" method="POST" action="<?= site_url('cliente/enviar_ticket'); ?>" data-parsley-errors-messages-disabled="true">
                 <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                 <div class="box-body pad" style="display: block;">
                     <div class="col-md-12">
