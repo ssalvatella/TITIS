@@ -443,7 +443,10 @@ $config['csrf_token_name'] = 'token_csrf';
 $config['csrf_cookie_name'] = 'token_csrf';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array('api/[a-zA-Z0-9_]+');
+$config['csrf_exclude_uris'] = array(
+    'api/[a-zA-Z0-9_]+',
+    'admin|tecnico_admin|tecnico|cliente/ver_ticket/\d+'
+);
 
 /*
 |--------------------------------------------------------------------------

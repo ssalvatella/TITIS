@@ -507,7 +507,6 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $id_ticket = $this->input->post('id_ticket');
             $id_tecnico_admin = $this->input->post('id_tecnico_admin');
-            var_dump($id_tecnico_admin);
             $this->ticket_modelo->asignar_ticket($id_ticket, $id_tecnico_admin);
         }
     }
