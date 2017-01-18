@@ -74,6 +74,9 @@
                             <li class="list-group-item">
                                 <b><?= $this->lang->line('registrado'); ?></b> <a class="pull-right"><?= date('d/m/Y H:i', strtotime($cliente['fecha_registro'])); ?></a>
                             </li>
+                            <li class="list-group-item">
+                                <b><?= $this->lang->line('ultima_modificacion'); ?></b> <a class="pull-right"><?= (isset($usuario['ultima_modificacion'])) ? date('d/m/Y H:i', strtotime($usuario['ultima_modificacion'])): $this->lang->line('no_modificado'); ?></a>
+                            </li>
                         </ul>
 
                         <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_mensaje"><b><?= $this->lang->line('enviar_mensaje'); ?></b></a>

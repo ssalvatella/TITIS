@@ -56,7 +56,7 @@ class Usuario extends CI_Model {
     }
     
     public function obtener_datos_usuario($usuario) {
-        $this->db->select('id_usuario, tipo, usuario, email, activo, fecha_registro'); // La contraseña no la devuelve
+        $this->db->select('*'); // La contraseña no la devuelve
         $this->db->from('Usuario');
         $this->db->where('id_usuario', $usuario);
         $consulta = $this->db->limit(1)->get();

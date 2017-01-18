@@ -245,3 +245,7 @@ $lang['ver_todos_los_mensajes'] = 'Ver Todos';
 $lang['verde'] = 'Verde';
 $lang['verde_claro'] = 'Verde Claro';
 $lang['visto'] = 'Visto';
+
+$lang['ultima_modificacion'] = 'Última modificación';
+$lang['no_modificado'] = 'No modificaco';
+

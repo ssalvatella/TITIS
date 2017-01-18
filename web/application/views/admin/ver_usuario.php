@@ -58,6 +58,9 @@
                             <li class="list-group-item">
                                 <b><?= $this->lang->line('registrado'); ?></b> <a class="pull-right"><?= date('d/m/Y H:i', strtotime($usuario['fecha_registro'])); ?></a>
                             </li>
+                            <li class="list-group-item">
+                                <b><?= $this->lang->line('ultima_modificacion'); ?></b> <a class="pull-right"><?= (isset($usuario['ultima_modificacion'])) ? date('d/m/Y H:i', strtotime($usuario['ultima_modificacion'])): $this->lang->line('no_modificado'); ?></a>
+                            </li>
                         </ul>
                     </div>
                     <!-- /.box-body -->
