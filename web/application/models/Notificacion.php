@@ -18,7 +18,24 @@ class Notificacion extends CI_Model {
     public function borrar_notificacion($id_notificacion, $id_usuario) {
         $this->db->where('notificacion', $id_notificacion);
         $this->db->where('usuario', $id_usuario);
-        return $this->db->delete('Destinatario_notificacion');
+        $this->db->delete('Destinatario_notificacion');
+        $this->borrar_notificacion_huerfana($id_notificacion);
+    }
+
+    public function borrar_notificacion_huerfana($id_notificacion) {
+        $this->db->from('Destinatario_notificacion');
+        $this->db->where('notificacion', $id_notificacion);
+        $destinatarios = $this->db->get()->num_rows();
+        if ($destinatarios == 0) {
+            $this->db->where('id_notificacion', $id_notificacion);
+            return $this->db->delete('Notificacion');
+        }
+    }
+
+    public function borrar_todas_notificaciones($id_usuario) {
+        $this->db->where('usuario', $id_usuario);
+        $this->db->delete('Destinatario_notificacion');
+        // AQUÍ HAY QUE BORRAR LAS NOTIFICACINES HUERFANAS
     }
 
     public function insertar_notificacion_admins($id_usuario, $datos) {

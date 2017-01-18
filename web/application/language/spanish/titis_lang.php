@@ -205,6 +205,7 @@ $lang['tecnico'] = 'Técnico';
 $lang['tecnico_admin'] = 'Técnico Admin';
 $lang['tecnicos'] = 'Técnicos';
 $lang['tecnicos_admin'] = 'Técnicos admin';
+$lang['tecnicos_asignados'] = 'Técnicos asignados';
 $lang['telefono'] = 'Teléfono';
 $lang['ticket'] = 'Ticket';
 $lang['ticket_enviado'] = 'Ticket enviado';

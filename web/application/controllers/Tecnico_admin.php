@@ -34,6 +34,7 @@ class Tecnico_admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_TECNICO_ADMIN)) {
             $datos['titulo'] = 'Inicio';
             $datos['tickets_pendientes'] = $this->ticket_modelo->obtener_tickets($this->session->userdata('id_usuario'), TRUE);
+            $datos['tecnicos'] = $this->tecnico_admin_modelo->obtener_tecnicos($this->session->userdata('id_usuario'));
             $this->plantilla->mostrar('tecnico_admin', 'inicio', $datos);
         }
     }
