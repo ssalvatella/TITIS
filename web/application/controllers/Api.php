@@ -158,7 +158,7 @@ class Api extends REST_Controller {
                     'info' => 'Obtiene la facturación mensual, trimestral o anual.',
                     'param_obligatorios' => [
                         'tiempo' => '"mensual" , "trimestral" o "anual"'
-                     ],
+                    ],
                     'param_opcionales' => [
                         'ano' => 'Año de la facturación. Por defecto coje el año actual'
                     ]
@@ -251,13 +251,12 @@ class Api extends REST_Controller {
             $this->response([
                 'status' => FALSE,
                 'error' => 'Se necesita el campo tiempo. Posibles valores de tiempo: "mensual", "trimestral", "anual".'
-            ], REST_Controller::HTTP_BAD_REQUEST);
+                    ], REST_Controller::HTTP_BAD_REQUEST);
         }
         $this->response([
             'status' => TRUE,
             'datos' => $this->factura_modelo->obtener_facturacion($tiempo, $año)
-        ], REST_Controller::HTTP_OK);
-
+                ], REST_Controller::HTTP_OK);
     }
 
     public function total_usuarios_get() {

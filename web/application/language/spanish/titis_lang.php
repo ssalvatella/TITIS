@@ -2,6 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
 $lang['a'] = 'A';
 $lang['a_menu_descripcion'] = 'Cambia entre entre contenido deslizante y contenido "empujado"';
 $lang['a_skin_descripcion'] = 'Activa entre skin oscura y clara para la barra de contenido derecha';
@@ -58,6 +59,7 @@ $lang['contrasena_no_cambiada'] = 'No se ha cambiado la contraseña. Las contras
 $lang['contrasena_nueva'] = 'Nueva Contraseña';
 $lang['contrasena_olvidada'] = '¿Contraseña olvidada?';
 $lang['cp'] = 'Código Postal';
+$lang['crear_concepto'] = 'Crear concepto';
 $lang['crear_factura'] = 'Crear Factura';
 $lang['crear_ticket'] = 'Crear Ticket';
 $lang['ct_descripcion'] = 'Envía un nuevo ticket y nuestro equipo lo resolverá cuanto antes';
@@ -151,6 +153,7 @@ $lang['no_hay_mensajes'] = 'No tiene mensajes';
 $lang['no_hay_notificaciones'] = 'No tiene notificaciones';
 $lang['no_hay_tareas_pendientes'] = 'No tienes tareas pendientes';
 $lang['no_hay_tickets_pendientes'] = 'No tienes tickets pendientes';
+$lang['no_modificado'] = 'No modificaco';
 $lang['no_visto'] = 'No visto';
 $lang['nombre'] = 'Nombre';
 $lang['notif_comentario_ticket'] = '%s comentó en un ticket';
@@ -229,6 +232,7 @@ $lang['titulo'] = 'Título';
 $lang['todos_cliente'] = 'Todos (cliente)';
 $lang['total'] = 'Total';
 $lang['trimestral'] = 'Trimestral';
+$lang['ultima_modificacion'] = 'Última modificación';
 $lang['ultimos_dias'] = 'Últimos %d días';
 $lang['ultimos_tickets'] = 'Últimos tickets';
 $lang['usuario'] = 'Usuario';
@@ -245,8 +249,3 @@ $lang['ver_todos_los_mensajes'] = 'Ver Todos';
 $lang['verde'] = 'Verde';
 $lang['verde_claro'] = 'Verde Claro';
 $lang['visto'] = 'Visto';
-
-$lang['ultima_modificacion'] = 'Última modificación';
-$lang['no_modificado'] = 'No modificaco';
-$lang['crear_concepto'] = 'Crear concepto';
-

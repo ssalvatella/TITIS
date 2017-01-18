@@ -559,7 +559,7 @@ class Admin extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
 
             $factura['descripcion'] = $this->input->post('descripcion_factura');
-            $factura['cliente'] =  $this->input->post('cliente');
+            $factura['cliente'] = $this->input->post('cliente');
             $numero_tareas = $this->input->post('id_tareas');
             $numero_conceptos = $this->input->post('numero_conceptos');
             $tareas = array();
@@ -586,7 +586,6 @@ class Admin extends MY_Controller {
             }
             $this->ver_factura($id_factura);
         }
-
     }
 
     public function eliminar_mensaje($id_mensaje) {

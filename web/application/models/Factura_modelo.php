@@ -38,7 +38,7 @@ class Factura_modelo extends CI_Model {
         $consulta = $this->db->get();
         return $consulta->row_array();
     }
-    
+
     public function obtener_tareas($id_factura) {
         $this->db->select('Tarea.*');
         $this->db->from('Ticket');
@@ -47,7 +47,7 @@ class Factura_modelo extends CI_Model {
         $this->db->join('Tarea', 'Tarea.ticket = Ticket.id_ticket');
         return $this->db->get()->result_array();
     }
-    
+
     public function sumar_precios($id_factura) {
         $this->db->select_sum('Tarea.precio');
         //$this->db->select('Tarea.precio');
@@ -57,7 +57,7 @@ class Factura_modelo extends CI_Model {
         $this->db->join('Tarea', 'Tarea.ticket = Ticket.id_ticket');
         return $this->db->get()->row()->precio;
     }
-    
+
     public function facturas_pendientes() {
         $this->db->from('Ticket');
         $this->db->where('factura', NULL);
@@ -82,7 +82,7 @@ class Factura_modelo extends CI_Model {
                 break;
             case "trimestral":
                 $mes = date('n');
-                if ($mes >= 1 AND $mes <= 3 ) {
+                if ($mes >= 1 AND $mes <= 3) {
                     $this->db->where('Factura.fecha > ', date($año . '-01-01'));
                     $this->db->where('Factura.fecha < ', date($año . '-03-31'));
                 } else if ($mes >= 4 AND $mes <= 6) {
@@ -114,7 +114,7 @@ class Factura_modelo extends CI_Model {
             'descripcion' => $datos['descripcion'],
             'cliente' => $datos['cliente']
         ];
-        
+
         //insertamos la factura
         if ($this->db->insert('Factura', $factura)) {
             return $this->db->insert_id();
@@ -122,9 +122,10 @@ class Factura_modelo extends CI_Model {
             return FALSE;
         }
     }
-    
+
     public function eliminar_factura($id_factura) {
         $this->db->where('id_factura', $id_factura);
         return $this->db->delete('Factura');
     }
+
 }
