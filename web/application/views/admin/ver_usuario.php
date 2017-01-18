@@ -69,16 +69,16 @@
                         <?php
                         switch ($usuario['tipo']) {
                             case USUARIO_TECNICO:
-                                echo '<li class="active"><a href="#tareas" data-toggle="tab">'.  $this->lang->line('tareas_pendientes') . '</a></li>';
+                                echo '<li class="'. (isset($mensaje)) ? 'active' : '' . '><a href="#tareas" data-toggle="tab">'.  $this->lang->line('tareas_pendientes') . '</a></li>';
                                 break;
                             case USUARIO_ADMIN:
                                 break;
                             case USUARIO_TECNICO_ADMIN:
-                                echo '<li class="active"><a href="#tickets" data-toggle="tab">'.  $this->lang->line('tickets') . '</a></li>';
+                                echo '<li ><a href="#tickets" data-toggle="tab">'.  $this->lang->line('tickets') . '</a></li>';
                                 break;
-                        } ?>
+                        }?>
                         <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-                        <li><a href="#editar" data-toggle="tab"><?= $this->lang->line('editar') ?></a></li>
+                        <li class="<?= (isset($mensaje)) ? 'active' : '' ?>"><a href="#editar" data-toggle="tab"><?= $this->lang->line('editar') ?></a></li>
                     </ul>
                     <div class="tab-content">
 
@@ -227,9 +227,9 @@
 
                         ?>
 
-                        <div class="tab-pane" id="editar">
+                        <div class="<?= (isset($mensaje)) ? 'active' : '' ?> tab-pane" id="editar">
                             <div class="row">
-                            <form id="form-registro-empleado" action="<?= site_url('admin/editar_empleado/' . $usuario['id_usuario']); ?>" method="POST" role="form" data-parsley-errors-messages-disabled="true">
+                            <form id="form-registro-empleado" action="<?= site_url('admin/ver_usuario/' . $usuario['id_usuario']); ?>" method="POST" role="form" data-parsley-errors-messages-disabled="true">
                                 <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
                                 <?php if (isset($mensaje_error)) { ?>
                                     <div class="row">

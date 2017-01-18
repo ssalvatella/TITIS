@@ -79,30 +79,47 @@ class Admin extends MY_Controller {
             if ($id_usuario == $this->session->userdata('id_usuario')) {
                 $this->perfil();
             } else {
+                if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                    $this->form_validation->set_error_delimiters('<div class="help-block">', '</div>');
+                    $this->form_validation->set_rules('usuario', $this->lang->line('usuario'), 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('email', $this->lang->line('email_opcional'), 'trim|valid_email|xss_clean|is_unique[Cliente.email_opcional]');
+                    if ($this->form_validation->run() == TRUE) {
+                        $usuario = $this->input->post('usuario');
+                        $email = $this->input->post('email');
+                        $datos = [
+                            'usuario' => $usuario,
+                            'email' => $email
+                        ];
+                        $this->usuario->modificar_datos_por_id($id_usuario, $datos);
+                        $datos['mensaje'] = $this->lang->line('perfil_actualizado');
+                    }
+                }
                 $datos['usuario'] = $this->usuario->obtener_datos_usuario($id_usuario)[0];
                 if ($datos['usuario']['tipo'] == USUARIO_CLIENTE) {
                     $this->ver_cliente($id_usuario);
                 } else {
                     $datos['titulo'] = $this->lang->line('usuario') . ' ' . $datos['usuario']['usuario'];
-                    $datos['numero_comentarios'] = $this->mensaje->contar_comentarios_usuario($datos['usuario']['id_usuario']);
-                    switch ($datos['usuario']['tipo']) {
-                        case USUARIO_ADMIN:
-                            break;
-                        case USUARIO_TECNICO_ADMIN:
-                            $datos['tickets'] = $this->ticket_modelo->obtener_tickets_tecnico_admin($datos['usuario']['id_usuario']);
-                            $datos['numero_tickets'] = sizeof($datos['tickets']);
-                            break;
-                        case USUARIO_TECNICO:
-                            $datos['tareas'] = $this->tarea->obtener_tareas_tecnico($datos['usuario']['id_usuario'], true);
-                            break;
-                    }
-                    $datos['comentarios'] = $this->mensaje->obtener_comentarios_usuario($datos['usuario']['id_usuario']);
-                    $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
-                    $this->plantilla->poner_css(site_url('assets/plugins/iCheck/all.css'));
-                    $this->plantilla->poner_js(site_url('assets/plugins/iCheck/icheck.min.js'));
-                    $this->plantilla->mostrar('admin', 'ver_usuario', $datos);
                 }
+
+                $datos['numero_comentarios'] = $this->mensaje->contar_comentarios_usuario($datos['usuario']['id_usuario']);
+                switch ($datos['usuario']['tipo']) {
+                    case USUARIO_ADMIN:
+                        break;
+                    case USUARIO_TECNICO_ADMIN:
+                        $datos['tickets'] = $this->ticket_modelo->obtener_tickets_tecnico_admin($datos['usuario']['id_usuario']);
+                        $datos['numero_tickets'] = sizeof($datos['tickets']);
+                        break;
+                    case USUARIO_TECNICO:
+                        $datos['tareas'] = $this->tarea->obtener_tareas_tecnico($datos['usuario']['id_usuario'], true);
+                        break;
+                }
+                $datos['comentarios'] = $this->mensaje->obtener_comentarios_usuario($datos['usuario']['id_usuario']);
+                $this->plantilla->poner_js(site_url('assets/plugins/parsley/parsley.min.js'));
+                $this->plantilla->poner_css(site_url('assets/plugins/iCheck/all.css'));
+                $this->plantilla->poner_js(site_url('assets/plugins/iCheck/icheck.min.js'));
+                $this->plantilla->mostrar('admin', 'ver_usuario', $datos);
             }
+
         }
     }
 
