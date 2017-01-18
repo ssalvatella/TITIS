@@ -210,7 +210,7 @@ $(function () {
         $.ajax({
             url: url_pagina + '/crear_tarea',
             type: 'POST',
-            data: {token_csrf: token_csrf, id_ticket: id_ticket, id_tecnico: id_tecnico, descripcion_tarea: descripcion_tarea, inicio: fecha_inicio.format('DD/MM/YYYY HH:MM'), fin_previsto: fecha_fin.format('DD/MM/YYYY HH:MM')},
+            data: {token_csrf: Cookies.get('token_csrf'), id_ticket: id_ticket, id_tecnico: id_tecnico, descripcion_tarea: descripcion_tarea, inicio: fecha_inicio.format('DD/MM/YYYY HH:MM'), fin_previsto: fecha_fin.format('DD/MM/YYYY HH:MM')},
             success: function (data) {
                 setTimeout(function () {
                     window.location.reload(true);
