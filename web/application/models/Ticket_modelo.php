@@ -217,4 +217,10 @@ class Ticket_modelo extends CI_Model {
         return $usuarios;
     }
 
+    public function obtener_datos_empleados($id_ticket) {
+        $usuarios = $this->obtener_datos_tecnicos($id_ticket);
+        array_push($usuarios, $this->obtener_datos_tecnico_admin($id_ticket));
+        return $usuarios;
+    }
+
 }

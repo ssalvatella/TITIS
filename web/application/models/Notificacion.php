@@ -69,4 +69,19 @@ class Notificacion extends CI_Model {
         }
     }
 
+    public function insertar_notificacion_ticket_empleados($id_ticket, $id_usuario, $datos) {
+        $datos['fecha'] = date("Y-m-d H:i:s");
+        if ($this->db->insert('Notificacion', $datos)) {
+            $id_notificacion = $this->db->insert_id();
+            $usuarios = $this->ticket_modelo->obtener_datos_empleados($id_ticket);
+            foreach ($usuarios as $u) {
+                $datos_dn = [
+                    'notificacion' => $id_notificacion,
+                    'usuario' => $u['id_usuario']
+                ];
+                $this->db->insert('Destinatario_notificacion', $datos_dn);
+            }
+        }
+    }
+
 }

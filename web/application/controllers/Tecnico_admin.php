@@ -258,7 +258,14 @@ class Tecnico_admin extends MY_Controller {
                 'inicio' => $inicio,
                 'fin_previsto' => $fin_previsto
             ];
-            $this->tarea->crear_tarea($datos);
+            if ($this->tarea->crear_tarea($datos)) {
+                $notificacion = [
+                    'url' => 'ver_ticket/' . $id_ticket,
+                    'texto' => 'notif_nueva_tarea',
+                    'parametros' => $this->session->userdata('nombre_usuario')
+                ];
+                $this->notificacion->insertar_notificacion_ticket_empleados($id_ticket, $this->session->userdata('id_usuario'), $notificacion);
+            }
         }
     }
 

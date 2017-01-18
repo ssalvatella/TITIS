@@ -240,7 +240,6 @@ class Admin extends MY_Controller {
         }
     }
 
-
     public function registrar_cliente() {
         if ($this->usuario_permitido(USUARIO_ADMIN)) {
             $datos['titulo'] = $this->lang->line('nuevo_cliente');
@@ -411,15 +410,11 @@ class Admin extends MY_Controller {
             if ($this->session->userdata('idioma') == 'spanish') {
                 $this->plantilla->poner_js(site_url('assets/plugins/select2/i18n/es.js'));
             }
-
             $this->plantilla->poner_js(site_url('assets/plugins/daterangepicker/moment.min.js'));
-
             $this->plantilla->poner_js(site_url('assets/plugins/timepicker/bootstrap-timepicker.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/timepicker/bootstrap-timepicker.css'));
-
             $this->plantilla->poner_css(site_url('assets/plugins/daterangepicker/daterangepicker.css'));
             $this->plantilla->poner_js(site_url('assets/plugins/daterangepicker/daterangepicker.js'));
-
             $this->plantilla->poner_js('assets/plugins/bootstrap-notify/bootstrap-notify.min.js');
             $this->plantilla->mostrar('admin', 'ticket', $datos);
         }
@@ -440,7 +435,14 @@ class Admin extends MY_Controller {
                 'inicio' => $inicio,
                 'fin_previsto' => $fin_previsto
             ];
-            $this->tarea->crear_tarea($datos);
+            if ($this->tarea->crear_tarea($datos)) {
+                $notificacion = [
+                    'url' => 'ver_ticket/' . $id_ticket,
+                    'texto' => 'notif_nueva_tarea',
+                    'parametros' => $this->session->userdata('nombre_usuario')
+                ];
+                $this->notificacion->insertar_notificacion_ticket_empleados($id_ticket, $this->session->userdata('id_usuario'), $notificacion);
+            }
         }
     }
 
