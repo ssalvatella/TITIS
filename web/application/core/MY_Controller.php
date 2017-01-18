@@ -77,4 +77,10 @@ class MY_Controller extends CI_Controller {
         return $this->email->send();
     }
 
+    function cambiar_idioma($idioma = "spanish") {
+        $this->session->set_userdata('idioma', $idioma);
+
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
 }

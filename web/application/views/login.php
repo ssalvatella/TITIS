@@ -82,8 +82,8 @@
                         <a href="<?= site_url('registro'); ?>" class="text-center"><?= $this->lang->line('registrar'); ?></a-->
                     </div>
                     <div class="col-xs-6 text-right" style="font-size: 200%;">
-                        <a href="<?= site_url('idioma_switcher/cambiar_idioma/spanish'); ?>" title="Español"><span class="flag-icon flag-icon-es"></span></a>
-                        <a href="<?= site_url('idioma_switcher/cambiar_idioma/english'); ?>" title="English"><span class="flag-icon flag-icon-gb"></span></a>
+                        <a href="<?= site_url('inicio/cambiar_idioma/spanish'); ?>" title="Español"><span class="flag-icon flag-icon-es"></span></a>
+                        <a href="<?= site_url('inicio/cambiar_idioma/english'); ?>" title="English"><span class="flag-icon flag-icon-gb"></span></a>
                     </div>
                 </div>
                 <div class="modal" id="modal_contrasena_olvidada">
