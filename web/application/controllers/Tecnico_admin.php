@@ -33,7 +33,7 @@ class Tecnico_admin extends MY_Controller {
     public function index() {
         if ($this->usuario_permitido(USUARIO_TECNICO_ADMIN)) {
             $datos['titulo'] = 'Inicio';
-            $datos['tickets_pendientes'] = $this->ticket_modelo->obtener_tickets($this->session->userdata('id_usuario'), TRUE);
+            $datos['tickets_pendientes'] = $this->ticket_modelo->obtener_tickets_tecnico_admin($this->session->userdata('id_usuario'), TRUE);
             $datos['tecnicos'] = $this->tecnico_admin_modelo->obtener_tecnicos($this->session->userdata('id_usuario'));
             $this->plantilla->mostrar('tecnico_admin', 'inicio', $datos);
         }
@@ -484,6 +484,19 @@ class Tecnico_admin extends MY_Controller {
                     forzar_descarga($ruta_fichero, NULL, $nombre_original);
                 }
             }
+        }
+    }
+
+    public function tecnicos() {
+        if ($this->usuario_permitido(USUARIO_TECNICO_ADMIN)) {
+            $datos['titulo'] = $this->lang->line('tecnicos');
+            $datos['tecnicos'] = $this->tecnico_admin_modelo->obtener_tecnicos($this->session->userdata('id_usuario'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
+            $this->plantilla->poner_js(site_url('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'));
+            $this->plantilla->poner_css(site_url('assets/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css'));
+            $this->plantilla->mostrar('tecnico_admin', 'tecnicos', $datos);
         }
     }
 

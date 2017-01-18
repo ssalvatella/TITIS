@@ -151,6 +151,7 @@ $lang['no_hay_mensajes'] = 'No messages';
 $lang['no_hay_mensajes'] = 'No new messages';
 $lang['no_hay_notificaciones'] = 'No notifications';
 $lang['no_hay_tareas_pendientes'] = 'You do not have any pending tasks';
+$lang['no_hay_tickets_pendientes'] = 'You do not have any pending tickets';
 $lang['no_visto'] = 'Not seen';
 $lang['nombre'] = 'Name';
 $lang['notif_comentario_ticket'] = '%s commented on a ticket';
