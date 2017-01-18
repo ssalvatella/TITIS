@@ -14,7 +14,9 @@ class Factura_modelo extends CI_Model {
         $this->db->join('Ticket', 'Factura.id_factura = Ticket.factura', 'left');
         $this->db->join('Concepto', 'Factura.id_factura = Concepto.factura', 'left');
         $this->db->join('Tarea', 'Tarea.ticket = Ticket.id_ticket', 'left');
+        $this->db->order_by('fecha', 'DESC');
         $this->db->limit($cantidad, $inicio);
+
         return $this->db->get()->result_array();
     }
 
@@ -63,12 +65,15 @@ class Factura_modelo extends CI_Model {
         return $this->db->get()->num_rows();
     }
 
-    public function obtener_facturacion($tiempo, $año = '') {
+    public function obtener_facturacion($tiempo, $año = '', $id_cliente = '') {
 
         $this->db->select('SUM(Tarea.precio) AS precio_tareas, SUM(Concepto.precio) AS precio_conceptos, Factura.*, Ticket.*, Tarea.*, Concepto.*', FALSE);
         $this->db->from('Factura');
         if ($año == '') {
             $año = 'Y';
+        }
+        if ($id_cliente != '') {
+            $this->db->where('Factura.cliente', $id_cliente);
         }
         switch ($tiempo) {
             case "mensual":

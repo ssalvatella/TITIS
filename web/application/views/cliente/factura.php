@@ -6,17 +6,42 @@
             <small><?= $factura['descripcion']; ?></small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="<?= site_url('cliente'); ?>"><i class="fa fa-home"></i><?= $this->lang->line('inicio'); ?></a></li>
+            <li><a href="<?= site_url('admin'); ?>"><i class="fa fa-home"></i><?= $this->lang->line('inicio'); ?></a></li>
             <li class="active"></i><?= $this->lang->line('ver_factura'); ?></li>
         </ol>
     </section>
     <section class="invoice">
+        
+        <!-- INICIO Modal ELIMINAR FACTURA -->
+        <div class="modal fade" id="modal_eliminar_factura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-danger" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('eliminar_factura'); ?></h4>
+                    </div>
+                    <form id="eliminar_factura_form" method="POST" action="<?= site_url('admin/borrar_factura'); ?>">
+                        <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
+                        <div class="modal-body">
+                            <p><?= $this->lang->line('mensaje_eliminar_factura'); ?></p>
+                            <p><?= $this->lang->line('mensaje_eliminar_factura2'); ?></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cancelar'); ?></button>
+                            <button type="submit" id="eliminar_factura" name="id_factura" value="<?= $factura['id_factura']; ?>" class="btn btn-danger"><?= $this->lang->line('eliminar'); ?></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- FIN Modal ELIMINAR FACTURA -->
+        
         <!-- title row -->
         <div class="row">
             <div class="col-xs-12">
                 <h2 class="page-header">
-                    <i class="fa fa-globe"></i> TITIS
-                    <small class="pull-right"><?= $this->lang->line('fecha'); ?>: 2/10/2014</small>
+                    <i class="fa fa-globe"></i> <?= NOMBRE_WEB ?>
+                    <small class="pull-right"><?= $this->lang->line('fecha') . ': ' . date('d/m/Y', strtotime($factura['fecha'])); ?></small>
                 </h2>
             </div>
             <!-- /.col -->
@@ -71,8 +96,15 @@
                         foreach ($tareas as $tarea) {
                             echo '<tr>
                             <td>' . $tarea['id_tarea'] . '</td>
-                            <td>' . $tarea['nombre'] . '</td>
-                            <td>' . $tarea['precio'] . ' €</td>';
+                            <td>' . $tarea['nombre'] . '&nbsp <i data-toggle="tooltip" title="'. $this->lang->line('tarea')  .'" class="glyphicon glyphicon-ok"></i> </td>
+                            <td>' .  number_format($tarea['precio'], 2, ',', ' ') . ' €</td>';
+                        }
+
+                        foreach ($conceptos as $concepto) {
+                            echo '<tr>
+                            <td>' . $concepto['id_concepto'] . '</td>
+                            <td>' . $concepto['nombre'] . '</td>
+                            <td>' . number_format($concepto['precio'], 2, ',', ' ')  . ' €</td>';
                         }
                         ?>
                     </tbody>
@@ -95,21 +127,21 @@
             </div>
             <!-- /.col -->
             <div class="col-xs-6">
-                <p class="lead"><?= $this->lang->line('cantidad_pagar'); ?> 2/22/2014</p>
+                <p class="lead"><?= $this->lang->line('cantidad_pagar') . ' - ' . date('d/m/Y', strtotime($factura['fecha'])) ; ?></p>
 
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
                             <th style="width:50%"><?= $this->lang->line('subtotal'); ?>:</th>
-                            <td><?= $total_tareas; ?> €</td>
+                            <td><?= number_format($total, 2, ',', ' ') ?> €</td>
                         </tr>
                         <tr>
                             <th><?= $this->lang->line('iva'); ?> (21%)</th>
-                            <td><?= $iva = $total_tareas * 0.21; ?> €</td>
+                            <td><?= number_format($total* $factura['iva'], 2, ',', ' ') ; ?> €</td>
                         </tr>
                         <tr>
                             <th><?= $this->lang->line('total'); ?>:</th>
-                            <td><?= $total_tareas + $iva; ?> €</td>
+                            <td><?= number_format($total + $total * $factura['iva'], 2, ',', ' '); ?> €</td>
                         </tr>
                     </table>
                 </div>
@@ -121,9 +153,11 @@
         <!-- this row will not appear when printing -->
         <div class="row no-print">
             <div class="col-xs-12">
-                <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> <?= $this->lang->line('confirmar_pago'); ?>
+                <button type="button" data-toggle="modal" data-target="#modal_eliminar_factura" class="btn btn-danger"><i class="fa fa-remove"></i> <?= $this->lang->line('eliminar_factura'); ?>
                 </button>
-                <a href="<?= site_url('cliente/imprimir_factura/' . $factura['id_factura']) ?>" target="_blank" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> <?= $this->lang->line('generar_pdf'); ?></a>
+                <button type="button" class="btn btn-default pull-right"><i class="fa fa-edit"></i> <?= $this->lang->line('editar_factura'); ?>
+                </button>
+                <a href="<?= site_url('admin/imprimir_factura/' . $factura['id_factura']) ?>" target="_blank" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> <?= $this->lang->line('generar_pdf'); ?></a>
             </div>
         </div>
     </section>

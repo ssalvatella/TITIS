@@ -273,6 +273,13 @@ class Cliente extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_CLIENTE)) {
             $datos['titulo'] = $this->lang->line('facturas');
             $datos['facturas'] = $this->cliente_modelo->obtener_facturas($this->session->userdata('id_cliente'), 7);
+            $id_cliente = $this->session->userdata('id_cliente');
+            $datos['facturacion_mensual'] = $this->factura_modelo->obtener_facturacion("mensual", date("Y"), $id_cliente);
+            $datos['facturacion_trimestral'] = $this->factura_modelo->obtener_facturacion("trimestral", date("Y"), $id_cliente);
+            $datos['facturacion_anual'] = $this->factura_modelo->obtener_facturacion("anual", date("Y"), $id_cliente);
+            $datos['facturacion_mensual_pasada'] = $this->factura_modelo->obtener_facturacion("mensual", date("Y", strtotime("-1 year")));
+            $datos['facturacion_trimestral_pasada'] = $this->factura_modelo->obtener_facturacion("trimestral", date("Y", strtotime("-1 year")));
+            $datos['facturacion_anual_pasada'] = $this->factura_modelo->obtener_facturacion("anual", date("Y", strtotime("-1 year")));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/jquery.dataTables.min.js'));
             $this->plantilla->poner_js(site_url('assets/plugins/datatables/dataTables.bootstrap.min.js'));
             $this->plantilla->poner_css(site_url('assets/plugins/datatables/dataTables.bootstrap.css'));
@@ -286,9 +293,10 @@ class Cliente extends MY_Controller {
         if ($this->usuario_permitido(USUARIO_CLIENTE)) {
             $datos['titulo'] = $this->lang->line('facturas');
             $datos['factura'] = $this->factura_modelo->obtener_factura($id_factura);
-            $datos['concepto'] = $this->concepto->obtener_concepto($id_factura);
+            $datos['conceptos'] = $this->concepto->obtener_conceptos($id_factura);
             $datos['tareas'] = $this->factura_modelo->obtener_tareas($id_factura);
             $datos['total_tareas'] = $this->factura_modelo->sumar_precios($id_factura);
+            $datos['total'] = $datos['factura']['precio_tareas'] + $datos['factura']['precio_conceptos'];
             $this->plantilla->poner_js(site_url('assets/plugins/fastclick/fastclick.js'));
             $this->plantilla->mostrar('cliente', 'factura', $datos);
         }

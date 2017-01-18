@@ -108,8 +108,8 @@
                                     <th><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('numero'); ?></th>
                                     <th><i class="fa fa-user" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('cliente'); ?></th>
                                     <th><i class="fa fa-ticket" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('ticket'); ?></th>
-                                    <th><i class="fa fa-euro" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('concepto'); ?></th>
-                                    <th><i class="fa fa-percent" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('iva'); ?></th>
+                                    <th><i class="fa fa-euro" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('concepto'); ?> (IVA 21 %) </th>
+                                    <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('fecha'); ?> </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -120,7 +120,7 @@
                                             <td><a href="' . site_url('admin/ver_cliente/' . $factura['cliente']) . '">' . $factura['nombre_cliente'] . '</a></td>
                                             <td><a href="' . site_url('admin/ver_ticket/' . $factura['id_ticket']) . '">' . $factura['nombre_ticket'] . '</a></td>
                                             <td>' . $factura['precio'] . '</td>
-                                            <td>' . round((float)$factura['iva'] * 100 ) . ' %' . '</td>
+                                            <td>' . date('d/m/Y H:i', strtotime($factura['fecha'])) . '</td>
                                         </tr>
                                          ';
                                 }
@@ -132,8 +132,8 @@
                                     <th><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('numero'); ?></th>
                                     <th><i class="fa fa-user" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('cliente'); ?></th>
                                     <th><i class="fa fa-ticket" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('ticket'); ?></th>
-                                    <th><i class="fa fa-euro" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('concepto'); ?></th>
-                                    <th><i class="fa fa-percent" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('iva'); ?></th>
+                                    <th><i class="fa fa-euro" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('concepto'); ?> (IVA 21 %) </th>
+                                    <th><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; <?= $this->lang->line('fecha'); ?> </th>
                                 </tr>
                             </tfoot>
                         </table>

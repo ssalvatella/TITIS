@@ -188,6 +188,14 @@ class Admin extends MY_Controller {
             $datos['tickets'] = $this->cliente_modelo->obtener_tickets($id_cliente);
             $datos['numero_mensajes'] = $this->mensaje->contar_comentarios_usuario($datos['cliente']['id_usuario']);
             $datos['facturas'] = $this->cliente_modelo->obtener_facturas($id_cliente);
+
+            $datos['facturacion_mensual'] = $this->factura_modelo->obtener_facturacion("mensual", date("Y"), $id_cliente);
+            $datos['facturacion_trimestral'] = $this->factura_modelo->obtener_facturacion("trimestral", date("Y"), $id_cliente);
+            $datos['facturacion_anual'] = $this->factura_modelo->obtener_facturacion("anual", date("Y"), $id_cliente);
+            $datos['facturacion_mensual_pasada'] = $this->factura_modelo->obtener_facturacion("mensual", date("Y", strtotime("-1 year")));
+            $datos['facturacion_trimestral_pasada'] = $this->factura_modelo->obtener_facturacion("trimestral", date("Y", strtotime("-1 year")));
+            $datos['facturacion_anual_pasada'] = $this->factura_modelo->obtener_facturacion("anual", date("Y", strtotime("-1 year")));
+
             $datos['id_cliente'] = $id_cliente;
             $this->plantilla->mostrar('admin', 'cliente', $datos);
         }
