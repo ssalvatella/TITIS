@@ -1,9 +1,8 @@
 $(function () {
-
-        $('#mensaje').summernote({
-            height: 200,
-            lang: "es-ES"
-        });
+    $('#mensaje').summernote({
+        height: 200,
+        lang: "es-ES"
+    });
 
     //Enable iCheck plugin for checkboxes
     //iCheck for checkbox and radio inputs
@@ -57,9 +56,9 @@ $(function () {
         "stateSave": true,
         "responsive": true,
         "columnDefs": [{
-            "targets": [3],
-            "class": "not-mobile",
-        }],
+                "targets": [3],
+                "class": "not-mobile",
+            }],
         "fnInitComplete": function () {
             $("#cargador").hide();
         }
@@ -87,18 +86,15 @@ $('#input_archivo').fileinput({
 });
 $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 
-$('#eliminar').click(function() {
+$('#eliminar').click(function () {
     var seleccionados = [];
-    $.each($('#mensajes').find('input[type="checkbox"]:checked'), function() {
+    $.each($('#mensajes').find('input[type="checkbox"]:checked'), function () {
         $(this).closest("tr").remove();
         seleccionados.push($(this).closest("tr").valueOf().attr("value"));
     })
 
-    var getUrl = window.location;
-    var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-
     $.ajax({
-        url: baseURL + '/eliminar_mensajes',
+        url: url_pagina + '/eliminar_mensajes',
         type: 'POST',
         data: {token_csrf: Cookies.get('token_csrf'), mensajes: seleccionados},
         success: function (data) {

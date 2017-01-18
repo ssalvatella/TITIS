@@ -78,22 +78,7 @@
                                                 }
                                                 ?>
                                                 <li>
-                                                    <a href="<?php
-                                                    switch ($this->session->tipo_usuario) {
-                                                        case USUARIO_ADMIN:
-                                                            echo site_url("admin/ver_mensaje/" . $mensaje_privado['id_mensaje']);
-                                                            break;
-                                                        case USUARIO_TECNICO_ADMIN:
-                                                            echo site_url("tecnico_admin/ver_mensaje/" . $mensaje_privado['id_mensaje']);
-                                                            break;
-                                                        case USUARIO_TECNICO:
-                                                            echo site_url("tecnico/ver_mensaje/" . $mensaje_privado['id_mensaje']);
-                                                            break;
-                                                        case USUARIO_CLIENTE:
-                                                            echo site_url("cliente/ver_mensaje/" . $mensaje_privado['id_mensaje']);
-                                                            break;
-                                                    };
-                                                    ?>">
+                                                    <a href="<?= $url_pagina . "/ver_mensaje/" . $mensaje_privado['id_mensaje']; ?>">
                                                         <div class="pull-left">
                                                             <img src="<?= site_url('assets/img/avatar/1.png'); ?>" class="img-circle" alt="<?= $this->lang->line('imagen_perfil'); ?>">
                                                         </div>
@@ -104,22 +89,7 @@
                                             <?php } ?>
                                         </ul>
                                     </li>
-                                    <li class="footer"><a href="<?php
-                                        switch ($this->session->tipo_usuario) {
-                                            case USUARIO_ADMIN:
-                                                echo site_url('admin/mensajes');
-                                                break;
-                                            case USUARIO_TECNICO_ADMIN:
-                                                echo site_url('tecnico_admin/mensajes');
-                                                break;
-                                            case USUARIO_TECNICO:
-                                                echo site_url('tecnico/mensajes');
-                                                break;
-                                            case USUARIO_CLIENTE:
-                                                echo site_url('cliente/mensajes');
-                                                break;
-                                        };
-                                        ?>"><?= $this->lang->line('ver_todos') ?></a></li>
+                                    <li class="footer"><a href="<?= $url_pagina . '/mensajes'; ?>"><?= $this->lang->line('ver_todos') ?></a></li>
                                 </ul>
                             </li>
 
@@ -144,22 +114,7 @@
                                         <ul id="menu_notificaciones" class="menu">                                            
                                         </ul>
                                     </li>
-                                    <li class="footer"><a href="<?php
-                                        switch ($this->session->tipo_usuario) {
-                                            case USUARIO_ADMIN:
-                                                echo site_url('admin/notificaciones');
-                                                break;
-                                            case USUARIO_TECNICO_ADMIN:
-                                                echo site_url('tecnico_admin/notificaciones');
-                                                break;
-                                            case USUARIO_TECNICO:
-                                                echo site_url('tecnico/notificaciones');
-                                                break;
-                                            case USUARIO_CLIENTE:
-                                                echo site_url('cliente/notificaciones');
-                                                break;
-                                        };
-                                        ?>"><?= $this->lang->line('ver_todas'); ?></a></li>
+                                    <li class="footer"><a href="<?= $url_pagina . '/notificaciones'; ?>"><?= $this->lang->line('ver_todas'); ?></a></li>
                                 </ul>
                             </li>
                             <!-- Menú cuenta usuario -->
@@ -476,6 +431,7 @@
         <script>
             var id_usuario = "<?= $this->session->userdata('id_usuario'); ?>";
             var idioma = "<?= $this->session->userdata('idioma'); ?>";
+            var url_pagina = "<?= $url_pagina; ?>";
         </script>
         <?= script_tag(base_url('assets/js/TITIS.js')) ?>
         <?= script_tag(base_url('assets/js/websocket.js')) ?>

@@ -94,11 +94,8 @@ $('#eliminar').click(function() {
         seleccionados.push($(this).closest("tr").valueOf().attr("value"));
     })
 
-    var getUrl = window.location;
-    var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-
     $.ajax({
-        url: baseURL + '/eliminar_mensajes',
+        url: url_pagina + '/eliminar_mensajes',
         type: 'POST',
         data: {token_csrf: Cookies.get('token_csrf'), mensajes: seleccionados},
         success: function (data) {

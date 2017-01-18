@@ -13,13 +13,11 @@ $(".select2").select2({
 // Completar/Descompletar una tarea
 function completar_tarea(elem) {
     var id_tarea = $(elem).closest("li")[0].value;
-    var getUrl = window.location;
-    var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    var id_ticket = getUrl.pathname.split('/')[3];
+    var id_ticket = window.location.pathname.split('/').pop();
 
     if (elem.checked) { // Completar tarea        
         $.ajax({
-            url: baseURL + '/completar_tarea',
+            url: url_pagina + '/completar_tarea',
             type: 'POST',
             data: {token_csrf: Cookies.get('token_csrf'), id_tarea: id_tarea, id_ticket: id_ticket},
             success: function (data) {
@@ -38,7 +36,7 @@ function completar_tarea(elem) {
         });
     } else { // Descompletar tarea        
         $.ajax({
-            url: baseURL + '/descompletar_tarea',
+            url: url_pagina + '/descompletar_tarea',
             type: 'POST',
             data: {token_csrf: Cookies.get('token_csrf'), id_tarea: id_tarea, id_ticket: id_ticket},
             success: function (data) {
@@ -166,15 +164,12 @@ function guardar_mensaje(elem) {
     var parent = elem.parentNode;
     var siguiente_div = parent.nextElementSibling;
     var mensaje_div = siguiente_div.children[0];
-    var getUrl = window.location;
-    var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-
     var id_mensaje = $(elem).val();
     var mensaje = $(mensaje_div).summernote('code');
     $(mensaje_div).summernote('destroy');
 
     $.ajax({
-        url: baseURL + '/editar_mensaje',
+        url: url_pagina + '/editar_mensaje',
         type: 'POST',
         data: {token_csrf: Cookies.get('token_csrf'), id_mensaje: id_mensaje, mensaje: mensaje},
         success: function (data) {
@@ -208,12 +203,10 @@ function cancelar_mensaje(elem) {
 $(function () {
     $('#asigna_tecnico_admin_form').on('submit', function (e) {
         e.preventDefault();
-        var getUrl = window.location;
-        var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-        var id_ticket = getUrl.pathname.split('/')[3];
+        var id_ticket = window.location.pathname.split('/').pop();
         var id_tecnico_admin = $("#seleccion_tecnicos_admins").val();
         $.ajax({
-            url: baseURL + '/asignar_ticket',
+            url: url_pagina + '/asignar_ticket',
             type: 'POST',
             data: {token_csrf: Cookies.get('token_csrf'), id_ticket: id_ticket, id_tecnico_admin: id_tecnico_admin},
             success: function (data) {
@@ -234,13 +227,11 @@ $(function () {
 
     $('#crear_tarea_form').on('submit', function (e) {
         e.preventDefault();
-        var getUrl = window.location;
-        var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-        var id_ticket = getUrl.pathname.split('/')[3];
+        var id_ticket = window.location.pathname.split('/').pop();
         var id_tecnico = $("#seleccion_tecnicos").val();
         var descripcion_tarea = $('#descripcion_tarea').val();
         $.ajax({
-            url: baseURL + '/crear_tarea',
+            url: url_pagina + '/crear_tarea',
             type: 'POST',
             data: {token_csrf: Cookies.get('token_csrf'), id_ticket: id_ticket, id_tecnico: id_tecnico, descripcion_tarea: descripcion_tarea, inicio: fecha_inicio.format('DD/MM/YYYY HH:MM'), fin_previsto: fecha_fin.format('DD/MM/YYYY HH:MM')},
             success: function (data) {
@@ -261,12 +252,10 @@ $(function () {
 
     $('#editar_tarea_form').on('submit', function (e) {
         e.preventDefault();
-        var getUrl = window.location;
-        var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
         var id_tecnico = $("#seleccion_tecnicos").val();
         var descripcion_tarea = $('#descripcion_tarea_editar').val();
         $.ajax({
-            url: baseURL + '/editar_tarea',
+            url: url_pagina + '/editar_tarea',
             type: 'POST',
             data: {token_csrf: Cookies.get('token_csrf'), id_tarea: tarea_editar, id_tecnico: id_tecnico, descripcion_tarea: descripcion_tarea, inicio: fecha_inicio.format('DD/MM/YYYY HH:MM'), fin_previsto: fecha_fin.format('DD/MM/YYYY HH:MM')},
             success: function (data) {
@@ -287,12 +276,10 @@ $(function () {
 
     $('#editar_descripcion_form').on('submit', function (e) {
         e.preventDefault();
-        var getUrl = window.location;
-        var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
         var id_descripcion = $("#id_descripcion").val();
         var descripcion = $('#textarea_descripcion').val();
         $.ajax({
-            url: baseURL + '/editar_descripcion',
+            url: url_pagina + '/editar_descripcion',
             type: 'POST',
             data: {token_csrf: Cookies.get('token_csrf'), id_descripcion: id_descripcion, descripcion: descripcion},
             success: function (data) {
@@ -323,14 +310,12 @@ $(function () {
 
     $(".boton_borrar").on("click", function () {
         var id_tarea = $(this).closest("li")[0].value;
-        var getUrl = window.location;
-        var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
         var li = $(this).closest('li')
         li.fadeOut('slow', function () {
             li.remove();
         });
         $.ajax({
-            url: baseURL + '/borrar_tarea',
+            url: url_pagina + '/borrar_tarea',
             type: 'POST',
             data: {token_csrf: Cookies.get('token_csrf'), id_tarea: id_tarea},
             success: function (data) {

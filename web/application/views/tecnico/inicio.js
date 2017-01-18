@@ -1,12 +1,10 @@
 // Completar/Descompletar una tarea
 function completar_tarea(elem) {
     var id_tarea = $(elem).closest("li")[0].value;
-    var getUrl = window.location;
-    var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     var id_ticket = $(elem).closest("li")[0].getAttribute("ticket");
     if (elem.checked) { // Completar tarea
         $.ajax({
-            url: baseURL + '/completar_tarea',
+            url: url_pagina + '/completar_tarea',
             type: 'POST',
             data: {token_csrf: Cookies.get('token_csrf'), id_tarea: id_tarea, id_ticket: id_ticket},
             success: function (data) {

@@ -43,6 +43,21 @@ class Plantilla {
             }
             $this->datos['notificaciones'] = $this->CI->notificacion->obtener_notificaciones($this->CI->session->userdata('id_usuario'));
             $this->datos['mensajes_privados'] = $this->CI->mensaje->ver_mensajes_privados($this->CI->session->userdata('id_usuario'), 'No vistos');
+
+            switch ($this->CI->session->userdata('tipo_usuario')) {
+                case USUARIO_ADMIN:
+                    $this->datos['url_pagina'] = site_url("admin");
+                    break;
+                case USUARIO_TECNICO_ADMIN:
+                    $this->datos['url_pagina'] = site_url("tecnico_admin");
+                    break;
+                case USUARIO_TECNICO:
+                    $this->datos['url_pagina'] = site_url("tecnico");
+                    break;
+                case USUARIO_CLIENTE:
+                    $this->datos['url_pagina'] = site_url("cliente");
+                    break;
+            };
             $this->CI->load->view('plantilla.php', $this->datos);
         }
     }

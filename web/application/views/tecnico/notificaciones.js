@@ -13,10 +13,9 @@ function borrar_notificacion(elem, id_notificacion) {
             $(div_anterior).remove();
         });
     }
-    var getUrl = window.location;
-    var baseURL = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
     $.ajax({
-        url: baseURL + '/borrar_notificacion',
+        url: url_pagina + '/borrar_notificacion',
         type: 'POST',
         data: {token_csrf: Cookies.get('token_csrf'), id_notificacion: id_notificacion},
         success: function (data) {
