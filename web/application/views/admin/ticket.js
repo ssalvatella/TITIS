@@ -250,6 +250,16 @@ $(function () {
         $('#modal_tarea').modal('hide');
     });
 
+    var i = 0;
+
+    $('#btn_crear').on('click', function(e) {
+        i++;
+        $('#conceptos').append('' +
+            '<div class="form-group"><input required id="descripcion_concepto" maxlength="200" name="descripcion_concepto' + i +'" type="text" class="form-control" placeholder="Nombre del concepto">' +
+            '<input style="margin-top: 10px" required id="precio_concepto" name="precio_concepto' + i + '" type="number" step="any" class="form-control" placeholder="Precio"></div>');
+        $('#id_conceptos').val(i);
+    });
+
     $('#editar_tarea_form').on('submit', function (e) {
         e.preventDefault();
         var id_tecnico = $("#seleccion_tecnicos").val();

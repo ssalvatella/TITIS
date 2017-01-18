@@ -189,8 +189,11 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel"><?= $this->lang->line('crear_factura'); ?></h4>
                     </div>
-                    <form id="crear_factura_form" method="POST">
+                    <form id="crear_factura_form" method="POST" action="<?= site_url('admin/crear_factura/' . $ticket['id_ticket'])?>">
                         <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash(); ?>" />
+                        <input id="id_conceptos" type="hidden" name="numero_conceptos" value="" />
+                        <input id="id_tareas" type="hidden" name="id_tareas" value="<?= sizeof($tareas_finalizadas)?>" />
+                        <input  type="hidden" name="cliente" value="<?= $ticket['cliente'] ?>" />
                         <div class="modal-body">
                             <div class="form-group" >
                                 <label><?= $this->lang->line('descripcion_factura'); ?></label>
@@ -198,15 +201,27 @@
                             </div>
                             <div class="form-group">
                                 <label><?= $this->lang->line('precios_tareas'); ?></label>
-                                <?php foreach ($tareas_finalizadas as $tarea_finalizada) { ?>
-                                    <h6><?= $tarea_finalizada['nombre']; ?></h6><input required id="precio_tarea" name="precio_tarea" type="number" step="any" class="form-control" placeholder="<?= $this->lang->line('precio'); ?>">
+
+                                <?php $i = 1;
+                                foreach ($tareas_finalizadas as $tarea_finalizada) { ?>
+                                    <h6><?= $tarea_finalizada['nombre']; ?></h6>
+                                    <input  type="hidden" name="id_tarea<?= $i?>" value="<?= $tarea_finalizada['id_tarea'] ?>" />
+                                    <input required name="precio_tarea<?= $i?>" type="number" step="any" class="form-control" placeholder="<?= $this->lang->line('precio');
+                                    $i++;?>">
                                     <?php
                                 }
                                 ?>
                             </div>
+                            <div class="form-group">
+                                <label><?= $this->lang->line('concepto'); ?>s</label>
+                                <div id="conceptos">
+
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal"><?= $this->lang->line('cerrar'); ?></button>
+                            <button id="btn_crear" type="button" class="btn btn-default"><?= $this->lang->line('crear_concepto'); ?></button>
                             <input type="submit" id="crear_factura" value="<?= $this->lang->line('crear_factura'); ?>" class="btn btn-primary">
                         </div>
                     </form>
@@ -370,7 +385,7 @@
                         <!-- /.box-body -->
                         <div class="box-footer clearfix no-border">
                             <?php if ($ticket['estado'] == TICKET_FINALIZADO) { ?>
-                                <button data-toggle="modal" data-target="#modal_factura" type="button" class="btn btn-default pull-right"><i class="fa fa-euro"></i> <?= $this->lang->line('crear_factura'); ?></button>
+                                <button style="margin-left: 20px" data-toggle="modal" data-target="#modal_factura" type="button" class="btn btn-default pull-right"><i class="fa fa-euro"></i> <?= $this->lang->line('crear_factura'); ?></button>
                             <?php } ?>
                             <button data-toggle="modal" data-target="#modal_tarea" type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> <?= $this->lang->line('añadir_tarea'); ?></button>
                         </div>

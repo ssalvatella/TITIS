@@ -112,9 +112,7 @@ class Factura_modelo extends CI_Model {
     public function crear_factura($datos) {
         $factura = [
             'descripcion' => $datos['descripcion'],
-            'cliente' => $datos['cliente'],
-            'ticket' => $datos['ticket'],
-            'iva' => $datos['iva']
+            'cliente' => $datos['cliente']
         ];
         
         //insertamos la factura

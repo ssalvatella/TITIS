@@ -16,4 +16,8 @@ class Concepto extends CI_Model {
         return $this->db->get()->result_array();
     }
 
+    public function insertar_concepto($datos) {
+        return $this->db->insert('Concepto', $datos);
+    }
+
 }

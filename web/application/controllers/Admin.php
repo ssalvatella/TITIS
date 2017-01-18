@@ -554,6 +554,41 @@ class Admin extends MY_Controller {
         }
     }
 
+    public function crear_factura($id_ticket) {
+
+        if ($this->usuario_permitido(USUARIO_ADMIN)) {
+
+            $factura['descripcion'] = $this->input->post('descripcion_factura');
+            $factura['cliente'] =  $this->input->post('cliente');
+            $numero_tareas = $this->input->post('id_tareas');
+            $numero_conceptos = $this->input->post('numero_conceptos');
+            $tareas = array();
+            for ($i = 1; $i < $numero_tareas + 1; $i++) {
+                array_push($tareas, [$this->input->post('id_tarea' . $i), $this->input->post('precio_tarea' . $i)]);
+            }
+
+            $conceptos = array();
+            for ($i = 1; $i < $numero_conceptos + 1; $i++) {
+                array_push($conceptos, [$this->input->post('descripcion_concepto' . $i), $this->input->post('precio_concepto' . $i)]);
+            }
+
+            $id_factura = $this->factura_modelo->crear_factura($factura);
+
+            $ticket['factura'] = $id_factura;
+            $this->ticket_modelo->modificar_ticket($id_ticket, $ticket);
+
+            foreach ($tareas as $tarea) {
+                $this->tarea->editar_tarea($tarea[0], ['precio' => $tarea[1]]);
+            }
+
+            foreach ($conceptos as $concepto) {
+                $this->concepto->insertar_concepto(['nombre' => $concepto[0], 'factura' => $id_factura, 'precio' => $concepto[1]]);
+            }
+            $this->ver_factura($id_factura);
+        }
+
+    }
+
     public function eliminar_mensaje($id_mensaje) {
         $this->mensaje->eliminar_mensaje($id_mensaje);
         redirect('admin/mensajes/');

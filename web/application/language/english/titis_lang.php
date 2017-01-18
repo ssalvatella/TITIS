@@ -249,3 +249,4 @@ $lang['visto'] = 'Viewed';
 
 $lang['ultima_modificacion'] = 'Last modified';
 $lang['no_modificado'] = 'No modified';
+$lang['crear_concepto'] = 'New concept';

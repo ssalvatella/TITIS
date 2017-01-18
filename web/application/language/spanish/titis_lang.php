@@ -248,4 +248,5 @@ $lang['visto'] = 'Visto';
 
 $lang['ultima_modificacion'] = 'Última modificación';
 $lang['no_modificado'] = 'No modificaco';
+$lang['crear_concepto'] = 'Crear concepto';
 

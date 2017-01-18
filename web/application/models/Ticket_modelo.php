@@ -160,6 +160,11 @@ class Ticket_modelo extends CI_Model {
         return $this->db->update('Ticket', $datos);
     }
 
+    public function modificar_ticket($id_ticket, $datos) {
+        $this->db->where('id_ticket', $id_ticket);
+        return $this->db->update('Ticket', $datos);
+    }
+
     public function eliminar_ticket($id_ticket) {
         $this->db->where('id_ticket', $id_ticket);
         return $this->db->delete('Ticket');
